@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<t2sdk-configuration>
+	<performance debug="true" localServerName="t2sdk"
+		reconnInterval="8" callBackTime="60000" heartbeatTime="60000"
+		sendPoolSize="2" senderQueueLength="30" />
+	<parents>
+		<parent safeLevel="NONE" parentName="tcmpdoudou">
+			<limit licenseFile="D:\micro-test\src\main\java\client_license.dat" />
+			<members>
+				<member address="10.72.8.130" port="8020" no="0" poolSize="1" />
+			</members>
+		</parent>
+	</parents>
+
+	<callBackMethods>
+		<!-- 即senderId为0，如果事件的senderId不存在，默认为0；默认回调方法，所有的请求事件都会交给这个回调方法 -->
+		<method id="0" className="cn.t2sdk.callback.TestCallBack" />
+	</callBackMethods>
+
+</t2sdk-configuration>

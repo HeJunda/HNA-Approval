@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>渤海信托</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<div id="app">
+		<header class="header cleanF">
+	        <a href="javascript:void(0)" onclick="JavaScript:history.back(-1);"><span class="back"></span></a>
+	        <h3 class="approve">流程审批</h3>   
+	    </header>
+		<div class="container paddinTop">
+	      <div class="examine">
+            <div class="examine-content">
+            <div class="examine-img"><img src="images/examine.png"/></div>
+              <div class="examine-info">
+                 <h3 class="examine-title">渤融2号_投资</h3>
+                 <ul class="examine-node">
+                  <li><span>发起部门：</span>信托融资部</li>
+                  <li><span>发 起 人：</span>张扬</li>
+                  <li><span>发起时间：</span>2017-05-12 18:23:12</li>
+                  <li><span>流程名称：</span>资金划款流程</li>
+                 </ul>
+              </div>  
+            </div>
+            <div class="examine-list">
+                 <h3 class="examine-item">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}" v-on:click="showDiv($event)"></span></h3>
+                 <ul class="examine-details" v-show="showDom" style="display: none">
+                    <li>付款账户<span class="fr">中国建设银行天津分行</span></li>
+                    <li>付款账号<span class="fr">1101 0111 2200 0509 986</span></li>
+                    <li>收款人<span class="fr">信托人</span></li>
+                    <li>收款账号<span class="fr">1101 0111 2200 0509 986</span></li>
+                    <li>划款金额<span class="fr">1000000.00</span></li>
+                 </ul>
+                 <p class="space"></p>
+                 <h3 class="examine-item">历史审批记录<span v-bind="{class:showHistory?'fr more-open':'fr more-close'}" v-on:click="showNode($event)"></span></h3>
+                 <div class="examine-history" v-show="showHistory" style="display: none">
+                   <div class="history">
+                    <h3 class="history-title">张一龙<i class="principal">信托业务经理</i><span class="fr">2017.05.04 12:09:12</span></h3>
+                    <div class="history-describe">
+                       同意，agree!
+                    <div class="history-type report"><img src="images/report.png"/></div>
+                    </div>
+                    <div class="history-enclosure">
+                       <ul>
+                         <li><a href="/">1个附件</a></li>
+                       </ul>
+                    </div>
+                   </div>
+                   <div class="history">
+                    <h3 class="history-title">张一龙<i class="principal">信托业务经理</i><span class="fr">2017.05.04 12:09:12</span></h3>
+                    <div class="history-describe">
+                       中国地震台网自动测定:2017年06月06日14时04分58秒在四川阿坝州汶川县附近（北纬31.32度，东经103.18度）发生3.8级左右地震，震源深度5千米，最终结果以正式速报为准
+                    <div class="history-type report"><img src="images/submit.png"/></div>
+                    </div>
+                    <div class="history-enclosure">
+                       <ul>
+                         <li><a href="/">1个附件</a></li>
+                       </ul>
+                    </div>
+                   </div>
+                   <div class="history">
+                    <h3 class="history-title">张一龙<i class="principal">信托业务经理</i><span class="fr">2017.05.04 12:09:12</span></h3>
+                    <div class="history-describe">
+                       中国地震台网自动测定:2017年06月06日14时04分58秒在四川阿坝州汶川县附近（北纬31.32度，东经103.18度）发生3.8级左右地震，震源深度5千米，最终结果以正式速报为准
+                    <div class="history-type report"><img src="images/overrule.png"/></div>
+                    </div>
+                    <div class="history-enclosure">
+                       <ul>
+                         <li><a href="/">1个附件</a></li>
+                       </ul>
+                    </div>
+                   </div>
+                 </div>
+                 <p class="space"></p>
+                 <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
+                 <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion"></textarea>
+            </div>
+            <div class="search-container">
+               <button class="search-button">提交</button>
+            </div>
+            <br/>
+        </div>
+        <!--弹窗-->
+        <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
+          <div class="layui-m-layershade" v-on:click="hideDiv"></div>
+          <div class="layui-m-layermain">
+            <div class="layui-m-layersection">
+              <div class="layui-m-layerchild">
+                <div class="layui-m-layercont">
+                  <div class="handle-status clearfix">
+                    <div class="status-icon" :class="{active: activeName =='report'}" v-on:click="showIcon('report')"><p><span class="report"></span></p><p>继续呈报</p></div>
+                    <div class="status-icon" :class="{active: activeName == 'ballBack'}" v-on:click="showIcon('ballBack')"><p><span class="ballBack"></span></p><p>打回</p></div>
+                    <div class="status-icon" :class="{active: activeName == 'submit'}" v-on:click="showIcon('submit')"><p><span class="submit"></span></p><p>同意</p></div>
+                    <div class="status-icon" :class="{active: activeName == 'cooperation'}" v-on:click="showIcon('cooperation')"><p><span class="cooperation"></span></p><p>协作</p></div>
+                    <div class="status-icon" :class="{active: activeName == 'overrule'}" v-on:click="showIcon('overrule')"><p><span class="overrule"></span></p><p>否决</p></div>
+                    <div class="status-icon" :class="{active: activeName == 'finish'}" v-on:click="showIcon('finish')"><p><span class="finish"></span></p><p>结束</p></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+	</div>
+	<script type="text/javascript" src="js/lib/vue.min.js"></script>
+	<script type="text/javascript" src="js/lib/layer.js"></script>
+	<script type="text/javascript" src="js/examine.js"></script>
+</body>
+</html>
