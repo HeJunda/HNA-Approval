@@ -1,0 +1,144 @@
+@charset "utf-8";
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td,section,p,span,font,div{margin:0;padding:0;font-family:-apple-system, BlinkMacSystemFont, "PingFang SC","Helvetica Neue",STHeiti,"Microsoft Yahei",Tahoma,Simsun,sans-serif;color:#333;}
+body,button{font-size:16px;font-style:normal}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:"Microsoft yahei";}
+small{font-size:12px;}
+ul,ol{list-style:none;}
+a{text-decoration:none;color: #333;}
+a:hover{text-decoration: underline;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+legend{color:#000;}
+fieldset,img{border:0;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+.fl,.ftrue{float:left;display:block;}
+.fr,.ffalse{float:right;display:block;}
+.clearfix{*zoom:1;}
+.clear{clear: both;}
+.cleanF{clear: left;}
+.cleanR{clear: right;}
+.clearfix:after{content:'\0020';display:block;height:0;overflow:hidden;clear:both;}
+/*首页*/
+.container{display:block;width:100%;height:100%;margin:0 auto;padding:0}
+.paddinTop{padding-top:3em}
+.header{display:block;width:100%;height:3em;text-align:center;border-bottom: 1px solid #D8D8D8;box-shadow:0px 3px 3px #EFEFEF;z-index: 10;position:fixed;background-color:#fff}
+.header .back{position:relative;display: inline-block;height:30px;width:15px;background: url(/images/tcmp-icon.png) no-repeat -1px -328px;float:left;vertical-align:middle;margin-top:0.5em;margin-left:10px;cursor: pointer;}
+.header .approve{display: inline-block;float:left;text-align:center;width:100%;margin-left: -25px;;font-size:1em;padding:0.75em 0}
+.banner{display: block;text-align:center;width:100%;position:relative;margin:0 auto}
+.banner>img{display: block;vertical-align: middle;width:100%;height:100%}
+.menu-box{width:100%;display: block;height:100%}
+.menu-box .menu-item{display:inline-block;min-height:4em;width:33%;float: left;text-align: center;border-bottom: 1px solid #EEEEEE;border-right: 1px solid #EEEEEE;padding:1em 0}
+.menu-box .menu-item:nth-child(3n){border-right: 0}
+.menu-icon span{display:inline-block;width:50px;height:50px;text-align:center;vertical-align: middle;background: url(/images/tcmp-icon.png)no-repeat}
+.menu-icon span.agency{background-position: 3px 0px}
+.menu-icon span.follow{background-position: 3px -65px}
+.menu-icon span.message{background-position: 3px -127px}
+.menu-icon span.distance{background-position: 3px -190px}
+.menu-icon span.project{background-position: 3px -254px}
+.menu-box .last{height:111px}
+.menu-item p{padding:0.625em 0}
+/*代办列表*/
+.agency-list{width:100%;background-color: #F9F9F9;}
+.agency-list ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
+.agency-left,.agency-right{display: inline-block;padding:10px 0}
+.agency-left span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle;margin-left:0.625em}
+.agency-left span.fund-icon{background-position:-63px -192px}
+.agency-left span.project-icon{background-position:-63px -144px}
+.agency-left span.approve-icon{background-position:-64px -48px}
+.agency-left span.info-icon{background-position:-63px -96px}
+.agency-left span.xucp-icon{background-position:-65px 0px}
+.agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
+.right-box{margin-left:80px;}
+.agency-right{float:right;width:100%}
+.agency-right span.number{position:absolute;display: inline-block;width:25px;height:25px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.75em;text-align:center;vertical-align:middle;line-height: 25px}
+.agency-title{color:#3C3C3C;font-size:1em;font-style:normal}
+.agency-right p{width:100%;font-size:0.875em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+.agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
+/*消息弹窗*/
+.popup{display: block;width:100%;height:100%}
+.popup .popup-title{background-color:#E75732;color:#fff;font-size:1.5em;height:3em;line-height:3em}
+.popup .popup-content{padding:10px 10px 20px 10px;display: block;}
+.popup-content p{font-size:1em;color:#333}
+.popup-content p span{display: inline-block;width:5em}
+.popup-content p.btn{text-align:center;margin-top: 2em}
+.popup-content p.btn a{padding:6px 20px;border-radius:5px;margin:0 5px;text-decoration:none}
+.popup-content p.btn a.cance{border:1px solid #E85C38;color:#E85C38}
+.popup-content p.btn a.ensure{border:0;color:#fff;background-color:#E85C38}
+.layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:60%;max-width: 500px}
+/*流程查询*/
+.follow-tab,.project-tab{display: block;width:100%;height:3em;border-top:1px solid #F0F0F0;border-bottom:1px solid #F0F0F0;background-color:#fff}
+.follow-tab ul li{float:left;display: inline-block;width:33.3%;text-align:center;line-height:3em;}
+.follow-tab ul li a{text-decoration:none;padding:0.75em 0;}
+.follow-tab ul li.active a{border-bottom:2px solid #E75732;}
+.agency-right p.follow-present{padding-top:3px;}
+.agency-right p.follow-present span{display: inline-block;width:7em}
+.agency-right span.arrow{position:absolute;display: inline-block;color:#8C8C8C;top:28px;right: 8px;text-align:center;vertical-align:middle;background:url(/images/tcmp-icon.png)no-repeat 0 -370px;height:20px;width:10px}
+.agency-right p.follow-person{display: inline-block;position: relative}
+.agency-right p.follow-person span{color:#333;padding-right: 8px;text-align}
+.agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:3px 10px;border:1px solid #E75732;border-radius:5px}
+/*项目查询*/
+.project-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
+.project-tab ul li a{text-decoration:none;padding:0.75em 0;}
+.project-tab ul li.active a{border-bottom:2px solid #E75732;}
+.search{display: block;background-color:#EAEAEA;padding:0.5em 0;}
+.search-box{display: block;width:80%;margin:0 auto;background-color:#fff;border-radius:20px;}
+.search-box input{border:0;padding:5px;margin-left: 10px;width:60%;outline:none}
+.search-box .search-btn{display: inline-block;padding-right:10px;vertical-align:middle;line-height:1.875em;}
+.search-box .search-btn .search-icon{display: inline-block;width:20px;height:20px;vertical-align:middle;background: url(/images/tcmp-icon.png) no-repeat -70px -247px;margin-right:5px}
+.lucre-name{border:1px solid #EDEDED;display: inline-block;padding:5px}
+.lucre-name p{color:#E75732}
+.lucre-name p.project-price{font-size:1em;font-weight:bold;}
+.lucre-name p.project-lucre{font-size:0.75em}
+/*项目详情*/
+.project-detail{display:block;width:100%;margin-top:10px;border-top:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF}
+.project-title{font-size:1em;color:#333;padding:0.5em}
+.project-content li{display: block;padding:0.8em 0.875em;border-top:1px solid #EFEFEF;font-size:0.875em;color:#A3A3A3}
+.project-content li span{color:#000}
+.project-content li input{width:95%;font-size:1em;color:#333;padding:2px;outline:none;border:0}
+.search-container{display:block;width:100%;text-align:center}
+.search-button{display: inline-block;width:70%;max-width:500px;border-radius:5px;text-align:center;background-color:#E75732;color:#fff;height:2.5em;line-height:2.5em;border:0;margin-top:3em} 
+/*流程审批*/
+.examine{display: block;width:100%;height:100%;position:relative;max-width:746px;margin:0 auto;}
+.examine-content{display:block;width:100%;height:auto;}
+.examine-img{position:absolute;display: block;z-index:-5}
+.examine-img img{width:100%;height:100%}
+.examine-info{display: block;width:90%;margin:0 auto;padding:1em 1em}
+.examine-title{font-size:1.5em;color:#fff;padding:0.5em 0}
+.examine-node li{display: block;width:100%;line-height:1.5em;color:#fff;font-size:0.875em}
+.examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
+.examine-list{display: block;margin-top:10px;width:100%;}
+.examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
+.examine-item span{font-size:3em;color:#DBDBDB;text-align:center;cursor:pointer}
+.examine-item span.status-text{font-size:1em;padding-right:1em;color:#7B7B7B}
+.examine-item .more-close{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat 8px -370px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
+.examine-item .more-open{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat -72px -270px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
+.examine-details li{font-size:0.875em;color:#7F7F7F;background-color:#fff;border-bottom:1px solid #E7E7E7;padding:0 0.625em;line-height:2.5em}
+.examine-details li span{font-size:0.875em;color:#333;font-size:1em}
+.space{height:0.625em;width:100%;background-color:#F9F9F9}
+.examine-opinion{width:95%;height:6em;border:0;border-bottom:1px solid #E7E7E7;padding:0.625em;font-size:0.875em;color:#333;margin:0 auto;display: block;}
+.examine-history{position:relative;height:auto;display: block}
+.history{padding:0 1em;border-bottom:1px solid #EDEDED;display: block;height:auto;background-color:#fff}
+.history-title{font-size:1em;color:#333;font-weight: normal;border-bottom: 1px solid #EDEDED;line-height:2em}
+.history-title i.principal{margin-left:10px;font-size:0.75em;color:#333;font-style:normal;}
+.history-title span{font-size:0.875em;color:#333}
+.history-describe{display: block;min-height: 5em;font-size:0.875em;color:#333;padding:0.5em 0;border-bottom: 1px solid #EDEDED}
+.history-enclosure ul li{font-size:0.875em;color:#333;padding:0.625em 0}
+.history-type{position:relative;display: block;height:60px}
+.history-type>img{position:absolute;bottom: 0;right:0;width:100%;height:100%;max-width:90px;max-height:60px}
+.handle-status{display: block;box-sizing: border-box;width:100%;max-width:500px;height:100%;text-align:center;vertical-align:middle}
+.handle-status .status-icon{display: inline-block;width:33.3%;float:left;height:auto;border:1px solid #F2F2F2;padding:0.625em;box-sizing: border-box;cursor:pointer}
+.handle-status .active{background-color:#FDBB84;border-color: #FB9339}
+.status-icon p{text-align:center;width:100%}
+.status-icon p:last-child{margin-top:0.5em;white-space:nowrap}
+.status-icon p span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle}
+.status-icon p span.cooperation{background-position:-122px 0px}
+.status-icon p span.ballBack{background-position:-122px -50px}
+.status-icon p span.overrule{background-position:-121px -96px}
+.status-icon p span.report{background-position:-120px -145px}
+.status-icon p span.finish{background-position:-120px -192px}
+.status-icon p span.submit{background-position:-121px -241px}
+
+

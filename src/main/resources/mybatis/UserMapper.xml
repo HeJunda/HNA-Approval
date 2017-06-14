@@ -1,0 +1,45 @@
+<!-- <?xml version="1.0" encoding="UTF-8" ?> -->
+<!-- <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> -->
+<!-- <mapper namespace="cn.jaye.mapper.UserMapper"> -->
+
+<!-- 	<resultMap id="user" type="cn.jaye.model.User"> -->
+<!-- 		<id column="id" property="id" /> -->
+<!-- 		<result column="name" property="name" /> -->
+<!-- 		<result column="password" property="password" /> -->
+<!-- 		<result column="regTime" property="regTime" /> -->
+<!-- 		<result column="upTime" property="upTime" /> -->
+<!-- 		<result column="debit" property="debit" /> -->
+<!-- 		<result column="payPassword" property="payPassword" /> -->
+<!-- 	</resultMap> -->
+<!-- 	<select id="getUserById" resultMap="user" resultType="cn.jaye.model.User"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM user -->
+<!-- 		WHERE id = #{id} -->
+<!-- 	</select> -->
+<!-- 	<select id="getUserByName" resultMap="user" resultType="List"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM user -->
+<!-- 		WHERE name = #{name} -->
+<!-- 	</select> -->
+<!-- 	<select id="getAllUserlist" resultMap="user" resultType="List"> -->
+<!-- 		SELECT * -->
+<!-- 		FROM user -->
+<!-- 	</select> -->
+<!-- 	<insert id="addUser" parameterType="cn.jaye.model.User"> -->
+<!-- 		INSERT INTO user( -->
+<!-- 		name, -->
+<!-- 		password, -->
+<!-- 		regTime, -->
+<!-- 		upTime, -->
+<!-- 		debit, -->
+<!-- 		payPassword -->
+<!-- 		) VALUES ( -->
+<!-- 		#{name}, -->
+<!-- 		#{password}, -->
+<!-- 		#{regTime}, -->
+<!-- 		#{upTime}, -->
+<!-- 		#{debit}, -->
+<!-- 		#{payPassword} -->
+<!-- 		) -->
+<!-- 	</insert> -->
+<!-- </mapper> -->
