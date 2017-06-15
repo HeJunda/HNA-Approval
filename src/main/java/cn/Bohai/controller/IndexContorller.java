@@ -9,7 +9,7 @@ import cn.Bohai.model.User;
 
 
 /**
- * Created by Junda on 2017/5/14.
+ * Created by Junda on 2017/6/14.
  */
 @Controller
 public class IndexContorller {
@@ -20,7 +20,6 @@ public class IndexContorller {
      */
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String toIndex() throws Exception{
-    	String jb =  userService.testBohaiLogin();
 		return "index";
     }
 
