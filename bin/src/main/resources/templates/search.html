@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>渤海信托</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+	<div id="app">
+		<header class="header cleanF">
+	        <a href="javascript:void(0)" onclick="JavaScript:history.back(-1);"><span class="back"></span></a>
+	        <h3 class="approve">搜索</h3>   
+	  </header>
+		<div class="container paddinTop">
+	  <form action="" method="post" class="form-submit">	
+      <div class="project-detail">
+       <ul class="project-content">
+          <li><input type="text" class="search-text" placeholder="请输入搜索关键字"></li>
+          <li><input type="text" class="search-text" placeholder="流程编号"></li>
+          <li><input type="text" class="search-text" placeholder="标题"></li>
+          <li><input type="text" class="search-text" placeholder="发起人"></li>
+          <li><span>发起部门</span><select>
+            <option>部门1</option>
+            <option>部门2</option>
+            <option>部门3</option>
+            <option>部门4</option>
+          </select></li>
+          <li><span>流程名称</span></li>
+          <li><span>实例状态</span></li>
+          <li><span>发起时间</span></li>
+          <li><span>结束时间</span><input type="date" placeholder="结束时间"/></li>
+       </ul>
+      </div>
+      <div class="search-container">
+           <button class="search-button">搜索</button>
+       </div>
+    </div>
+    </form>    
+	</div>
+	<script type="text/javascript" src="js/lib/vue.min.js"></script>
+	<script type="text/javascript" src="js/lib/layer.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+</body>
+</html>
