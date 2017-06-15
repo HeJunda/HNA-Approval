@@ -19,6 +19,7 @@ import cn.Bohai.service.WorkflowService;
  * Created by Junda on 2017/6/6.
  */
 @RestController
+@RequestMapping("/workflow")
 public class WorkflowController {
     
 	@Autowired

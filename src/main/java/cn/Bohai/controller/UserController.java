@@ -20,6 +20,7 @@ import java.util.List;
  * Created by Junda on 2017/5/28.
  */
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
