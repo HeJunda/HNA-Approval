@@ -1,8 +1,6 @@
 package cn.Bohai.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by Junda on 2017/6/14.
  */
 @RestController
-public class IndexContorller {
+public class PageContorller {
 	
 	/**
      * 用户登录校验
@@ -74,7 +72,7 @@ public class IndexContorller {
      */
 	@RequestMapping(value="/project")
 	public ModelAndView  project(){
-		 return new ModelAndView("test");
+		 return new ModelAndView("project");
 	}
 	/**
      * 用户登录校验
@@ -91,6 +89,14 @@ public class IndexContorller {
 	@RequestMapping(value="/search")
 	public  ModelAndView  search(){
 		 return new ModelAndView("search");
+	}
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/test")
+	public  ModelAndView  test(){
+		 return new ModelAndView("test");
 	}
 
 

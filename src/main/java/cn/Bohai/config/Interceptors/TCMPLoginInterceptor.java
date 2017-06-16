@@ -18,8 +18,8 @@ import cn.Bohai.service.UserService;
  */
 public class TCMPLoginInterceptor implements HandlerInterceptor {
 	
-	@Autowired
-	private UserService userservice;
+//	@Autowired
+	private UserService userservice = new UserService();
 
 
 	@Override
@@ -27,10 +27,10 @@ public class TCMPLoginInterceptor implements HandlerInterceptor {
 			HttpServletResponse response, Object handler) throws Exception {
 		// TODO Auto-generated method stub
 		
+		//ＴＣＭＰ登录校验
+		Boolean isLogin = userservice.testBohaiLogin();
 		
-//		Boolean isLogin = userservice.testBohai();
-		
-		return true;
+		return isLogin;
 	}
 
 	@Override

@@ -32,8 +32,8 @@ public class UserController {
      * @throws Exception 
      */
     @RequestMapping(value = "/userLoginCheck",method = RequestMethod.GET)
-    public String userLoginCheck(User user) throws Exception{
-    	String jb =  userService.testBohaiLogin(user);
+    public Boolean userLoginCheck(User user) throws Exception{
+    	Boolean jb =  userService.testBohaiLogin();
 		return jb;
     	
     }
