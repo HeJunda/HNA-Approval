@@ -15,7 +15,6 @@ import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 
@@ -48,16 +47,19 @@ public class WorkflowService {
 //		mw.put("interfaceid","R8101");//待办信息接口(R8101)
 		
 		mw.put("userid","6666");
-		mw.put("start",1);
-		mw.put("limit",1);
-//		mw.put("flowname",awaitMessage.getFlowname());
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
+		mw.put("start",0);
+		mw.put("limit",10);
+//		mw.put("flowname",awaitMessage.getFlowname());//条件查询
 		mw.put("interfaceid","R8101");//待办信息接口(R8101)
 		
-		IDataset result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
 		//访问接口
+		IDataset result = null;
 	    result = T2Util.send("8000", iDataset);
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -81,6 +83,9 @@ public class WorkflowService {
 		//请求体
 		MapWriter mw = new MapWriter();
 		mw.put("userid",doneMessage.getUserid());
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
 		mw.put("start",doneMessage.getStart());
 		mw.put("limit",doneMessage.getLimit());
 		mw.put("flowtype",doneMessage.getFlowtype());
@@ -113,6 +118,9 @@ public class WorkflowService {
 		//请求体
 		MapWriter mw = new MapWriter();
 		mw.put("userid",awaitDetail.getUserid());
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
 		mw.put("taskid",awaitDetail.getTaskid());
 		mw.put("pagefrom",awaitDetail.getPagefrom());
 		mw.put("flowname",awaitDetail.getFlowname());
@@ -143,6 +151,10 @@ public class WorkflowService {
 		
 		//请求体
 		MapWriter mw = new MapWriter();
+		mw.put("userid","6666");
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
 		mw.put("instanceid",processInformation.getInstanceid());
 		mw.put("interfaceid","R8104");//待办消息详情接口(R8104)
 	
@@ -173,6 +185,9 @@ public class WorkflowService {
 		MapWriter mw = new MapWriter();
 		mw.put("instanceid",historicalApproval.getInstanceid());
 		mw.put("userid",historicalApproval.getUserid());
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
 		mw.put("start",historicalApproval.getStart());
 		mw.put("limit",historicalApproval.getLimit());
 		mw.put("interfaceid","R8105");//查看历史审批意见接口(R8105)
@@ -203,6 +218,9 @@ public class WorkflowService {
 		//请求体
 		MapWriter mw = new MapWriter();
 		mw.put("userid",processing.getUserid());
+		mw.put("clienttype","iphone");
+		mw.put("clientsign","meadidea.com");
+		mw.put("checkcode","iphone");
 		mw.put("taskeid",processing.getTaskeid());
 		mw.put("actionname",processing.getActionname());
 		mw.put("remark",processing.getRemark());
