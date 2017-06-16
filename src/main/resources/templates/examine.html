@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"></html>
+<html lang="en" xmnls="www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <meta name="format-detection" content="telephone=no" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
+    <meta name="format-detection" content="telephone=no"></meta>
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
 </head>
 <body>
 	<div id="app">
 		<header class="header cleanF">
 	        <a href="javascript:void(0)" onclick="JavaScript:history.back(-1);"><span class="back"></span></a>
-	        <h3 class="approve">流程审批</h3>   
+	        <h3 class="approve">流程详情</h3>   
 	    </header>
 		<div class="container paddinTop">
 	      <div class="examine">
@@ -81,10 +82,11 @@
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
                  <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion"></textarea>
             </div>
-            <div class="search-container">
+          </div>
+          <div class="search-container">
                <button class="search-button">提交</button>
             </div>
-            <br/>
+          <br/>
         </div>
         <!--弹窗-->
         <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">

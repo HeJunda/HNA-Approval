@@ -5,7 +5,7 @@
 		sendPoolSize="2" senderQueueLength="30" />
 	<parents>
 		<parent safeLevel="NONE" parentName="tcmpdoudou">
-			<limit licenseFile="D:\micro-test\src\main\java\client_license.dat" />
+			<limit licenseFile="D:\github\HNA-Approval\src\main\java\client_license.dat" />
 			<members>
 				<member address="10.72.8.130" port="8020" no="0" poolSize="1" />
 			</members>
