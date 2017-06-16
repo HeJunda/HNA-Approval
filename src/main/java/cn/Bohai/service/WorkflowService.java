@@ -83,10 +83,10 @@ public class WorkflowService {
 		mw.put("clienttype","iphone");
 		mw.put("clientsign","meadidea.com");
 		mw.put("checkcode","iphone");
-		mw.put("start",doneMessage.getStart());
-		mw.put("limit",doneMessage.getLimit());
-		mw.put("flowtype",doneMessage.getFlowtype());
-		mw.put("flowname",doneMessage.getFlowname());
+		mw.put("start",0);
+		mw.put("limit",10);
+//		mw.put("flowtype",doneMessage.getFlowtype());
+//		mw.put("flowname",doneMessage.getFlowname());
 		mw.put("interfaceid","R8102");//已办信息接口(R8102)
 		
 		IDataset result = null;

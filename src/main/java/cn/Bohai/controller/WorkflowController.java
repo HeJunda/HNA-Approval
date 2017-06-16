@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import cn.Bohai.model.AwaitDetail;
@@ -31,9 +33,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitMessage",method = RequestMethod.GET)
-	public String getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
+	public JSONObject getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
 		String jsonString = workflowService.getAwaitMessage(awaitMessage);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	} 
 	
 	
@@ -41,7 +45,7 @@ public class WorkflowController {
      * 获取已办信息
 	 * @throws Exception 
      */
-	@RequestMapping(value = "/getDoneMessage",method = RequestMethod.POST)
+	@RequestMapping(value = "/getDoneMessage",method = RequestMethod.GET)
 	public String getDoneMessage(DoneMessage doneMessage) throws Exception{
 		String jsonString = workflowService.getDoneMessage(doneMessage);
 		return jsonString;
