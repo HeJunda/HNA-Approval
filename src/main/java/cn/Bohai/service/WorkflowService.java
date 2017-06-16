@@ -34,26 +34,23 @@ public class WorkflowService {
 	 * @param awaitMessage
 	 * @throws Exception 
 	 */
-	@Test
 	public String getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
 		
 		T2Util.init();
-		//请求体
 		MapWriter mw = new MapWriter();
-//		mw.put("userid",awaitMessage.getUserid());
-//		mw.put("start",awaitMessage.getStart());
-//		mw.put("limit",awaitMessage.getLimit());
-//		mw.put("flowname",awaitMessage.getFlowname());
-//		mw.put("interfaceid","R8101");//待办信息接口(R8101)
 		
-		mw.put("userid","6666");
+		//校验参数
 		mw.put("clienttype","iphone");
 		mw.put("clientsign","meadidea.com");
 		mw.put("checkcode","iphone");
+		
+		//请求体
+		mw.put("userid",awaitMessage.getUserid());
 		mw.put("start",0);
 		mw.put("limit",10);
 //		mw.put("flowname",awaitMessage.getFlowname());//条件查询
 		mw.put("interfaceid","R8101");//待办信息接口(R8101)
+		
 		
 		IDataset iDataset = mw.getDataset();
 		
