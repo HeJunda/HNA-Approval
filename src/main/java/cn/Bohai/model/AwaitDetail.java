@@ -24,7 +24,7 @@ public class AwaitDetail implements Serializable {
     /**
      * 流程类型
      */
-    private String flowname;
+    private String flowtype;
 	public String getUserid() {
 		return userid;
 	}
@@ -43,12 +43,13 @@ public class AwaitDetail implements Serializable {
 	public void setPagefrom(String pagefrom) {
 		this.pagefrom = pagefrom;
 	}
-	public String getFlowname() {
-		return flowname;
+	public String getFlowtype() {
+		return flowtype;
 	}
-	public void setFlowname(String flowname) {
-		this.flowname = flowname;
+	public void setFlowtype(String flowtype) {
+		this.flowtype = flowtype;
 	}
+	
     
     
      

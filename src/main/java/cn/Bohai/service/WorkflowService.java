@@ -129,7 +129,7 @@ public class WorkflowService {
 		//请求体
 		mw.put("taskid",awaitDetail.getTaskid());
 		mw.put("pagefrom",awaitDetail.getPagefrom());
-		mw.put("flowname",awaitDetail.getFlowname());
+		mw.put("flowtype",awaitDetail.getFlowtype());
 		mw.put("interfaceid","R8103");//获取待办消息详情接口(R8103)
 	
 		IDataset result = null;
