@@ -57,7 +57,7 @@ public class WorkflowController {
      * 获取待处理流程详情
 	 * @throws Exception 
      */
-	@RequestMapping(value = "/getAwaitDetail",method = RequestMethod.POST)
+	@RequestMapping(value = "/getAwaitDetail",method = RequestMethod.GET)
 	public JSONObject getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
 		String jsonString = workflowService.getAwaitDetail(awaitDetail);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
@@ -70,7 +70,7 @@ public class WorkflowController {
      * 流程信息查看
 	 * @throws Exception 
      */
-	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.POST)
+	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.GET)
 	public JSONObject getProcessInformation(ProcessInformation processInformation) throws Exception{
 		String jsonString = workflowService.getProcessInformation(processInformation);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
@@ -82,7 +82,7 @@ public class WorkflowController {
      * 查看历史审批意见
 	 * @throws Exception 
      */
-	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.POST)
+	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)
 	public JSONObject getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
 		String jsonString = workflowService.getHistoricalApproval(historicalApproval);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
