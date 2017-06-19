@@ -13,6 +13,7 @@ import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.HistoricalApproval;
+import cn.Bohai.model.MyInitiatedProcessing;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
@@ -110,6 +111,18 @@ public class WorkflowController {
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
 	public JSONObject processProcessing(Processing processing) throws Exception{
 		String jsonString = workflowService.processProcessing(processing);
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
+	}
+	
+	/**
+     * 查看我发起的流程
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getMyInitiatedProcess",method = RequestMethod.POST)
+	public JSONObject getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing) throws Exception{
+		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
 	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
 		return jsonObject;
