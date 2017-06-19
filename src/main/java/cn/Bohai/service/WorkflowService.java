@@ -103,7 +103,7 @@ public class WorkflowService {
 	}
 	
 	/**
-	 * 获取待办消息详情
+	 * 获取待处理流程详情
 	 * @param awaitDetail
 	 * @throws Exception 
 	 */
@@ -141,7 +141,6 @@ public class WorkflowService {
 	 * @param processInformation
 	 * @throws Exception 
 	 */
-//	@Test
 	public String getProcessInformation (ProcessInformation processInformation) throws Exception{
 		
 		T2Util.init();

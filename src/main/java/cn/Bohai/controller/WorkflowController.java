@@ -46,9 +46,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getDoneMessage",method = RequestMethod.GET)
-	public String getDoneMessage(DoneMessage doneMessage) throws Exception{
+	public JSONObject getDoneMessage(DoneMessage doneMessage) throws Exception{
 		String jsonString = workflowService.getDoneMessage(doneMessage);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	} 
 	
 	/**
@@ -56,9 +58,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitDetail",method = RequestMethod.POST)
-	public String getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
+	public JSONObject getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
 		String jsonString = workflowService.getAwaitDetail(awaitDetail);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	} 
 	
 	
@@ -67,9 +71,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.POST)
-	public String getProcessInformation(ProcessInformation processInformation) throws Exception{
+	public JSONObject getProcessInformation(ProcessInformation processInformation) throws Exception{
 		String jsonString = workflowService.getProcessInformation(processInformation);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	} 
 	
 	/**
@@ -77,9 +83,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.POST)
-	public String getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
+	public JSONObject getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
 		String jsonString = workflowService.getHistoricalApproval(historicalApproval);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	}
 	
 	/**
@@ -87,9 +95,11 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
-	public String processProcessing(Processing processing) throws Exception{
+	public JSONObject processProcessing(Processing processing) throws Exception{
 		String jsonString = workflowService.processProcessing(processing);
-		return jsonString;
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
 	}
 	
 	
