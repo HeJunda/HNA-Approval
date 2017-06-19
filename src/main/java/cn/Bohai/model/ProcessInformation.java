@@ -13,6 +13,10 @@ public class ProcessInformation implements Serializable {
      * 流程实例ID
      */
     private String instanceid;
+    /**
+     * 用户ID
+     */
+    private String userid;
 
 	public String getInstanceid() {
 		return instanceid;
@@ -21,6 +25,15 @@ public class ProcessInformation implements Serializable {
 	public void setInstanceid(String instanceid) {
 		this.instanceid = instanceid;
 	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	
 
     
 }

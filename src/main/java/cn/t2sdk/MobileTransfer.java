@@ -38,7 +38,7 @@ public class MobileTransfer {
 				mw.put("clientsign","meadidea.com");
 				mw.put("checkcode","fake_check_code");
 				mw.put("clienttype","iphone");
-				mw.put("userpwd","1");
+				mw.put("userpwd","asdfasd");
 				mw.put("userid","admin");
 				mw.put("instanceid","projectSetupApproval.1320063");
 				

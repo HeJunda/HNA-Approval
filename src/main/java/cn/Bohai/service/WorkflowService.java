@@ -7,10 +7,13 @@ import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import cn.Bohai.Utils.T2Util;
+import cn.Bohai.common.CommonParameter;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.HistoricalApproval;
+import cn.Bohai.model.MyInitiatedProcessing;
+import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 
@@ -40,12 +43,12 @@ public class WorkflowService {
 		MapWriter mw = new MapWriter();
 		
 		//校验参数
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		mw.put("userid",awaitMessage.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
-		mw.put("userid",awaitMessage.getUserid());
 		mw.put("start",0);
 		mw.put("limit",10);
 //		mw.put("flowname",awaitMessage.getFlowname());//条件查询
@@ -77,12 +80,15 @@ public class WorkflowService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
+		
+		//校验参数
 		mw.put("userid",doneMessage.getUserid());
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("start",0);
 		mw.put("limit",10);
 //		mw.put("flowtype",doneMessage.getFlowtype());
@@ -112,12 +118,15 @@ public class WorkflowService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
+		
+		//校验参数
 		mw.put("userid",awaitDetail.getUserid());
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("taskid",awaitDetail.getTaskid());
 		mw.put("pagefrom",awaitDetail.getPagefrom());
 		mw.put("flowname",awaitDetail.getFlowname());
@@ -145,12 +154,14 @@ public class WorkflowService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
-		mw.put("userid","6666");
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		//校验参数
+		mw.put("userid",processInformation.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("instanceid",processInformation.getInstanceid());
 		mw.put("interfaceid","R8104");//待办消息详情接口(R8104)
 	
@@ -177,13 +188,16 @@ public class WorkflowService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
-		mw.put("instanceid",historicalApproval.getInstanceid());
+		
+		//校验参数
 		mw.put("userid",historicalApproval.getUserid());
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("instanceid",historicalApproval.getInstanceid());
 		mw.put("start",historicalApproval.getStart());
 		mw.put("limit",historicalApproval.getLimit());
 		mw.put("interfaceid","R8105");//查看历史审批意见接口(R8105)
@@ -202,6 +216,78 @@ public class WorkflowService {
 	}
 	
 	/**
+	 * 查询我发起的流程
+	 * @param historicalApproval
+	 * @throws Exception 
+	 */
+//	@Test
+	public String getMyInitiatedProcess (MyInitiatedProcessing myInitiatedProcessing) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",myInitiatedProcessing.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("start",0);
+		mw.put("limit",10);
+		mw.put("interfaceid","R8129");//我发起的流程(R8129)
+	
+		IDataset result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    System.out.println(jsonString);
+		return jsonString;
+	}
+	
+	/**
+	 * 获取下一步节点
+	 * @param historicalApproval
+	 * @throws Exception 
+	 */
+//	@Test
+	public String getNextNode(NextNode nextNode) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",nextNode.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("taskid",nextNode.getTaskid());
+		mw.put("actionvalue",nextNode.getActionvalue());
+		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
+	
+		IDataset result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    System.out.println(jsonString);
+		return jsonString;
+	}
+	
+	
+	
+	/**
 	 * 流程处理
 	 * @param historicalApproval
 	 * @throws Exception 
@@ -211,12 +297,15 @@ public class WorkflowService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
+		
+		//校验参数
 		mw.put("userid",processing.getUserid());
-		mw.put("clienttype","iphone");
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("taskeid",processing.getTaskeid());
 		mw.put("actionname",processing.getActionname());
 		mw.put("remark",processing.getRemark());

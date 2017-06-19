@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="GBK"?>
 <t2sdk-configuration>
 	<performance debug="true" localServerName="t2sdk"
 		reconnInterval="8" callBackTime="60000" heartbeatTime="60000"
@@ -13,7 +13,7 @@
 	</parents>
 
 	<callBackMethods>
-		<!-- å³senderIdä¸º0ï¼Œå¦‚æžœäº‹ä»¶çš„senderIdä¸å­˜åœ¨ï¼Œé»˜è®¤ä¸º0ï¼›é»˜è®¤å›žè°ƒæ–¹æ³•ï¼Œæ‰€æœ‰çš„è¯·æ±‚äº‹ä»¶éƒ½ä¼šäº¤ç»™è¿™ä¸ªå›žè°ƒæ–¹æ³• -->
+		<!-- ¼´senderIdÎª0£¬Èç¹ûÊÂ¼þµÄsenderId²»´æÔÚ£¬Ä¬ÈÏÎª0£»Ä¬ÈÏ»Øµ÷·½·¨£¬ËùÓÐµÄÇëÇóÊÂ¼þ¶¼»á½»¸øÕâ¸ö»Øµ÷·½·¨ -->
 		<method id="0" className="cn.t2sdk.callback.TestCallBack" />
 	</callBackMethods>
 
