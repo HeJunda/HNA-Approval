@@ -16,6 +16,7 @@ import cn.Bohai.model.MyInitiatedProcessing;
 import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
+import cn.Bohai.model.SelectPerson;
 
 import com.alibaba.fastjson.JSON;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
@@ -251,27 +252,33 @@ public class WorkflowService {
 	}
 	
 	/**
-	 * 获取下一步节点
+	 * 人员选择
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getNextNode(NextNode nextNode) throws Exception{
+	public String selectPerson(SelectPerson Selectperson) throws Exception{
 		
 		T2Util.init();
 		
 		MapWriter mw = new MapWriter();
 		
 		//校验参数
-		mw.put("userid",nextNode.getUserid());
+		mw.put("userid",Selectperson.getUserid());
 		mw.put("clienttype",CommonParameter.clienttype);
 		mw.put("clientsign",CommonParameter.clientsign);
 		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
-		mw.put("taskid",nextNode.getTaskid());
-		mw.put("actionvalue",nextNode.getActionvalue());
-		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
+		mw.put("taskid",Selectperson.getTaskid());
+		mw.put("actionvalue",Selectperson.getActionvalue());
+		mw.put("nodename",Selectperson.getNodename());
+		mw.put("actiontype",Selectperson.getActiontype());
+		mw.put("isskipnode",Selectperson.getIsskipnode());
+		mw.put("skipnodeselecttype",Selectperson.getSkipnodeselecttype());
+		mw.put("skipnodeselectvalue",Selectperson.getSkipnodeselectvalue());
+		mw.put("instanceid",Selectperson.getInstanceid());
+		mw.put("interfaceid","R8129");//我发起的流程(R8129)
 	
 		IDataset result = null;
 		IDataset iDataset = mw.getDataset();
@@ -285,6 +292,41 @@ public class WorkflowService {
 		return jsonString;
 	}
 	
+//	/**
+//	 * 获取下一步节点
+//	 * @param historicalApproval
+//	 * @throws Exception 
+//	 */
+////	@Test
+//	public String getNextNode(NextNode nextNode) throws Exception{
+//		
+//		T2Util.init();
+//		
+//		MapWriter mw = new MapWriter();
+//		
+//		//校验参数
+//		mw.put("userid",nextNode.getUserid());
+//		mw.put("clienttype",CommonParameter.clienttype);
+//		mw.put("clientsign",CommonParameter.clientsign);
+//		mw.put("checkcode",CommonParameter.checkcode);
+//		
+//		//请求体
+//		mw.put("taskid",nextNode.getTaskid());
+//		mw.put("actionvalue",nextNode.getActionvalue());
+//		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
+//	
+//		IDataset result = null;
+//		IDataset iDataset = mw.getDataset();
+//		
+//		//访问接口
+//	    result = T2Util.send("8000", iDataset);
+//	    @SuppressWarnings("rawtypes")
+//		List<Map> resultListMap = T2Util.dataset2MapList(result);
+//	    String jsonString = JSON.toJSONString(resultListMap);
+//	    System.out.println(jsonString);
+//		return jsonString;
+//	}
+//	
 	
 	
 	/**

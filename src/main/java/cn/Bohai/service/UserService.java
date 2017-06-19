@@ -3,11 +3,16 @@ package cn.Bohai.service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
 import org.junit.Test;
 import org.springframework.stereotype.Service;
+
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
+
 import cn.Bohai.Utils.T2Util;
+import cn.Bohai.common.CommonParameter;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,12 +36,18 @@ public class UserService {
 		
 		//请求体
 		MapWriter mw = new MapWriter();
+		
 		mw.put("userid","6666");
 		mw.put("userpwd","111111");
-		mw.put("clienttype","iphone");
+		
+		//校验参数
+//		mw.put("userid",awaitMessage.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		
 		mw.put("interfaceid","R8001");//用户登录校验接口(R8001)
-		mw.put("clientsign","meadidea.com");
-		mw.put("checkcode","iphone");
 		mw.put("loginmode","PWD");
 		
 		IDataset result = null;
@@ -61,7 +72,7 @@ public class UserService {
 	    if(loginLogo != null && loginLogo.equals("1")){
 	    	System.out.println("用户已登录");
 	    	return true;
-	    }else {
+	    } else {
 	    	System.out.println("用户未登录");
 			return false;
 		}

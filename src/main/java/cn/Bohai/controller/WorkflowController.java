@@ -15,6 +15,7 @@ import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.HistoricalApproval;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
+import cn.Bohai.model.SelectPerson;
 import cn.Bohai.service.WorkflowService;
 
 /**
@@ -80,6 +81,18 @@ public class WorkflowController {
 	
 	/**
      * 查看历史审批意见
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
+	public JSONObject selectPerson(SelectPerson selectPerson) throws Exception{
+		String jsonString = workflowService.selectPerson(selectPerson);
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
+	}
+	
+	/**
+     * 人员选择
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)

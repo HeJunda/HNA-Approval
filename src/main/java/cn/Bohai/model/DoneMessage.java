@@ -15,19 +15,19 @@ public class DoneMessage implements Serializable {
      */
     private String userid;
     /**
-     * 用户密码
-     */
-    private String start;
-    /**
      * 流程类型
      */
     private String flowtype;
     /**
-     * 客户端类型
+     * 每页条数
      */
-    private String limit;
+    private int limit;
     /**
-     * 客户端识别码
+     * 起始页
+     */
+    private int start;
+    /**
+     * 流程标题
      */
     private String flowname;
 	public String getUserid() {
@@ -35,18 +35,6 @@ public class DoneMessage implements Serializable {
 	}
 	public void setUserid(String userid) {
 		this.userid = userid;
-	}
-	public String getStart() {
-		return start;
-	}
-	public void setStart(String start) {
-		this.start = start;
-	}
-	public String getLimit() {
-		return limit;
-	}
-	public void setLimit(String limit) {
-		this.limit = limit;
 	}
 	public String getFlowname() {
 		return flowname;
@@ -59,6 +47,18 @@ public class DoneMessage implements Serializable {
 	}
 	public void setFlowtype(String flowtype) {
 		this.flowtype = flowtype;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
 	}
     
      

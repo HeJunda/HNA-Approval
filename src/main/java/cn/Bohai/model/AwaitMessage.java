@@ -16,11 +16,11 @@ public class AwaitMessage implements Serializable {
     /**
      * 起始页
      */
-    private String start;
+    private int start;
     /**
      * 每页条数
      */
-    private String limit;
+    private int limit;
     /**
      * 流程标题
      */
@@ -31,23 +31,23 @@ public class AwaitMessage implements Serializable {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getStart() {
-		return start;
-	}
-	public void setStart(String start) {
-		this.start = start;
-	}
-	public String getLimit() {
-		return limit;
-	}
-	public void setLimit(String limit) {
-		this.limit = limit;
-	}
 	public String getFlowname() {
 		return flowname;
 	}
 	public void setFlowname(String flowname) {
 		this.flowname = flowname;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
     
      
