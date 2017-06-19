@@ -3,6 +3,8 @@ package cn.Bohai.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.ProjectDetail;
@@ -12,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 
+@Service
 public class ProjectService {
 	
 	

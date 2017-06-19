@@ -32,14 +32,14 @@ public class MobileTransfer {
 		{
 				// �����������
 				MapWriter mw = new MapWriter();
-				mw.put("login_account","admin");
+				mw.put("login_account","admin111");
 				mw.put("password","1");
 				mw.put("interfaceid","R8001");//������ӿ�
 				mw.put("clientsign","meadidea.com");
 				mw.put("checkcode","fake_check_code");
 				mw.put("clienttype","iphone");
-				mw.put("userpwd","asdfasd");
-				mw.put("userid","admin");
+				mw.put("userpwd","11111");
+				mw.put("userid","admin1111");
 				mw.put("instanceid","projectSetupApproval.1320063");
 				
 //				mw.put("flowtype","batch_cap_capitalTransBatch");

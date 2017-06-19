@@ -146,7 +146,7 @@ public class WorkflowService {
 	}
 	
 	/**
-	 * 获取待办消息详情
+	 * 获取流程更多信息
 	 * @param processInformation
 	 * @throws Exception 
 	 */
@@ -312,7 +312,6 @@ public class WorkflowService {
 		mw.put("actiontype",processing.getActiontype());
 		mw.put("actionvalue",processing.getActionvalue());
 		mw.put("nextopermap",processing.getNextopermap());
-		mw.put("flowvar",processing.getFlowvar());
 		mw.put("comeback",processing.getComeback());
 		mw.put("clienttype",processing.getClienttype());
 		mw.put("formtype",processing.getFormtype());

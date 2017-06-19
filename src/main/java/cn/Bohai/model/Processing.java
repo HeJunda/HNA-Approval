@@ -37,10 +37,10 @@ public class Processing implements Serializable {
      * 按下一步处理人
      */
     private String nextopermap;
-    /**
-     * 流程变量
-     */
-    private String flowvar;
+//    /**
+//     * 流程变量
+//     */
+//    private String flowvar;
     /**
      * 驳回之后返回类型
      */
@@ -99,12 +99,12 @@ public class Processing implements Serializable {
 	public void setNextopermap(String nextopermap) {
 		this.nextopermap = nextopermap;
 	}
-	public String getFlowvar() {
-		return flowvar;
-	}
-	public void setFlowvar(String flowvar) {
-		this.flowvar = flowvar;
-	}
+//	public String getFlowvar() {
+//		return flowvar;
+//	}
+//	public void setFlowvar(String flowvar) {
+//		this.flowvar = flowvar;
+//	}
 	public String getComeback() {
 		return comeback;
 	}
