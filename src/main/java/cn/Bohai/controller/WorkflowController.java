@@ -120,7 +120,7 @@ public class WorkflowController {
      * 查看我发起的流程
 	 * @throws Exception 
      */
-	@RequestMapping(value = "/getMyInitiatedProcess",method = RequestMethod.POST)
+	@RequestMapping(value = "/getMyInitiatedProcess",method = RequestMethod.GET)
 	public JSONObject getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing) throws Exception{
 		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
 		JSONArray jsonArray=JSON.parseArray(jsonString);

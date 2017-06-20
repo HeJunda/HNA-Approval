@@ -1,6 +1,8 @@
 package cn.Bohai.Utils;
 
 import cn.Bohai.Utils.RSAUtils;
+import cn.Bohai.model.CheckUserAuthEntity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,8 +12,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-//import com.google.gson.Gson;
-//import com.google.gson.GsonBuilder;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 public class SSOUtil {
@@ -119,23 +121,23 @@ public class SSOUtil {
         retValue = sendPost(ssoUrl, parameters);
         
         System.out.println(retValue);
-//
-//        //获取返回值
-//		Gson gson = new GsonBuilder().serializeNulls().disableHtmlEscaping().create();
-//		CheckUserAuthEntity checkUserAuthEntity = gson.fromJson(retValue, CheckUserAuthEntity.class);
-//		
-//		//打印返回代码和返回信息
-//        System.out.println("respCode:"+checkUserAuthEntity.getHeader().getRespCode()+",respMsg:"+checkUserAuthEntity.getHeader().getRespMsg());
-//        
-//		//解密body内容
-//		String privateKeyStr = RSAUtils.loadKeyStringByPath("D:/private_key.pem");
-//		try {
-//			String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
-//	        System.out.println("bodyDecrypt:"+bodyDecrypt);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
+        //获取返回值
+		Gson gson = new GsonBuilder().serializeNulls().disableHtmlEscaping().create();
+		CheckUserAuthEntity checkUserAuthEntity = gson.fromJson(retValue, CheckUserAuthEntity.class);
+		
+		//打印返回代码和返回信息
+        System.out.println("respCode:"+checkUserAuthEntity.getHeader().getRespCode()+",respMsg:"+checkUserAuthEntity.getHeader().getRespMsg());
+        
+		//解密body内容
+		String privateKeyStr = RSAUtils.loadKeyStringByPath("D:/private_key.pem");
+		try {
+			String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
+	        System.out.println("bodyDecrypt:"+bodyDecrypt);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
         return retValue;
         
