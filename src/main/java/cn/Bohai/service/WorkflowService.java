@@ -355,7 +355,6 @@ public class WorkflowService {
 		mw.put("actionvalue",processing.getActionvalue());
 		mw.put("nextopermap",processing.getNextopermap());
 		mw.put("comeback",processing.getComeback());
-		mw.put("clienttype",processing.getClienttype());
 		mw.put("formtype",processing.getFormtype());
 		mw.put("receiveuserids",processing.getReceiveuserids());	
 		mw.put("interfaceid","R8100");//流程处理接口(R8100)
