@@ -13,6 +13,10 @@ public class ProjectDetail implements Serializable {
      * 项目编号
      */
     private String projectcode;
+    /**
+     * 用户ID
+     */
+    private String userid;
 
 	public String getProjectcode() {
 		return projectcode;
@@ -20,6 +24,14 @@ public class ProjectDetail implements Serializable {
 
 	public void setProjectcode(String projectcode) {
 		this.projectcode = projectcode;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
     
     

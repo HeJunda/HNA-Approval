@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import cn.Bohai.Utils.T2Util;
+import cn.Bohai.common.CommonParameter;
 import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.ProjectDetail;
 import cn.Bohai.model.ProjectList;
@@ -29,9 +30,15 @@ public class ProjectService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
+		
+		//校验参数
 		mw.put("userid",Projectlist.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("projectname",Projectlist.getProjectname());
 		mw.put("projectphase",Projectlist.getProjectphase());
 		mw.put("depcode",Projectlist.getDepcode());
@@ -62,8 +69,14 @@ public class ProjectService {
 		
 		T2Util.init();
 		
-		//请求体
 		MapWriter mw = new MapWriter();
+		//校验参数
+		mw.put("userid",Projectdetail.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
 		mw.put("projectcode",Projectdetail.getProjectcode());
 		mw.put("interfaceid","R8403");//项目基本信息（R8403）
 		
