@@ -290,41 +290,41 @@ public class WorkflowService {
 		return jsonString;
 	}
 	
-//	/**
-//	 * 获取下一步节点
-//	 * @param historicalApproval
-//	 * @throws Exception 
-//	 */
-////	@Test
-//	public String getNextNode(NextNode nextNode) throws Exception{
-//		
-//		T2Util.init();
-//		
-//		MapWriter mw = new MapWriter();
-//		
-//		//校验参数
-//		mw.put("userid",nextNode.getUserid());
-//		mw.put("clienttype",CommonParameter.clienttype);
-//		mw.put("clientsign",CommonParameter.clientsign);
-//		mw.put("checkcode",CommonParameter.checkcode);
-//		
-//		//请求体
-//		mw.put("taskid",nextNode.getTaskid());
-//		mw.put("actionvalue",nextNode.getActionvalue());
-//		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
-//	
-//		IDataset result = null;
-//		IDataset iDataset = mw.getDataset();
-//		
-//		//访问接口
-//	    result = T2Util.send("8000", iDataset);
-//	    @SuppressWarnings("rawtypes")
-//		List<Map> resultListMap = T2Util.dataset2MapList(result);
-//	    String jsonString = JSON.toJSONString(resultListMap);
-//	    System.out.println(jsonString);
-//		return jsonString;
-//	}
-//	
+	/**
+	 * 获取下一步节点
+	 * @param historicalApproval
+	 * @throws Exception 
+	 */
+//	@Test
+	public String getNextNode(NextNode nextNode) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",nextNode.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("taskid",nextNode.getTaskid());
+		mw.put("actionvalue",nextNode.getActionvalue());
+		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
+	
+		IDataset result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    System.out.println(jsonString);
+		return jsonString;
+	}
+	
 	
 	
 	/**

@@ -14,6 +14,7 @@ import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.HistoricalApproval;
 import cn.Bohai.model.MyInitiatedProcessing;
+import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
@@ -87,6 +88,18 @@ public class WorkflowController {
 	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
 	public JSONObject selectPerson(SelectPerson selectPerson) throws Exception{
 		String jsonString = workflowService.selectPerson(selectPerson);
+		JSONArray jsonArray=JSON.parseArray(jsonString);
+	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		return jsonObject;
+	}
+	
+	/**
+     * 获取下一步节点
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getNextNode",method = RequestMethod.GET)
+	public JSONObject getNextNode(NextNode nextNode) throws Exception{
+		String jsonString = workflowService.getNextNode(nextNode);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
 	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
 		return jsonObject;
