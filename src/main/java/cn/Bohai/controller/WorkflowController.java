@@ -82,7 +82,7 @@ public class WorkflowController {
 	} 
 	
 	/**
-     * 查看历史审批意见
+     * 人员选择
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
@@ -106,7 +106,7 @@ public class WorkflowController {
 	}
 	
 	/**
-     * 人员选择
+     * 历史处理意见
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)
