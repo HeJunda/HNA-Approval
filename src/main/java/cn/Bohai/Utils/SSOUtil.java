@@ -83,14 +83,14 @@ public class SSOUtil {
     public static String CheckTokenBySSO(String token) {
     	String retValue = "";
     	//第三方应用的appid
-        String appId = "BB7B1FB2E8214EF39031506033307CA3";
+        String appId = "C75E89BB45354E23BA4A4E1B696271EE";
         //sso服务器地址
         String ssoUrl = "http://10.70.70.248:8080/ssoserver/service/gateway.do";
         
         String body = "{\"token\":\""+token+"\"}";
 
 		//sso服务公钥
-		String publicKeyStr = RSAUtils.loadKeyStringByPath("D:/rsa_public_key.pem");
+		String publicKeyStr = RSAUtils.loadKeyStringByPath("rsa_public_key.pem");
 		String bodyEncrypt;
 		try {
 			//加密body参数
@@ -130,7 +130,7 @@ public class SSOUtil {
         System.out.println("respCode:"+checkUserAuthEntity.getHeader().getRespCode()+",respMsg:"+checkUserAuthEntity.getHeader().getRespMsg());
         
 		//解密body内容
-		String privateKeyStr = RSAUtils.loadKeyStringByPath("D:/private_key.pem");
+		String privateKeyStr = RSAUtils.loadKeyStringByPath("private_key.pem");
 		try {
 			String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
 	        System.out.println("bodyDecrypt:"+bodyDecrypt);

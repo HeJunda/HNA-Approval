@@ -19,6 +19,8 @@ import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 
@@ -249,6 +251,9 @@ public class WorkflowService {
 		return jsonString;
 	}
 	
+	
+	
+	
 	/**
 	 * 人员选择
 	 * @param historicalApproval
@@ -272,11 +277,8 @@ public class WorkflowService {
 		mw.put("actionvalue",Selectperson.getActionvalue());
 		mw.put("nodename",Selectperson.getNodename());
 		mw.put("actiontype",Selectperson.getActiontype());
-		mw.put("isskipnode",Selectperson.getIsskipnode());
-		mw.put("skipnodeselecttype",Selectperson.getSkipnodeselecttype());
-		mw.put("skipnodeselectvalue",Selectperson.getSkipnodeselectvalue());
 		mw.put("instanceid",Selectperson.getInstanceid());
-		mw.put("interfaceid","R8129");//我发起的流程(R8129)
+		mw.put("interfaceid","R8108");//人员选择接口(R8108)
 	
 		IDataset result = null;
 		IDataset iDataset = mw.getDataset();
@@ -325,7 +327,54 @@ public class WorkflowService {
 		return jsonString;
 	}
 	
-	
+
+	/**
+	 * 获取人员列表
+	 * @param historicalApproval
+	 * @throws Exception 
+	 */
+//	@Test
+	public String getPersonList(SelectPerson Selectperson) throws Exception{
+		
+		NextNode nextNode = new NextNode();
+		nextNode.setActionvalue(Selectperson.getActionvalue());
+		nextNode.setTaskid(Selectperson.getTaskid());
+		nextNode.setUserid(Selectperson.getUserid());
+		String nextNodeString = getNextNode(nextNode);
+		JSONArray jsonArray=JSON.parseArray(nextNodeString);
+		JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		Selectperson.setNodename(jsonObject.get("nodename").toString());
+		
+        T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",Selectperson.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("taskid",Selectperson.getTaskid());
+		mw.put("actionvalue",Selectperson.getActionvalue());
+		mw.put("nodename",Selectperson.getNodename());
+		mw.put("actiontype",Selectperson.getActiontype());
+		mw.put("instanceid",Selectperson.getInstanceid());
+		mw.put("interfaceid","R8108");//人员选择接口(R8108)
+		
+		IDataset result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    System.out.println(jsonString);
+		return jsonString;
+		
+	}
 	
 	/**
 	 * 流程处理

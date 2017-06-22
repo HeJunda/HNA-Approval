@@ -18,7 +18,7 @@ public class NextNode implements Serializable {
      */
     private String taskid;
     /**
-     * 页面来源
+     * 按钮值
      */
     private String actionvalue;
     

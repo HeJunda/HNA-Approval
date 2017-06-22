@@ -1,7 +1,13 @@
 package cn.Bohai.Utils;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URLEncoder;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.RSAPublicKeySpec;
 
 import cn.Bohai.model.CheckUserAuthEntity;
 
@@ -34,6 +40,11 @@ public class MPUtil {
       * @return
       */
      public static String CheckTokenBySSO(String token) {
+    	 
+    	 String modulus = "zuIkgDG7Wo6Reu++vQSPU4muGVHzCMkiAM8ChTwAqb/S6g9ff3+cEbeh8fPQOUaowlWws+1HpVJnaNh3EPZeETf/M9zqEGqoKTK0uUTzm75dr2VK5SAI07fP/PYG2FAhVs+NtvsbcBFe3QpAsugw7H38X5WEs8HBIXSr5m7hCMU=";
+    	 
+    	 String publicExponent = "AQAB";
+    			 
      	 String retValue = "";
      	 //第三方应用的appid
          String appId = "BB7B1FB2E8214EF39031506033307CA3";
@@ -94,6 +105,24 @@ public class MPUtil {
  		
          return retValue;
          
+     }
+     
+     
+     public static PublicKey getPublicKey(String modulus, String publicExponent)
+
+             throws NoSuchAlgorithmException, InvalidKeySpecException {
+
+         BigInteger bigIntModulus = new BigInteger(modulus,16);
+
+         BigInteger bigIntPrivateExponent = new BigInteger(publicExponent,16);
+
+         RSAPublicKeySpec keySpec = new RSAPublicKeySpec(bigIntModulus, bigIntPrivateExponent);
+
+         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+         PublicKey publicKey = keyFactory.generatePublic(keySpec);
+
+         return publicKey;
+
      }
      
 

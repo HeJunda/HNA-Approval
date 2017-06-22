@@ -30,18 +30,6 @@ public class SelectPerson implements Serializable {
      */
     private String nodename;
     /**
-     * 选人方式
-     */
-    private String isskipnode;
-    /**
-     * ----
-     */
-    private String skipnodeselecttype;
-    /**
-     * 选人参数值
-     */
-    private String skipnodeselectvalue;
-    /**
      * 流程实例ID
      */
     private String instanceid;
@@ -62,24 +50,6 @@ public class SelectPerson implements Serializable {
 	}
 	public void setNodename(String nodename) {
 		this.nodename = nodename;
-	}
-	public String getIsskipnode() {
-		return isskipnode;
-	}
-	public void setIsskipnode(String isskipnode) {
-		this.isskipnode = isskipnode;
-	}
-	public String getSkipnodeselecttype() {
-		return skipnodeselecttype;
-	}
-	public void setSkipnodeselecttype(String skipnodeselecttype) {
-		this.skipnodeselecttype = skipnodeselecttype;
-	}
-	public String getSkipnodeselectvalue() {
-		return skipnodeselectvalue;
-	}
-	public void setSkipnodeselectvalue(String skipnodeselectvalue) {
-		this.skipnodeselectvalue = skipnodeselectvalue;
 	}
 	public String getInstanceid() {
 		return instanceid;
