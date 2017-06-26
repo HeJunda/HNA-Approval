@@ -37,11 +37,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitMessage",method = RequestMethod.GET)
-	public JSONObject getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
-		String jsonString = workflowService.getAwaitMessage(awaitMessage);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
+//		String jsonString = workflowService.getAwaitMessage(awaitMessage);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		JSONArray jsonArray = workflowService.getAwaitMessage(awaitMessage);
+		return jsonArray;
 	} 
 	
 	
@@ -50,11 +51,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getDoneMessage",method = RequestMethod.GET)
-	public JSONObject getDoneMessage(DoneMessage doneMessage) throws Exception{
-		String jsonString = workflowService.getDoneMessage(doneMessage);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getDoneMessage(DoneMessage doneMessage) throws Exception{
+//		String jsonString = workflowService.getDoneMessage(doneMessage);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		JSONArray jsonArray = workflowService.getDoneMessage(doneMessage);
+		return jsonArray;
 	} 
 	
 	/**
@@ -62,11 +64,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitDetail",method = RequestMethod.GET)
-	public JSONObject getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
-		String jsonString = workflowService.getAwaitDetail(awaitDetail);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
+//		String jsonString = workflowService.getAwaitDetail(awaitDetail);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		JSONArray jsonArray = workflowService.getAwaitDetail(awaitDetail);
+		return jsonArray;
 	} 
 	
 	
@@ -75,11 +78,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.GET)
-	public JSONObject getProcessInformation(ProcessInformation processInformation) throws Exception{
-		String jsonString = workflowService.getProcessInformation(processInformation);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getProcessInformation(ProcessInformation processInformation) throws Exception{
+//		String jsonString = workflowService.getProcessInformation(processInformation);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    JSONArray jsonArray = workflowService.getProcessInformation(processInformation);
+		return jsonArray;
 	} 
 	
 	/**
@@ -87,11 +91,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
-	public JSONObject selectPerson(SelectPerson selectPerson) throws Exception{
-		String jsonString = workflowService.selectPerson(selectPerson);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray selectPerson(SelectPerson selectPerson) throws Exception{
+//		String jsonString = workflowService.selectPerson(selectPerson);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    JSONArray jsonArray = workflowService.selectPerson(selectPerson);
+		return jsonArray;
 	}
 	
 	/**
@@ -99,11 +104,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getNextNode",method = RequestMethod.GET)
-	public JSONObject getNextNode(NextNode nextNode) throws Exception{
-		String jsonString = workflowService.getNextNode(nextNode);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getNextNode(NextNode nextNode) throws Exception{
+//		String jsonString = workflowService.getNextNode(nextNode);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    JSONArray jsonArray = workflowService.getNextNode(nextNode);
+		return jsonArray;
 	}
 	
 	/**
@@ -130,11 +136,12 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
 	
-	public JSONObject processProcessing(@RequestBody Processing processing) throws Exception{
-		String jsonString = workflowService.processProcessing(processing);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray processProcessing(@RequestBody Processing processing) throws Exception{
+//		String jsonString = workflowService.processProcessing(processing);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    JSONArray jsonArray = workflowService.processProcessing(processing);
+		return jsonArray;
 	}
 	
 	/**
@@ -142,11 +149,12 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getMyInitiatedProcess",method = RequestMethod.GET)
-	public JSONObject getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing) throws Exception{
-		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing) throws Exception{
+//		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    JSONArray jsonArray = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
+		return jsonArray;
 	}
 	
 	

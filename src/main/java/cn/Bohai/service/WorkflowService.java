@@ -39,7 +39,7 @@ public class WorkflowService {
 	 * @param awaitMessage
 	 * @throws Exception 
 	 */
-	public String getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
+	public JSONArray getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
 		
 		T2Util.init();
 		MapWriter mw = new MapWriter();
@@ -66,9 +66,10 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
-	    System.out.println(jsonString);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    System.out.println(jsonArray);
 	    
-		return jsonString;
+		return jsonArray;
 	}
 	
 	
@@ -78,7 +79,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getDoneMessage(DoneMessage doneMessage) throws Exception{
+	public JSONArray getDoneMessage(DoneMessage doneMessage) throws Exception{
 		
 		T2Util.init();
 		
@@ -106,8 +107,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	/**
@@ -116,7 +118,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getAwaitDetail (AwaitDetail awaitDetail) throws Exception{
+	public JSONArray getAwaitDetail (AwaitDetail awaitDetail) throws Exception{
 		
 		T2Util.init();
 		
@@ -143,8 +145,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	/**
@@ -152,7 +155,7 @@ public class WorkflowService {
 	 * @param processInformation
 	 * @throws Exception 
 	 */
-	public String getProcessInformation (ProcessInformation processInformation) throws Exception{
+	public JSONArray getProcessInformation (ProcessInformation processInformation) throws Exception{
 		
 		T2Util.init();
 		
@@ -176,8 +179,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	/**
@@ -235,7 +239,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getMyInitiatedProcess (MyInitiatedProcessing myInitiatedProcessing) throws Exception{
+	public JSONArray getMyInitiatedProcess (MyInitiatedProcessing myInitiatedProcessing) throws Exception{
 		
 		T2Util.init();
 		
@@ -260,8 +264,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	
@@ -273,7 +278,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String selectPerson(SelectPerson Selectperson) throws Exception{
+	public JSONArray selectPerson(SelectPerson Selectperson) throws Exception{
 		
 		T2Util.init();
 		
@@ -301,8 +306,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	/**
@@ -311,7 +317,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getNextNode(NextNode nextNode) throws Exception{
+	public JSONArray getNextNode(NextNode nextNode) throws Exception{
 		
 		T2Util.init();
 		
@@ -336,8 +342,9 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 
@@ -347,47 +354,47 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getPersonList(SelectPerson Selectperson) throws Exception{
-		
-		NextNode nextNode = new NextNode();
-		nextNode.setActionvalue(Selectperson.getActionvalue());
-		nextNode.setTaskid(Selectperson.getTaskid());
-		nextNode.setUserid(Selectperson.getUserid());
-		String nextNodeString = getNextNode(nextNode);
-		JSONArray jsonArray=JSON.parseArray(nextNodeString);
-		JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		Selectperson.setNodename(jsonObject.get("nodename").toString());
-		
-        T2Util.init();
-		
-		MapWriter mw = new MapWriter();
-		
-		//校验参数
-		mw.put("userid",Selectperson.getUserid());
-		mw.put("clienttype",CommonParameter.clienttype);
-		mw.put("clientsign",CommonParameter.clientsign);
-		mw.put("checkcode",CommonParameter.checkcode);
-		
-		//请求体
-		mw.put("taskid",Selectperson.getTaskid());
-		mw.put("actionvalue",Selectperson.getActionvalue());
-		mw.put("nodename",Selectperson.getNodename());
-		mw.put("actiontype",Selectperson.getActiontype());
-		mw.put("instanceid",Selectperson.getInstanceid());
-		mw.put("interfaceid","R8108");//人员选择接口(R8108)
-		
-		IDataset result = null;
-		IDataset iDataset = mw.getDataset();
-		
-		//访问接口
-	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    System.out.println(jsonString);
-		return jsonString;
-		
-	}
+//	public String getPersonList(SelectPerson Selectperson) throws Exception{
+//		
+//		NextNode nextNode = new NextNode();
+//		nextNode.setActionvalue(Selectperson.getActionvalue());
+//		nextNode.setTaskid(Selectperson.getTaskid());
+//		nextNode.setUserid(Selectperson.getUserid());
+//		String nextNodeString = getNextNode(nextNode);
+//		JSONArray jsonArray=JSON.parseArray(nextNodeString);
+//		JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+//		Selectperson.setNodename(jsonObject.get("nodename").toString());
+//		
+//        T2Util.init();
+//		
+//		MapWriter mw = new MapWriter();
+//		
+//		//校验参数
+//		mw.put("userid",Selectperson.getUserid());
+//		mw.put("clienttype",CommonParameter.clienttype);
+//		mw.put("clientsign",CommonParameter.clientsign);
+//		mw.put("checkcode",CommonParameter.checkcode);
+//		
+//		//请求体
+//		mw.put("taskid",Selectperson.getTaskid());
+//		mw.put("actionvalue",Selectperson.getActionvalue());
+//		mw.put("nodename",Selectperson.getNodename());
+//		mw.put("actiontype",Selectperson.getActiontype());
+//		mw.put("instanceid",Selectperson.getInstanceid());
+//		mw.put("interfaceid","R8108");//人员选择接口(R8108)
+//		
+//		IDataset result = null;
+//		IDataset iDataset = mw.getDataset();
+//		
+//		//访问接口
+//	    result = T2Util.send("8000", iDataset);
+//	    @SuppressWarnings("rawtypes")
+//		List<Map> resultListMap = T2Util.dataset2MapList(result);
+//	    String jsonString = JSON.toJSONString(resultListMap);
+//	    System.out.println(jsonString);
+//		return jsonString;
+//		
+//	}
 	
 	/**
 	 * 流程处理
@@ -395,7 +402,7 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String processProcessing (Processing processing) throws Exception{
+	public JSONArray processProcessing (Processing processing) throws Exception{
 		
 		T2Util.init();
 		
@@ -428,7 +435,8 @@ public class WorkflowService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 }
