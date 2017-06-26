@@ -30,7 +30,7 @@
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   <script type="text/javascript" src="js/lib/vue-router.min.js"></script>
-  <script type="text/javascript" src="js/lib/vue-resource.min.js"></script>
+  <script type="text/javascript" src="js/lib/axios.min.js"></script>
   <script type="text/javascript" src="js/lib/layer.js"></script>
 	
 
@@ -45,7 +45,7 @@
                        </div>
                        <div class="agency-right">
                         <div class="right-box">
-                         <h3 class="agency-title">资金划付</h3>
+                         <h3 class="agency-title">项目管理</h3>
                          <p class="follow-present"><span>当前审批人：</span>张扬</p>
                          <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
                          <span class="arrow fr"></span>
@@ -103,93 +103,60 @@
                          <span class="arrow fr"></span>
                          </div>
                        </div>
-                    </li>
+                    </li> 
                   </ul>
                 </div> 
-              </div>`
+              </div>`/* ,
+          data:{
+              	datas:[]
+              },
+          created:function(){
+          	  axios.get("/workflow/getMyInitiatedProcess",{params:{userid:'6666'}}).then(function(response){
+          		  this.datas=response.data;
+          		  console.log(this.datas)
+          	  }).catch(function(error){
+          		  console.log(error);
+          	  });
+          } */
+       
   }
   var persons={
     template:`<div class="agency-list">
-                <div>
                   <ul>
-                    <li class="clearfix">
+                    <li class="clearfix" v-for="item in dataes">
                        <div class="agency-left">
                            <span class="fund-icon"></span>
                        </div>
                        <div class="agency-right">
                           <div class="right-box">
-                         <h3 class="agency-title">资金划付</h3>
+                         <h3 class="agency-title">{{item.flowname}}</h3>
                          <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">发起时间：<span class="fr">2017-05-12</span></p>
+                         <p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
                          <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">当前审批部门：<span class="fr">信托投资部门</span></p>
-                         <span class="prompt fr">正在审批</span>
-                         </div>
-                       </div>
-                    </li>
-                    <li class="clearfix">
-                       <div class="agency-left">
-                           <span class="project-icon"></span>
-                       </div>
-                       <div class="agency-right">
-                       <div class="right-box">
-                         <h3 class="agency-title">项目管理</h3>
-                         <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">发起时间：<span class="fr">2017-05-12</span></p>
-                         <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">当前审批部门：<span class="fr">信托投资部门</span></p>
-                         <span class="prompt fr">正在审批</span>
-                     </div>
-                       </div>
-                    </li>
-                    <li class="clearfix">
-                       <div class="agency-left">
-                           <span class="approve-icon"></span>
-                       </div>
-                       <div class="agency-right">
-                       <div class="right-box">
-                         <h3 class="agency-title">项目审批</h3>
-                         <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">发起时间：<span class="fr">2017-05-12</span></p>
-                         <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">当前审批部门：<span class="fr">信托投资部门</span></p>
-                         <span class="prompt fr">正在审批</span>
-                    </div>     
-                       </div>
-                    </li>
-                    <li class="clearfix">
-                       <div class="agency-left">
-                           <span class="info-icon"></span>
-                       </div>
-                       <div class="agency-right">
-                       <div class="right-box">
-                         <h3 class="agency-title">信息披露</h3>
-                         <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">发起时间：<span class="fr">2017-05-12</span></p>
-                         <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">当前审批部门：<span class="fr">信托投资部门</span></p>
-                         <span class="prompt fr">正在审批</span>
-                         </div>
-                       </div>
-                    </li>
-                    <li class="clearfix">
-                       <div class="agency-left">
-                           <span class="xucp-icon"></span>
-                       </div>
-                       <div class="agency-right">
-                       <div class="right-box">
-                         <h3 class="agency-title">续存管理</h3>
-                         <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">发起时间：<span class="fr">2017-05-12</span></p>
-                         <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-                         <p class="follow-person">当前审批部门：<span class="fr">信托投资部门</span></p>
-                         <span class="prompt fr">正在审批</span>
+                         <p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
+                         <span class="prompt fr">{{item.flowstatus}}</span>
                          </div>
                        </div>
                     </li>
                   </ul>
-                </div>
-              </div>`
+              </div>`,
+            data:function(){
+				return{
+					dataes:[]
+				}
+            },
+            created:function(){
+            	  var _this=this;
+            	  axios.get("/workflow/getDoneMessage",{params:{userid:'6666'}}).then(function(response){
+            		  console.log(response.data)
+            		  var stres=[];
+            		  stres.push(response.data)
+            		  _this.dataes=stres;
+            		  console.log(_this.dataes)
+            	  }).catch(function(error){
+            		  console.log(error);
+            	  });
+            }
   }
   var agencys={
     template:`<div>分发给我</div>`
@@ -219,7 +186,7 @@
     })
 
   new Vue({
-    router:routeres
+	router:routeres,
   }).$mount("#app")
 
 

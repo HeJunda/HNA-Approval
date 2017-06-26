@@ -1,9 +1,7 @@
- 
-//  new Vue({
-//       el: '#app',
-//       methods: {
-// 	      handleChange(index) {
-// 	  }
-//     }
-// });
+//new Vue({
+//	el:"#app",
+//	created:fumction(){
+//		
+//	}
+//})
 

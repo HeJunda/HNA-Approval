@@ -16,17 +16,17 @@ import com.google.gson.GsonBuilder;
 
 public class MPUtil {
 	
-	 String publicKey = Utils.RSACrypto.GetPublicKey(ConfigKeyConst.PushPublicKeyFile);
-     String timestamp = DateTime.Now.ToString();
-
-     //soapHeader
-     PushContentService.ServiceSoapHeader soapHeader = new PushContentService.ServiceSoapHeader();
-     soapHeader.Account = ConfigKeyConst.PushAccount;
-     soapHeader.TimeKey = new Utils.RSACrypto().RSAEncrypt(publicKey, timestamp);
-     soapHeader.Password = new Utils.RSACrypto().RSAEncrypt(publicKey, ConfigKeyConst.PushPassword);
-
-     PushContentService.PushService service = new PushContentService.PushService();
-     service.ServiceSoapHeaderValue = soapHeader;
+//	 String publicKey = Utils.RSACrypto.GetPublicKey(ConfigKeyConst.PushPublicKeyFile);
+//     String timestamp = DateTime.Now.ToString();
+//
+//     //soapHeader
+//     PushContentService.ServiceSoapHeader soapHeader = new PushContentService.ServiceSoapHeader();
+//     soapHeader.Account = ConfigKeyConst.PushAccount;
+//     soapHeader.TimeKey = new Utils.RSACrypto().RSAEncrypt(publicKey, timestamp);
+//     soapHeader.Password = new Utils.RSACrypto().RSAEncrypt(publicKey, ConfigKeyConst.PushPassword);
+//
+//     PushContentService.PushService service = new PushContentService.PushService();
+//     service.ServiceSoapHeaderValue = soapHeader;
      
      
      

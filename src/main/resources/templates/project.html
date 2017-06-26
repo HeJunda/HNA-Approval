@@ -20,8 +20,6 @@
               <ul class="cleanF">
                 <router-link tag="li" to="active">本人名下</router-link>
                 <router-link tag="li" to="project">本部名下</router-link>
-                 <!-- <li class="active"><a href="project.html"></a></li>
-                 <li><a href="project-person.html">本部名下</a></li> -->
               </ul>
         </div>
         
@@ -31,177 +29,143 @@
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
+  	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript">
   var active={
     template:`<div>
                 <div class="search">
                     <div class="search-box">
-                        <input type="text" placeholder="请输入项目名称"/><span class="search-btn fr"><i class="search-icon"></i>搜索</span>
+                        <input type="text" placeholder="请输入项目名称" id="itemword"/><span class="search-btn fr" v-on:click="sear()"><i class="search-icon"></i>搜索</span>
                     </div>
                 </div>
                 <div class="agency-list">
                    <ul>
-                      <li class="clearfix">
+                      <li class="clearfix" v-for="item in dataes">
                         <a href="project-detail.html">
                          <div class="agency-left">
                              <div class="lucre-name">
-                              <p class="project-price">6.99%</p>
+                              <p class="project-price">{{item.predictmaxyield}}%</p>
                               <p class="project-lucre">预计收益</p>
                              </div>
                          </div>
                          <div class="agency-right">
                           <div class="right-box">
-                           <h3 class="agency-title">资金划付</h3>
-                           <p>发放速度是的范德萨撒大声地啊实打实大师啊撒大声地</p>
+                           <h3 class="agency-title">{{item.dptname}}</h3>
+                           <p>{{item.projectname}}</p>
                            </div>
                          </div>
                          </a>
                       </li>
-                      <li class="clearfix">
-                         <div class="agency-left">
-                             <div class="lucre-name">
-                              <p class="project-price">6.99%</p>
-                              <p class="project-lucre">预计收益</p>
-                             </div>
-                         </div>
-                         <div class="agency-right">
-                         <div class="right-box">
-                           <h3 class="agency-title">项目管理</h3>
-                           <p>发放速度是的范德萨</p>
-                           </div>
-                         </div>
-                      </li>
-                      <li class="clearfix">
-                         <div class="agency-left">
-                             <div class="lucre-name">
-                              <p class="project-price">6.99%</p>
-                              <p class="project-lucre">预计收益</p>
-                             </div>
-                         </div>
-                         <div class="agency-right">
-                         <div class="right-box">
-                           <h3 class="agency-title">项目审批</h3>
-                           <p>发放速度是的范德萨</p>
-                           </div>
-                         </div>
-                      </li>
-                      <li class="clearfix">
-                         <div class="agency-left">
-                             <div class="lucre-name">
-                              <p class="project-price">6.99%</p>
-                              <p class="project-lucre">预计收益</p>
-                             </div>
-                         </div>
-                         <div class="agency-right">
-                         <div class="right-box">
-                           <h3 class="agency-title">信息披露</h3>
-                           <p>发放速度是的范德萨</p>
-                           </div>
-                         </div>
-                      </li>
-                      <li class="clearfix">
-                         <div class="agency-left">
-                             <div class="lucre-name">
-                              <p class="project-price">6.99%</p>
-                              <p class="project-lucre">预计收益</p>
-                             </div>
-                         </div>
-                         <div class="agency-right">
-                         <div class="right-box">
-                           <h3 class="agency-title">续存管理</h3>
-                           <p>发放速度是的范德萨</p>
-                           </div>
-                         </div>
-                      </li>
+                      
                    </ul>
                 </div>
-              </div>`            
+              </div>`,
+			  data:function(){
+					return{
+						dataes:[]
+					}
+			  },
+			  created:function(){
+					var _this=this;
+					axios.get("/project/getProjectList",{params:{userid:'6666',projectname:'',projectphase:'',depcode:''}}).then(function(response){
+						 console.log(response.data)
+						 var stres=[];
+						 stres.push(response.data)
+						 _this.dataes=stres;
+						 console.log(_this.dataes)
+					}).catch(function(error){
+						  console.log(error);
+					});
+			  },
+			  methods:{
+				  sear:function(){
+					  var itemword=$("#itemword").val();
+						console.log(itemword)
+						if(itemword==""){
+							alert("查询内容不能为空");
+							console.log('123515')
+						}else{
+							var _this=this;
+							axios.get("/project/getProjectList",{params:{userid:'6666',projectname:itemword}}).then(function(response){
+								var stres=[];
+								stres.push(response.data)
+								_this.dataes=stres;
+								console.log(_this.dataes)
+							}).catch(function(error){
+								console.log(error);
+							});	
+						}
+				  }
+			  }
   }
   var project={
     template:`<div>
 			    <div class="search">
 			    <div class="search-box">
-			        <input type="text" placeholder="请输入项目名称"/><span class="search-btn fr"><i class="search-icon"></i>搜索</span>
+			        <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
 			    </div>
 			</div>
 			<div class="agency-list">
 			   <ul>
-			      <li class="clearfix">
+			      <li class="clearfix" v-for="item in dataes">
 			        <a href="project-detail.html">
 			         <div class="agency-left">
 			             <div class="lucre-name">
-			              <p class="project-price">6.99%</p>
+			              <p class="project-price">{{item.predictmaxyield}}%</p>
 			              <p class="project-lucre">预计收益</p>
 			             </div>
 			         </div>
 			         <div class="agency-right">
 			          <div class="right-box">
-			           <h3 class="agency-title">资金划付</h3>
-			           <p>发放速度是的范德萨撒大声地啊实打实大师啊撒大声地</p>
+			           <h3 class="agency-title">{{item.dptname}}</h3>
+			           <p>{{item.projectname}}</p>
 			           </div>
 			         </div>
 			         </a>
 			      </li>
-			      <li class="clearfix">
-			         <div class="agency-left">
-			             <div class="lucre-name">
-			              <p class="project-price">6.99%</p>
-			              <p class="project-lucre">预计收益</p>
-			             </div>
-			         </div>
-			         <div class="agency-right">
-			         <div class="right-box">
-			           <h3 class="agency-title">项目管理</h3>
-			           <p>发放速度是的范德萨</p>
-			           </div>
-			         </div>
-			      </li>
-			      <li class="clearfix">
-			         <div class="agency-left">
-			             <div class="lucre-name">
-			              <p class="project-price">6.99%</p>
-			              <p class="project-lucre">预计收益</p>
-			             </div>
-			         </div>
-			         <div class="agency-right">
-			         <div class="right-box">
-			           <h3 class="agency-title">项目审批</h3>
-			           <p>发放速度是的范德萨</p>
-			           </div>
-			         </div>
-			      </li>
-			      <li class="clearfix">
-			         <div class="agency-left">
-			             <div class="lucre-name">
-			              <p class="project-price">6.99%</p>
-			              <p class="project-lucre">预计收益</p>
-			             </div>
-			         </div>
-			         <div class="agency-right">
-			         <div class="right-box">
-			           <h3 class="agency-title">信息披露</h3>
-			           <p>发放速度是的范德萨</p>
-			           </div>
-			         </div>
-			      </li>
-			      <li class="clearfix">
-			         <div class="agency-left">
-			             <div class="lucre-name">
-			              <p class="project-price">6.99%</p>
-			              <p class="project-lucre">预计收益</p>
-			             </div>
-			         </div>
-			         <div class="agency-right">
-			         <div class="right-box">
-			           <h3 class="agency-title">续存管理</h3>
-			           <p>发放速度是的范德萨</p>
-			           </div>
-			         </div>
-			      </li>
+			      
 			   </ul>
 			</div>
-			</div>`
+			</div>`,
+			  data:function(){
+					return{
+						dataes:[]
+					}
+			  },
+			  created:function(){
+					var _this=this;
+					axios.get("/project/getProjectList",{params:{userid:'6666',projectname:'',projectphase:'',depcode:''}}).then(function(response){
+						 console.log(response.data)
+						 var stres=[];
+						 stres.push(response.data)
+						 _this.dataes=stres;
+						 console.log(_this.dataes)
+					}).catch(function(error){
+						  console.log(error);
+					});
+			  },
+			  methods:{
+				  sears:function(){
+					  var gulpwork=$("#gulpwork").val();
+						console.log(gulpwork)
+						if(gulpwork==""){
+							alert("查询内容不能为空");
+							console.log('123515')
+						}else{
+							var _this=this;
+							axios.get("/project/getProjectList",{params:{userid:'6666',projectname:gulpwork}}).then(function(response){
+								var stres=[];
+								stres.push(response.data)
+								_this.dataes=stres;
+								console.log(_this.dataes)
+							}).catch(function(error){
+								console.log(error);
+							});	
+						}
+				  }
+			  }
   }
   const routers=[
     {

@@ -23,7 +23,6 @@ table{border-collapse:collapse;border-spacing:0;}
 .clearfix:after{content:'\0020';display:block;height:0;overflow:hidden;clear:both;}
 /*首页*/
 .container{display:block;width:100%;height:100%;margin:0 auto;padding:0}
-.paddinTop{padding-top:3em}
 .header{display:block;width:100%;height:3em;text-align:center;border-bottom: 1px solid #D8D8D8;box-shadow:0px 3px 3px #EFEFEF;z-index: 10;position:fixed;background-color:#fff}
 .header .back{position:relative;display: inline-block;height:30px;width:15px;background: url(/images/tcmp-icon.png) no-repeat -1px -328px;float:left;vertical-align:middle;margin-top:0.5em;margin-left:10px;cursor: pointer;}
 .header .approve{display: inline-block;float:left;text-align:center;width:100%;margin-left: -25px;;font-size:1em;padding:0.75em 0}
@@ -106,7 +105,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-img{position:absolute;display: block;z-index:-5}
 .examine-img img{width:100%}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1em 1em}
-.examine-title{font-size:1.5em;color:#fff;padding:0.5em 0}
+.examine-title{font-size:1.5em;color:#fff}
 .examine-node li{display: block;width:100%;line-height:1.5em;color:#fff;font-size:0.875em}
 .examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
 .examine-list{display: block;margin-top:10px;width:100%;}
@@ -140,5 +139,17 @@ table{border-collapse:collapse;border-spacing:0;}
 .status-icon p span.report{background-position:-120px -145px}
 .status-icon p span.finish{background-position:-120px -192px}
 .status-icon p span.submit{background-position:-121px -241px}
+.paddinTop{padding-top:3em}
+/*下一步选择人*/
+
+.mark{width: 100%;}
+.item-mark{position:relative;height:60px;}
+.appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center}
+.item-mark .right{float:right;line-height:60px;}
+.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:5px;padding:3px 5px;border-radius:5px;position:relative}
+.content{width:100%;}
+.content ul li{display:flex;line-height:44px;border-bottom:1px solid #ccc;justify-content:space-between;margin: 0 10px;padding:0 5px;}
+.bg{color:#f00}
+
 
 

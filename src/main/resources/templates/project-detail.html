@@ -17,21 +17,43 @@
 	  </header>
 		<div class="container paddinTop">
       <div class="project-detail">
-       <h3 class="project-title">渤融2号_其他投资</h3>
+       <h3 class="project-title">{{dataes.projectname}}</h3>
        <ul class="project-content">
-          <li>项目编号<span class="fr">2017030450606</span></li>
-          <li>项目部门<span class="fr">信托融资部</span></li>
-          <li>项目类型<span class="fr">集资</span></li>
-          <li>项目收益<span class="fr">6.3%</span></li>
-          <li>成立时间<span class="fr">2017-03-04</span></li>
-          <li>结束时间<span class="fr">2017-10-04</span></li>
-          <li>信托/投资规模（元）<span class="fr">201,70,304,506.06</span></li>
+          <li>项目编号<span class="fr">{{dataes.projectcode}}</span></li>
+          <li>项目部门<span class="fr">{{dataes.dptname}}</span></li>
+          <li>项目类型<span class="fr">{{dataes.projecttype}}</span></li>
+          <li>项目收益<span class="fr"></span></li>
+          <li>成立时间<span class="fr">{{dataes.setupdate}}</span></li>
+          <li>结束时间<span class="fr">{{dataes.enddate}}</span></li>
+          <li>信托/投资规模（元）<span class="fr">{{dataes.trustscale}}</span></li>
        </ul>
       </div>
     </div>    
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
+	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:function(){
+			return{
+				dataes:[]
+			}
+		},
+		created:function(){
+			 var _this=this;
+			 axios.get("/project/getProjectDetail",{params:{userid:'6666',projectcode:20160502009}}).then(function(response){
+				  console.log(response.data)
+				  //var stres=[];
+				  //stres.push(response.data)
+				  _this.dataes=response.data;
+				  console.log(_this.dataes)
+			 }).catch(function(error){
+				  console.log(error);
+			 });
+		}
+	})
+	</script>
 </body>
 </html>
