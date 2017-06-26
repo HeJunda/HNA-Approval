@@ -1,6 +1,7 @@
 package cn.Bohai.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -110,11 +111,17 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)
-	public JSONObject getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
-		String jsonString = workflowService.getHistoricalApproval(historicalApproval);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
+//		String jsonString = workflowService.getHistoricalApproval(historicalApproval);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+		JSONArray jsonArray = workflowService.getHistoricalApproval(historicalApproval);
+//		Object obj1 = jsonArray.toArray()[0];
+//		JSONObject obj2 = (JSONObject) obj1;
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.toString());
+//	    String a = jsonObject.getString("attach");
+//	    jsonObject.put("attachsdfasdfasdf", a);
+//	    System.out.println(jsonObject);
+		return jsonArray;
 	}
 	
 	/**
@@ -122,7 +129,8 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
-	public JSONObject processProcessing(Processing processing) throws Exception{
+	
+	public JSONObject processProcessing(@RequestBody Processing processing) throws Exception{
 		String jsonString = workflowService.processProcessing(processing);
 		JSONArray jsonArray=JSON.parseArray(jsonString);
 	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());

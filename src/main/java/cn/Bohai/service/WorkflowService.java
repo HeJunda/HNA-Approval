@@ -1,5 +1,6 @@
 package cn.Bohai.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -185,7 +186,8 @@ public class WorkflowService {
 	 * @throws Exception 
 	 */
 //	@Test
-	public String getHistoricalApproval (HistoricalApproval historicalApproval) throws Exception{
+	@SuppressWarnings("unchecked")
+	public JSONArray getHistoricalApproval (HistoricalApproval historicalApproval) throws Exception{
 		
 		T2Util.init();
 		
@@ -211,9 +213,20 @@ public class WorkflowService {
 	    result = T2Util.send("8000", iDataset);
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    for(int i=0;i<resultListMap.size();i++){
+	    	@SuppressWarnings("rawtypes")
+	    	Map map = resultListMap.get(i);
+	    	String attach = (String) map.get("attach");
+	    	JSONArray attachJsonArray = JSONArray.parseArray(attach);
+	    	map.put("attach", attachJsonArray);
+	    }
 	    String jsonString = JSON.toJSONString(resultListMap);
-	    System.out.println(jsonString);
-		return jsonString;
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
+//	    JSON.toJSON
+//	    String jsonString = JSONArray.;
+//	    JSONArray array = 
+//	    System.out.println(jsonString);
+		return jsonArray;
 	}
 	
 	/**
