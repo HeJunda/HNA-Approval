@@ -16,7 +16,7 @@ public class Processing implements Serializable {
     /**
      * 任务ID
      */
-    private String taskeid;
+    private String taskid;
     /**
      * 节点动作按钮名称
      */
@@ -63,11 +63,11 @@ public class Processing implements Serializable {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	public String getTaskeid() {
-		return taskeid;
+	public String getTaskid() {
+		return taskid;
 	}
-	public void setTaskeid(String taskeid) {
-		this.taskeid = taskeid;
+	public void setTaskeid(String taskid) {
+		this.taskid = taskid;
 	}
 	public String getActionname() {
 		return actionname;
