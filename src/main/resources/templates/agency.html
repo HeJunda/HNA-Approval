@@ -19,81 +19,27 @@
 	      <div class="agency-list">
            <ul>
               <li class="clearfix" v-for="item in datas">
-               <a v-bind:href="getTitleHref(item.taskid)">
-                 <div class="agency-left">
-                     <span class="fund-icon"></span>
-                 </div>
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">{{item.flowname}}</h3>
-	                 <p>{{item.nodename}}</p>
-	                 <span class="number fr">10</span>
-                   </div>
-                 </div>
-                 </a>
+               	<a v-bind:href="getTitleHref(item.taskid)">
+                 	<div class="agency-left">
+                     	<span class="fund-icon"></span>
+                 	</div>
+                 	<div class="agency-right">
+                   		<div class="right-box">
+	                 		<h3 class="agency-title">{{item.flowname}}</h3>
+	                 		<p>{{item.nodename}}</p>
+	                 		<span class="number fr">10</span>
+                   		</div>
+                 	</div>
+           	  	</a>
               </li>
-             <!--<li class="clearfix">
-               <a href="examine.html">
-                 <div class="agency-left">
-                     <span class="project-icon"></span>
-                 </div>
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">项目管理</h3>
-	                 <p>发放速度是的范德萨</p>
-	                 <span class="number fr">10</span>
-                   </div>
-                 </div>
-                 </a>
-              </li> -->
-              <!--  <li class="clearfix">
-                 <a href="examine.html">
-                 <div class="agency-left">
-                     <span class="approve-icon"></span>
-                 </div>
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">项目审批</h3>
-	                 <p>发放速度是的范德萨</p>
-	                 <span class="number fr">10</span>
-                   </div>
-                 </div>
-                 </a>
-              </li>
-              <li class="clearfix">
-               <a href="examine.html">
-                 <div class="agency-left">
-                     <span class="info-icon"></span>
-                 </div>
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">信息披露</h3>
-	                 <p>发放速度是的范德萨</p>
-	                 <span class="number fr">10</span>
-                   </div>
-                 </div>
-                 </a>
-              </li>
-              <li class="clearfix">
-              	<a href="examine.html">
-                 <div class="agency-left">
-                     <span class="xucp-icon"></span>
-                 </div>
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">续存管理</h3>
-	                 <p>发放速度是的范德萨</p>
-	                 <span class="number fr">10</span>
-                   </div>
-                 </div>
-                 </a>
-              </li> -->
+
            </ul>
 	      </div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/agency.js"></script>
 </body>
 </html>

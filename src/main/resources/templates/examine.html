@@ -41,7 +41,7 @@
                  <p class="space"></p>
                  <h3 class="examine-item">历史审批记录<span v-bind="{class:showHistory?'fr more-open':'fr more-close'}" v-on:click="showNode($event)"></span></h3>
                  <div class="examine-history" v-show="showHistory" style="display: none">
-                   <div class="history" v-for="msg in datis">
+                   <div class="history" v-for="msg in histry">
                     <h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
                     <div class="history-describe">
                       {{msg.remark}}!
@@ -73,7 +73,7 @@
               <div class="layui-m-layerchild">
                 <div class="layui-m-layercont">
                   <div class="handle-status clearfix">
-                    <div v-for="item in actionlist" class="status-icon" :class="{active: activeName ==item.name}" v-on:click="showIcon(item)"><p><span class="report"></span></p><p>{{item.name}}</p></div>
+                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
                    
                   </div>
                 </div>
@@ -99,7 +99,7 @@
 			      	</header>
 			      	<div class="content">
 			      		<ul>
-			      			<li v-for="person in moom"><span>{{person.username}}</span></li>
+			      			<li v-for="name in person"><span>{{name.username}}</span></li>
 			      		</ul>
 			      	</div>
 					</div>
@@ -113,7 +113,8 @@
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>	
+	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/examine.js"></script>
 </body>
 </html>

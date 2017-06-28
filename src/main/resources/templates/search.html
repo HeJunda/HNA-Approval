@@ -20,7 +20,6 @@
               <ul class="cleanF">
                 <router-link tag="li" to="/active" class="active">本人呈报</router-link>
                 <router-link tag="li" to="/person">本人审批</router-link>
-                <router-link tag="li" to="/agency">分发给我</router-link>
               </ul>
 		  </div>
 	      
@@ -30,8 +29,9 @@
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
+	<script	type="text/javascript" src="js/lib/cookies.js"></script>
+	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
 	<script>
 	var actives={
@@ -144,32 +144,28 @@
 								dataes:[]
 							}
 						},
-						/* created:function(){
+						created:function(){
 							  var _this=this;
 							  axios.get("/workflow/getDoneMessage",{params:{userid:'6666'}}).then(function(response){
-								  console.log(response.data)
-								  var stres=[];
-								  stres.push(response.data)
-								  _this.dataes=stres;
+								 
+								  _this.dataes=response.data;
 								  console.log(_this.dataes)
 							  }).catch(function(error){
 								  console.log(error);
 							  });
-						}, */
+						},
 						methods:{
 							search:function(){
 								var keywork=$("#keywork").val();
-								console.log(keywork)
 								if(keywork==""){
 									alert("查询内容不能为空");
-									console.log('123515')
 								}else{
 									var _this=this;
-									axios.get("/workflow/getDoneMessage",{params:{userid:'6666',flowname:keywork}}).then(function(response){
-										var stres=[];
-										stres.push(response.data)
-										_this.dataes=stres;
-										console.log(_this.dataes)
+									var user=getCookie('userid')
+					      			console.log(user)
+									axios.get("/workflow/getDoneMessage",{params:{userid:user,flowname:keywork}}).then(function(response){
+										 _this.dataes=response.data;
+										  console.log(_this.dataes)
 									}).catch(function(error){
 										console.log(error);
 									});
@@ -179,9 +175,7 @@
 							
 						}
 		  }
-		  var agencys={
-		    template:`<div>分发给我</div>`
-		  }
+		 
 
 		  const routers = [
 		    {
@@ -195,10 +189,6 @@
 		    {
 		      path:"/person",
 		      component:persons
-		    },
-		    {
-		      path:"/agency",
-		      component:agencys
 		    }
 		  ]
 

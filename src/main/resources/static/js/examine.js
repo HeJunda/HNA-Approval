@@ -1,4 +1,4 @@
- new Vue({
+new Vue({
 	el:'#app',
 	data:{
       showDom:false,
@@ -6,45 +6,46 @@
       showLayer:false,
       showuser:false,
       digital:{},
-      personObj:{},
+      histry:'',
+      aclist:'',
+      list:'',
+      person:'',   	  
       opinion:'',
       activeName:'',
-      opinion:'',
       status:'',
-      actionlist:[],
-      dates:[],
-      datis:[],
+      actionlist:[],  
       comeback:'',
       parms:[],
       noname:[],
-      personArr:[],
-      moom:[]
+      personStr:'',
+      moom:[],
+      message:''
 	},
+	/*过滤ICON图标*/
 	filters:{
-		quite:function(value){
-			if(this.actionlist.name=="同意"){
-				$(".status-icon").attr(":class","{active: activeName == 'submit'}")
-			}else if(this.actionlist.name=="否决"){
-				$(".status-icon").attr(":class","{active: activeName == 'overrule'}")
-			}else if(this.actionlist.name=="打回"){
-				$(".status-icon").attr(":class","{active: activeName == 'ballBack'}")
-			}else if(this.actionlist.name=="分阅"){
-				$(".status-icon").attr(":class","{active: activeName == 'report'}")
-			}else if(this.actionlist.name=="协作"){
-				$(".status-icon").attr(":class","{active: activeName == 'cooperation'}")
+		showTubiao:function(value){
+			if(value=="同意"){
+				return 'submit';
+			}else if(value=="否决"){
+				return 'overrule';
+			}else if(value=="打回"){
+				return 'ballBack';
+			}else if(value=="分阅"){
+				return 'report';
+			}else if(value=="协作"){
+				return 'cooperation';
 			}
 		}
 	},
 	methods:{
+		/*点击更多详情*/
 		showDiv:function(event){
 			var _this=this;
-			axios.get("/workflow/getProcessInformation",{params:{userid:'6666',instanceid:"T1385"}}).then(function(response){
-				var strs=[];
-				strs.push(response.data);
-				_this.dates=strs;
+			var user=getCookie('userid')
+			var instance=this.digital.instanceid;
+			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
+				_this.dates=response.data;
 				console.log(_this.dates)
-				//console.log(_this.datas.taskid);
-				//alert(this.datas.constructor == Array);
 			}).catch(function(error){
 			    console.log(error);
 			});
@@ -52,6 +53,7 @@
 			this.showDom=!this.showDom;
 				
 			},
+		/*点击选人*/
 		showUser:function(parame){
 			this.showuser=!this.showuser;
 			var taskId=this.digital.taskid;
@@ -61,15 +63,23 @@
 			var names=this.parms.value;
 			var instance=this.digital.instanceid;
 			var noname=this.noname;
+			/*if(parm==2){
+				nodename=this.noname;
+			}else{
+				nodename=""
+			}*/
+			
 			var _this=this
-			axios.get('/workflow/selectPerson',{params:{userid:'6666',taskid:taskId,actionvalue:names,nodename:noname,actiontype:parm,instanceid:instance}}).then(function(response){
-				var memo=response.data.memo;
-				var useid=response.data.userid;
-				console.log(response.data)
-				console.log(useid)
+			var user=getCookie('userid')
+			axios.get('/workflow/selectPerson',{params:{userid:user,taskid:taskId,actionvalue:names,nodename:noname,actiontype:parm,instanceid:instance}}).then(function(response){
+				_this.person=response.data;
+				console.log(_this.person)
 				var personList=[];
-				personList.push(response.data);
-				_this.moom=personList;
+				_this.person.forEach(function(i,index,array){
+					var arrUser=i.userid
+					personList.push(arrUser);
+				})
+				console.info(personList)
 				
 				$(".content ul").on("click",$(".content li"),function(ev){
 					var ev = ev || window.event;
@@ -84,7 +94,9 @@
 							lis.setAttribute("class","bg");
 							lis.innerHTML="√";
 							if(target.nodeName.toLowerCase() == "li"){
-								$(target).append(lis).attr('data-id',useid);
+								var ind=$(".content li").index($(target));
+								console.log(ind);
+								$(target).append(lis).attr('data-id',personList[ind]);
 							}
 						}
 					}
@@ -93,24 +105,31 @@
 				console.log(err)
 			});
 		},
+		/*点击确定*/
 		showok:function(){
 			this.showuser=!this.showuser;
-			var personLen=$(".content li").attr('data-id');
-			this.personArr.push(personLen);
-			//console.log(this.personArr);
-			var personObj={};
-			for(var i=0;i<this.personArr.length;i++){
-				personObj[i+1]=this.personArr[i]
+			var _this=this;
+			var lis=$(".content li")
+			var personArr=[];
+			for(var i=0;i<lis.length;i++){
+				if(lis.eq(i).attr('data-id')!=undefined){
+					personArr.push(lis.eq(i).attr('data-id'));
+				}
 			}
-			console.log(personObj)
+			console.log(personArr)
+			_this.personStr=personArr.join(",")
+			console.log(_this.personStr)
+			
 		},
+		
+		/*历史记录*/
 		showNode:function(){
 			var _this=this;
 			var instance=this.digital.instanceid;
-			axios.get("/workflow/getHistoricalApproval",{params:{userid:'6666',instanceid:instance}}).then(function(response){
-				var stris=[];
-				stris.push(response.data);
-				_this.datis=stris;
+			var user=getCookie('userid')
+			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,instanceid:instance}}).then(function(response){
+				_this.histry=response.data;
+				console.log(_this.histry)
 				
 			}).catch(function(error){
 			    console.log(error);
@@ -119,17 +138,18 @@
 		},
 		showTip:function(){
 			this.showLayer=!this.showLayer;
-		},
-		hideDiv:function(){
 			var _this=this;
-			axios.get("/workflow/getAwaitDetail",{params:{userid:'6666',taskid:this.taskid}}).then(function(response){
-				console.log(response.data)
-				var zrr=[];
-				zrr.push(response.data);
-				_this.dais=zrr;
+			var taskId=_this.digital.taskid;
+			var user=getCookie('userid')
+			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+				_this.aclist=response.data;
+				_this.list=JSON.parse(_this.aclist[0].actionlist)
+				console.log(_this.list);
 			}).catch(function(error){
 			    console.log(error);
 			});
+		},
+		hideDiv:function(){
 			this.showLayer=!this.showLayer;
 		},
 		showIcon:function(name){
@@ -139,16 +159,16 @@
             this.parms=name;
             var names=name.value;
             var taskId=this.digital.taskid;
-            
             /*弹出框(一)*/
             if(name.comeback!='0' && name.comeback!=""){
-            	var comeback=name.comeback;
+            	this.comeback=name.comeback;
+            	
             	var html='';
-            	if(comeback==1){
+            	if(this.comeback==1){
             		html='<div class="comeback"><p><input type="radio" checked="true" name="Comeback" value="0">下一步按原流程重新提交逐级审批</p><p><input type="radio" name="Comeback" value="1">下一步直接提交至本节点</p><p><input type="radio" name="Comeback" value="2">由下一步处理人选择提交</p></div>';
-            	}else if(comeback==2){
+            	}else if(this.comeback==2){
             		html='<div class=""><p><input type="radio" name="Comeback" value="0">下一步按原流程重新提交逐级审批</p><p><input type="radio" checked="true" name="Comeback" value="1">下一步直接提交至本节点</p><p><input type="radio" name="Comeback" value="2">由下一步处理人选择提交</p></div>';
-            	}else if(comeback==3){
+            	}else if(this.comeback==3){
             		html=html='<div class=""><p><input type="radio" name="Comeback" value="0">下一步按原流程重新提交逐级审批</p><p><input type="radio" name="Comeback" value="1">下一步直接提交至本节点</p><p><input type="radio" checked="true" name="Comeback" value="2">由下一步处理人选择提交</p></div>';
             	}
             	var index=layer.open({
@@ -170,16 +190,29 @@
             /*人物弹出框(二)*/
             if(name.type==2||name.type==3||name.type==4||name.type==7||name.type==9){
             	document.querySelector(".person-item").style.display="block";
+            	//console.log(name.type)
+            	var _this=this;
             	if(name.type==2){
-                	axios.get("/workflow/getNextNode",{params:{userid:'6666',actionvalue:names,taskid:taskId}}).then(function(response){
-                		this.noname=response.data.nodename
+            		var user=getCookie('userid')
+            		axios.get("/workflow/getNextNode",{params:{userid:user,actionvalue:names,taskid:taskId}}).then(function(response){
+            			console.log(response.data)
+                		_this.noname=response.data.nodename
+                		console.log(_this.noname)
+                		
+                		
+                		
                 	},function(err){
                 		console.log(err)
                 	})
-            	}else{this.noname=""}
+            	}else{
+                	_this.noname=""
+                		
+                		
+            	}
             	
             }else{document.querySelector(".person-item").style.display="none";}          
 		},
+		/*点击提交*/
 		submit:function(){
 			if(this.opinion=="" || this.activeName==""){
 				layer.open({
@@ -193,11 +226,18 @@
 			var str=this.opinion;
 			var parm=this.parms;
 			var comebacks=this.comeback;
+			//console.log(comebacks)
 			var formtypes=this.digital.formtype;
 			var taskId=this.digital.taskid;
-			var persones=this.personArr;			
-			axios.post("/workflow/processProcessing",{userid:'6666',taskeid:taskId,nextopermap:persones,actionname:parm.name,remark:str,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:''}).then(function(response){
-				if(response.data.code==1){
+			var personStrs=this.personStr;
+			var nonames=this.noname;
+			var user=getCookie('userid')
+			//console.log(nonames)
+			axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,nextopermap:"",actionname:parm.name,remark:str,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
+				console.log(response.data)
+				console.log(response.data[0].code)
+				if(response.data[0].code=='1'){
+					alert(123)
 					window.location.href='agency.html';
 				}else{
 					layer.open({
@@ -207,8 +247,8 @@
 					    time: 3 
 					  });
 				}
-			}).catch(function(reseponse){
-				console.log(reseponse)
+			}).catch(function(response){
+				console.log(response)
 				layer.open({
 				    content: response.result,
 				    style: 'background-color:#ccc; color:#fff; border:none;',
@@ -221,12 +261,16 @@
 		
 	},
 	created:function(){
+		var taskId=localurl('taskid')
+		//console.log(taskId)
+		var user=getCookie('userid')
+		console.log(user)
 		var _this=this;
-		axios.get("/workflow/getAwaitDetail",{params:{userid:'6666',taskid:1784577}}).then(function(response){
-			_this.digital=response.data;
-			_this.actionlist=JSON.parse(response.data.actionlist);
+		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+			_this.digital=response.data[0];
+			//_this.actionlist=JSON.parse(response.data.actionlist);
 		}).catch(function(error){
-		    console.log(error);
+		    console.log('服务错误');
 		});		
 	}
 });

@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
   	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+  	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
   <script type="text/javascript">
@@ -69,7 +70,9 @@
 			  },
 			  created:function(){
 					var _this=this;
-					axios.get("/project/getProjectList",{params:{userid:'6666',projectname:'',projectphase:'',depcode:''}}).then(function(response){
+					var user=getCookie('userid')
+	      			console.log(user)
+					axios.get("/project/getProjectList",{params:{userid:user,projectname:'',projectphase:'',depcode:''}}).then(function(response){
 						 console.log(response.data)
 						 var stres=[];
 						 stres.push(response.data)
@@ -88,7 +91,9 @@
 							console.log('123515')
 						}else{
 							var _this=this;
-							axios.get("/project/getProjectList",{params:{userid:'6666',projectname:itemword}}).then(function(response){
+							var user=getCookie('userid')
+			      			  console.log(user)
+							axios.get("/project/getProjectList",{params:{userid:user,projectname:itemword}}).then(function(response){
 								var stres=[];
 								stres.push(response.data)
 								_this.dataes=stres;
@@ -136,7 +141,9 @@
 			  },
 			  created:function(){
 					var _this=this;
-					axios.get("/project/getProjectList",{params:{userid:'6666',projectname:'',projectphase:'',depcode:''}}).then(function(response){
+					var user=getCookie('userid')
+	      			  console.log(user)
+					axios.get("/project/getProjectList",{params:{userid:user,projectname:'',projectphase:'',depcode:''}}).then(function(response){
 						 console.log(response.data)
 						 var stres=[];
 						 stres.push(response.data)
@@ -155,7 +162,9 @@
 							console.log('123515')
 						}else{
 							var _this=this;
-							axios.get("/project/getProjectList",{params:{userid:'6666',projectname:gulpwork}}).then(function(response){
+							var user=getCookie('userid')
+			      			  console.log(user)
+							axios.get("/project/getProjectList",{params:{userid:user,projectname:gulpwork}}).then(function(response){
 								var stres=[];
 								stres.push(response.data)
 								_this.dataes=stres;
