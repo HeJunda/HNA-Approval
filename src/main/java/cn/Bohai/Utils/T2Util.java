@@ -71,7 +71,7 @@ public class T2Util {
 	 * @param functionId
 	 * @param senddata
 	 */
-	public static IDataset send(String functionId,IDataset senddata)throws Exception{
+	public static IDatasets send(String functionId,IDataset senddata)throws Exception{
 		logger.info("调用"+functionId+"功能开始...");
 		
 		if(T2util==null || T2util.getClient()==null){
@@ -98,7 +98,7 @@ public class T2Util {
 						DatasetService.printDataset(result.getDataset(i));
 						System.out.println(result.getDataset(i));
 					}
-					return result.getDataset(0);
+					return result;
 				}else{
 					return null;
 				}
@@ -125,6 +125,7 @@ public class T2Util {
 			int datasetCount = result.getDatasetCount();
 			System.out.println("datasetCount="+datasetCount);
 			System.out.println("datasetCount="+result.getDataset(0).getTotalCount());
+			System.out.println("datasetCount="+result.getDataset(1).getTotalCount());
 			
 			for (int i = 0; i < datasetCount; i++) {
 				System.out.println("dataset - " + result.getDatasetName(i));
@@ -138,13 +139,15 @@ public class T2Util {
 	
 	
 	/**
-	 * 将dataset转换成List（存放Map类型）
+	 * 将datasets转换成List（存放Map类型）
 	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public static List<Map> dataset2MapList(IDataset request) throws Exception {
+	public static List<Map> dataset2MapList(IDatasets requests) throws Exception {
+		IDataset request = requests.getDataset(0);
+		int showTotal = requests.getDataset(1).getInt("totalCount");
 		List<Map> result = new ArrayList<Map>();
 		if (request == null) {
 			return null;
@@ -170,7 +173,7 @@ public class T2Util {
 			
 		}
 		Map map = new HashMap();
-		map.put("TotalCount", request.getTotalCount());
+		map.put("TotalCount", showTotal);
 		result.add(map);
 		return result;
 	}
