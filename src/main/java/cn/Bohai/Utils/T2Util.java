@@ -90,14 +90,18 @@ public class T2Util {
 				int datasetCount = result.getDatasetCount();
 				System.out.println("datasetCount="+datasetCount);
 				System.out.println("datasetCount="+result.getDataset(0).getTotalCount());
+				System.out.println("datasetCount="+result.getDataset(0).getString("TotalCount"));
 				
 				if(datasetCount>0){
+					
 					for (int i = 0; i < datasetCount; i++) {
+						
 						System.out.println("dataset - " + result.getDatasetName(i));
 						// 打印IDataset
 						DatasetService.printDataset(result.getDataset(i));
 						System.out.println(result.getDataset(i));
 					}
+					
 					return result;
 				}else{
 					return null;
@@ -147,7 +151,8 @@ public class T2Util {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<Map> dataset2MapList(IDatasets requests) throws Exception {
 		IDataset request = requests.getDataset(0);
-		int total = requests.getDataset(0).getTotalCount();
+//		String TotalCount = requests.getDataset(0).getString("TotalCount");
+//		System.out.println(TotalCount);
 		List<Map> result = new ArrayList<Map>();
 		if (request == null) {
 			return null;
@@ -172,9 +177,9 @@ public class T2Util {
 			result.add(map);
 			
 		}
-		Map map = new HashMap();
-		map.put("TotalCount", total);
-		result.add(map);
+//		Map map = new HashMap();
+//		map.put("TotalCount", TotalCount);
+//		result.add(map);
 		return result;
 	}
 
