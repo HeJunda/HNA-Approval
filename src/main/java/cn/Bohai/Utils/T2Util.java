@@ -147,7 +147,7 @@ public class T2Util {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<Map> dataset2MapList(IDatasets requests) throws Exception {
 		IDataset request = requests.getDataset(0);
-		int showTotal = requests.getDataset(1).getInt("totalCount");
+		int total = requests.getDataset(0).getTotalCount();
 		List<Map> result = new ArrayList<Map>();
 		if (request == null) {
 			return null;
@@ -173,7 +173,7 @@ public class T2Util {
 			
 		}
 		Map map = new HashMap();
-		map.put("TotalCount", showTotal);
+		map.put("TotalCount", total);
 		result.add(map);
 		return result;
 	}
