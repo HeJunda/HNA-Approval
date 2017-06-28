@@ -167,7 +167,11 @@ public class T2Util {
 				map.put(key, value);
 			}
 			result.add(map);
+			
 		}
+		Map map = new HashMap();
+		map.put("TotalCount", request.getTotalCount());
+		result.add(map);
 		return result;
 	}
 

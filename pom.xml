@@ -98,13 +98,29 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.4</version>
 		</dependency>
+		
+       <!--安装额外jar到本地仓库 -->
+<!-- 		<dependency>   -->
+<!-- 		    <groupId>other.hundson.base</groupId>   -->
+<!-- 		    <artifactId>T2sdk</artifactId>   -->
+<!-- 		    <version>1.0.0</version>   -->
+<!-- 		</dependency>  -->
+		
+		
+	    <dependency>  
+	        <groupId>com.hundsun</groupId>  
+	        <artifactId>hundsun</artifactId>  
+	        <version>1.0.0</version>  
+	        <scope>system</scope>  
+	        <systemPath>${project.basedir}/lib/com.hundsun.t2sdk-1.0.0.jar</systemPath>  
+	    </dependency>  
 
 		<!--分页插件 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-			<version>4.1.1</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.\hundson.pagehelper</groupId> -->
+<!-- 			<artifactId>pagehelper</artifactId> -->
+<!-- 			<version>4.1.1</version> -->
+<!-- 		</dependency> -->
 	</dependencies>
 <!-- 	<dependencyManagement> -->
 <!-- 		<dependencies> -->
@@ -123,11 +139,12 @@
 	            <groupId>org.springframework.boot</groupId>  
 	            <artifactId>spring-boot-maven-plugin</artifactId>  
 	            <configuration>  
-	                <fork>true</fork>  
+<!-- 	                <fork>true</fork>   -->
+					<excuteable>true</excuteable>
 	            </configuration>  
 	        </plugin>  
 	    </plugins>  
-	</build> 
+	</build>
 
 
 </project>

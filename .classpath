@@ -27,6 +27,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/com.hundsun.t2sdk-1.0.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
