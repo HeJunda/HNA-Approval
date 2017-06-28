@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
+import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
@@ -50,7 +51,7 @@ public class UserService {
 		mw.put("interfaceid","R8001");//用户登录校验接口(R8001)
 		mw.put("loginmode","PWD");
 		
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		

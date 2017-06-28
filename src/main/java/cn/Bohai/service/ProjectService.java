@@ -14,6 +14,7 @@ import cn.Bohai.model.ProjectList;
 import com.alibaba.fastjson.JSON;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
+import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
 @Service
 public class ProjectService {
@@ -46,7 +47,7 @@ public class ProjectService {
 		mw.put("limit",10);
 		mw.put("interfaceid","R8402");//项目列表（R8402）
 		
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
@@ -80,7 +81,7 @@ public class ProjectService {
 		mw.put("projectcode",Projectdetail.getProjectcode());
 		mw.put("interfaceid","R8403");//项目基本信息（R8403）
 		
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		

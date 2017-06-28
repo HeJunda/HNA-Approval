@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
+import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
 
 /**
@@ -61,7 +62,7 @@ public class WorkflowService {
 		
 		
 		//访问接口
-		IDataset result = null;
+		IDatasets result = null;
 	    result = T2Util.send("8000", iDataset);
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -98,7 +99,7 @@ public class WorkflowService {
 		mw.put("flowname",doneMessage.getFlowname());
 		mw.put("interfaceid","R8102");//已办信息接口(R8102)
 		
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
@@ -136,7 +137,7 @@ public class WorkflowService {
 		mw.put("flowtype",awaitDetail.getFlowtype());
 		mw.put("interfaceid","R8103");//获取待办消息详情接口(R8103)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
@@ -170,7 +171,7 @@ public class WorkflowService {
 		mw.put("instanceid",processInformation.getInstanceid());
 		mw.put("interfaceid","R8104");//待办消息详情接口(R8104)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
@@ -209,7 +210,7 @@ public class WorkflowService {
 		mw.put("limit",historicalApproval.getLimit());
 		mw.put("interfaceid","R8105");//查看历史审批意见接口(R8105)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
@@ -256,7 +257,7 @@ public class WorkflowService {
 		mw.put("limit",10);
 		mw.put("interfaceid","R8129");//我发起的流程(R8129)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
@@ -298,7 +299,7 @@ public class WorkflowService {
 		mw.put("instanceid",Selectperson.getInstanceid());
 		mw.put("interfaceid","R8108");//人员选择接口(R8108)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
@@ -334,7 +335,7 @@ public class WorkflowService {
 		mw.put("actionvalue",nextNode.getActionvalue());
 		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
@@ -426,7 +427,7 @@ public class WorkflowService {
 		mw.put("receiveuserids",processing.getReceiveuserids());	
 		mw.put("interfaceid","R8100");//流程处理接口(R8100)
 	
-		IDataset result = null;
+		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
 		
