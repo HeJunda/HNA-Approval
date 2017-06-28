@@ -52,7 +52,7 @@ public class WorkflowService {
 		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
-		mw.put("start",0);
+		mw.put("start",awaitMessage.getStart());
 		mw.put("limit",CommonParameter.limit);
 //		mw.put("flowname",awaitMessage.getFlowname());//条件查询
 		mw.put("interfaceid","R8101");//待办信息接口(R8101)
@@ -93,7 +93,7 @@ public class WorkflowService {
 		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
-		mw.put("start",0);
+		mw.put("start",doneMessage.getStart());
 		mw.put("limit",CommonParameter.limit);
 //		mw.put("flowtype",doneMessage.getFlowtype());
 		mw.put("flowname",doneMessage.getFlowname());
@@ -253,7 +253,7 @@ public class WorkflowService {
 		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
-		mw.put("start",0);
+		mw.put("start",myInitiatedProcessing.getStart());
 		mw.put("limit",CommonParameter.limit);
 		mw.put("interfaceid","R8129");//我发起的流程(R8129)
 	

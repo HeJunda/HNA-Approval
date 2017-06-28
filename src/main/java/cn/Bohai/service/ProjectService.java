@@ -43,7 +43,7 @@ public class ProjectService {
 		mw.put("projectname",Projectlist.getProjectname());
 		mw.put("projectphase",Projectlist.getProjectphase());
 		mw.put("depcode",Projectlist.getDepcode());
-		mw.put("start",0);
+		mw.put("start",Projectlist.getStart());
 		mw.put("limit",CommonParameter.limit);
 		mw.put("interfaceid","R8402");//项目列表（R8402）
 		
