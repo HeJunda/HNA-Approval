@@ -1,10 +1,14 @@
 package cn.Bohai.service;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+
+
+
+//import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import cn.Bohai.Utils.T2Util;
@@ -18,6 +22,12 @@ import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
+
+
+
+
+
+
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -79,7 +89,6 @@ public class WorkflowService {
 	 * @param doneMessage
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray getDoneMessage(DoneMessage doneMessage) throws Exception{
 		
 		T2Util.init();
@@ -118,7 +127,6 @@ public class WorkflowService {
 	 * @param awaitDetail
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray getAwaitDetail (AwaitDetail awaitDetail) throws Exception{
 		
 		T2Util.init();
@@ -156,6 +164,7 @@ public class WorkflowService {
 	 * @param processInformation
 	 * @throws Exception 
 	 */
+	@SuppressWarnings("unchecked")
 	public JSONArray getProcessInformation (ProcessInformation processInformation) throws Exception{
 		
 		T2Util.init();
@@ -179,6 +188,43 @@ public class WorkflowService {
 	    result = T2Util.send("8000", iDataset);
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    for(int i=0;i<resultListMap.size();i++){
+	    	@SuppressWarnings("rawtypes")
+	    	Map map = resultListMap.get(i);
+	    	String flowinfo = (String) map.get("flowinfo");
+	    	
+	    	// 去掉“\”
+	    	flowinfo = flowinfo.replace("\\\\", "");
+	    	
+	    	//获取基本信息
+	    	JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
+	    	String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
+	    	Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+	    	Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    	
+	    	for (String key : baseInfoMap.keySet()) {
+	    		String newkey = key.substring(key.indexOf('|') + 1);
+	    		Object newValue = baseInfoMap.get(key);
+	    		baseInfoMapShow.put(newkey, newValue);
+	    	}
+//	    	JSONObject jsonObject = new JSONObject(baseFlowinfoJsonString);
+	    	
+	    	//遍历信息
+//	    	@SuppressWarnings("rawtypes")
+//			Iterator iterator = jsonObject.keys();
+//	    	@SuppressWarnings("rawtypes")
+//			Map baseMap = new HashMap();
+	    	
+	    	//遍历json，去掉key中的数字
+//	    	while(iterator.hasNext()){
+//	    		String key = (String) iterator.next();
+//	    		key = key.substring(key.indexOf('|') + 1);
+//	    		String value = jsonObject.getString(key);
+//	    		baseMap.put(key, value);
+//	    	}
+	    	String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+	    	map.put("flowinfo", flowBaseInfoString);
+	    }
 	    String jsonString = JSON.toJSONString(resultListMap);
 	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
@@ -190,7 +236,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 	@SuppressWarnings("unchecked")
 	public JSONArray getHistoricalApproval (HistoricalApproval historicalApproval) throws Exception{
 		
@@ -239,7 +284,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray getMyInitiatedProcess (MyInitiatedProcessing myInitiatedProcessing) throws Exception{
 		
 		T2Util.init();
@@ -278,7 +322,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray selectPerson(SelectPerson Selectperson) throws Exception{
 		
 		T2Util.init();
@@ -317,7 +360,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray getNextNode(NextNode nextNode) throws Exception{
 		
 		T2Util.init();
@@ -334,7 +376,7 @@ public class WorkflowService {
 		mw.put("taskid",nextNode.getTaskid());
 		mw.put("actionvalue",nextNode.getActionvalue());
 		mw.put("interfaceid","R8109");//获取下一步节点(R8109)
-	
+	    
 		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
@@ -354,7 +396,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 //	public String getPersonList(SelectPerson Selectperson) throws Exception{
 //		
 //		NextNode nextNode = new NextNode();
@@ -402,7 +443,6 @@ public class WorkflowService {
 	 * @param historicalApproval
 	 * @throws Exception 
 	 */
-//	@Test
 	public JSONArray processProcessing (Processing processing) throws Exception{
 		
 		T2Util.init();
