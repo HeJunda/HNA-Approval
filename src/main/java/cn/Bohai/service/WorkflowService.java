@@ -209,15 +209,22 @@ public class WorkflowService {
 	    	String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
 	    	
 	    	//去掉多余数字
-	    	Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
-	    	Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
-	    	for (String key : baseInfoMap.keySet()) {
-	    		String newkey = key.substring(key.indexOf('|') + 1);
-	    		Object newValue = baseInfoMap.get(key);
-	    		baseInfoMapShow.put(newkey, newValue);
+	    	if( baseFlowinfoJsonString == null || baseFlowinfoJsonString.equals("") ){
+	    		
+	    		map.put("flowinfo", "");
+	    		
+	    	} else {
+	    		
+	    		Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+	    		Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    		for (String key : baseInfoMap.keySet()) {
+	    			String newkey = key.substring(key.indexOf('|') + 1);
+	    			Object newValue = baseInfoMap.get(key);
+	    			baseInfoMapShow.put(newkey, newValue);
+	    		}
+	    		String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+	    		map.put("flowinfo", flowBaseInfoString);
 	    	}
-	    	String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
-	    	map.put("flowinfo", flowBaseInfoString);
 	    }
 	    String jsonString = JSON.toJSONString(resultListMap);
 	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
