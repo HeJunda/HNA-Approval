@@ -9,18 +9,33 @@ var vm=new Vue({
             } 
         },
 		created:function(){
-			var _this=this;
 			document.cookie = 'userid'+'='+6666;
-			console.log(document.cookie)
-			
 			var user=getCookie('userid')
-			console.log(user)
-			
-			axios.get("/workflow/getAwaitMessage",{params:{userid:user}}).then(function(response){
+			var _this=this;
+			axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:0,limit:10}}).then(function(response){
 				_this.datas=response.data;
 				console.log(_this.datas)
-			}).catch(function(error){
+				}).catch(function(error){
 			    console.log(error);
-		});
-	}
+			});
+		}
 })
+
+var myScroll = new IScroll('#clearfix', {  
+    mouseWheel: true,  
+    scrollbars: true  
+});  
+myScroll.on('scrollEnd', function(){
+	var len=vm.datas.length;
+	//console.log(len)
+	document.cookie = 'userid'+'='+6666;
+	var user=getCookie('userid')
+	axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:len,limit:10}}).then(function(res){
+		if(res.data.length!=0)
+		//vm.datas.concat(res.data);	
+		vm.datas.push.apply(vm.datas,res.data)
+		//console.log("____"+JSON.stringify(res.data))
+		}).catch(function(error){
+	    console.log(error);
+	});
+});  

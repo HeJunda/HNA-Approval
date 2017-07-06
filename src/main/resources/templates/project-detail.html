@@ -32,6 +32,7 @@
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript">
 	new Vue({
@@ -43,7 +44,11 @@
 		},
 		created:function(){
 			 var _this=this;
-			 axios.get("/project/getProjectDetail",{params:{userid:'6666',projectcode:20160502009}}).then(function(response){
+			 var user=getCookie('userid')
+			 var code=localurl('projectcode')
+			 console.log(user)
+			 console.log(code)
+			 axios.get("/project/getProjectDetail",{params:{userid:user,projectcode:code}}).then(function(response){
 				  console.log(response.data)
 				  //var stres=[];
 				  //stres.push(response.data)

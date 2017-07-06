@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -32,27 +33,36 @@
             <div class="examine-list">
                  <h3 class="examine-item">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}" v-on:click="showDiv($event)"></span></h3>
                  <ul class="examine-details" v-show="showDom" style="display: none">
-                    <li>付款账户<span class="fr">{{digital.flowname}}</span></li>
-                    <li>发起人<span class="fr">{{digital.starter}}</span></li>
-                    <li>业务系统<span class="fr">{{digital.nodename}}</span></li>
-                    <li>发起时间<span class="fr">{{digital.starttime}}</span></li>
-                    <li>流程<span class="fr">{{digital.processname}}</span></li>
+                    <li>流程ID<span class="fr">{{dates.instanceid}}</span></li>
+                    <li>流程标题<span class="fr">{{dates.flowname}}</span></li>
+                    <li>流程名称<span class="fr">{{dates.processname}}</span></li>
+                    <li>发起人ID<span class="fr">{{dates.starteruserid}}</span></li>
+                    <li>发起时间<span class="fr">{{dates.starttime}}</span></li>
+                    <li>节点名称<span class="fr">{{dates.nodename}}</span></li>
+                    <li>是否存在关联流程<span class="fr">{{dates.isrelated}}</span></li>
+                    <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
+                    <div class="tems">
+                 		<a href="#" class="tems">{{temes}}</a>	
+            	 	</div>
                  </ul>
+                
                  <p class="space"></p>
                  <h3 class="examine-item">历史审批记录<span v-bind="{class:showHistory?'fr more-open':'fr more-close'}" v-on:click="showNode($event)"></span></h3>
-                 <div class="examine-history" v-show="showHistory" style="display: none">
-                   <div class="history" v-for="msg in histry">
-                    <h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
-                    <div class="history-describe">
-                      {{msg.remark}}!
-                    <div class="history-type report"><img src="images/report.png"/></div>
-                    </div>
-                    <div class="history-enclosure">
-                       <ul>
-                         <li v-for="attach in msg.attach"><a href="/">{{attach}}</a></li>
-                       </ul>
-                    </div>
-                   </div>
+                 <div id="history">
+	                 <div class="examine-history" v-show="showHistory" style="display: none">
+	                     <div class="history" v-for="msg in histry">
+	                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
+	                    	<div class="history-describe">
+	                      		{{msg.remark}}!
+	                    	<div class="history-type report"><img src="images/report.png"/></div>
+	                    	</div>
+	                    	<div class="history-enclosure">
+	                       		<ul>
+	                         		<li v-for="attach in msg.attach"><a href="/">{{attach}}</a></li>
+	                       		</ul>
+	                    	</div>
+                   		</div>
+	                 </div>	
                  </div>
                  <p class="space"></p>
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
@@ -115,6 +125,8 @@
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>	
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
+	<script type="text/javascript" src="js/lib/iscroll.js"></script>
+	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/examine.js"></script>
 </body>
 </html>

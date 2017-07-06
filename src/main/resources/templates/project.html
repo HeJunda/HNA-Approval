@@ -44,7 +44,7 @@
                 <div class="agency-list">
                    <ul>
                       <li class="clearfix" v-for="item in dataes">
-                        <a href="project-detail.html">
+                        <a v-bind:href="getTitleHref(item.projectcode)">
                          <div class="agency-left">
                              <div class="lucre-name">
                               <p class="project-price">{{item.predictmaxyield}}%</p>
@@ -72,7 +72,7 @@
 					var _this=this;
 					var user=getCookie('userid')
 	      			console.log(user)
-					axios.get("/project/getProjectList",{params:{userid:user,projectname:'',projectphase:'',depcode:''}}).then(function(response){
+					axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:'',projectphase:'',depcode:''}}).then(function(response){
 						 console.log(response.data)
 						 var stres=[];
 						 stres.push(response.data)
@@ -83,6 +83,9 @@
 					});
 			  },
 			  methods:{
+				  getTitleHref:function(data){
+		               return '/project-detail.html?projectcode='+data;
+		          },
 				  sear:function(){
 					  var itemword=$("#itemword").val();
 						console.log(itemword)
@@ -93,7 +96,7 @@
 							var _this=this;
 							var user=getCookie('userid')
 			      			  console.log(user)
-							axios.get("/project/getProjectList",{params:{userid:user,projectname:itemword}}).then(function(response){
+							axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:itemword}}).then(function(response){
 								var stres=[];
 								stres.push(response.data)
 								_this.dataes=stres;
@@ -115,7 +118,7 @@
 			<div class="agency-list">
 			   <ul>
 			      <li class="clearfix" v-for="item in dataes">
-			        <a href="project-detail.html">
+			        <a v-bind:href="getTitleHref(item.projectcode)">
 			         <div class="agency-left">
 			             <div class="lucre-name">
 			              <p class="project-price">{{item.predictmaxyield}}%</p>
@@ -143,7 +146,8 @@
 					var _this=this;
 					var user=getCookie('userid')
 	      			  console.log(user)
-					axios.get("/project/getProjectList",{params:{userid:user,projectname:'',projectphase:'',depcode:''}}).then(function(response){
+	      			//var code=getCookie("projectcod")
+					axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:'',projectphase:'',depcode:''}}).then(function(response){
 						 console.log(response.data)
 						 var stres=[];
 						 stres.push(response.data)
@@ -154,6 +158,9 @@
 					});
 			  },
 			  methods:{
+				  getTitleHref:function(data){
+		               return '/project-detail.html?projectcode='+data;
+		          },
 				  sears:function(){
 					  var gulpwork=$("#gulpwork").val();
 						console.log(gulpwork)
@@ -164,7 +171,7 @@
 							var _this=this;
 							var user=getCookie('userid')
 			      			  console.log(user)
-							axios.get("/project/getProjectList",{params:{userid:user,projectname:gulpwork}}).then(function(response){
+							axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:gulpwork}}).then(function(response){
 								var stres=[];
 								stres.push(response.data)
 								_this.dataes=stres;

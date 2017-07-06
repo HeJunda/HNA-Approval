@@ -22,7 +22,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .cleanR{clear: right;}
 .clearfix:after{content:'\0020';display:block;height:0;overflow:hidden;clear:both;}
 /*首页*/
-.container{display:block;width:100%;height:100%;margin:0 auto;padding:0}
+.container{display:block;width:100%;height:100%;margin:0 auto;padding:0;position:relative}
 .header{display:block;width:100%;height:3em;text-align:center;border-bottom: 1px solid #D8D8D8;box-shadow:0px 3px 3px #EFEFEF;z-index: 10;position:fixed;background-color:#fff}
 .header .back{position:relative;display: inline-block;height:30px;width:15px;background: url(/images/tcmp-icon.png) no-repeat -1px -328px;float:left;vertical-align:middle;margin-top:0.5em;margin-left:10px;cursor: pointer;}
 .header .approve{display: inline-block;float:left;text-align:center;width:100%;margin-left: -25px;;font-size:1em;padding:0.75em 0}
@@ -41,6 +41,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .menu-item p{padding:0.625em 0}
 /*代办列表*/
 .agency-list{width:100%;background-color: #F9F9F9;}
+.agencylist{width:100%;}
 .agency-list ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .agency-left,.agency-right{display: inline-block;padding:10px 0}
 .agency-left span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle;margin-left:0.625em}
@@ -50,6 +51,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-left span.info-icon{background-position:-63px -96px}
 .agency-left span.xucp-icon{background-position:-65px 0px}
 .agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
+.examineHistory{width:100%;position:relative}
 .right-box{margin-left:80px;}
 .agency-right{float:right;width:100%}
 .agency-right span.number{position:absolute;display: inline-block;width:25px;height:25px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.75em;text-align:center;vertical-align:middle;line-height: 25px}
@@ -106,7 +108,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-img img{width:100%}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1em 1em}
 .examine-title{font-size:1.5em;color:#fff}
-.examine-node li{display: block;width:100%;line-height:1.5em;color:#fff;font-size:0.875em}
+.examine-node li{display: block;width:100%;line-height:1.8em;color:#fff;font-size:0.875em}
 .examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
 .examine-list{display: block;margin-top:10px;width:100%;}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
@@ -151,5 +153,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .content ul li{display:flex;line-height:44px;border-bottom:1px solid #ccc;justify-content:space-between;margin: 0 10px;padding:0 5px;}
 .bg{color:#f00}
 
+.searchList{width:100%;position:relative}
+.tems{font-size:12px}
 
 
