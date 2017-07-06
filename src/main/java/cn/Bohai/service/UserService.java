@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
@@ -26,11 +25,10 @@ public class UserService {
 	
 	
 	/**
-	 * 测试T2通道
+	 * 用户登录校验
 	 * @param user
 	 * @throws Exception 
 	 */
-	@Test
 	public boolean testBohaiLogin() throws Exception{
 		
 		T2Util.init();

@@ -8,11 +8,17 @@ import java.util.Map;
 
 
 
+
+
+import jcifs.smb.SmbFile;
+
+
 //import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
+import cn.Bohai.model.Attach;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
@@ -22,6 +28,8 @@ import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
+
+
 
 
 
@@ -199,29 +207,15 @@ public class WorkflowService {
 	    	//获取基本信息
 	    	JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
 	    	String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
+	    	
+	    	//去掉多余数字
 	    	Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
 	    	Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
-	    	
 	    	for (String key : baseInfoMap.keySet()) {
 	    		String newkey = key.substring(key.indexOf('|') + 1);
 	    		Object newValue = baseInfoMap.get(key);
 	    		baseInfoMapShow.put(newkey, newValue);
 	    	}
-//	    	JSONObject jsonObject = new JSONObject(baseFlowinfoJsonString);
-	    	
-	    	//遍历信息
-//	    	@SuppressWarnings("rawtypes")
-//			Iterator iterator = jsonObject.keys();
-//	    	@SuppressWarnings("rawtypes")
-//			Map baseMap = new HashMap();
-	    	
-	    	//遍历json，去掉key中的数字
-//	    	while(iterator.hasNext()){
-//	    		String key = (String) iterator.next();
-//	    		key = key.substring(key.indexOf('|') + 1);
-//	    		String value = jsonObject.getString(key);
-//	    		baseMap.put(key, value);
-//	    	}
 	    	String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
 	    	map.put("flowinfo", flowBaseInfoString);
 	    }
@@ -466,7 +460,7 @@ public class WorkflowService {
 		mw.put("formtype",processing.getFormtype());
 		mw.put("receiveuserids",processing.getReceiveuserids());	
 		mw.put("interfaceid","R8100");//流程处理接口(R8100)
-	
+	    
 		IDatasets result = null;
 		IDataset iDataset = mw.getDataset();
 		
@@ -480,4 +474,22 @@ public class WorkflowService {
 	    System.out.println(jsonString);
 		return jsonArray;
 	}
+	
+	
+	/**
+	 * 获取附件
+	 * @param attach
+	 * @throws Exception 
+	 */
+//	public JSONArray getAttach(Attach attach) throws Exception{
+//		 String url="smb://administrator:123[abc]@10.72.8.130" + attach.getAddress();
+//	     SmbFile file = new SmbFile(url);
+//	        if(file.exists()){
+//	            SmbFile[] files = file.listFiles();
+//	            for(SmbFile f : files){
+//	                System.out.println(f.getName());
+//	            }
+//	        }
+//		return jsonArray;
+//	}
 }

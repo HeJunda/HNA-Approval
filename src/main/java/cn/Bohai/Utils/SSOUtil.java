@@ -143,8 +143,8 @@ public class SSOUtil {
         
     }
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-    	String token = "123";
-    	CheckTokenBySSO(token);
-	}
+//    public static void main(String[] args) throws UnsupportedEncodingException {
+//    	String token = "123";
+//    	CheckTokenBySSO(token);
+//	}
 }

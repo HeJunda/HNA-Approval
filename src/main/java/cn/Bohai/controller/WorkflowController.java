@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import cn.Bohai.model.Attach;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
@@ -74,7 +75,7 @@ public class WorkflowController {
 	
 	
 	/**
-     * 流程信息查看
+     * 获取流程更多信息
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.GET)
@@ -156,6 +157,19 @@ public class WorkflowController {
 	    JSONArray jsonArray = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
 		return jsonArray;
 	}
+	
+	/**
+     * 查看附件
+	 * @throws Exception 
+     */
+//	@RequestMapping(value = "/getAttach",method = RequestMethod.GET)
+//	public JSONArray getMyInitiatedProcess(Attach attach) throws Exception{
+//		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+//	    JSONArray jsonArray = workflowService.getAttach(attach);
+//		return jsonArray;
+//	}
 	
 	
 }
