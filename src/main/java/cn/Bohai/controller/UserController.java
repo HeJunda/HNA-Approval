@@ -4,6 +4,7 @@ import cn.Bohai.model.User;
 import cn.Bohai.service.UserService;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //
     /**
      * 用户登录校验
      * @throws Exception 
@@ -33,6 +33,17 @@ public class UserController {
     public Boolean userLoginCheck(User user) throws Exception{
     	Boolean jb =  userService.testBohaiLogin();
 		return jb;
+    	
+    }
+    
+    /**
+     * 获取用户信息
+     * @throws Exception 
+     */
+    @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
+    public JSONArray getUserInfo(User user) throws Exception{
+    	JSONArray jsonArray = userService.getUserInfo(user);
+		return jsonArray;
     	
     }
     

@@ -1,7 +1,7 @@
 package cn.Bohai.service;
 
 import java.util.HashMap;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 
-import jcifs.smb.SmbFile;
+//import jcifs.smb.SmbFile;
 
 
 //import org.json.JSONObject;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
-import cn.Bohai.model.Attach;
+//import cn.Bohai.model.Attach;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
@@ -392,52 +392,6 @@ public class WorkflowService {
 	}
 	
 
-	/**
-	 * 获取人员列表
-	 * @param historicalApproval
-	 * @throws Exception 
-	 */
-//	public String getPersonList(SelectPerson Selectperson) throws Exception{
-//		
-//		NextNode nextNode = new NextNode();
-//		nextNode.setActionvalue(Selectperson.getActionvalue());
-//		nextNode.setTaskid(Selectperson.getTaskid());
-//		nextNode.setUserid(Selectperson.getUserid());
-//		String nextNodeString = getNextNode(nextNode);
-//		JSONArray jsonArray=JSON.parseArray(nextNodeString);
-//		JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-//		Selectperson.setNodename(jsonObject.get("nodename").toString());
-//		
-//        T2Util.init();
-//		
-//		MapWriter mw = new MapWriter();
-//		
-//		//校验参数
-//		mw.put("userid",Selectperson.getUserid());
-//		mw.put("clienttype",CommonParameter.clienttype);
-//		mw.put("clientsign",CommonParameter.clientsign);
-//		mw.put("checkcode",CommonParameter.checkcode);
-//		
-//		//请求体
-//		mw.put("taskid",Selectperson.getTaskid());
-//		mw.put("actionvalue",Selectperson.getActionvalue());
-//		mw.put("nodename",Selectperson.getNodename());
-//		mw.put("actiontype",Selectperson.getActiontype());
-//		mw.put("instanceid",Selectperson.getInstanceid());
-//		mw.put("interfaceid","R8108");//人员选择接口(R8108)
-//		
-//		IDataset result = null;
-//		IDataset iDataset = mw.getDataset();
-//		
-//		//访问接口
-//	    result = T2Util.send("8000", iDataset);
-//	    @SuppressWarnings("rawtypes")
-//		List<Map> resultListMap = T2Util.dataset2MapList(result);
-//	    String jsonString = JSON.toJSONString(resultListMap);
-//	    System.out.println(jsonString);
-//		return jsonString;
-//		
-//	}
 	
 	/**
 	 * 流程处理

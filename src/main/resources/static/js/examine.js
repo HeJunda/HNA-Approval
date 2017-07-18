@@ -74,6 +74,7 @@ var vm=new Vue({
 					 var result = '';
 					 axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
 						_this.histry=response.data;
+						console.log(_this.histry)
 						if(_this.histry.length>0){
 						}else{
 		                   me.lock();

@@ -12,12 +12,14 @@ import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
+import cn.Bohai.model.DoneMessage;
+import cn.Bohai.model.User;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Jaye on 2017/5/13.
+ * Created by Junda on 2017/5/13.
  */
 @Service
 public class UserService {
@@ -80,6 +82,40 @@ public class UserService {
 //		return jsonString;
 //		return results;
 		
+	}
+	
+	/**
+	 * 获取用户信息
+	 * @param userId
+	 * @throws Exception 
+	 */
+	public JSONArray getUserInfo(User user) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",user.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("interfaceid","R8004");//获取用户信息接口(R8004)
+		
+		IDatasets result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    System.out.println(jsonString);
+		return jsonArray;
 	}
 	
 }

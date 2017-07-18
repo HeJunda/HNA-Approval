@@ -93,9 +93,6 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
 	public JSONArray selectPerson(SelectPerson selectPerson) throws Exception{
-//		String jsonString = workflowService.selectPerson(selectPerson);
-//		JSONArray jsonArray=JSON.parseArray(jsonString);
-//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
 	    JSONArray jsonArray = workflowService.selectPerson(selectPerson);
 		return jsonArray;
 	}

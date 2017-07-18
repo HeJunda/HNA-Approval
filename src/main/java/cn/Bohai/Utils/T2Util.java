@@ -150,8 +150,6 @@ public class T2Util {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static List<Map> dataset2MapList(IDatasets requests) throws Exception {
 		IDataset request = requests.getDataset(0);
-//		String TotalCount = requests.getDataset(0).getString("TotalCount");
-//		System.out.println(TotalCount);
 		List<Map> result = new ArrayList<Map>();
 		if (request == null) {
 			return null;
@@ -166,19 +164,11 @@ public class T2Util {
 				if (StringUtils.isBlank(value)) {
 					value = "";
 				}
-//				else if (StringUtil.isNumeric(value)) {
-//					
-//				} else if (StringUtil.isDouble(value)) {
-//					value = String.valueOf(new BigDecimal(value).setScale(8, RoundingMode.HALF_UP));
-//				}
 				map.put(key, value);
 			}
 			result.add(map);
 			
 		}
-//		Map map = new HashMap();
-//		map.put("TotalCount", TotalCount);
-//		result.add(map);
 		return result;
 	}
 
