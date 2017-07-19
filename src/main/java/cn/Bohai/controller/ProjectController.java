@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.ProjectDetail;
 import cn.Bohai.model.ProjectList;
+import cn.Bohai.model.User;
 import cn.Bohai.service.ProjectService;
+import cn.Bohai.service.UserService;
 import cn.Bohai.service.WorkflowService;
 
 import com.alibaba.fastjson.JSON;
@@ -22,6 +24,8 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectService projectService;
+	@Autowired
+	private UserService userService;
 	
 	
 	/**
@@ -30,6 +34,22 @@ public class ProjectController {
      */
 	@RequestMapping(value = "/getProjectList",method = RequestMethod.GET)
 	public JSONArray getProjectList(ProjectList projectList) throws Exception{
+		JSONArray jsonArray = projectService.getProjectList(projectList);
+		return jsonArray;
+	} 
+	
+	/**
+     * 获取本部门下项目列表
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getMyDeptProjectList",method = RequestMethod.GET)
+	public JSONArray getMyDeptProjectList(ProjectList projectList) throws Exception{
+		User user = new User();
+		user.setUserid(projectList.getUserid());
+		JSONArray jsonArray1 = userService.getUserInfo(user);
+		JSONObject jsonObject1  = JSONObject.parseObject(jsonArray1.get(0).toString());
+		String dept = (String) jsonObject1.get("orgid");
+		projectList.setDepcode(dept);
 		JSONArray jsonArray = projectService.getProjectList(projectList);
 		return jsonArray;
 	} 
