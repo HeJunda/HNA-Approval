@@ -8,6 +8,7 @@ var vm=new Vue({
       digital:{},
       ObjInfo:{},
       temes:'',
+      attach:'',
       histry:'',
       aclist:'',
       list:'',
@@ -54,7 +55,7 @@ var vm=new Vue({
 				console.log(_this.dates.attach);
 				var tem=_this.dates.attach.replace('"','').replace('[','').replace(']','').split('|');
 				var tems=tem[0].replace('.docx','');
-				_this.temes=tems
+				_this.temes=tem[2]
 				console.log(tem[2])
 			}).catch(function(error){
 			    console.log(error);
@@ -75,6 +76,9 @@ var vm=new Vue({
 					 axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
 						_this.histry=response.data;
 						console.log(_this.histry)
+						var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
+						_this.attach=ach[2]
+						console.log(ach[2])
 						if(_this.histry.length>0){
 						}else{
 		                   me.lock();

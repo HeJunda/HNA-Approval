@@ -26,17 +26,14 @@
 	  				<div class="agencylist" id='List'>
 	                  <ul>
 	                    <li class="clearfix" v-for="item in dataes">
-	                       <div class="agency-left">
-	                           <span class="fund-icon"></span>
-	                       </div>
 	                       <div class="agency-right">
 	                          <div class="right-box">
 	                         	<h3 class="agency-title">{{item.flowname}}</h3>
-	                         	<p class="follow-person">发起人：<span class="fr">张扬</span></p>
-	                         	<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
-	                         	<p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-	                         	<p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
-	                         	<span class="prompt fr">{{item.flowstatus}}</span>
+								<p class="follow-person">发起人：<span class="fr">{{item.startername}}</span></p>
+								<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+								<p class="follow-person">当前审批人：<span class="fr">{{item.assigneename}}</span></p>
+								<p class="follow-person">当前审批部门：<span class="fr">{{item.startorgname}}</span></p>
+								<span class="prompt fr">{{item.flowstatus}}</span>
 	                       	  </div>
 	                       </div>
 	                    </li>

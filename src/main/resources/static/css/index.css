@@ -52,8 +52,9 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-left span.xucp-icon{background-position:-65px 0px}
 .agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
 .examineHistory{width:100%;position:relative}
-.right-box{margin-left:80px;}
+.right-box{margin-left:15px;}
 .agency-right{float:right;width:100%}
+.list-right{float:right;margin-top:10px;width:80%;}
 .agency-right span.number{position:absolute;display: inline-block;width:25px;height:25px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.75em;text-align:center;vertical-align:middle;line-height: 25px}
 .agency-title{color:#3C3C3C;font-size:1em;font-style:normal}
 .agency-right p{width:100%;font-size:0.875em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
@@ -154,6 +155,6 @@ table{border-collapse:collapse;border-spacing:0;}
 .bg{color:#f00}
 
 .searchList{width:100%;position:relative}
-.tems{font-size:12px}
+.tems{font-size:14px;line-height:30px;margin-left:10px;color:#3399FF}
 
 

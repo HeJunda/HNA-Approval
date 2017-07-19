@@ -42,7 +42,7 @@
                     <li>是否存在关联流程<span class="fr">{{dates.isrelated}}</span></li>
                     <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
                     <div class="tems">
-                 		<a href="#" class="tems">{{temes}}</a>	
+                 		<a :href="'http://10.72.8.130:7004'+temes" class="tems">附件</a>	
             	 	</div>
                  </ul>
                 
@@ -57,9 +57,7 @@
 	                    	<div class="history-type report"><img src="images/report.png"/></div>
 	                    	</div>
 	                    	<div class="history-enclosure">
-	                       		<ul>
-	                         		<li v-for="attach in msg.attach"><a href="/">{{attach}}</a></li>
-	                       		</ul>
+	                         	<a :href="'http://10.72.8.130:7004'+attach" class="tems">附件</a>
 	                    	</div>
                    		</div>
 	                 </div>	

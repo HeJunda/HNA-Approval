@@ -7,7 +7,8 @@
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
-	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -19,7 +20,7 @@
         <div class="project-tab">
               <ul class="cleanF">
                 <router-link tag="li" to="active">本人名下</router-link>
-                <router-link tag="li" to="project">本部名下</router-link>
+                <router-link tag="li" to="project">本部门下</router-link>
               </ul>
         </div>
         
@@ -33,34 +34,37 @@
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/dropload.js"></script>
   <script type="text/javascript">
   var active={
-    template:`<div>
-                <div class="search">
-                    <div class="search-box">
-                        <input type="text" placeholder="请输入项目名称" id="itemword"/><span class="search-btn fr" v-on:click="sear()"><i class="search-icon"></i>搜索</span>
-                    </div>
-                </div>
-                <div class="agency-list">
-                   <ul>
-                      <li class="clearfix" v-for="item in dataes">
-                        <a v-bind:href="getTitleHref(item.projectcode)">
-                         <div class="agency-left">
-                             <div class="lucre-name">
-                              <p class="project-price">{{item.predictmaxyield}}%</p>
-                              <p class="project-lucre">预计收益</p>
-                             </div>
-                         </div>
-                         <div class="agency-right">
-                          <div class="right-box">
-                           <h3 class="agency-title">{{item.dptname}}</h3>
-                           <p>{{item.projectname}}</p>
-                           </div>
-                         </div>
-                         </a>
-                      </li>
-                      
-                   </ul>
+    template:`<div class="active">
+  				<div class="item-active">
+	                <div class="search">
+	                    <div class="search-box">
+	                        <input type="text" placeholder="请输入项目名称" id="itemword"/><span class="search-btn fr" v-on:click="sear()"><i class="search-icon"></i>搜索</span>
+	                    </div>
+	                </div>
+	                <div class="agency-list">
+	                   <ul>
+	                      <li class="clearfix" v-for="item in dataes">
+	                        <a v-bind:href="getTitleHref(item.projectcode)">
+	                         <div class="agency-left">
+	                             <div class="lucre-name">
+	                              <p class="project-price">{{item.predictmaxyield}}%</p>
+	                              <p class="project-lucre">预计收益</p>
+	                             </div>
+	                         </div>
+	                         <div class="list-right">
+	                          <div class="right-box">
+	                           <h3 class="agency-title">{{item.dptname}}</h3>
+	                           <p>{{item.projectname}}</p>
+	                           </div>
+	                         </div>
+	                         </a>
+	                      </li>
+	                      
+	                   </ul>
+	                </div>
                 </div>
               </div>`,
 			  data:function(){
@@ -71,16 +75,28 @@
 			  created:function(){
 					var _this=this;
 					var user=getCookie('userid')
-	      			console.log(user)
-					axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:'',projectphase:'',depcode:''}}).then(function(response){
-						 console.log(response.data)
-						 var stres=[];
-						 stres.push(response.data)
-						 _this.dataes=stres;
-						 console.log(_this.dataes)
-					}).catch(function(error){
-						  console.log(error);
-					});
+					$("#active").dropload({
+						scrollArea : window,
+						loadDownFn : function(me){
+							start=0;
+							var result = '';
+							axios.get("/project/getProjectList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+								_this.dataes=response.data
+								if(_this.dataes.length>0){
+								 	}else{
+					                	me.lock();
+					                   	me.noData();
+									}
+									setTimeout(function(){
+					                    $('.item-active').append(result);
+					                    me.resetload();
+					                },1000);
+							}).catch(function(error){
+							 	console.log(error);
+								me.resetload();
+							});
+						}
+					})
 			  },
 			  methods:{
 				  getTitleHref:function(data){
@@ -88,19 +104,14 @@
 		          },
 				  sear:function(){
 					  var itemword=$("#itemword").val();
-						console.log(itemword)
 						if(itemword==""){
 							alert("查询内容不能为空");
-							console.log('123515')
 						}else{
 							var _this=this;
 							var user=getCookie('userid')
-			      			  console.log(user)
 							axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:itemword}}).then(function(response){
-								var stres=[];
-								stres.push(response.data)
-								_this.dataes=stres;
-								console.log(_this.dataes)
+								
+								_this.dataes=response.data
 							}).catch(function(error){
 								console.log(error);
 							});	
@@ -109,33 +120,34 @@
 			  }
   }
   var project={
-    template:`<div>
-			    <div class="search">
-			    <div class="search-box">
-			        <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
-			    </div>
-			</div>
-			<div class="agency-list">
-			   <ul>
-			      <li class="clearfix" v-for="item in dataes">
-			        <a v-bind:href="getTitleHref(item.projectcode)">
-			         <div class="agency-left">
-			             <div class="lucre-name">
-			              <p class="project-price">{{item.predictmaxyield}}%</p>
-			              <p class="project-lucre">预计收益</p>
-			             </div>
-			         </div>
-			         <div class="agency-right">
-			          <div class="right-box">
-			           <h3 class="agency-title">{{item.dptname}}</h3>
-			           <p>{{item.projectname}}</p>
-			           </div>
-			         </div>
-			         </a>
-			      </li>
-			      
-			   </ul>
-			</div>
+    template:`<div id="project">
+  				<div class="item-project">
+					<div class="search">
+					    <div class="search-box">
+					        <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
+					    </div>
+					</div>
+					<div class="agency-list">
+					   <ul>
+					      <li class="clearfix" v-for="item in dataes">
+					        <a v-bind:href="getTitleHref(item.projectcode)">
+					         <div class="agency-left">
+					             <div class="lucre-name">
+					              <p class="project-price">{{item.predictmaxyield}}%</p>
+					              <p class="project-lucre">预计收益</p>
+					             </div>
+					         </div>
+					         <div class="list-right">
+					          <div class="right-box">
+					           <h3 class="agency-title">{{item.dptname}}</h3>
+					           <p>{{item.projectname}}</p>
+					           </div>
+					         </div>
+					         </a>
+					      </li>
+					   </ul>
+					</div>
+				</div>
 			</div>`,
 			  data:function(){
 					return{
@@ -145,17 +157,28 @@
 			  created:function(){
 					var _this=this;
 					var user=getCookie('userid')
-	      			  console.log(user)
-	      			//var code=getCookie("projectcod")
-					axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:'',projectphase:'',depcode:''}}).then(function(response){
-						 console.log(response.data)
-						 var stres=[];
-						 stres.push(response.data)
-						 _this.dataes=stres;
-						 console.log(_this.dataes)
-					}).catch(function(error){
-						  console.log(error);
-					});
+	      			$("#project").dropload({
+						scrollArea : window,
+						loadDownFn : function(me){
+							start=0;
+							var result = '';
+							axios.get("/project/getMyDeptProjectList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+								_this.dataes=response.data
+								if(_this.dataes.length>0){
+								 	}else{
+					                	me.lock();
+					                   	me.noData();
+									}
+									setTimeout(function(){
+					                    $('.item-project').append(result);
+					                    me.resetload();
+					                },1000);
+							}).catch(function(error){
+							 	console.log(error);
+								me.resetload();
+							});
+						}
+					})
 			  },
 			  methods:{
 				  getTitleHref:function(data){
@@ -166,16 +189,11 @@
 						console.log(gulpwork)
 						if(gulpwork==""){
 							alert("查询内容不能为空");
-							console.log('123515')
 						}else{
 							var _this=this;
 							var user=getCookie('userid')
-			      			  console.log(user)
-							axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:gulpwork}}).then(function(response){
-								var stres=[];
-								stres.push(response.data)
-								_this.dataes=stres;
-								console.log(_this.dataes)
+							axios.get("/project/getMyDeptProjectList",{params:{userid:user,start:0,projectname:gulpwork}}).then(function(response){
+								_this.dataes=response.data
 							}).catch(function(error){
 								console.log(error);
 							});	

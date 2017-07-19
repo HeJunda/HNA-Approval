@@ -13,42 +13,18 @@
 	<div id="app">
 		<header class="header cleanF">
 	        <a href="index.html"><span class="back"></span></a>
-	        <h3 class="approve">跟踪</h3>   
+	        <h3 class="approve">流程查询</h3>   
 	    </header>
 		<div class="container paddinTop">
 		  <div class="follow-tab">
-              <ul class="cleanF">
-                <li v-bind="{class:activeClass=1?'active':''}" v-on:click="person(1)">本人呈报</li>
-                <li v-bind="{class:activeClass=2?'active':''}" v-on:click="approval(2)">本人审批</li>
+             <ul class="cleanF">
+                <router-link tag="li" to="active">本人呈报</router-link>
+                <router-link tag="li" to="person">本人审批</router-link>
               </ul>
 		  </div>	      
-	      <div class="agency-list" id="search">
-	      <div class="searchList">
-			<div class="search">
-				<div class="search-box">
-				<input type="text" placeholder="请输入流程名称" id="keywork"/><span class="search-btn fr" v-on:click="search()"><i class="search-icon"></i>搜索</span>
-				</div>
-			</div>
-	
-			<ul>
-				<li class="clearfix" v-for="item in dataes">
-				<div class="agency-left">
-					<span class="fund-icon"></span>
-				</div>
-				<div class="agency-right">
-					<div class="right-box">
-						<h3 class="agency-title">{{item.flowname}}</h3>
-						<p class="follow-person">发起人：<span class="fr">张扬</span></p>
-						<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
-						<p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-						<p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
-						<span class="prompt fr">{{item.flowstatus}}</span>
-					</div>
-				</div>
-				</li>
-			</ul>
-			</div>	
-	      </div>
+		  
+		  <router-view></router-view>
+	      
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
@@ -58,151 +34,90 @@
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script	type="text/javascript" src="js/lib/iscroll.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/search.js"></script>
-	<!-- <script> 
+	<script> 
 	var actives={
 		    template:`<div class="agency-list">
-					 <div class="search">
-					     <div class="search-box">
-					         <input type="text" placeholder="请输入流程名称"/><span class="search-btn fr"><i class="search-icon"></i>搜索</span>
-					     </div>
-					 </div>
-		                <div>
-		                  <ul>
-		                    <li class="clearfix">
-		                       <div class="agency-left">
-		                           <span class="fund-icon"></span>
-		                       </div>
-		                       <div class="agency-right">
-		                        <div class="right-box">
-		                         <h3 class="agency-title">资金划付</h3>
-		                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-		                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-		                         <span class="arrow fr"></span>
-		                         </div>
-		                       </div>
-		                    </li>
-		                    <li class="clearfix">
-		                       <div class="agency-left">
-		                           <span class="project-icon"></span>
-		                       </div>
-		                       <div class="agency-right">
-		                       <div class="right-box">
-		                         <h3 class="agency-title">项目管理</h3>
-		                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-		                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-		                         <span class="arrow fr"></span>
-		                         </div>
-		                       </div>
-		                    </li>
-		                    <li class="clearfix">
-		                       <div class="agency-left">
-		                           <span class="approve-icon"></span>
-		                       </div>
-		                       <div class="agency-right">
-		                       <div class="right-box">
-		                         <h3 class="agency-title">项目审批</h3>
-		                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-		                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-		                         <span class="arrow fr"></span>
-		                         </div>
-		                       </div>
-		                    </li>
-		                    <li class="clearfix">
-		                       <div class="agency-left">
-		                           <span class="info-icon"></span>
-		                       </div>
-		                       <div class="agency-right">
-		                       <div class="right-box">
-		                         <h3 class="agency-title">信息披露</h3>
-		                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-		                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-		                         <span class="arrow fr"></span>
-		                         </div>
-		                       </div>
-		                    </li>
-		                    <li class="clearfix">
-		                       <div class="agency-left">
-		                           <span class="xucp-icon"></span>
-		                       </div>
-		                       <div class="agency-right">
-		                       <div class="right-box">
-		                         <h3 class="agency-title">续存管理</h3>
-		                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-		                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-		                         <span class="arrow fr"></span>
-		                         </div>
-		                       </div>
-		                    </li>
-		                  </ul>
-		                </div> 
+						 <div class="search">
+						     <div class="search-box">
+						         <input type="text" placeholder="请输入流程名称"/><span class="search-btn fr v-on:click='sears()"><i class="search-icon"></i>搜索</span>
+						     </div>
+						 </div>
+			             <div>
+			                  <ul>
+			                    <li class="clearfix">
+			                       <div class="agency-right">
+			                       <div class="right-box">
+			                         <h3 class="agency-title">资金划付</h3>
+			                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
+			                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
+			                         <span class="arrow fr"></span>
+			                         </div>
+			                       </div>
+			                    </li>
+			                  </ul>
+			             </div> 
 		              </div>`
 		  }
 		  var persons={
 			 template:`<div class="agency-list">
 							
-							<div class="search">
-							    <div class="search-box">
-							        <input type="text" placeholder="请输入流程名称" id="keywork"/><span class="search-btn fr" v-on:click="search()"><i class="search-icon"></i>搜索</span>
-							    </div>
-							</div>
-	
-						   	<ul>
-						      <li class="clearfix" v-for="item in dataes">
-						         <div class="agency-left">
-						             <span class="fund-icon"></span>
-						         </div>
-						         <div class="agency-right">
-						            <div class="right-box">
-						           <h3 class="agency-title">{{item.flowname}}</h3>
-						           <p class="follow-person">发起人：<span class="fr">张扬</span></p>
-						           <p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
-						           <p class="follow-person">当前审批人：<span class="fr">张扬</span></p>
-						           <p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
-						           <span class="prompt fr">{{item.flowstatus}}</span>
-						           </div>
-						         </div>
-						      </li>
-						    </ul>
-						</div>`,
-						data:function(){
-							return{
-								dataes:[]
-							}
-						},
-						created:function(){
-							  var _this=this;
-							  axios.get("/workflow/getDoneMessage",{params:{userid:'6666',start:0,limit:10}}).then(function(response){
-								 
-								  _this.dataes=response.data;
-								  console.log(_this.dataes)
-							  }).catch(function(error){
-								  console.log(error);
-							  });
-						},
-						methods:{
-							search:function(){
-								var keywork=$("#keywork").val();
-								if(keywork==""){
-									alert("查询内容不能为空");
-								}else{
-									var _this=this;
-									var user=getCookie('userid')
-					      			console.log(user)
-									axios.get("/workflow/getDoneMessage",{params:{userid:user,start:0,flowname:keywork}}).then(function(response){
-										 _this.dataes=response.data;
-										  console.log(_this.dataes)
-									}).catch(function(error){
-										console.log(error);
-									});
-									
-								}
-							}
-							
-						}
-		  }
-		 
+					<div class="search">
+					    <div class="search-box">
+					        <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
+					    </div>
+					</div>
 
+				   	<ul>
+				      <li class="clearfix" v-for="item in dataes">
+				         <div class="agency-right">
+				            <div class="right-box">
+				           <h3 class="agency-title">{{item.flowname}}</h3>
+				           <p class="follow-person">发起人：<span class="fr">{{item.startername}}</span></p>
+				           <p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+				           <p class="follow-person">当前审批人：<span class="fr">{{item.assigneename}}</span></p>
+				           <p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
+				           <span class="prompt fr">{{item.flowstatus}}</span>
+				           </div>
+				         </div>
+				      </li>
+				    </ul>
+				</div>`,
+				data:function(){
+					return{
+						dataes:[]
+					}
+				},
+				created:function(){
+					  var _this=this;
+					  var user=getCookie('userid')
+					  axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:0,limit:10}}).then(function(response){
+						 console.log(response.data)
+						  _this.dataes=response.data;
+						  console.log(_this.dataes)
+					  }).catch(function(error){
+						  console.log(error);
+					  });
+				},
+				methods:{
+					sears:function(){
+						var gulpwork=$("#gulpwork").val();
+						console.log(gulpwork)
+						if(gulpwork==""){
+							alert("查询内容不能为空");
+						}else{
+							var _this=this;
+							var user=getCookie('userid')
+							axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:0,flowname:gulpwork}}).then(function(response){
+								console.log(response.data)
+								console.log(response.data[0])
+								_this.dataes=response.data
+							}).catch(function(error){
+								console.log(error);
+							});	
+						}
+					}
+				}
+		  }
 		  const routers = [
 		    {
 		      path:"",
@@ -225,7 +140,7 @@
 		  new Vue({
 		    router:routeres
 		  }).$mount("#app")
-	</script>-->
+	</script>
 </body>
 	
 </html>
