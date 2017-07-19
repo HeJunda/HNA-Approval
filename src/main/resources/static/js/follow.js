@@ -9,6 +9,7 @@ var follow=new Vue({
 		person:function(value){
 			this.activeClass=value;
 			console.log("111111");
+			 var user=getCookie('userid');
 			axios.get("/workflow/getDoneMessage",{params:{userid:this.userid,start:0,limit:10}}).then(function(response){
 		  		  //this.dataes=response.data
 				follow.dataes.push.apply(follow.dataes,res.data);
@@ -19,6 +20,7 @@ var follow=new Vue({
 		approval:function(value){
 			this.activeClass=value;
 			console.log("222222");
+			 var user=getCookie('userid');
 			axios.get("/workflow/getDoneMessage",{params:{userid:this.userid,start:0,limit:10}}).then(function(response){
 				follow.dataes.push.apply(follow.dataes,res.data);
 		  	  }).catch(function(error){

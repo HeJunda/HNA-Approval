@@ -29,11 +29,9 @@ public class ProjectController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProjectList",method = RequestMethod.GET)
-	public JSONObject getProjectList(ProjectList projectList) throws Exception{
-		String jsonString = projectService.getProjectList(projectList);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getProjectList(ProjectList projectList) throws Exception{
+		JSONArray jsonArray = projectService.getProjectList(projectList);
+		return jsonArray;
 	} 
 	
 	/**
@@ -41,11 +39,9 @@ public class ProjectController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProjectDetail",method = RequestMethod.GET)
-	public JSONObject getProjectDetail(ProjectDetail projectDetail) throws Exception{
-		String jsonString = projectService.getProjectDetail(projectDetail);
-		JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		return jsonObject;
+	public JSONArray getProjectDetail(ProjectDetail projectDetail) throws Exception{
+		JSONArray jsonArray = projectService.getProjectDetail(projectDetail);
+		return jsonArray;
 	} 
 
 }

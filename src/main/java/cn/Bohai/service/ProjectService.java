@@ -12,6 +12,7 @@ import cn.Bohai.model.ProjectDetail;
 import cn.Bohai.model.ProjectList;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
@@ -26,8 +27,7 @@ public class ProjectService {
 	 * @param doneMessage
 	 * @throws Exception 
 	 */
-//	@Test
-	public String getProjectList(ProjectList Projectlist) throws Exception{
+	public JSONArray getProjectList(ProjectList Projectlist) throws Exception{
 		
 		T2Util.init();
 		
@@ -56,8 +56,9 @@ public class ProjectService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 	
 	/**
@@ -65,8 +66,7 @@ public class ProjectService {
 	 * @param doneMessage
 	 * @throws Exception 
 	 */
-//	@Test
-	public String getProjectDetail(ProjectDetail Projectdetail) throws Exception{
+	public JSONArray getProjectDetail(ProjectDetail Projectdetail) throws Exception{
 		
 		T2Util.init();
 		
@@ -90,8 +90,9 @@ public class ProjectService {
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
 	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
-		return jsonString;
+		return jsonArray;
 	}
 
 }
