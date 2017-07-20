@@ -20,6 +20,8 @@ import cn.Bohai.model.NextNode;
 import cn.Bohai.model.ProcessInformation;
 import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
+import cn.Bohai.model.SplitRead;
+import cn.Bohai.model.User;
 import cn.Bohai.service.WorkflowService;
 
 /**
@@ -156,17 +158,24 @@ public class WorkflowController {
 	}
 	
 	/**
-     * 查看附件
+     * 获取常用语
 	 * @throws Exception 
      */
-//	@RequestMapping(value = "/getAttach",method = RequestMethod.GET)
-//	public JSONArray getMyInitiatedProcess(Attach attach) throws Exception{
-//		String jsonString = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
-//		JSONArray jsonArray=JSON.parseArray(jsonString);
-//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-//	    JSONArray jsonArray = workflowService.getAttach(attach);
-//		return jsonArray;
-//	}
+	@RequestMapping(value = "/getCommonlanguage",method = RequestMethod.GET)
+	public JSONArray getCommonlanguage(User user) throws Exception{
+		JSONArray jsonArray = workflowService.getCommonlanguage(user);
+		return jsonArray;
+	} 
+	
+	/**
+     * 待阅/已阅数据
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getSplitRead",method = RequestMethod.GET)
+	public JSONArray getSplitRead(SplitRead splitRead) throws Exception{
+		JSONArray jsonArray = workflowService.getSplitRead(splitRead);
+		return jsonArray;
+	} 
 	
 	
 }
