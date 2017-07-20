@@ -110,7 +110,6 @@
 							var _this=this;
 							var user=getCookie('userid')
 							axios.get("/project/getProjectList",{params:{userid:user,start:0,projectname:itemword}}).then(function(response){
-								
 								_this.dataes=response.data
 							}).catch(function(error){
 								console.log(error);

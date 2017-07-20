@@ -8,6 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -32,43 +33,20 @@
 	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
 	<script type="text/javascript" src="js/lib/jquery.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script	type="text/javascript" src="js/lib/iscroll.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
+	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script> 
 	var actives={
-		    template:`<div class="agency-list">
-						 <div class="search">
-						     <div class="search-box">
-						         <input type="text" placeholder="请输入流程名称"/><span class="search-btn fr v-on:click='sears()"><i class="search-icon"></i>搜索</span>
-						     </div>
-						 </div>
-			             <div>
-			                  <ul>
-			                    <li class="clearfix">
-			                       <div class="agency-right">
-			                       <div class="right-box">
-			                         <h3 class="agency-title">资金划付</h3>
-			                         <p class="follow-present"><span>当前审批人：</span>张扬</p>
-			                         <p class="follow-present"><span>当前审批部门：</span>信托投资部门</p>
-			                         <span class="arrow fr"></span>
-			                         </div>
-			                       </div>
-			                    </li>
-			                  </ul>
-			             </div> 
-		              </div>`
-		  }
-		  var persons={
-			 template:`<div class="agency-list">
-							
+			 template:`<div class="agency-list" id="active">
+				<div class="item-active">
 					<div class="search">
 					    <div class="search-box">
-					        <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
+					        <input type="text" placeholder="请输入项目名称" id="gulpwork" v-model="name"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
 					    </div>
 					</div>
-
+			
 				   	<ul>
-				      <li class="clearfix" v-for="item in dataes">
+				      <li class="clearfix" v-for="item in datae">
 				         <div class="agency-right">
 				            <div class="right-box">
 				           <h3 class="agency-title">{{item.flowname}}</h3>
@@ -81,22 +59,125 @@
 				         </div>
 				      </li>
 				    </ul>
+			    </div>		
+			</div>`,
+			data:function(){
+				return{
+					name:"",
+					names:"",
+					dataes:[]
+				}
+			},
+			created:function(){
+				  var _this=this;
+				  var user=getCookie('userid')
+				  
+				  $("#active").dropload({
+					scrollArea : window,
+					loadDownFn : function(me){
+						start=0;
+						var result = '';
+						axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+							_this.dataes=response.data
+							if(_this.dataes.length>0){
+							 	}else{
+				                	me.lock();
+				                   	me.noData();
+								}
+								setTimeout(function(){
+				                    $('.item-active').append(result);
+				                    me.resetload();
+				                },1000);
+						}).catch(function(error){
+						 	console.log(error);
+							me.resetload();
+						});
+					}
+				})
+			},
+			methods:{
+				sears:function(){
+					var gulpwork=$("#gulpwork").val();
+					console.log(gulpwork)
+					if(gulpwork==""){
+						alert("查询内容不能为空");
+					}else{
+						 this.names=this.name
+			        }
+				}
+			},
+			computed:{
+			    datae:function(){
+			    	var name = this.names;
+			        if (name) {
+			            return this.dataes.filter(function(product) {
+			                return Object.keys(product).some(function(key) {
+			                    return String(product[key]).toLowerCase().indexOf(name) > -1
+			                })
+			            })
+			        }
+			        return this.dataes;
+			    }
+			}
+		  }
+	var persons={
+			 template:`<div class="agency-list" id="active">
+					<div class="item-active">
+						<div class="search">
+						    <div class="search-box">
+						        <input type="text" placeholder="请输入项目名称" id="gulpwork" v-model="name"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
+						    </div>
+						</div>
+	
+					   	<ul>
+					      <li class="clearfix" v-for="item in datae">
+					         <div class="agency-right">
+					            <div class="right-box">
+					           <h3 class="agency-title">{{item.flowname}}</h3>
+					           <p class="follow-person">发起人：<span class="fr">{{item.startername}}</span></p>
+					           <p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+					           <p class="follow-person">当前审批人：<span class="fr">{{item.assigneename}}</span></p>
+					           <p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
+					           <span class="prompt fr">{{item.flowstatus}}</span>
+					           </div>
+					         </div>
+					      </li>
+					    </ul>
+				    </div>		
 				</div>`,
 				data:function(){
 					return{
+						name:"",
+						names:"",
 						dataes:[]
 					}
 				},
 				created:function(){
 					  var _this=this;
 					  var user=getCookie('userid')
-					  axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:0,limit:10}}).then(function(response){
-						 console.log(response.data)
-						  _this.dataes=response.data;
-						  console.log(_this.dataes)
-					  }).catch(function(error){
-						  console.log(error);
-					  });
+					  
+					  $("#active").dropload({
+						scrollArea : window,
+						loadDownFn : function(me){
+							start=0;
+							var result = '';
+							axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+								_this.dataes=response.data
+								if(_this.dataes.length>0){
+								 	}else{
+					                	me.lock();
+					                   	me.noData();
+									}
+									setTimeout(function(){
+					                    $('.item-active').append(result);
+					                    me.resetload();
+					                },1000);
+							}).catch(function(error){
+							 	console.log(error);
+								me.resetload();
+							});
+						}
+					})
 				},
 				methods:{
 					sears:function(){
@@ -105,18 +186,23 @@
 						if(gulpwork==""){
 							alert("查询内容不能为空");
 						}else{
-							var _this=this;
-							var user=getCookie('userid')
-							axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:0,flowname:gulpwork}}).then(function(response){
-								console.log(response.data)
-								console.log(response.data[0])
-								_this.dataes=response.data
-							}).catch(function(error){
-								console.log(error);
-							});	
-						}
+							 this.names=this.name
+				        }
 					}
-				}
+				},
+				computed:{
+	                datae:function(){
+	                	var name = this.names;
+	                    if (name) {
+	                        return this.dataes.filter(function(product) {
+	                            return Object.keys(product).some(function(key) {
+	                                return String(product[key]).toLowerCase().indexOf(name) > -1
+	                            })
+	                        })
+	                    }
+	                    return this.dataes;
+	                }
+	            }
 		  }
 		  const routers = [
 		    {
