@@ -13,6 +13,8 @@ import java.util.Map;
 //import jcifs.smb.SmbFile;
 
 
+
+
 //import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +38,9 @@ import cn.Bohai.model.SelectPerson;
 
 
 
+
+import cn.Bohai.model.SplitRead;
+import cn.Bohai.model.User;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -436,21 +441,71 @@ public class WorkflowService {
 		return jsonArray;
 	}
 	
-	
 	/**
-	 * 获取附件
-	 * @param attach
+	 * 获取常用语
+	 * @param user
 	 * @throws Exception 
 	 */
-//	public JSONArray getAttach(Attach attach) throws Exception{
-//		 String url="smb://administrator:123[abc]@10.72.8.130" + attach.getAddress();
-//	     SmbFile file = new SmbFile(url);
-//	        if(file.exists()){
-//	            SmbFile[] files = file.listFiles();
-//	            for(SmbFile f : files){
-//	                System.out.println(f.getName());
-//	            }
-//	        }
-//		return jsonArray;
-//	}
+	public JSONArray getCommonlanguage (User user) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",user.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("interfaceid","R8123");//获取常用语接口(R8123)
+	    
+		IDatasets result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    System.out.println(jsonString);
+		return jsonArray;
+	}
+	
+	/**
+	 * 待阅/已阅数据
+	 * @param user
+	 * @throws Exception 
+	 */
+	public JSONArray getSplitRead(SplitRead splitRead) throws Exception{
+		
+		T2Util.init();
+		
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",splitRead.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("interfaceid","R8125");//待阅/已阅数据接口(R8125)
+	    
+		IDatasets result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    @SuppressWarnings("rawtypes")
+		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    String jsonString = JSON.toJSONString(resultListMap);
+	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    System.out.println(jsonString);
+		return jsonArray;
+	}
+	
+	
 }
