@@ -47,16 +47,18 @@
 			
 				   	<ul>
 				      <li class="clearfix" v-for="item in datae">
-				         <div class="agency-right">
+				      	<a href="searchDetail.html">
+				      		<div class="agency-right">
 				            <div class="right-box">
-				           <h3 class="agency-title">{{item.flowname}}</h3>
-				           <p class="follow-person">发起人：<span class="fr">{{item.startername}}</span></p>
-				           <p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
-				           <p class="follow-person">当前审批人：<span class="fr">{{item.assigneename}}</span></p>
-				           <p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
-				           <span class="prompt fr">{{item.flowstatus}}</span>
+				           		<h3 class="agency-title">{{item.flowname}}</h3>
+				           		<p class="follow-person">发起人：<span class="fr">{{item.startername}}</span></p>
+				           		<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+				           		<p class="follow-person">当前审批人：<span class="fr">{{item.assigneename}}</span></p>
+				           		<p class="follow-person">当前审批部门：<span class="fr">{{item.startorg}}</span></p>
+				           		<span class="prompt fr">{{item.flowstatus}}</span>
 				           </div>
-				         </div>
+				           </div>
+				      	</a>
 				      </li>
 				    </ul>
 			    </div>		
@@ -96,6 +98,9 @@
 				})
 			},
 			methods:{
+				/* getHref:function(data){
+		               return '/searchDetail.html?instanceid='+data;
+		        }, */
 				sears:function(){
 					var gulpwork=$("#gulpwork").val();
 					console.log(gulpwork)
@@ -131,6 +136,7 @@
 	
 					   	<ul>
 					      <li class="clearfix" v-for="item in datae">
+					      
 					         <div class="agency-right">
 					            <div class="right-box">
 					           <h3 class="agency-title">{{item.flowname}}</h3>

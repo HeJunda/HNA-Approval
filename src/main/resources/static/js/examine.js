@@ -2,14 +2,14 @@ var vm=new Vue({
 	el:'#app',
 	data:{
       showDom:false,
-      showHistory:false,
       showLayer:false,
       showuser:false,
       digital:{},
       ObjInfo:{},
       temes:'',
+      annex:'',
       attach:'',
-      histry:'',
+      histry:[],
       aclist:'',
       list:'',
       person:'',   	  
@@ -22,7 +22,9 @@ var vm=new Vue({
       parms:[],
       noname:'',
       personStr:'',
-      moom:[]
+      moom:[],
+      add:'',
+      language:[]
 	},
 	/*过滤ICON图标*/
 	filters:{
@@ -40,45 +42,49 @@ var vm=new Vue({
 			}
 		}
 	},
-	methods:{
-		/*点击更多详情*/
-		showDiv:function(event){
+	created:function(){
+		var taskId=localurl('taskid')
+		var user=getCookie('userid')
+		var _this=this;
+		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+			_this.digital=response.data[0];
+			//console.log(_this.digital)
+			//_this.actionlist=JSON.parse(response.data.actionlist);
+			//console.log("@@@@@"+response.data[0].instanceid);
+			_this.add=response.data[0].instanceid;
+			vm.showHistory();
+		}).catch(function(error){
+		    console.log('服务错误');
+		});		
+	},
+	computed:{
+		showHistory:function(){
+			$('.dropload-down').remove();
 			var _this=this;
-			var user=getCookie('userid')
-			var instance=this.digital.instanceid;
-			//console.log(instance)
-			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
-				_this.dates=response.data[0];
-				var info=JSON.parse(_this.dates.flowinfo)
-				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
-				_this.ObjInfo=info
-				console.log(_this.dates.attach);
-				var tem=_this.dates.attach.replace('"','').replace('[','').replace(']','').split('|');
-				var tems=tem[0].replace('.docx','');
-				_this.temes=tem[2]
-				console.log(tem[2])
-			}).catch(function(error){
-			    console.log(error);
-			});
-			this.showDom=!this.showDom;
-			},
-			/*历史记录*/
-			showNode:function(){
-				$('.dropload-down').remove();
-				var _this=this;
-				var instance=this.digital.instanceid;
-				var user=getCookie('userid')
-				$("#history").dropload({
-					 scrollArea : window,
-					 loadDownFn : function(me){
-					 start=0;
-					 var result = '';
-					 axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
+			var instance=_this.add;
+			var user=getCookie('userid');
+			$("#history").dropload({
+				scrollArea : window,
+				loadDownFn : function(me){
+					start=0;
+					var result = '';
+					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
 						_this.histry=response.data;
 						console.log(_this.histry)
-						var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
-						_this.attach=ach[2]
-						console.log(ach[2])
+						var attaches=[]
+						for(var i in _this.histry){
+							for(var j in _this.histry[i].attach){
+								attaches.push(_this.histry[i].attach[j])
+//								console.log(attaches)
+//								console.log(attaches.length)
+								var ach=attaches.replace('"','').replace('[','').replace(']','').split('|');
+								console.log(ach)
+							}
+						}
+//						var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
+//						console.log(ach);
+//						_this.attach=ach[2]
+//						console.log(ach[2])
 						if(_this.histry.length>0){
 						}else{
 		                   me.lock();
@@ -88,16 +94,39 @@ var vm=new Vue({
 		                    $('.examine-history').append(result);
 		                    me.resetload();
 		                },1000);
-						}).catch(function(error){
-						    console.log(error);
-						    me.resetload();
-						});
-					 }
-				});
-				if(_this.showHistory==true){
-					$('.dropload-down').remove();
+					}).catch(function(error){
+					    console.log(error);
+					    me.resetload();
+					});
 				}
-				this.showHistory=!this.showHistory;
+			 })
+		}
+	},
+	methods:{
+		/*点击更多详情*/
+		showDiv:function(event){
+			var _this=this;
+			var user=getCookie('userid')
+			var instance=this.digital.instanceid;
+			//console.log(instance)
+			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
+				console.log(response.data)
+				_this.dates=response.data[0];
+				var info=JSON.parse(_this.dates.flowinfo)
+				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
+				_this.ObjInfo=info
+				console.log(_this.dates.attach);
+				var tem=_this.dates.attach.replace('"','').replace('[','').replace(']','').split('|');
+				console.log(tem);
+				//var tems=tem[0].replace('.docx','');
+				_this.temes=tem[2];
+				_this.annex=tem[0];
+				console.log(tem[2])
+				console.log(tem[0])
+			}).catch(function(error){
+			    console.log(error);
+			});
+			this.showDom=!this.showDom;
 			},
 			/*点击确定*/
 			showok:function(){
@@ -231,6 +260,25 @@ var vm=new Vue({
 					console.log(err)
 				});
 			},
+			focus:function(){
+				var _this=this;
+				var user=getCookie('userid');
+				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
+        			console.log(response.data)
+            		_this.language=response.data
+            		console.log(_this.language)
+            	},function(err){
+            		console.log(err)
+            	})
+			},
+			select:function(){
+				//document.getElementById('sele').value = obj.value;
+//				var index=$("#select").selectedIndex
+//				var text=$("#select").options[index].text;
+				var options=$("#select option:selected");
+				console.log(options.text());
+				$("#sele").val(options.text())
+			},
 			/*点击提交*/
 			submit:function(){
 				if(this.opinion=="" || this.activeName==""){
@@ -275,17 +323,40 @@ var vm=new Vue({
 					  });
 				})
 			}
-		},
-		created:function(){
-			var taskId=localurl('taskid')
-			var user=getCookie('userid')
-			var _this=this;
-			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
-				_this.digital=response.data[0];
-				//_this.actionlist=JSON.parse(response.data.actionlist);
-				//console.log(_this.digital)
-			}).catch(function(error){
-			    console.log('服务错误');
-				});		
-			}
-		})
+		}
+//		mounted:function(){
+//			$('.dropload-down').remove();
+//			var _this=this;
+//			var instance=this.digital.instanceid;
+//			var user=getCookie('userid')
+//			$("#history").dropload({
+//				 scrollArea : window,
+//				 loadDownFn : function(me){
+//				 start=0;
+//				 var result = '';
+//				 axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
+//					_this.histry=response.data;
+//					console.log(_this.histry)
+//					var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
+//					_this.attach=ach[2]
+//					console.log(ach[2])
+//					if(_this.histry.length>0){
+//					}else{
+//	                   me.lock();
+//	                   me.noData();
+//					}
+//					setTimeout(function(){
+//	                    $('.examine-history').append(result);
+//	                    me.resetload();
+//	                },1000);
+//					}).catch(function(error){
+//					    console.log(error);
+//					    me.resetload();
+//					});
+//				 }
+//			});
+//			if(_this.showHistory==true){
+//				$('.dropload-down').remove();
+//			}
+//		}
+	})

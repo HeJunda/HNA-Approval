@@ -42,30 +42,34 @@
                     <li>是否存在关联流程<span class="fr">{{dates.isrelated}}</span></li>
                     <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
                     <div class="tems">
-                 		<a :href="'http://10.72.8.130:7004'+temes" class="tems">附件</a>	
+                 		<a :href="'http://10.72.8.130:7004'+temes" class="tems">附件：{{annex}}</a>	
             	 	</div>
                  </ul>
                 
                  <p class="space"></p>
-                 <h3 class="examine-item">历史审批记录<span v-bind="{class:showHistory?'fr more-open':'fr more-close'}" v-on:click="showNode($event)"></span></h3>
+                 <h3 class="examine-item">历史审批记录</h3>
                  <div id="history">
-	                 <div class="examine-history" v-show="showHistory" style="display: none">
-	                     <div class="history" v-for="msg in histry">
+	                 <ul class="examine-history">
+	                     <li class="history" v-for="msg in histry">
 	                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
 	                    	<div class="history-describe">
-	                      		{{msg.remark}}!
-	                    	<div class="history-type report"><img src="images/report.png"/></div>
+	                      		{{msg.remark}}
 	                    	</div>
 	                    	<div class="history-enclosure">
-	                         	<a :href="'http://10.72.8.130:7004'+attach" class="tems">附件</a>
+	                         	<a :href="'http://10.72.8.130:7004'+attach" class="tems">附件：{{annex}}</a>
 	                    	</div>
-                   		</div>
-	                 </div>	
+                   		</li>
+	                 </ul>	
                  </div>
                  <p class="space"></p>
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
                  <h3 class="examine-item person-item" style="display:none">人员选择<span class="fr" v-on:click="showUser">···</span><span class="status-text fr"></span></h3>
-                 <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion"></textarea>
+	        	 <strong>常用语:</strong>
+	        	 <select id="select" name="select" v-on:change="select(this)">
+					 <option v-for="lange in language" :value="lange.phrase">{{lange.phrase}}</option>
+				 </select>
+                 <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion" v-on:focus="focus()" name="sele" id="sele"></textarea>
+        
             </div>
           </div>
           <div class="search-container">

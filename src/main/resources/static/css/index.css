@@ -157,4 +157,5 @@ table{border-collapse:collapse;border-spacing:0;}
 .searchList{width:100%;position:relative}
 .tems{font-size:14px;line-height:30px;margin-left:10px;color:#3399FF}
 
-
+select{margin:5px;}
+strong{font-style:normal;margin-left:5px;}

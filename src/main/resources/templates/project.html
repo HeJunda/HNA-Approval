@@ -83,6 +83,7 @@
 							start=0;
 							var result = '';
 							axios.get("/project/getProjectList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+								console.log(response.data)
 								_this.dataes=response.data
 								if(_this.dataes.length>0){
 								 	}else{
