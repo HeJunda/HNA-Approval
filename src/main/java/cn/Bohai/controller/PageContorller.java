@@ -98,6 +98,14 @@ public class PageContorller {
 	public  ModelAndView  test(){
 		 return new ModelAndView("test");
 	}
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/searchDetail")
+	public  ModelAndView  searchDetail(){
+		 return new ModelAndView("searchDetail");
+	}
 
 
 
