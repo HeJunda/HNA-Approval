@@ -106,6 +106,22 @@ public class PageContorller {
 	public  ModelAndView  searchDetail(){
 		 return new ModelAndView("searchDetail");
 	}
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/followAwait")
+	public  ModelAndView  followAwait(){
+		 return new ModelAndView("followAwait");
+	}
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/followAlready")
+	public  ModelAndView  followAlready(){
+		 return new ModelAndView("followAlready");
+	}
 
 
 
