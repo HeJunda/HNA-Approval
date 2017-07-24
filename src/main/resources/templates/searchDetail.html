@@ -17,15 +17,17 @@
 	  	</header>
 		<div class="container paddinTop">
       		<div class="project-detail">
-	       		<h3 class="project-title">dataes.projectname</h3>
+	       		<h3 class="project-title">{{dataes.flowname}}</h3>
 	       		<ul class="project-content">
-	          		<li>项目编号<span class="fr">fghjk</span></li>
-	          		<li>项目部门<span class="fr">sdfgf</span></li>
-	          		<li>项目类型<span class="fr">dfghjdf</span></li>
-	          		<li>项目收益<span class="fr">dfgdsdf</span></li>
-	          		<li>成立时间<span class="fr">sdfgds</span></li>
-	          		<li>结束时间<span class="fr">dfdsdfs</span></li>
-	          		<li>信托/投资规模（元）<span class="fr">dfgdsfd</span></li>
+	       			<li>流程编号<span class="fr">{{dataes.instanceid}}</span></li>
+	          		<li>流程名称<span class="fr">{{dataes.processname}}</span></li>
+	          		<li>发起人<span class="fr">{{dataes.startername}}</span></li>
+	          		<li>发起部门名称<span class="fr">{{dataes.starterorgname}}</span></li>
+	          		<li>发起时间<span class="fr">{{dataes.starttime}}</span></li>
+	          		<li>流程状态<span class="fr">{{dataes.flowstatus}}</span></li>
+	          		<li>当前节点<span class="fr">{{dataes.nodename}}</span></li>
+	          		<li>当前处理人<span class="fr">{{dataes.assigneename}}</span></li>
+	          		<li>结束时间<span class="fr">{{dataes.endtime}}</span></li>
 	       		</ul>
       		</div>
     	</div>    
@@ -35,5 +37,29 @@
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	
+	<script type="text/javascript">
+	new Vue({
+		el:"#app",
+		data:function(){
+			return{
+				dataes:[]
+			}
+		},
+		created:function(){
+			 var _this=this;
+			 var user=getCookie('userid')
+			 var code=localurl('index')
+			 console.log(user)
+			 console.log(code)
+			 axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user}}).then(function(response){
+				  console.log(response.data)
+				  _this.dataes=response.data[code];
+				  console.log(_this.dataes)
+			 }).catch(function(error){
+				  console.log(error);
+			 });
+		}
+	})
+	</script>
 </body>
 </html>

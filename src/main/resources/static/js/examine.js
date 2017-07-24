@@ -42,6 +42,7 @@ var vm=new Vue({
 			}
 		}
 	},
+	
 	created:function(){
 		var taskId=localurl('taskid')
 		var user=getCookie('userid')
@@ -69,6 +70,7 @@ var vm=new Vue({
 					start=0;
 					var result = '';
 					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
+						console.log(response.data)
 						_this.histry=response.data;
 						console.log(_this.histry)
 						var attaches=[]
@@ -77,8 +79,8 @@ var vm=new Vue({
 								attaches.push(_this.histry[i].attach[j])
 //								console.log(attaches)
 //								console.log(attaches.length)
-								var ach=attaches.replace('"','').replace('[','').replace(']','').split('|');
-								console.log(ach)
+//								var ach=attaches.replace('"','').replace('[','').replace(']','').split('|');
+//								console.log(ach)
 							}
 						}
 //						var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
@@ -103,6 +105,17 @@ var vm=new Vue({
 		}
 	},
 	methods:{
+		history:function(){
+			var _this=this;
+			var instance=_this.digital.instanceid;
+			console.log(instance)
+			var user=getCookie('userid');
+			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10,instanceid:instance}}).then(function(response){
+				console.log(response.data)
+			}).then(function(error){
+				console.log(error)
+			})
+		},
 		/*点击更多详情*/
 		showDiv:function(event){
 			var _this=this;
@@ -272,9 +285,6 @@ var vm=new Vue({
             	})
 			},
 			select:function(){
-				//document.getElementById('sele').value = obj.value;
-//				var index=$("#select").selectedIndex
-//				var text=$("#select").options[index].text;
 				var options=$("#select option:selected");
 				console.log(options.text());
 				$("#sele").val(options.text())
