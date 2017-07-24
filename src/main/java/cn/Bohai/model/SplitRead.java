@@ -16,7 +16,7 @@ public class SplitRead implements Serializable {
     /**
      * 是否已读(1-已读 0-未读)
      */
-    private int hasread;
+    private String hasread;
     /**
      * 任务或流程名称
      */
@@ -35,12 +35,12 @@ public class SplitRead implements Serializable {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-//	public String getHasread() {
-//		return hasread;
-//	}
-//	public void setHasread(String hasread) {
-//		this.hasread = hasread;
-//	}
+	public String getHasread() {
+		return hasread;
+	}
+	public void setHasread(String hasread) {
+		this.hasread = hasread;
+	}
 	public String getFlowname() {
 		return flowname;
 	}
@@ -58,12 +58,6 @@ public class SplitRead implements Serializable {
 	}
 	public void setLimit(int limit) {
 		this.limit = limit;
-	}
-	public int getHasread() {
-		return hasread;
-	}
-	public void setHasread(int hasread) {
-		this.hasread = hasread;
 	}
     
 }
