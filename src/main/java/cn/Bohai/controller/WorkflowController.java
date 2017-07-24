@@ -118,15 +118,7 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)
 	public JSONArray getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
-//		String jsonString = workflowService.getHistoricalApproval(historicalApproval);
-//		JSONArray jsonArray=JSON.parseArray(jsonString);
 		JSONArray jsonArray = workflowService.getHistoricalApproval(historicalApproval);
-//		Object obj1 = jsonArray.toArray()[0];
-//		JSONObject obj2 = (JSONObject) obj1;
-//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.toString());
-//	    String a = jsonObject.getString("attach");
-//	    jsonObject.put("attachsdfasdfasdf", a);
-//	    System.out.println(jsonObject);
 		return jsonArray;
 	}
 	
@@ -135,7 +127,6 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
-	
 	public JSONArray processProcessing(@RequestBody Processing processing) throws Exception{
 //		String jsonString = workflowService.processProcessing(processing);
 //		JSONArray jsonArray=JSON.parseArray(jsonString);
