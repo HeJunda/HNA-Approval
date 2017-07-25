@@ -1,5 +1,6 @@
 package cn.Bohai.service;
 
+import java.util.Arrays;
 import java.util.HashMap;
 //import java.util.Iterator;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 
 //import jcifs.smb.SmbFile;
+
 
 
 
@@ -166,6 +168,7 @@ public class WorkflowService {
 	    result = T2Util.send("8000", iDataset);
 	    @SuppressWarnings("rawtypes")
 		List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    
 	    String jsonString = JSON.toJSONString(resultListMap);
 	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
 	    System.out.println(jsonString);
@@ -205,9 +208,34 @@ public class WorkflowService {
 	    	@SuppressWarnings("rawtypes")
 	    	Map map = resultListMap.get(i);
 	    	String flowinfo = (String) map.get("flowinfo");
+	    	String attachString = (String) map.get("attach");
 	    	
 	    	// 去掉“\”
 	    	flowinfo = flowinfo.replace("\\\\", "");
+	    	attachString = attachString.replace("\\\\", "");
+	    	// 去掉“[”
+	    	attachString = attachString.replace("[", "");
+	    	// 去掉“]”
+	    	attachString = attachString.replace("]", "");
+	    	attachString = attachString.replace("\"","");
+	    	List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    	
+	    	Map<String,String> attachMap = new HashMap<String,String>();
+	    	for (int j=0;j<attachlist.size();j++) {
+	    		String oneAttachString = attachlist.get(j);
+//	    		List<String> oneAttachlist = Arrays.asList(oneAttachString.split("|"));
+	    		String[] oneAttachArray = oneAttachString.split("\\|");
+//	    		str.replaceAll( “\\\\”,  “”);
+    			String newkey = oneAttachArray[0].replaceAll( "\\\\","");
+    			String newValue = oneAttachArray[2].replaceAll( "\\\\","");
+    			attachMap.put(newkey, newValue);
+    		}
+	    	String attachMapString = JSON.toJSONString(attachMap);
+    		map.put("attach", attachMapString);
+	    	
+	    	
+	    	
+	    	System.out.println(attachlist);
 	    	
 	    	//获取基本信息
 	    	JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
