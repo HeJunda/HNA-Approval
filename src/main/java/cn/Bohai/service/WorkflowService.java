@@ -208,33 +208,40 @@ public class WorkflowService {
 	    	@SuppressWarnings("rawtypes")
 	    	Map map = resultListMap.get(i);
 	    	String flowinfo = (String) map.get("flowinfo");
+	    	flowinfo = flowinfo.replace("\\\\", "");
+	    	
+	    	
 	    	String attachString = (String) map.get("attach");
 	    	
-	    	// 去掉“\”
-	    	flowinfo = flowinfo.replace("\\\\", "");
-	    	attachString = attachString.replace("\\\\", "");
-	    	// 去掉“[”
-	    	attachString = attachString.replace("[", "");
-	    	// 去掉“]”
-	    	attachString = attachString.replace("]", "");
-	    	//去掉冒号
-	    	attachString = attachString.replace("\"","");
-	    	List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    	if(attachString == null || attachString.equals("")){
+	    		map.put("attach", "");
+	    	}else{
+	    		// 去掉“\”
+	    		attachString = attachString.replace("\\\\", "");
+	    		// 去掉“[”
+	    		attachString = attachString.replace("[", "");
+	    		// 去掉“]”
+	    		attachString = attachString.replace("]", "");
+	    		//去掉冒号
+	    		attachString = attachString.replace("\"","");
+	    		List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    		
+	    		
+	    		//获取附件信息
+	    		Map<String,String> attachMap = new HashMap<String,String>();
+	    		for (int j=0;j<attachlist.size();j++) {
+	    			String oneAttachString = attachlist.get(j);
+	    			String[] oneAttachArray = oneAttachString.split("\\|");
+	    			String newkey = oneAttachArray[0];
+	    			String newValue = oneAttachArray[2];
+	    			attachMap.put(newkey, newValue);
+	    		}
+	    		String attachMapString = JSON.toJSONString(attachMap);
+	    		map.put("attach", attachMapString);
+	    	}
 	    	
-	    	Map<String,String> attachMap = new HashMap<String,String>();
-	    	for (int j=0;j<attachlist.size();j++) {
-	    		String oneAttachString = attachlist.get(j);
-	    		String[] oneAttachArray = oneAttachString.split("\\|");
-    			String newkey = oneAttachArray[0];
-    			String newValue = oneAttachArray[2];
-    			attachMap.put(newkey, newValue);
-    		}
-	    	String attachMapString = JSON.toJSONString(attachMap);
-    		map.put("attach", attachMapString);
 	    	
 	    	
-	    	
-	    	System.out.println(attachlist);
 	    	
 	    	//获取基本信息
 	    	JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
