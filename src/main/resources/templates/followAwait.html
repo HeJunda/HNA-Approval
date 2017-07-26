@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<html lang="en" xmnls="www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
+    <meta name="format-detection" content="telephone=no"></meta>
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+	<title>渤海信托</title>
+	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+</head>
+<body>
+	<div id="app">
+		<header class="header cleanF">
+	        <a href="follow.html"><span class="back"></span></a>
+	        <h3 class="approve">待阅</h3>   
+	    </header>
+		<div class="container paddinTop">
+			<div class="agency-list" id="await">
+				<div class="item-await">
+			   		<ul>
+			      		<li class="clearfix" v-for="item in dataes">
+			      			<div class="agency-right">
+			            		<div class="right-box">
+			           				<h3 class="agency-title">{{item.flowname}}</h3>
+			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
+			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
+			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
+			           				<p class="follow-person">发起人ID：<span class="fr">{{item.starteruserid}}</span></p>
+			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
+			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+			           				<p class="follow-person">审批单：<span class="fr">{{item.approvalform}}</span></p>
+			           			</div>
+			           		</div>
+			           		<button v-for="val in await" v-on:click="submit()" class="await-btn">{{val.name}}</button>
+			      		</li>
+			      		
+			        </ul>
+		    	</div>		
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/lib/vue.min.js"></script>
+  	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
+  	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+  	<script	type="text/javascript" src="js/lib/cookies.js"></script>
+	<script type="text/javascript" src="js/lib/iscroll.js"></script>
+  	<script type="text/javascript" src="js/lib/layer.js"></script>
+ 	<script type="text/javascript">
+ 	new Vue({
+ 		el:'#app',
+ 		data:function(){
+ 			return{
+ 				dataes:[],
+ 				await:{},
+ 				sub:[]
+ 			}
+ 			
+ 		},
+ 		created:function(){
+ 			var _this=this;
+ 			var user=getCookie('userid')
+ 			var code=localurl('taskid')
+ 			console.log(user)
+ 			console.log(code)
+ 			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:code,flowtype:'_notictask'}}).then(function(response){
+ 				console.log(response.data)
+				_this.dataes=response.data;
+				//console.log(_this.dataes[0].actionlist);
+				var name=JSON.parse(_this.dataes[0].actionlist)
+				//console.log(name)
+				_this.await=name;
+ 			}).catch(function(error){
+ 			    console.log(error);
+ 			});	
+ 		},
+ 		methods:{
+ 			submit:function(){
+ 				var _this=this;
+ 				var user=getCookie('userid')
+ 				var taskId=_this.dataes[0].taskid;
+ 				var formType=_this.dataes[0].formtype
+ 				var actionName=_this.await[0].name
+ 				var actionType=_this.await[0].type
+ 				var actionValue=_this.await[0].value
+ 				console.log(taskId)
+ 				console.log(formType)
+ 				console.log(actionName)
+ 				console.log(actionType)
+ 				console.log(actionValue)
+ 				
+ 				axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,formtype:formType,actionname:actionName,actionvalue:actionValue,actiontype:actionType}).then(function(response){
+ 	 				console.log(response.data)
+ 					_this.sub=response.data;
+ 	 				if(response.data[0].code=='1'){
+						window.location.href='follow.html';
+					}else{
+						console.log("error")
+					}
+ 	 			}).catch(function(error){
+ 	 			    console.log('error');
+ 	 			});	
+ 			}
+ 		}
+ 	})
+ 	</script>
+</body>
+</html>
+
+

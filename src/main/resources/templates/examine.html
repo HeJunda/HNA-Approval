@@ -42,12 +42,14 @@
                     <li>是否存在关联流程<span class="fr">{{dates.isrelated}}</span></li>
                     <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
                     <div class="tems">
-                 		<a :href="'http://10.72.8.130:7004'+temes" class="tems">附件：{{annex}}</a>	
+                    	<ul>
+                    		 <li v-for="(val,key) in temes"><a :href="'http://10.72.8.130:7004'+val" class="tems">附件：{{key}}</a>	</li>
+                    	</ul>
             	 	</div>
                  </ul>
                 
                  <p class="space"></p>
-                 <h3 class="examine-item" v-on:click="history()">历史审批记录</h3>
+                 <h3 class="examine-item">历史审批记录</h3>
                  <div id="history">
 	                 <ul class="examine-history">
 	                     <li class="history" v-for="msg in histry">
@@ -56,7 +58,9 @@
 	                      		{{msg.remark}}
 	                    	</div>
 	                    	<div class="history-enclosure">
-	                         	<a :href="'http://10.72.8.130:7004'+attach" class="tems">附件：{{annex}}</a>
+	                         	<ul>
+		                    		 <li v-for="(val,key) in annex"><a :href="'http://10.72.8.130:7004'+val" class="tems">附件：{{key}}</a>	</li>
+		                    	</ul>
 	                    	</div>
                    		</li>
 	                 </ul>	

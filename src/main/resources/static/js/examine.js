@@ -6,7 +6,7 @@ var vm=new Vue({
       showuser:false,
       digital:{},
       ObjInfo:{},
-      temes:'',
+      temes:[],
       annex:'',
       attach:'',
       histry:[],
@@ -73,20 +73,9 @@ var vm=new Vue({
 						console.log(response.data)
 						_this.histry=response.data;
 						console.log(_this.histry)
-						var attaches=[]
-						for(var i in _this.histry){
-							for(var j in _this.histry[i].attach){
-								attaches.push(_this.histry[i].attach[j])
-//								console.log(attaches)
-//								console.log(attaches.length)
-//								var ach=attaches.replace('"','').replace('[','').replace(']','').split('|');
-//								console.log(ach)
-							}
-						}
-//						var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
-//						console.log(ach);
-//						_this.attach=ach[2]
-//						console.log(ach[2])
+						var att=_this.histry[0].attach
+						console.log(att)
+						_this.annex=JSON.parse(att);
 						if(_this.histry.length>0){
 						}else{
 		                   me.lock();
@@ -105,17 +94,6 @@ var vm=new Vue({
 		}
 	},
 	methods:{
-		history:function(){
-			var _this=this;
-			var instance=_this.digital.instanceid;
-			console.log(instance)
-			var user=getCookie('userid');
-			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10,instanceid:instance}}).then(function(response){
-				console.log(response.data)
-			}).then(function(error){
-				console.log(error)
-			})
-		},
 		/*点击更多详情*/
 		showDiv:function(event){
 			var _this=this;
@@ -128,14 +106,9 @@ var vm=new Vue({
 				var info=JSON.parse(_this.dates.flowinfo)
 				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
 				_this.ObjInfo=info
-				console.log(_this.dates.attach);
-				var tem=_this.dates.attach.replace('"','').replace('[','').replace(']','').split('|');
-				console.log(tem);
-				//var tems=tem[0].replace('.docx','');
-				_this.temes=tem[2];
-				_this.annex=tem[0];
-				console.log(tem[2])
-				console.log(tem[0])
+				//console.log(_this.dates.attach);
+				var tem=_this.dates.attach
+				_this.temes=JSON.parse(tem);
 			}).catch(function(error){
 			    console.log(error);
 			});
@@ -152,10 +125,8 @@ var vm=new Vue({
 						personArr.push(lis.eq(i).attr('data-id'));
 					}
 				}
-				//console.log(personArr)
 				_this.personStr=personArr.join(",")
 				//console.log(_this.personStr)
-				
 			},
 			
 			showTip:function(){
@@ -334,39 +305,5 @@ var vm=new Vue({
 				})
 			}
 		}
-//		mounted:function(){
-//			$('.dropload-down').remove();
-//			var _this=this;
-//			var instance=this.digital.instanceid;
-//			var user=getCookie('userid')
-//			$("#history").dropload({
-//				 scrollArea : window,
-//				 loadDownFn : function(me){
-//				 start=0;
-//				 var result = '';
-//				 axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
-//					_this.histry=response.data;
-//					console.log(_this.histry)
-//					var ach=_this.histry[0].attach[0].replace('"','').replace('[','').replace(']','').split('|');
-//					_this.attach=ach[2]
-//					console.log(ach[2])
-//					if(_this.histry.length>0){
-//					}else{
-//	                   me.lock();
-//	                   me.noData();
-//					}
-//					setTimeout(function(){
-//	                    $('.examine-history').append(result);
-//	                    me.resetload();
-//	                },1000);
-//					}).catch(function(error){
-//					    console.log(error);
-//					    me.resetload();
-//					});
-//				 }
-//			});
-//			if(_this.showHistory==true){
-//				$('.dropload-down').remove();
-//			}
-//		}
+
 	})
