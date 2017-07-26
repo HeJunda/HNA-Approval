@@ -217,17 +217,16 @@ public class WorkflowService {
 	    	attachString = attachString.replace("[", "");
 	    	// 去掉“]”
 	    	attachString = attachString.replace("]", "");
+	    	//去掉冒号
 	    	attachString = attachString.replace("\"","");
 	    	List<String> attachlist = Arrays.asList(attachString.split(",")); 
 	    	
 	    	Map<String,String> attachMap = new HashMap<String,String>();
 	    	for (int j=0;j<attachlist.size();j++) {
 	    		String oneAttachString = attachlist.get(j);
-//	    		List<String> oneAttachlist = Arrays.asList(oneAttachString.split("|"));
 	    		String[] oneAttachArray = oneAttachString.split("\\|");
-//	    		str.replaceAll( “\\\\”,  “”);
-    			String newkey = oneAttachArray[0].replaceAll( "\\\\","");
-    			String newValue = oneAttachArray[2].replaceAll( "\\\\","");
+    			String newkey = oneAttachArray[0];
+    			String newValue = oneAttachArray[2];
     			attachMap.put(newkey, newValue);
     		}
 	    	String attachMapString = JSON.toJSONString(attachMap);
@@ -300,9 +299,27 @@ public class WorkflowService {
 	    for(int i=0;i<resultListMap.size();i++){
 	    	@SuppressWarnings("rawtypes")
 	    	Map map = resultListMap.get(i);
-	    	String attach = (String) map.get("attach");
-	    	JSONArray attachJsonArray = JSONArray.parseArray(attach);
-	    	map.put("attach", attachJsonArray);
+            String attachString = (String) map.get("attach");
+	    	//去掉斜杠
+	    	attachString = attachString.replace("\\\\", "");
+	    	// 去掉“[”
+	    	attachString = attachString.replace("[", "");
+	    	// 去掉“]”
+	    	attachString = attachString.replace("]", "");
+	    	//去掉冒号
+	    	attachString = attachString.replace("\"","");
+	    	List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    	
+	    	Map<String,String> attachMap = new HashMap<String,String>();
+	    	for (int j=0;j<attachlist.size();j++) {
+	    		String oneAttachString = attachlist.get(j);
+	    		String[] oneAttachArray = oneAttachString.split("\\|");
+    			String newkey = oneAttachArray[0];
+    			String newValue = oneAttachArray[2];
+    			attachMap.put(newkey, newValue);
+    		}
+	    	String attachMapString = JSON.toJSONString(attachMap);
+    		map.put("attach", attachMapString);
 	    }
 	    String jsonString = JSON.toJSONString(resultListMap);
 	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
