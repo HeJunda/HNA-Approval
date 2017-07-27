@@ -32,7 +32,10 @@
 			           				<p class="follow-person">审批单：<span class="fr">{{item.approvalform}}</span></p>
 			           			</div>
 			           		</div>
-			           		<button v-for="val in await" v-on:click="submit()" class="await-btn">{{val.name}}</button>
+			           		<div class="search-container">
+			           			<button v-for="val in await" v-on:click="submit()" class="await-btn">{{val.name}}</button>
+			           		</div>
+			           		
 			      		</li>
 			      		
 			        </ul>

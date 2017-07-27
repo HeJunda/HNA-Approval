@@ -99,7 +99,7 @@ var vm=new Vue({
 			var _this=this;
 			var user=getCookie('userid')
 			var instance=this.digital.instanceid;
-			//console.log(instance)
+			console.log(instance)
 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
 				console.log(response.data)
 				_this.dates=response.data[0];
