@@ -33,8 +33,13 @@ public class ProjectController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProjectList",method = RequestMethod.GET)
-	public JSONArray getProjectList(ProjectList projectList) throws Exception{
-		JSONArray jsonArray = projectService.getProjectList(projectList);
+	public JSONArray getProjectList(ProjectList projectList){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = projectService.getProjectList(projectList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -43,14 +48,19 @@ public class ProjectController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getMyDeptProjectList",method = RequestMethod.GET)
-	public JSONArray getMyDeptProjectList(ProjectList projectList) throws Exception{
-		User user = new User();
-		user.setUserid(projectList.getUserid());
-		JSONArray jsonArray1 = userService.getUserInfo(user);
-		JSONObject jsonObject1  = JSONObject.parseObject(jsonArray1.get(0).toString());
-		String dept = (String) jsonObject1.get("orgid");
-		projectList.setDepcode(dept);
-		JSONArray jsonArray = projectService.getProjectList(projectList);
+	public JSONArray getMyDeptProjectList(ProjectList projectList){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			User user = new User();
+			user.setUserid(projectList.getUserid());
+			JSONArray jsonArray1 = userService.getUserInfo(user);
+			JSONObject jsonObject1  = JSONObject.parseObject(jsonArray1.get(0).toString());
+			String dept = (String) jsonObject1.get("orgid");
+			projectList.setDepcode(dept);
+		    jsonArray = projectService.getProjectList(projectList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -59,8 +69,13 @@ public class ProjectController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProjectDetail",method = RequestMethod.GET)
-	public JSONArray getProjectDetail(ProjectDetail projectDetail) throws Exception{
-		JSONArray jsonArray = projectService.getProjectDetail(projectDetail);
+	public JSONArray getProjectDetail(ProjectDetail projectDetail){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = projectService.getProjectDetail(projectDetail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 

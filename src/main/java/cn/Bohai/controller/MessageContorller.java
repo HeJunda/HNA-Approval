@@ -27,8 +27,13 @@ public class MessageContorller {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getMessageList",method = RequestMethod.GET)
-	public JSONArray getAwaitMessage(Message message) throws Exception{
-		JSONArray jsonArray = messageService.getMessageList(message);
+	public JSONArray getAwaitMessage(Message message){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = messageService.getMessageList(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 

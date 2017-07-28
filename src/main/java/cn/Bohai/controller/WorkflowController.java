@@ -40,11 +40,16 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitMessage",method = RequestMethod.GET)
-	public JSONArray getAwaitMessage(AwaitMessage awaitMessage) throws Exception{
+	public JSONArray getAwaitMessage(AwaitMessage awaitMessage){
 //		String jsonString = workflowService.getAwaitMessage(awaitMessage);
 //		JSONArray jsonArray=JSON.parseArray(jsonString);
 //	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-		JSONArray jsonArray = workflowService.getAwaitMessage(awaitMessage);
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getAwaitMessage(awaitMessage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -54,8 +59,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getDoneMessage",method = RequestMethod.GET)
-	public JSONArray getDoneMessage(DoneMessage doneMessage) throws Exception{
-		JSONArray jsonArray = workflowService.getDoneMessage(doneMessage);
+	public JSONArray getDoneMessage(DoneMessage doneMessage){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getDoneMessage(doneMessage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -64,8 +74,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getAwaitDetail",method = RequestMethod.GET)
-	public JSONArray getAwaitDetail(AwaitDetail awaitDetail) throws Exception{
-		JSONArray jsonArray = workflowService.getAwaitDetail(awaitDetail);
+	public JSONArray getAwaitDetail(AwaitDetail awaitDetail){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getAwaitDetail(awaitDetail);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -75,8 +90,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getProcessInformation",method = RequestMethod.GET)
-	public JSONArray getProcessInformation(ProcessInformation processInformation) throws Exception{
-	    JSONArray jsonArray = workflowService.getProcessInformation(processInformation);
+	public JSONArray getProcessInformation(ProcessInformation processInformation){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getProcessInformation(processInformation);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -85,8 +105,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/selectPerson",method = RequestMethod.GET)
-	public JSONArray selectPerson(SelectPerson selectPerson) throws Exception{
-	    JSONArray jsonArray = workflowService.selectPerson(selectPerson);
+	public JSONArray selectPerson(SelectPerson selectPerson){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.selectPerson(selectPerson);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	}
 	
@@ -96,7 +121,12 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/getNextNode",method = RequestMethod.GET)
 	public JSONArray getNextNode(NextNode nextNode) throws Exception{
-	    JSONArray jsonArray = workflowService.getNextNode(nextNode);
+	    JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getNextNode(nextNode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	}
 	
@@ -105,8 +135,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getHistoricalApproval",method = RequestMethod.GET)
-	public JSONArray getHistoricalApproval(HistoricalApproval historicalApproval) throws Exception{
-		JSONArray jsonArray = workflowService.getHistoricalApproval(historicalApproval);
+	public JSONArray getHistoricalApproval(HistoricalApproval historicalApproval){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getHistoricalApproval(historicalApproval);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	}
 	
@@ -115,8 +150,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
-	public JSONArray processProcessing(@RequestBody Processing processing) throws Exception{
-	    JSONArray jsonArray = workflowService.processProcessing(processing);
+	public JSONArray processProcessing(@RequestBody Processing processing){
+	    JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.processProcessing(processing);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	}
 	
@@ -125,8 +165,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getMyInitiatedProcess",method = RequestMethod.GET)
-	public JSONArray getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing) throws Exception{
-	    JSONArray jsonArray = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
+	public JSONArray getMyInitiatedProcess(MyInitiatedProcessing myInitiatedProcessing){
+	    JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	}
 	
@@ -136,7 +181,12 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/getCommonlanguage",method = RequestMethod.GET)
 	public JSONArray getCommonlanguage(User user) throws Exception{
-		JSONArray jsonArray = workflowService.getCommonlanguage(user);
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getCommonlanguage(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	
@@ -145,8 +195,13 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getSplitRead",method = RequestMethod.GET)
-	public JSONArray getSplitRead(SplitRead splitRead) throws Exception{
-		JSONArray jsonArray = workflowService.getSplitRead(splitRead);
+	public JSONArray getSplitRead(SplitRead splitRead){
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getSplitRead(splitRead);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
 	} 
 	

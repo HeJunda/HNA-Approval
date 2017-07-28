@@ -30,8 +30,13 @@ public class UserController {
      * @throws Exception 
      */
     @RequestMapping(value = "/userLoginCheck",method = RequestMethod.GET)
-    public Boolean userLoginCheck(User user) throws Exception{
-    	Boolean jb =  userService.testBohaiLogin();
+    public Boolean userLoginCheck(User user){
+    	Boolean jb = new Boolean(false);
+    	try {
+    		jb =  userService.testBohaiLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jb;
     	
     }
@@ -41,8 +46,13 @@ public class UserController {
      * @throws Exception 
      */
     @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
-    public JSONArray getUserInfo(User user) throws Exception{
-    	JSONArray jsonArray = userService.getUserInfo(user);
+    public JSONArray getUserInfo(User user){
+    	JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = userService.getUserInfo(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonArray;
     	
     }
