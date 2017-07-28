@@ -68,10 +68,9 @@
                  <p class="space"></p>
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
                  <h3 class="examine-item person-item" style="display:none">人员选择<span class="fr" v-on:click="showUser">···</span><span class="status-text fr"></span></h3>
-	        	 <strong>常用语:</strong>
-	        	 <select id="select" name="select" v-on:change="select(this)">
-					 <option v-for="lange in language" :value="lange.phrase">{{lange.phrase}}</option>
-				 </select>
+	        	 
+	        	 <strong v-on:click="lane()">常用语:</strong>
+	        	 
                  <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion" v-on:focus="focus()" name="sele" id="sele"></textarea>
         
             </div>
@@ -80,6 +79,22 @@
                <button class="search-button" v-on:click="submit()">提交</button>
             </div>
           <br/>
+        </div>
+        <!-- 常用语 -->
+        <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
+          <div class="layui-m-layershade" v-on:click="hideDiv"></div>
+          <div class="layui-m-layermain">
+            <div class="layui-m-layersection">
+              <div class="layui-m-layerchild">
+                <div class="layui-m-layercont">
+                  <div class="handle-status clearfix">
+                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!--弹窗-->
         <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">

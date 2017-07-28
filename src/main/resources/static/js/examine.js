@@ -4,6 +4,7 @@ var vm=new Vue({
       showDom:false,
       showLayer:false,
       showuser:false,
+      showLange:false,
       digital:{},
       ObjInfo:{},
       temes:[],
@@ -244,21 +245,37 @@ var vm=new Vue({
 					console.log(err)
 				});
 			},
-			focus:function(){
+			/*常用语*/
+			lane:function(){
 				var _this=this;
 				var user=getCookie('userid');
 				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
         			console.log(response.data)
-            		_this.language=response.data
-            		console.log(_this.language)
+            		/*_this.language=response.data
+            		console.log(_this.language)*/
+        			var html='';
+        			$.each(response.data,function(i,val){
+        				html+='<option class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</option>'
+        			});
+        				var L=layer.open({
+        					type: 1,
+        					anim: 'up',
+        					style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;box-shadow: 0;',
+        					content: html+"<p class='option'>取消</p>"
+        			})
+        			$(document).on("click","option",function(){  
+        				var value=$(this).val()
+        				console.log(value)
+        				$("#sele").val(value)
+        				layer.close(L)
+        			}); 
+    				$(document).on("click","p",function(){  
+        				layer.close(L)
+        			}); 
+            		
             	},function(err){
             		console.log(err)
             	})
-			},
-			select:function(){
-				var options=$("#select option:selected");
-				console.log(options.text());
-				$("#sele").val(options.text())
 			},
 			/*点击提交*/
 			submit:function(){
