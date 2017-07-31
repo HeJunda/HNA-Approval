@@ -250,16 +250,20 @@ public class WorkflowService {
 	    		flowinfo = flowinfo.replace("\\\\", "");
 	    		JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
 	    		String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
-	    		//去掉多余数字
-	    		Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
-	    		Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
-	    		for (String key : baseInfoMap.keySet()) {
-	    			String newkey = key.substring(key.indexOf('|') + 1);
-	    			Object newValue = baseInfoMap.get(key);
-	    			baseInfoMapShow.put(newkey, newValue);
-	    		}
-	    		String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
-	    		map.put("flowinfo", flowBaseInfoString);
+	    		if (baseFlowinfoJsonString == null || baseFlowinfoJsonString.equals("")) {
+	    			map.put("flowinfo", "");
+				} else {
+					//去掉多余数字
+					Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+					Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+					for (String key : baseInfoMap.keySet()) {
+						String newkey = key.substring(key.indexOf('|') + 1);
+						Object newValue = baseInfoMap.get(key);
+						baseInfoMapShow.put(newkey, newValue);
+					}
+					String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+					map.put("flowinfo", flowBaseInfoString);
+				}
 	    	}
 	    }
 	    
