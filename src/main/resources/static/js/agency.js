@@ -4,15 +4,12 @@ var vm=new Vue({
 			datas:[]
 		},
 		methods:{
-            /*getTitleHref:function(val){
+            getTitleHref:function(val){
                 return '/examine.html?taskid='+val;
-            } */
-			exam:function(){
-				window.location.href='/examine.html?taskid='+this.datas.taskid
-			}
+            } 
         },
 		created:function(){
-			document.cookie='userid'+'='+6666;
+			document.cookie = 'userid'+'='+6666;
 			var user=getCookie('userid')
 			var _this=this;
 			axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:0,limit:10}}).then(function(response){

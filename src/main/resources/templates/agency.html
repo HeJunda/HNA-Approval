@@ -18,15 +18,15 @@
 		<div class="container paddinTop">
 	      <div class="agency-list" id="clearfix">
            <ul>
-              <li class="clearfix"  v-for="item in datas" v-on:click="exam()">
-               	<!-- <a :href="'/examine.html?taskid='+item.taskid"> -->
+              <li class="clearfix"  v-for="item in datas">
+               	<a :href="'/examine.html?taskid='+item.taskid">
                  	<div class="agency-right">
                    		<div class="right-box">
 	                 		<h3 class="agency-title">{{item.flowname}}</h3>
 	                 		<p>{{item.nodename}}</p>
                    		</div>
                  	</div>
-           	  	<!-- </a> -->
+           	  	</a>
               </li>
            </ul>
 	      </div>
