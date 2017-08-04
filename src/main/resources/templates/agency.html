@@ -18,8 +18,8 @@
 		<div class="container paddinTop">
 	      <div class="agency-list" id="clearfix">
            <ul>
-              <li class="clearfix" v-for="item in datas">
-               	<a v-bind:href="getTitleHref(item.taskid)">
+              <li class="clearfix">
+               	<a :href="getTitleHref(item.taskid)" v-for="item in datas">
                  	<div class="agency-right">
                    		<div class="right-box">
 	                 		<h3 class="agency-title">{{item.flowname}}</h3>

@@ -161,3 +161,4 @@ select{margin:5px;}
 strong{font-style:normal;margin-left:5px;}
 .await-btn{border:0px solid; background:#FF9900;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
 .option{line-height:50px;text-align:center}
+.router-link-active{color:#FFC600}

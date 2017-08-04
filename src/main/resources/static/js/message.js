@@ -24,7 +24,9 @@ new Vue({
 				start=0;
 				var result = '';
 				axios.get("/message/getMessageList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
+					console.log(response.data)
 					_this.data=response.data
+					
 					if(_this.data.length>0){
 						
 				 	}else{

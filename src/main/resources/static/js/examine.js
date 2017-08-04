@@ -43,7 +43,6 @@ var vm=new Vue({
 			}
 		}
 	},
-	
 	created:function(){
 		var taskId=localurl('taskid')
 		var user=getCookie('userid')
