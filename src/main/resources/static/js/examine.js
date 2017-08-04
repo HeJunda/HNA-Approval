@@ -112,23 +112,8 @@ var vm=new Vue({
 			}).catch(function(error){
 			    console.log(error);
 			});
-			this.showDom=!this.showDom;
+				this.showDom=!this.showDom;
 			},
-			/*点击确定*/
-			showok:function(){
-				this.showuser=!this.showuser;
-				var _this=this;
-				var lis=$(".content li")
-				var personArr=[];
-				for(var i=0;i<lis.length;i++){
-					if(lis.eq(i).attr('data-id')!=undefined){
-						personArr.push(lis.eq(i).attr('data-id'));
-					}
-				}
-				_this.personStr=personArr.join(",")
-				//console.log(_this.personStr)
-			},
-			
 			showTip:function(){
 				this.showLayer=!this.showLayer;
 				var _this=this;
@@ -168,13 +153,17 @@ var vm=new Vue({
 		        	    btn: ['确定','取消'],
 		        	    yes: function(index){
 		        	    	var check=document.querySelectorAll("input[name='Comeback']");
+		        	    	console.log(check)
 		        	    	for(var i=0;i<check.length;i++){
 		        	    		if(check[i].checked){
 		            	    		this.comeback=check[i].value;
 		            	    	}	
 		        	    	}
 		        	    	layer.close(index);
-		        	      }
+		        	      },
+		        	    no: function(index){
+		        	    	$(".status-text").text(" ")
+		        	    }
 		        	  });   	
 		        }else{
 		        	this.comeback=name.comeback;
@@ -234,7 +223,6 @@ var vm=new Vue({
 								lis.innerHTML="√";
 								if(target.nodeName.toLowerCase() == "li"){
 									var ind=$(".content li").index($(target));
-									//console.log(ind);
 									$(target).append(lis).attr('data-id',personList[ind]);
 								}
 							}
@@ -244,6 +232,29 @@ var vm=new Vue({
 					console.log(err)
 				});
 			},
+			/*点击确定*/
+			showok:function(){
+				this.showuser=!this.showuser;
+				var _this=this;
+				var lis=$(".content li")
+				var personArr=[];
+				for(var i=0;i<lis.length;i++){
+					if(lis.eq(i).attr('data-id')!=undefined){
+						personArr.push(lis.eq(i).attr('data-id'));
+					}
+				}
+				_this.personStr=personArr.join(",")
+				//console.log(_this.personStr)
+				if($(".bg").length=="0"){
+					layer.open({
+					    content: '请添加选择人',
+					    skin: 'msg',
+					    style: 'background-color:#ccc; color:#fff; border:none;',
+					    time: 1
+					});
+				}
+			},
+			
 			/*常用语*/
 			lane:function(){
 				var _this=this;
@@ -278,14 +289,14 @@ var vm=new Vue({
 			},
 			/*点击提交*/
 			submit:function(){
-				if(this.opinion=="" || this.activeName==""){
+				/*if(this.opinion=="" || this.activeName==""){
 					layer.open({
 					    content: '输入不能为空',
 					    skin: 'msg',
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    time: 3 
 					  });
-				}
+				}*/
 				var _this=this;
 				var str=this.opinion;
 				var parm=this.parms;
@@ -301,6 +312,12 @@ var vm=new Vue({
 					console.log(response.data)
 					console.log(response.data[0].code)
 					if(response.data[0].code=='1'){
+						layer.open({
+						    content: '提交成功',
+						    skin: 'msg',
+						    style: 'background-color:#ccc; color:#fff; border:none;',
+						    time: 3 
+						  });
 						window.location.href='agency.html';
 					}else{
 						layer.open({
@@ -319,6 +336,7 @@ var vm=new Vue({
 					    time: 3 
 					  });
 				})
+				
 			}
 		}
 
