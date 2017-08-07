@@ -79,7 +79,7 @@
             </div>
           <br/>
         </div>
-        <!-- 常用语 -->
+        <!-- ICON -->
         <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
           <div class="layui-m-layershade" v-on:click="hideDiv"></div>
           <div class="layui-m-layermain">
@@ -95,23 +95,7 @@
             </div>
           </div>
         </div>
-        <!--弹窗-->
-        <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
-          <div class="layui-m-layershade" v-on:click="hideDiv"></div>
-          <div class="layui-m-layermain">
-            <div class="layui-m-layersection">
-              <div class="layui-m-layerchild">
-                <div class="layui-m-layercont">
-                  <div class="handle-status clearfix">
-                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
-                   
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- 弹窗 -->
+        <!-- 选择人 -->
           <div class="layui-m-layer layui-m-layer1" v-show="showuser" style="display:none">
           <div class="layui-m-layershade" v-on:click="showUser()"></div>
           <div class="layui-m-layermain">
