@@ -10,6 +10,7 @@ import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
+import cn.Bohai.Utils.SSOUtil;
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
 import cn.Bohai.model.DoneMessage;
@@ -119,5 +120,21 @@ public class UserService {
 	    }else{
 	    	return null;
 	    }
+	}
+	
+	/**
+	 * 获取用户信息
+	 * @param token
+	 * @throws Exception 
+	 */
+	public String getSSOInfo(String token) throws Exception{
+		try {
+			String userInfo = SSOUtil.CheckTokenBySSO(token);
+			return userInfo;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+		
 	}
 }

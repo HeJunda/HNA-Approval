@@ -43,7 +43,7 @@ public class UserController {
     
     /**
      * 获取用户信息
-     * @throws Exception 
+     *  
      */
     @RequestMapping(value = "/getUserInfo",method = RequestMethod.GET)
     public JSONArray getUserInfo(User user){
@@ -54,6 +54,23 @@ public class UserController {
 			e.printStackTrace();
 		}
 		return jsonArray;
+    	
+    }
+    
+    /**
+     * 兜兜SSO校验
+     * 
+     */
+    @RequestMapping(value = "/getSSOInfo",method = RequestMethod.GET)
+    public String getSSOInfo(String token){
+    	try {
+			String userInfo = userService.getSSOInfo(token);
+			return userInfo;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
     	
     }
     
