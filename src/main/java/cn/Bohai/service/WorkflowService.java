@@ -84,18 +84,20 @@ public class WorkflowService {
 		
 		
 		IDataset iDataset = mw.getDataset();
-		
+		IDatasets result = null;
 		
 		//访问接口
-		IDatasets result = null;
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonArray);
-	    
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	
@@ -129,12 +131,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -166,13 +172,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -202,76 +211,80 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    for(int i=0;i<resultListMap.size();i++){
+	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
-	    	Map map = resultListMap.get(i);
-	    	
-	    	
-	    	//获取附件信息
-	    	String attachString = (String) map.get("attach");
-	    	if(attachString == null || attachString.equals("") || attachString.equals("[]")){
-	    		map.put("attach", "");
-	    	}else{
-	    		// 去掉“\”
-	    		attachString = attachString.replace("\\\\", "");
-	    		// 去掉“[”
-	    		attachString = attachString.replace("[", "");
-	    		// 去掉“]”
-	    		attachString = attachString.replace("]", "");
-	    		//去掉冒号
-	    		attachString = attachString.replace("\"","");
-	    		List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	for(int i=0;i<resultListMap.size();i++){
+	    		@SuppressWarnings("rawtypes")
+	    		Map map = resultListMap.get(i);
 	    		
 	    		
-	    		Map<String,String> attachMap = new HashMap<String,String>();
-	    		for (int j=0;j<attachlist.size();j++) {
-	    			String oneAttachString = attachlist.get(j);
-	    			String[] oneAttachArray = oneAttachString.split("\\|");
-	    			String newkey = oneAttachArray[0];
-	    			String newValue = oneAttachArray[2];
-	    			attachMap.put(newkey, newValue);
+	    		//获取附件信息
+	    		String attachString = (String) map.get("attach");
+	    		if(attachString == null || attachString.equals("") || attachString.equals("[]")){
+	    			map.put("attach", "");
+	    		}else{
+	    			// 去掉“\”
+	    			attachString = attachString.replace("\\\\", "");
+	    			// 去掉“[”
+	    			attachString = attachString.replace("[", "");
+	    			// 去掉“]”
+	    			attachString = attachString.replace("]", "");
+	    			//去掉冒号
+	    			attachString = attachString.replace("\"","");
+	    			List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    			
+	    			
+	    			Map<String,String> attachMap = new HashMap<String,String>();
+	    			for (int j=0;j<attachlist.size();j++) {
+	    				String oneAttachString = attachlist.get(j);
+	    				String[] oneAttachArray = oneAttachString.split("\\|");
+	    				String newkey = oneAttachArray[0];
+	    				String newValue = oneAttachArray[2];
+	    				attachMap.put(newkey, newValue);
+	    			}
+	    			String attachMapString = JSON.toJSONString(attachMap);
+	    			map.put("attach", attachMapString);
 	    		}
-	    		String attachMapString = JSON.toJSONString(attachMap);
-	    		map.put("attach", attachMapString);
-	    	}
-	    	
-	    	
-	    	
-	    	
-	    	//获取基本信息
-	    	String flowinfo = (String) map.get("flowinfo");
-	    	if( flowinfo == null || flowinfo.equals("") || flowinfo.equals("[]")){
 	    		
-	    		map.put("flowinfo", "");
 	    		
-	    	} else {
-	    		flowinfo = flowinfo.replace("\\\\", "");
-	    		JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
-	    		String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
-	    		if (baseFlowinfoJsonString == null || baseFlowinfoJsonString.equals("")) {
+	    		
+	    		
+	    		//获取基本信息
+	    		String flowinfo = (String) map.get("flowinfo");
+	    		if( flowinfo == null || flowinfo.equals("") || flowinfo.equals("[]")){
+	    			
 	    			map.put("flowinfo", "");
-				} else {
-					//去掉多余数字
-					Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
-					Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
-					for (String key : baseInfoMap.keySet()) {
-						String newkey = key.substring(key.indexOf('|') + 1);
-						Object newValue = baseInfoMap.get(key);
-						baseInfoMapShow.put(newkey, newValue);
-					}
-					String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
-					map.put("flowinfo", flowBaseInfoString);
-				}
+	    			
+	    		} else {
+	    			flowinfo = flowinfo.replace("\\\\", "");
+	    			JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
+	    			String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
+	    			if (baseFlowinfoJsonString == null || baseFlowinfoJsonString.equals("")) {
+	    				map.put("flowinfo", "");
+	    			} else {
+	    				//去掉多余数字
+	    				Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+	    				Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    				for (String key : baseInfoMap.keySet()) {
+	    					String newkey = key.substring(key.indexOf('|') + 1);
+	    					Object newValue = baseInfoMap.get(key);
+	    					baseInfoMapShow.put(newkey, newValue);
+	    				}
+	    				String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+	    				map.put("flowinfo", flowBaseInfoString);
+	    			}
+	    		}
 	    	}
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
 	    }
 	    
 	    
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
 	}
 	
 	/**
@@ -304,41 +317,46 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    for(int i=0;i<resultListMap.size();i++){
+	    if(result != null){
+	    	
 	    	@SuppressWarnings("rawtypes")
-	    	Map map = resultListMap.get(i);
-            String attachString = (String) map.get("attach");
-            
-            if(attachString == null || attachString.equals("") || attachString.equals("[]")){
-            	map.put("attach", "");
-            }else{
-            	//去掉斜杠
-            	attachString = attachString.replace("\\\\", "");
-            	// 去掉“[”
-            	attachString = attachString.replace("[", "");
-            	// 去掉“]”
-            	attachString = attachString.replace("]", "");
-            	//去掉冒号
-            	attachString = attachString.replace("\"","");
-            	List<String> attachlist = Arrays.asList(attachString.split(",")); 
-            	
-            	Map<String,String> attachMap = new HashMap<String,String>();
-            	for (int j=0;j<attachlist.size();j++) {
-            		String oneAttachString = attachlist.get(j);
-            		String[] oneAttachArray = oneAttachString.split("\\|");
-            		String newkey = oneAttachArray[0];
-            		String newValue = oneAttachArray[2];
-            		attachMap.put(newkey, newValue);
-            	}
-            	String attachMapString = JSON.toJSONString(attachMap);
-            	map.put("attach", attachMapString);
-            }
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	for(int i=0;i<resultListMap.size();i++){
+	    		@SuppressWarnings("rawtypes")
+	    		Map map = resultListMap.get(i);
+	    		String attachString = (String) map.get("attach");
+	    		
+	    		if(attachString == null || attachString.equals("") || attachString.equals("[]")){
+	    			map.put("attach", "");
+	    		}else{
+	    			//去掉斜杠
+	    			attachString = attachString.replace("\\\\", "");
+	    			// 去掉“[”
+	    			attachString = attachString.replace("[", "");
+	    			// 去掉“]”
+	    			attachString = attachString.replace("]", "");
+	    			//去掉冒号
+	    			attachString = attachString.replace("\"","");
+	    			List<String> attachlist = Arrays.asList(attachString.split(",")); 
+	    			
+	    			Map<String,String> attachMap = new HashMap<String,String>();
+	    			for (int j=0;j<attachlist.size();j++) {
+	    				String oneAttachString = attachlist.get(j);
+	    				String[] oneAttachArray = oneAttachString.split("\\|");
+	    				String newkey = oneAttachArray[0];
+	    				String newValue = oneAttachArray[2];
+	    				attachMap.put(newkey, newValue);
+	    			}
+	    			String attachMapString = JSON.toJSONString(attachMap);
+	    			map.put("attach", attachMapString);
+	    		}
+	    	}
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
 	    }
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-		return jsonArray;
 	}
 	
 	/**
@@ -368,12 +386,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	
@@ -409,12 +431,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -444,12 +470,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 
@@ -489,12 +519,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -522,12 +556,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -557,12 +595,16 @@ public class WorkflowService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	

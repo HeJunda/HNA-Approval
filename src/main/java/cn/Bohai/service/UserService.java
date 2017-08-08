@@ -42,7 +42,6 @@ public class UserService {
 		mw.put("userpwd","111111");
 		
 		//校验参数
-//		mw.put("userid",awaitMessage.getUserid());
 		mw.put("clienttype",CommonParameter.clienttype);
 		mw.put("clientsign",CommonParameter.clientsign);
 		mw.put("checkcode",CommonParameter.checkcode);
@@ -57,30 +56,30 @@ public class UserService {
 		
 		//访问登录校验
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    
-	    
-	    //先转为JSONArray，再转为JSONObject
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    System.out.println(jsonString);
-	    JSONArray jsonArray=JSON.parseArray(jsonString);
-	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
-	    
-	    
-	    //登录状态判断
-	    String loginLogo = jsonObject.getString("code");
-	    if(loginLogo != null && loginLogo.equals("1")){
-	    	System.out.println("用户已登录");
-	    	return true;
+	    if(result != null){
+	    	
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	
+	    	//先转为JSONArray，再转为JSONObject
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray=JSON.parseArray(jsonString);
+	    	JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    	
+	    	
+	    	//登录状态判断
+	    	String loginLogo = jsonObject.getString("code");
+	    	if(loginLogo != null && loginLogo.equals("1")){
+	    		System.out.println("用户已登录");
+	    		return true;
+	    	} else {
+	    		System.out.println("用户未登录");
+	    		return false;
+	    	}
 	    } else {
-	    	System.out.println("用户未登录");
-			return false;
-		}
+	    	return false;
+	    }
 	    
-	    
-//		return jsonString;
-//		return results;
 		
 	}
 	
@@ -110,12 +109,15 @@ public class UserService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
-	
 }

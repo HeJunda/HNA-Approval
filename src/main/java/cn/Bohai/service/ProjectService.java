@@ -53,12 +53,16 @@ public class ProjectService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 	
 	/**
@@ -87,12 +91,16 @@ public class ProjectService {
 		
 		//访问接口
 	    result = T2Util.send("8000", iDataset);
-	    @SuppressWarnings("rawtypes")
-		List<Map> resultListMap = T2Util.dataset2MapList(result);
-	    String jsonString = JSON.toJSONString(resultListMap);
-	    JSONArray jsonArray = JSONArray.parseArray(jsonString);
-	    System.out.println(jsonString);
-		return jsonArray;
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
 	}
 
 }

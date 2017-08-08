@@ -106,11 +106,13 @@ public class T2Util {
 					return null;
 				}
 			}else{
-				throw new Exception("调用"+functionId+"功能失败，失败原因:["+resultEvent.getErrorNo()+"]"+resultEvent.getErrorInfo());
+				System.out.println("调用"+functionId+"功能失败，失败原因:["+resultEvent.getErrorNo()+"]"+resultEvent.getErrorInfo());
+				return null;
 			}
 		} catch (Exception e) {
 			logger.info("调用"+functionId+"功能失败:"+e.getMessage(),e);
-			throw e;
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
