@@ -5,7 +5,7 @@
 		sendPoolSize="2" senderQueueLength="30" />
 	<parents>
 		<parent safeLevel="NONE" parentName="tcmpdoudou">
-			<limit licenseFile="D:\gitWork\HNA-Approval\src\main\resources\client_license.dat" encrypt="blowfish"/>
+			<limit licenseFile="/app/www/htdocs/hna_apl/client_license.dat" encrypt="blowfish"/>
 			<members>
 				<member address="10.72.8.130" port="8020" no="1" poolSize="1"/>
 			</members>
