@@ -18,7 +18,7 @@ import cn.Bohai.service.UserService;
  */
 public class TCMPLoginInterceptor implements HandlerInterceptor {
 	
-//	@Autowired
+	@Autowired
 	private UserService userservice = new UserService();
 
 
