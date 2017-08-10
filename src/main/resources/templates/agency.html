@@ -8,6 +8,7 @@
   	<meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -15,8 +16,9 @@
 	        <a href="index.html"><span class="back"></span></a>
 	        <h3 class="approve">移动审批</h3>   
 	    </header>
-		<div class="container paddinTop">
-	      <div class="agency-list" id="clearfix">
+	    
+		<div class="container paddinTop" id="clearList">
+	      <div class="agency-list AgList">
            <ul>
               <li class="clearfix"  v-for="item in datas">
                	<a :href="'/examine.html?taskid='+item.taskid">
@@ -36,6 +38,8 @@
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/iscroll.js"></script>
+	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/agency.js"></script>
 </body>
 </html>

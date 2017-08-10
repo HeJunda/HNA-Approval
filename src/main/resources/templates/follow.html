@@ -67,11 +67,11 @@
 						$('.dropload-down').remove();
 						var _this=this;
 						var user=getCookie('userid')
-						  
+						var start=0;
 						$("#await").dropload({
 							scrollArea : window,
 							loadDownFn : function(me){
-								start=0;
+								
 								var result = '';
 								axios.get("/workflow/getSplitRead",{params:{userid:user,start:start++,limit:10,hasread:0}}).then(function(response){
 									_this.dataes=response.data
@@ -129,11 +129,11 @@
 				$('.dropload-down').remove();
 				var _this=this;
 				var user=getCookie('userid')
-				  
+				var start=0;
 				$("#already").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
-						start=0;
+						
 						var result = '';
 						axios.get("/workflow/getSplitRead",{params:{userid:user,start:start++,limit:10,hasread:1}}).then(function(response){
 							console.log(response.data)

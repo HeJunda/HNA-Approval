@@ -121,12 +121,13 @@
  				var _this=this;
  				var instance=_this.add;
  				var user=getCookie('userid');
+ 				var start=0;
  				$("#history").dropload({
  					scrollArea : window,
  					loadDownFn : function(me){
- 						start=0;
+ 						
  						var result = '';
- 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10,instanceid:instance}}).then(function(response){
+ 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:++,limit:10,instanceid:instance}}).then(function(response){
  							console.log(response.data)
  							_this.histry=response.data;
  							console.log(_this.histry)
@@ -162,11 +163,11 @@
  				var actionName=_this.await[0].name
  				var actionType=_this.await[0].type
  				var actionValue=_this.await[0].value
- 				console.log(taskId)
+ 				/* console.log(taskId)
  				console.log(formType)
  				console.log(actionName)
  				console.log(actionType)
- 				console.log(actionValue)
+ 				console.log(actionValue) */
  				
  				axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,formtype:formType,actionname:actionName,actionvalue:actionValue,actiontype:actionType}).then(function(response){
  	 				console.log(response.data)

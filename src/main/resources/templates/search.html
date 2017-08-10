@@ -73,11 +73,11 @@
 			created:function(){
 				  var _this=this;
 				  var user=getCookie('userid')
-				  
+				  var start=0;
 				  $("#active").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
-						start=0;
+						
 						var result = '';
 						axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:start++,limit:10}}).then(function(response){
 							_this.dataes=response.data
