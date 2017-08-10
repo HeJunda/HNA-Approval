@@ -58,9 +58,9 @@
 			date:{}
 		},
 		created:function(){
-			/* var token=window.native.getSsoToken()
-			console.log(token) */
-			/* var _this=this
+			var token=window.native.getSsoToken()
+			alert(token)
+			var _this=this
 			var user=getCookie('userid')
 			console.log(user)
 			axios.get("/user/userLoginCheck",{token:token}).then(function(response){
@@ -68,7 +68,7 @@
 				console.log(_this.date);
 			}).catch(function(error){
 			    console.log(error);
-			}); */
+			});
 		}
 	})
 	
