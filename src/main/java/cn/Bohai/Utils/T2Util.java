@@ -80,40 +80,66 @@ public class T2Util {
 		IEvent event = new EventFactory().getEventByAlias(functionId, EventType.ET_REQUEST);
 		event.putEventData(senddata);
 		
-		// 同步服务调用带指定超时
-		try {
+		try{
 			IEvent resultEvent = T2util.getClient().sendReceive(event);
-			
 			if (resultEvent.getReturnCode() == EventReturnCode.I_OK) {
-				IDatasets result = resultEvent.getEventDatas();
-				int datasetCount = result.getDatasetCount();
-				System.out.println("datasetCount="+datasetCount);
-				System.out.println("datasetCount="+result.getDataset(0).getTotalCount());
-				System.out.println("datasetCount="+result.getDataset(0).getString("TotalCount"));
+			IDatasets result = resultEvent.getEventDatas();
+			int datasetCount = result.getDatasetCount();
+			System.out.println("datasetCount="+datasetCount);
+			System.out.println("datasetCount="+result.getDataset(0).getTotalCount());
+			System.out.println("datasetCount="+result.getDataset(0).getString("TotalCount"));
+			
+			if(datasetCount>0){
 				
-				if(datasetCount>0){
+				for (int i = 0; i < datasetCount; i++) {
 					
-					for (int i = 0; i < datasetCount; i++) {
-						
-						System.out.println("dataset - " + result.getDatasetName(i));
-						// 打印IDataset
-						DatasetService.printDataset(result.getDataset(i));
-						System.out.println(result.getDataset(i));
-					}
-					
-					return result;
-				}else{
-					return null;
+					System.out.println("dataset - " + result.getDatasetName(i));
+					// 打印IDataset
+					DatasetService.printDataset(result.getDataset(i));
+					System.out.println(result.getDataset(i));
 				}
-			}else{
-				System.out.println("调用"+functionId+"功能失败，失败原因:["+resultEvent.getErrorNo()+"]"+resultEvent.getErrorInfo());
-				return null;
+				
+				return result;
 			}
-		} catch (Exception e) {
-			logger.info("调用"+functionId+"功能失败:"+e.getMessage(),e);
-			e.printStackTrace();
-			return null;
+			}}
+		catch(T2SDKException e){
+			System.out.println("Exceptiion happended"+e.getMessage());
 		}
+		return null;
+		// 同步服务调用带指定超时
+//		try {
+//			IEvent resultEvent = T2util.getClient().sendReceive(event);
+//			
+//			if (resultEvent.getReturnCode() == EventReturnCode.I_OK) {
+//				IDatasets result = resultEvent.getEventDatas();
+//				int datasetCount = result.getDatasetCount();
+//				System.out.println("datasetCount="+datasetCount);
+//				System.out.println("datasetCount="+result.getDataset(0).getTotalCount());
+//				System.out.println("datasetCount="+result.getDataset(0).getString("TotalCount"));
+//				
+//				if(datasetCount>0){
+//					
+//					for (int i = 0; i < datasetCount; i++) {
+//						
+//						System.out.println("dataset - " + result.getDatasetName(i));
+//						// 打印IDataset
+//						DatasetService.printDataset(result.getDataset(i));
+//						System.out.println(result.getDataset(i));
+//					}
+//					
+//					return result;
+//				}else{
+//					return null;
+//				}
+//			}else{
+//				System.out.println("调用"+functionId+"功能失败，失败原因:["+resultEvent.getErrorNo()+"]"+resultEvent.getErrorInfo());
+//				return null;
+//			}
+//		} catch (Exception e) {
+//			logger.info("调用"+functionId+"功能失败:"+e.getMessage(),e);
+//			e.printStackTrace();
+//			return null;
+//		}
 	}
 	
 	

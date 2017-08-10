@@ -1,5 +1,6 @@
 package cn.Bohai.controller;
 
+import cn.Bohai.model.Token;
 import cn.Bohai.model.User;
 import cn.Bohai.service.UserService;
 
@@ -62,7 +63,7 @@ public class UserController {
      * 
      */
     @RequestMapping(value = "/getSSOInfo",method = RequestMethod.GET)
-    public String getSSOInfo(String token){
+    public String getSSOInfo(Token token){
     	try {
 			String userInfo = userService.getSSOInfo(token);
 			return userInfo;

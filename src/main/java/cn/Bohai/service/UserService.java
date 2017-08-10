@@ -14,6 +14,7 @@ import cn.Bohai.Utils.SSOUtil;
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
 import cn.Bohai.model.DoneMessage;
+import cn.Bohai.model.Token;
 import cn.Bohai.model.User;
 
 import java.util.List;
@@ -127,9 +128,9 @@ public class UserService {
 	 * @param token
 	 * @throws Exception 
 	 */
-	public String getSSOInfo(String token) throws Exception{
+	public String getSSOInfo(Token token) throws Exception{
 		try {
-			String userInfo = SSOUtil.CheckTokenBySSO(token);
+			String userInfo = SSOUtil.CheckTokenBySSO(token.getToken());
 			return userInfo;
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -8,9 +8,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+
+
+
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -34,7 +38,7 @@ public class SSOUtil {
         try {  
             URL realUrl = new URL(url);  
             // 打开和URL之间的连接  
-            URLConnection conn = realUrl.openConnection();  
+            HttpURLConnection conn = (HttpURLConnection)realUrl.openConnection();  
             // 设置通用的请求属性  
             conn.setRequestProperty("accept", "*/*");  
             conn.setRequestProperty("connection", "Keep-Alive");  
@@ -90,7 +94,7 @@ public class SSOUtil {
         String body = "{\"token\":\""+token+"\"}";
 
 		//sso服务公钥
-		String publicKeyStr = RSAUtils.loadKeyStringByPath("rsa_public_key.pem");
+		String publicKeyStr = RSAUtils.loadKeyStringByPath("D:/gitWork/HNA-Approval/src/main/resources/sso_rsa_public_key.pem");
 		String bodyEncrypt;
 		try {
 			//加密body参数
@@ -130,7 +134,7 @@ public class SSOUtil {
         System.out.println("respCode:"+checkUserAuthEntity.getHeader().getRespCode()+",respMsg:"+checkUserAuthEntity.getHeader().getRespMsg());
         
 		//解密body内容
-		String privateKeyStr = RSAUtils.loadKeyStringByPath("private_key.pem");
+		String privateKeyStr = RSAUtils.loadKeyStringByPath("D:/gitWork/HNA-Approval/target/classes/private_key.pem");
 		try {
 			String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
 	        System.out.println("bodyDecrypt:"+bodyDecrypt);

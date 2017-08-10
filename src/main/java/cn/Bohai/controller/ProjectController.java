@@ -44,7 +44,7 @@ public class ProjectController {
 	} 
 	
 	/**
-     * 获取本部门下项目列表
+     * 获取本部门下项目列表（改为前端同步请求）
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getMyDeptProjectList",method = RequestMethod.GET)
