@@ -65,7 +65,7 @@
 			console.log(user)
 			axios.get("/user/userLoginCheck",{token:token}).then(function(response){
 				_this.date=response.data;
-				console.log(_this.date);
+				alert(_this.date);
 			}).catch(function(error){
 			    console.log(error);
 			});
