@@ -19,17 +19,17 @@
 	    </header>
 		<div class="container paddinTop" id="message">
 	      <div class="agency-list">
-          <ul class="msg-list">
-              <li class="clearfix" v-for="(item,index) in data" v-on:click="add(index)">
-                 <div class="agency-right">
-                   <div class="right-box">
-	                 <h3 class="agency-title">{{item.title}}</h3>
-	                 <p>{{item.content}}</p>
-	                 <span class="time fr">{{item.sendDate}}</span>
-                   </div>
-                 </div>
-              </li>
-           </ul>
+            <ul class="msg-list">
+           		<li class="clearfix" v-for="(item,index) in data" v-on:click="add(index)">
+                 	<div class="agency-right">
+                   		<div class="right-box">
+	                 		<h3 class="agency-title">{{item.title}}</h3>
+	                 		<p>{{item.content}}</p>
+	                 		<span class="time fr">{{item.sendDate}}</span>
+                   		</div>
+                	</div>
+              	</li> 
+           	</ul>
 	      </div>
 		</div>
 	</div>

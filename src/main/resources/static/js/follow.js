@@ -8,7 +8,6 @@ var follow=new Vue({
 	methods:{
 		person:function(value){
 			this.activeClass=value;
-			console.log("111111");
 			 var user=getCookie('userid');
 			axios.get("/workflow/getSplitRead",{params:{userid:this.userid,start:0,limit:10}}).then(function(response){
 		  		  //this.dataes=response.data

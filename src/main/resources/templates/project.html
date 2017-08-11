@@ -62,8 +62,7 @@
 	                         </div>
 	                         </a>
 	                      </li>
-	                      
-	                   </ul>
+	                   </ul> 
 	                </div>
                 </div>
               </div>`,
@@ -77,22 +76,23 @@
 			  created:function(){
 					var _this=this;
 					var user=getCookie('userid')
-					var start=0;
+					var start = 0;
+					
 					$("#active").dropload({
 						scrollArea : window,
 						loadDownFn : function(me){
-							
-							var result = '';
-							axios.get("/project/getProjectList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
-								console.log(response.data)
-								_this.dataes=response.data
-								if(_this.dataes.length>0){
+							var result = [];
+							if(_this.dataes.length>10){
+								start=_this.dataes.length;
+							}
+							axios.get("/project/getProjectList",{params:{userid:user,start:start,limit:10}}).then(function(response){
+								if(response.data.length>0){
+									_this.dataes=_this.dataes.concat(response.data)
 								 	}else{
 					                	me.lock();
 					                   	me.noData();
 									}
 									setTimeout(function(){
-					                    $('.item-active').append(result);
 					                    me.resetload();
 					                },1000);
 							}).catch(function(error){
@@ -100,7 +100,7 @@
 								me.resetload();
 							});
 						}
-					})
+					}) 
 			  },
 			  methods:{
 				  getTitleHref:function(data){
@@ -172,22 +172,26 @@
 					var _this=this;
 					var user=getCookie('userid')
 					var start=0;
+					
 					$("#active").dropload({
 						scrollArea : window,
 						loadDownFn : function(me){
-							
-							var result = '';
-							axios.get("/project/getMyDeptProjectList",{params:{userid:user,start:start++,limit:10}}).then(function(response){
-								_this.dataes=response.data
-								if(_this.dataes.length>0){
+							var result = [];
+							if(_this.dataes.length>10){
+								start=_this.dataes.length
+							}
+							axios.get("/project/getMyDeptProjectList",{params:{userid:user,start:start,limit:10}}).then(function(response){
+								
+								if(response.data.length>0){
+									_this.dataes=_this.dataes.concat(response.data)
 								 	}else{
 					                	me.lock();
 					                   	me.noData();
 									}
 									setTimeout(function(){
-					                    $('.item-active').append(result);
 					                    me.resetload();
 					                },1000);
+									
 							}).catch(function(error){
 							 	console.log(error);
 								me.resetload();

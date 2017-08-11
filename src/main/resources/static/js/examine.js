@@ -64,27 +64,25 @@ var vm=new Vue({
 			var _this=this;
 			var instance=_this.add;
 			var user=getCookie('userid');
+			var start=0;
 			$("#history").dropload({
 				scrollArea : window,
 				loadDownFn : function(me){
-					start=0;
-					var result = '';
-					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start++,limit:10,instanceid:instance}}).then(function(response){
-						console.log(response.data)
-						_this.histry=response.data;
-						console.log(_this.histry)
-						var att=_this.histry[0].attach
-						console.log(att)
-						_this.annex=JSON.parse(att);
-						if(_this.histry.length>0){
-						}else{
-		                   me.lock();
-		                   me.noData();
-						}
-						setTimeout(function(){
-		                    $('.examine-history').append(result);
-		                    me.resetload();
-		                },1000);
+					if(_this.histry.length>=10){
+						start=_this.histry.length;
+					}
+					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
+						if(response.data.length>0){
+							_this.histry=_this.histry.concat(response.data)
+ 							var att=_this.histry[0].attach
+ 							_this.annex=JSON.parse(att);
+						 	}else{
+			                	me.lock();
+			                   	me.noData();
+							}
+							setTimeout(function(){
+			                    me.resetload();
+			                },1000);
 					}).catch(function(error){
 					    console.log(error);
 					    me.resetload();

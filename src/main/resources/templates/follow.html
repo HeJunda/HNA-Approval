@@ -71,17 +71,17 @@
 						$("#await").dropload({
 							scrollArea : window,
 							loadDownFn : function(me){
-								
-								var result = '';
-								axios.get("/workflow/getSplitRead",{params:{userid:user,start:start++,limit:10,hasread:0}}).then(function(response){
-									_this.dataes=response.data
-									if(_this.dataes.length>0){
+								if(_this.dataes.length>=10){
+									start=_this.dataes.length;
+								}
+								axios.get("/workflow/getSplitRead",{params:{userid:user,start:start,limit:10,hasread:0}}).then(function(response){
+									if(response.data.length>0){
+										_this.dataes=_this.dataes.concat(response.data)
 									 	}else{
 						                	me.lock();
 						                   	me.noData();
 										}
 										setTimeout(function(){
-						                    $('.item-await').append(result);
 						                    me.resetload();
 						                },1000);
 								}).catch(function(error){
@@ -133,18 +133,17 @@
 				$("#already").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
-						
-						var result = '';
-						axios.get("/workflow/getSplitRead",{params:{userid:user,start:start++,limit:10,hasread:1}}).then(function(response){
-							console.log(response.data)
-							_this.dataes=response.data
-							if(_this.dataes.length>0){
+						if(_this.dataes.length>=10){
+							start=_this.dataes.length;
+						}
+						axios.get("/workflow/getSplitRead",{params:{userid:user,start:start,limit:10,hasread:1}}).then(function(response){
+							if(response.data.length>0){
+								_this.dataes=_this.dataes.concat(response.data)
 							 	}else{
 				                	me.lock();
 				                   	me.noData();
 								}
 								setTimeout(function(){
-				                    $('.item-already').append(result);
 				                    me.resetload();
 				                },1000);
 						}).catch(function(error){

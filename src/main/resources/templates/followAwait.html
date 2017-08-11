@@ -103,12 +103,10 @@
  			console.log(user)
  			console.log(code)
  			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:code,flowtype:'_notictask'}}).then(function(response){
- 				console.log(response.data)
 				_this.dataes=response.data;
 				var name=JSON.parse(_this.dataes[0].actionlist)
 				_this.await=name;
 				_this.datil=response.data[0]
- 				console.log(_this.datil)
  				_this.add=response.data[0].instanceid;
  				vum.showHistory();
  			}).catch(function(error){
@@ -125,24 +123,22 @@
  				$("#history").dropload({
  					scrollArea : window,
  					loadDownFn : function(me){
- 						
- 						var result = '';
- 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:++,limit:10,instanceid:instance}}).then(function(response){
- 							console.log(response.data)
- 							_this.histry=response.data;
- 							console.log(_this.histry)
- 							var att=_this.histry[0].attach
- 							console.log(att)
- 							_this.annex=JSON.parse(att);
- 							if(_this.histry.length>0){
- 							}else{
- 			                   me.lock();
- 			                   me.noData();
- 							}
- 							setTimeout(function(){
- 			                    $('.examine-history').append(result);
- 			                    me.resetload();
- 			                },1000);
+ 						if(_this.histry.length>=10){
+							start=_this.histry.length;
+						}
+ 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
+ 							
+ 							if(response.data.length>0){
+								_this.histry=_this.histry.concat(response.data)
+	 							var att=_this.histry[0].attach
+	 							_this.annex=JSON.parse(att);
+							 	}else{
+				                	me.lock();
+				                   	me.noData();
+								}
+								setTimeout(function(){
+				                    me.resetload();
+				                },1000);
  						}).catch(function(error){
  						    console.log(error);
  						    me.resetload();
