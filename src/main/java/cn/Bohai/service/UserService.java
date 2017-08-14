@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
@@ -17,6 +18,8 @@ import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.Token;
 import cn.Bohai.model.User;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -83,6 +86,73 @@ public class UserService {
 	    }
 	    
 		
+	}
+	
+	/**
+	 * 用户登录校验(免密)
+	 * @param user
+	 * @throws Exception 
+	 */
+//	@Test
+	public Boolean testBohaiLoginNOPWD(String userid) throws Exception{
+		
+		T2Util.init();
+		
+		//请求体
+		MapWriter mw = new MapWriter();
+		
+		//用户ID
+		mw.put("userid",userid);
+		
+		//校验参数
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//获取时间戳
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDHHMMSS");
+		String logintime = sdf.format(date);
+		mw.put("logintime",logintime);
+		
+	    //生成登录安全码
+		String logincode = CommonParameter.clienttype+"\\|"+userid+"\\|"+logintime+"\\|"+"TCMPAPPLOGIN123";
+		mw.put("logincode",logincode);
+		
+		//登录模式设为免密登录
+		mw.put("loginmode","NOPWD");
+		
+		mw.put("interfaceid","R8001");//用户登录校验接口(R8001)
+		
+		IDatasets result = null;
+		IDataset iDataset = mw.getDataset();
+		
+		
+		//访问登录校验
+	    result = T2Util.send("8000", iDataset);
+	    if(result != null){
+	    	
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	
+	    	//先转为JSONArray，再转为JSONObject
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray=JSON.parseArray(jsonString);
+	    	JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+	    	
+	    	
+	    	//登录状态判断
+	    	String loginLogo = jsonObject.getString("code");
+	    	if(loginLogo != null && loginLogo.equals("1")){
+	    		System.out.println("用户已登录");
+	    		return true;
+	    	} else {
+	    		System.out.println("用户未登录");
+	    		return false;
+	    	}
+	    } else {
+	    	return false;
+	    }
 	}
 	
 	/**
