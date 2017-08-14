@@ -29,7 +29,7 @@ var vm=new Vue({
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 					if(response.data.length>0){
 						_this.data=_this.data.concat(response.data)
-					 	}else{
+					 	}else if(response.data.length==0){
 		                	me.lock();
 		                   	me.noData();
 						}

@@ -68,24 +68,26 @@ var vm=new Vue({
 			$("#history").dropload({
 				scrollArea : window,
 				loadDownFn : function(me){
-					if(_this.histry.length>=10){
+					if(_this.histry.length>10){
 						start=_this.histry.length;
 					}
 					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
 						if(response.data.length>0){
 							_this.histry=_this.histry.concat(response.data)
- 							var att=_this.histry[0].attach
- 							_this.annex=JSON.parse(att);
-						 	}else{
-			                	me.lock();
-			                   	me.noData();
-							}
-							setTimeout(function(){
-			                    me.resetload();
-			                },1000);
+							var att=_this.histry[0].attach;
+							_this.annex=JSON.parse(att);
+						}else if(response.data.length==0){
+							console.log(123)
+			                me.lock();
+			                me.noData();
+						}
+						/*setTimeout(function(){
+			                me.resetload();
+			            },1000);*/
+						
 					}).catch(function(error){
 					    console.log(error);
-					    me.resetload();
+					    //me.resetload();
 					});
 				}
 			 })
@@ -162,7 +164,8 @@ var vm=new Vue({
 	        	    	 layer.close(index);
 	        	    },
 	        	    no: function(){
-	        	    	_this.status=""
+	        	    	_this.parms="";
+	        	    	actionname="";
 	        	    }
 	        	  });   	
 	        }else{
@@ -319,7 +322,7 @@ var vm=new Vue({
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    time: 3 
 					  });
-					window.location.href='agency.html';
+					//window.location.href='agency.html';
 				}else{
 					layer.open({
 					    content: response.data[0].result,

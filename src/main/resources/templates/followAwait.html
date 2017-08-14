@@ -132,7 +132,7 @@
 								_this.histry=_this.histry.concat(response.data)
 	 							var att=_this.histry[0].attach
 	 							_this.annex=JSON.parse(att);
-							 	}else{
+							 	}else if(response.data.length==0){
 				                	me.lock();
 				                   	me.noData();
 								}

@@ -61,10 +61,8 @@
 			/* var token=window.native.getSsoToken()
 			alert(token)
 			var _this=this
-			var user=getCookie('userid')
-			console.log(user)
-			axios.get("/user/userLoginCheck",{token:token}).then(function(response){
-				_this.date=response.data;
+			axios.get("/user/getSSOInfo",{token:token}).then(function(response){
+				_this.date=response.data.UserAccount;
 				alert(_this.date);
 			}).catch(function(error){
 			    console.log(error);
