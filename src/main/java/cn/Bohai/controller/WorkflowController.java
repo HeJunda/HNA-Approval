@@ -22,6 +22,7 @@ import cn.Bohai.model.Processing;
 import cn.Bohai.model.SelectPerson;
 import cn.Bohai.model.SplitRead;
 import cn.Bohai.model.User;
+import cn.Bohai.service.UserService;
 import cn.Bohai.service.WorkflowService;
 
 /**
@@ -33,6 +34,8 @@ public class WorkflowController {
     
 	@Autowired
 	private WorkflowService workflowService;
+	@Autowired
+	private UserService userService;
 	
 	
 	/**
@@ -151,9 +154,13 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/processProcessing",method = RequestMethod.POST)
 	public JSONArray processProcessing(@RequestBody Processing processing){
+		
+		
 	    JSONArray jsonArray = new JSONArray();
 		try {
-			 jsonArray = workflowService.processProcessing(processing);
+			if(userService.testBohaiLoginNOPWD(processing.getUserid())){
+				jsonArray = workflowService.processProcessing(processing);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

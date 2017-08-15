@@ -30,11 +30,11 @@ public class UserController {
      * 用户登录校验
      * @throws Exception 
      */
-    @RequestMapping(value = "/userLoginCheck",method = RequestMethod.GET)
+    @RequestMapping(value = "/testBohaiLoginNOPWD",method = RequestMethod.GET)
     public Boolean userLoginCheck(User user){
     	Boolean jb = new Boolean(false);
     	try {
-    		jb =  userService.testBohaiLogin();
+    		jb =  userService.testBohaiLoginNOPWD(user.getUserid());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -15,7 +15,16 @@ public class MyWebAppConfigurer extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 	    // 多个拦截器组成一个拦截器链
 	    registry.addInterceptor(new TCMPLoginInterceptor())
-	    .addPathPatterns("/workflow/**")
+	    .addPathPatterns("/workflow/getAwaitMessage")
+	    .addPathPatterns("/workflow/getDoneMessage")
+	    .addPathPatterns("/workflow/getAwaitDetail")
+	    .addPathPatterns("/workflow/getProcessInformation")
+	    .addPathPatterns("/workflow/selectPerson")
+	    .addPathPatterns("/workflow/getNextNode")
+	    .addPathPatterns("/workflow/getHistoricalApproval")
+	    .addPathPatterns("/workflow/getMyInitiatedProcess")
+	    .addPathPatterns("/workflow/getCommonlanguage")
+	    .addPathPatterns("/workflow/getSplitRead")
 	    .addPathPatterns("/project/**")
 	    .addPathPatterns("/user/getUserInfo")
 	    .addPathPatterns("/message/**")
