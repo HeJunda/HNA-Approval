@@ -68,9 +68,7 @@ var vm=new Vue({
 			$("#history").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
-						if(_this.histry.length<=10){
-							start=_this.histry.length;
-						}
+						start=_this.histry.length;
 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
 							if(response.data.length>0){
 							_this.histry=_this.histry.concat(response.data)

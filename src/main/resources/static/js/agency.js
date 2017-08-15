@@ -9,7 +9,7 @@ var vm=new Vue({
             } 
         },
 		created:function(){
-			$('.dropload-down').remove();
+			
 			var user=getCookie('userid')
 			var _this=this;
 			var start = 0;
@@ -17,16 +17,16 @@ var vm=new Vue({
 			$("#clearList").dropload({
 				scrollArea : window,
 				loadDownFn : function(me){
-					if(_this.datas.length<=10){
-						start=_this.datas.length;
-					}
+					start=_this.datas.length;
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10}}).then(function(response){
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
 			                console.log(123)	
-							me.lock();
-			                me.noData();
+							me.lock('up');
+			                me.lock('down')
+			                me.noData(true);
+			                $('.dropload-down').remove();
 						}
 						setTimeout(function(){
 		                    me.resetload();

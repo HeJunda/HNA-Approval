@@ -1,29 +1,31 @@
 var vm=new Vue({
 	el:"#app",
 	data:{
-		data:[]
+		dataes:[]
 	},
 	created:function(){
 		var _this=this;
 		var user=getCookie('userid');
 		var start = 0;
-		$("#message").dropload({
+		$("body").dropload({
 			scrollArea : window,
 			loadDownFn : function(me){
 				var result = [];
-				if(_this.data.length>=10){
-					start=_this.data.length;
-				}
+					start=_this.dataes.length;
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 					if(response.data.length>0){
-						_this.data=_this.data.concat(response.data)
-					 	}else{
-		                	me.lock();
-		                   	me.noData();
-						}
-						setTimeout(function(){
-		                    me.resetload();
-		                },1000);
+						console.log(response.data.length)
+						_this.dataes=_this.dataes.concat(response.data)
+				 	}else{
+				 		console.log(123)
+				 		me.lock('up');
+		                me.lock('down')
+		                me.noData(true);
+		                $('.dropload-down').remove();
+					}
+					setTimeout(function(){
+	                    me.resetload();
+	                },1000);
 				}).catch(function(error){
 				 	console.log(error);
 					me.resetload();

@@ -18,9 +18,9 @@
 	        <h3 class="approve">消息列表</h3>   
 	    </header>
 		<div class="container paddinTop" id="message">
-	      <div class="agency-list">
+		<div>
             <ul class="msg-list">
-           		<li class="clearfix" v-for="(item,index) in data" v-on:click="add(index)">
+           		<li class="clearfix" v-for="(item,index) in dataes" v-on:click="add(index)">
                  	<div class="agency-right">
                    		<div class="right-box">
 	                 		<h3 class="agency-title">{{item.title}}</h3>
@@ -30,7 +30,7 @@
                 	</div>
               	</li> 
            	</ul>
-	      </div>
+           	</div>	
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>

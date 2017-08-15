@@ -82,15 +82,14 @@
 						scrollArea : window,
 						loadDownFn : function(me){
 							var result = [];
-							if(_this.dataes.length>=10){
 								start=_this.dataes.length;
-							}
+							
 							axios.get("/project/getProjectList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 								if(response.data.length>0){
 									_this.dataes=_this.dataes.concat(response.data)
 								 	}else{
-					                	me.lock();
-					                   	me.noData();
+						                me.lock()
+						                me.noData(true);
 									}
 									setTimeout(function(){
 					                    me.resetload();
@@ -177,16 +176,17 @@
 						scrollArea : window,
 						loadDownFn : function(me){
 							var result = [];
-							if(_this.dataes.length>10){
 								start=_this.dataes.length
-							}
+							
 							axios.get("/project/getMyDeptProjectList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 								
 								if(response.data.length>0){
 									_this.dataes=_this.dataes.concat(response.data)
 								}else{
-					                	me.lock();
-					                   	me.noData();
+									me.lock('up');
+					                me.lock('down')
+					                me.noData(true);
+					                $('.dropload-down').remove();
 								}
 								setTimeout(function(){
 				                    me.resetload();
