@@ -50,6 +50,7 @@
     <script src="http://doudou.hnagroup.com:8080/File/Scripts/sso.min.js"></script>
 	<script type="text/javascript" src="/js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+	<script type="text/javascript" src="js/layer.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script>
 	new Vue({
@@ -59,13 +60,21 @@
 		},
 		created:function(){
 			var token=window.native.getSsoToken()
+			alert(token)
 			var _this=this
-			axios.get("/user/getSSOInfo",{token:token}).then(function(response){
+			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+				alert(response)
 				_this.date=response.data.UserAccount;
 				alert(_this.date);
 				document.cookie = 'userid'+'='+_this.date;
 				var user=getCookie('userid')
 				alert(user)
+				if(user==""){
+					layer.open({
+					    content: '您还未登陆,请先登录兜兜。',
+					    btn: '确定'
+					})
+				}
 			}).catch(function(error){
 			    console.log(error);
 			});
