@@ -44,7 +44,7 @@ public class T2Util {
 			try {
 				sdkServices.init();
 				sdkServices.start();
-				// 获取名为 jres 的客户端
+				// 获取名为 tcmpdoudou 的客户端
 				logger.info("开始启动T2sdk。。。");
 				client = sdkServices.getClient("tcmpdoudou");
 				T2util.setClient(client);

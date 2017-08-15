@@ -4,17 +4,16 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDataset;
 import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 
+import cn.Bohai.Utils.COMMONUtils;
 import cn.Bohai.Utils.SSOUtil;
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
-import cn.Bohai.model.DoneMessage;
 import cn.Bohai.model.Token;
 import cn.Bohai.model.User;
 
@@ -93,7 +92,6 @@ public class UserService {
 	 * @param user
 	 * @throws Exception 
 	 */
-//	@Test
 	public Boolean testBohaiLoginNOPWD(String userid) throws Exception{
 		
 		T2Util.init();
@@ -116,8 +114,12 @@ public class UserService {
 		mw.put("logintime",logintime);
 		
 	    //生成登录安全码
-		String logincode = CommonParameter.clienttype+"\\|"+userid+"\\|"+logintime+"\\|"+"TCMPAPPLOGIN123";
-		mw.put("logincode",logincode);
+		String logincode = CommonParameter.clienttype+"|"+userid+"|"+logintime+"|"+"TCMPAPPLOGIN123";
+		System.out.println("logincode:"+logincode);
+		
+		String loginCodeMD5 = COMMONUtils.ToMD5(logincode);
+		System.out.println("loginCodeMD5:"+loginCodeMD5);
+		mw.put("logincode",loginCodeMD5);
 		
 		//登录模式设为免密登录
 		mw.put("loginmode","NOPWD");
@@ -208,4 +210,6 @@ public class UserService {
 		}
 		
 	}
+	
+
 }
