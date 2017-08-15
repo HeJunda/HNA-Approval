@@ -68,12 +68,10 @@
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
                  <h3 class="examine-item person-item" style="display:none">人员选择<span class="fr" v-on:click="showUser">···</span><span class="status-text fr"></span></h3>
 	        	 
-	        	
-        
             </div>
           </div>
           <div class="search-container">
-          	   <strong v-on:click="lane()">常用语:</strong>
+          	   <strong class="langeUse" v-on:click="lane()">常用语:</strong>
 	        	 
                <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion" v-on:focus="focus()" name="sele" id="sele" required="required"></textarea>
           	   <input class="search-button" v-on:click="submit()" type="submit" value="提交" />
