@@ -127,12 +127,11 @@
 							start=_this.histry.length;
 						}
  						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
- 							
- 							if(response.data.length>0){
+ 							if(response.data.length!=_this.histry.length || response.data.length>10){
 								_this.histry=_this.histry.concat(response.data)
 	 							var att=_this.histry[0].attach
 	 							_this.annex=JSON.parse(att);
-							 	}else if(response.data.length==0){
+							 	}else{
 				                	me.lock();
 				                   	me.noData();
 								}

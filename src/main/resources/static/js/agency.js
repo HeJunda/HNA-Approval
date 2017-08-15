@@ -23,9 +23,10 @@ var vm=new Vue({
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10}}).then(function(response){
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
-						}else if(response.data.length==0){
-			                	me.lock();
-			                   	me.noData();
+						}else{
+			                console.log(123)	
+							me.lock();
+			                me.noData();
 						}
 						setTimeout(function(){
 		                    me.resetload();

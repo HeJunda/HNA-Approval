@@ -66,31 +66,26 @@ var vm=new Vue({
 			var user=getCookie('userid');
 			var start=0;
 			$("#history").dropload({
-				scrollArea : window,
-				loadDownFn : function(me){
-					if(_this.histry.length>10){
-						start=_this.histry.length;
-					}
-					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
-						if(response.data.length>0){
+					scrollArea : window,
+					loadDownFn : function(me){
+						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
+							if(response.data.length!=_this.histry.length || response.data.length>10){
 							_this.histry=_this.histry.concat(response.data)
-							var att=_this.histry[0].attach;
-							_this.annex=JSON.parse(att);
-						}else if(response.data.length==0){
-							console.log(123)
-			                me.lock();
-			                me.noData();
-						}
-						/*setTimeout(function(){
-			                me.resetload();
-			            },1000);*/
-						
-					}).catch(function(error){
-					    console.log(error);
-					    //me.resetload();
-					});
-				}
-			 })
+ 							var att=_this.histry[0].attach
+ 							_this.annex=JSON.parse(att);
+						 	}else{
+			                	me.lock();
+			                   	me.noData();
+							}
+							setTimeout(function(){
+			                    me.resetload();
+			                },1000);
+						}).catch(function(error){
+						    console.log(error);
+						    me.resetload();
+						});
+					}
+			})
 		}
 	},
 	methods:{
@@ -164,8 +159,9 @@ var vm=new Vue({
 	        	    	 layer.close(index);
 	        	    },
 	        	    no: function(){
+	        	    	_this.status="";
 	        	    	_this.parms="";
-	        	    	actionname="";
+	        	    	actionname:"";
 	        	    }
 	        	  });   	
 	        }else{
@@ -293,19 +289,18 @@ var vm=new Vue({
 		},
 		/*点击提交*/
 		submit:function(){
-			/*if(this.opinion=="" || this.activeName==""){
+			if(this.opinion==""){
 				layer.open({
 				    content: '输入不能为空',
 				    skin: 'msg',
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    time: 3 
 				  });
-			}*/
+			}else{
 			var _this=this;
 			var str=this.opinion;
 			var parm=this.parms;
 			var comebacks=this.comeback;
-			console.log(comebacks)
 			var formtypes=this.digital.formtype;
 			var taskId=this.digital.taskid;
 			var personStrs=this.personStr;
@@ -322,7 +317,7 @@ var vm=new Vue({
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    time: 3 
 					  });
-					//window.location.href='agency.html';
+					window.location.href='agency.html';
 				}else{
 					layer.open({
 					    content: response.data[0].result,
@@ -331,16 +326,17 @@ var vm=new Vue({
 					    time: 3 
 					  });
 				}
-			}).catch(function(response){
-				console.log(response)
-				layer.open({
+			}).catch(function(error){
+				console.log(error)
+				/*layer.open({
 				    content: response.result,
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    skin: 'msg',
 				    time: 3 
-				  });
-			})
+				  });*/
+				})
 			
+			}
 		}
 	}
 })
