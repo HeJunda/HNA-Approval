@@ -59,7 +59,9 @@
 			date:{}
 		},
 		created:function(){
-			var token=window.native.getSsoToken()
+			document.cookie = 'userid='+'jd.he';
+			var user=getCookie('userid')
+			/* var token=window.native.getSsoToken()
 			alert(token)
 			var _this=this
 			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
@@ -74,10 +76,10 @@
 					    content: '您还未登陆,请先登录兜兜。',
 					    btn: '确定'
 					})
-				}
+				} 
 			}).catch(function(error){
 			    console.log(error);
-			});
+			});*/
 			
 		}
 	})

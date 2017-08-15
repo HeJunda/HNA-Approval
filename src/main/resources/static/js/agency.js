@@ -9,6 +9,7 @@ var vm=new Vue({
             } 
         },
 		created:function(){
+			$('.dropload-down').remove();
 			var user=getCookie('userid')
 			var _this=this;
 			var start = 0;
@@ -16,7 +17,7 @@ var vm=new Vue({
 			$("#clearList").dropload({
 				scrollArea : window,
 				loadDownFn : function(me){
-					if(_this.datas.length>=10){
+					if(_this.datas.length<=10){
 						start=_this.datas.length;
 					}
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10}}).then(function(response){

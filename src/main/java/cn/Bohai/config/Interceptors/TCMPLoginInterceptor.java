@@ -28,7 +28,7 @@ public class TCMPLoginInterceptor implements HandlerInterceptor {
 		// TODO Auto-generated method stub
 		
 		//ＴＣＭＰ免密登录校验
-		String userid = (String) request.getParameter("userid");
+		String userid = (String) request.getParameter("taskid");
 		Boolean isLogin = userservice.testBohaiLoginNOPWD(userid);
 		
 		//ＴＣＭＰ密码登录校验

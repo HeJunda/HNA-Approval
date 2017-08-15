@@ -68,8 +68,11 @@ var vm=new Vue({
 			$("#history").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
+						if(_this.histry.length<=10){
+							start=_this.histry.length;
+						}
 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
-							if(response.data.length!=_this.histry.length || response.data.length>10){
+							if(response.data.length>0){
 							_this.histry=_this.histry.concat(response.data)
  							var att=_this.histry[0].attach
  							_this.annex=JSON.parse(att);
@@ -82,7 +85,7 @@ var vm=new Vue({
 			                },1000);
 						}).catch(function(error){
 						    console.log(error);
-						    me.resetload();
+						    //me.resetload();
 						});
 					}
 			})
@@ -261,8 +264,6 @@ var vm=new Vue({
 			var user=getCookie('userid');
 			axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
     			console.log(response.data)
-        		/*_this.language=response.data
-        		console.log(_this.language)*/
     			var html='';
     			$.each(response.data,function(i,val){
     				html+='<option class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</option>'
@@ -277,6 +278,7 @@ var vm=new Vue({
     				var value=$(this).val()
     				console.log(value)
     				$("#sele").val(value)
+    				_this.opinion=value;
     				layer.close(L)
     			}); 
 				$(document).on("click","p",function(){  
@@ -289,14 +291,14 @@ var vm=new Vue({
 		},
 		/*点击提交*/
 		submit:function(){
-			if(this.opinion==""){
+			/*if($("#sele").val==""){
 				layer.open({
 				    content: '输入不能为空',
 				    skin: 'msg',
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    time: 3 
 				  });
-			}else{
+			}*/
 			var _this=this;
 			var str=this.opinion;
 			var parm=this.parms;
@@ -307,7 +309,8 @@ var vm=new Vue({
 			var nonames=this.noname;
 			console.log(nonames)
 			var user=getCookie('userid')
-			axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,nextopermap:nonames,actionname:parm.name,remark:str,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
+			console.log(user)
+			axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,remark:str,nextopermap:nonames,actionname:parm.name,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
 				console.log(response.data)
 				console.log(response.data[0].code)
 				if(response.data[0].code=='1'){
@@ -326,17 +329,15 @@ var vm=new Vue({
 					    time: 3 
 					  });
 				}
-			}).catch(function(error){
-				console.log(error)
-				/*layer.open({
+			}).catch(function(response){
+				console.log(response)
+				layer.open({
 				    content: response.result,
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    skin: 'msg',
 				    time: 3 
-				  });*/
-				})
-			
-			}
+				});
+			})
 		}
 	}
 })
