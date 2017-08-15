@@ -50,7 +50,7 @@
     <script src="http://doudou.hnagroup.com:8080/File/Scripts/sso.min.js"></script>
 	<script type="text/javascript" src="/js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-	
+	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script>
 	new Vue({
 		el:'#app',
@@ -58,15 +58,18 @@
 			date:{}
 		},
 		created:function(){
-			/* var token=window.native.getSsoToken()
-			alert(token)
+			var token=window.native.getSsoToken()
 			var _this=this
 			axios.get("/user/getSSOInfo",{token:token}).then(function(response){
 				_this.date=response.data.UserAccount;
 				alert(_this.date);
+				document.cookie = 'userid'+'='+_this.date;
+				var user=getCookie('userid')
+				alert(user)
 			}).catch(function(error){
 			    console.log(error);
-			}); */
+			});
+			
 		}
 	})
 	

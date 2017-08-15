@@ -9,7 +9,6 @@ var vm=new Vue({
             } 
         },
 		created:function(){
-			document.cookie = 'userid'+'='+6666;
 			var user=getCookie('userid')
 			var _this=this;
 			var start = 0;
