@@ -16,27 +16,55 @@
 	        <a href="index.html"><span class="back"></span></a>
 	        <h3 class="approve">流程查询</h3>   
 	    </header>
+				<!-- <div class="container paddinTop">
+				  <div class="follow-tab">
+		             <ul class="cleanF">
+		                <router-link tag="li" to="active" v-on:click='shaxin()'>本人呈报</router-link>
+		                <router-link tag="li" to="person" v-on:click='shaxin()'>本人审批</router-link>
+		              </ul>
+				  </div>	      
+				  
+				  <router-view></router-view>
+			      
+				</div> -->
 		<div class="container paddinTop">
-		  <div class="follow-tab">
-             <ul class="cleanF">
-                <router-link tag="li" to="active">本人呈报</router-link>
-                <router-link tag="li" to="person">本人审批</router-link>
-              </ul>
-		  </div>	      
-		  
-		  <router-view></router-view>
-	      
+	        <div class="project-tab tab">
+	            <div class="cleanF" id="tab-nav">
+                	<p class="searNav item cur" onclick="tab(0)">本人呈报</p>
+                	<p class="searNav item" onclick="tab(1)">本人审批</p>
+                </div>
+	        </div>
+	        
+	        
+	        <div class="search">
+	            <div class="search-box">
+	                <input type="text" placeholder="请输入项目名称" id="gulpwork"/><span class="search-btn fr" onclick="sear()"><i class="search-icon"></i>搜索</span>
+	            </div>
+	        </div>
+        	<div class="conSearch">
+        		<div class="lists">
+	        		<div class="agency-list" id="active">
+	        			<ul></ul>
+	        		</div>
+        		</div>	
+        		<div class="lists">
+        			<div class="agency" id="project">
+        				<ul></ul>
+	        		</div>
+        		</div>	
+        	</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/home.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
+	<script type="text/javascript" src="js/search.js"></script>
 	<script> 
-	var actives={
+	/* var actives={
 			 template:`<div class="agency-list" id="active">
 				<div class="item-active">
 					<div class="search">
@@ -44,7 +72,7 @@
 					        <input type="text" placeholder="请输入项目名称" id="gulpwork" v-model="name"/><span class="search-btn fr" v-on:click='sears()'><i class="search-icon"></i>搜索</span>
 					    </div>
 					</div>
-			
+					
 				   	<ul>
 				      <li class="clearfix" v-for="(item,index) in datae">
 				      	<a v-bind:href="getHref(index)">
@@ -74,11 +102,10 @@
 				  var _this=this;
 				  var user=getCookie('userid')
 				  var start=0;
-				  $("#active").dropload({
+				  $("body").dropload({
 					scrollArea : window,
 					loadDownFn : function(me){
 							start=_this.dataes.length;
-						
 						axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:start,limit:10}}).then(function(response){
 							if(response.data.length!=_this.dataes.length||response.data.length>10){
 								_this.dataes=_this.dataes.concat(response.data)
@@ -110,6 +137,9 @@
 					}else{
 						 this.names=this.name
 			        }
+				},
+				shaxin:function(){
+					location.reload()
 				}
 			},
 			computed:{
@@ -136,7 +166,7 @@
 						</div>
 	
 					   	<ul>
-					      <li class="clearfix" v-for="(item,index) in datae">
+					      <li class="clearfix" v-for="(item,index) in mydate">
 					      <a v-bind:href="getHref(index)">
 					         <div class="agency-right">
 					            <div class="right-box">
@@ -157,21 +187,22 @@
 					return{
 						name:"",
 						names:"",
-						dataes:[]
+						mydate:[]
 					}
 				},
 				created:function(){
 					  var _this=this;
+					  _this.dataes==[];
 					  var user=getCookie('userid')
-					  var start = 0
-					  $("#active").dropload({
+					  var starts = 0
+					  $("body").dropload({
 						scrollArea : window,
 						loadDownFn : function(me){
-								start=_this.dataes.length;
-							
-							axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:start,limit:10}}).then(function(response){
-								if(response.data.length>10||response.data.length!=_this.dataes.length){
-									_this.dataes=_this.dataes.concat(response.data)
+								starts=_this.mydate.length;
+										
+							axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user,start:starts,limit:10}}).then(function(response){
+								if(response.data.length>10||response.data.length!=_this.mydate.length){
+									_this.mydate=_this.mydate.concat(response.data)
 								 	}else{
 								 		me.lock('up');
 						                me.lock('down')
@@ -200,6 +231,9 @@
 						}else{
 							 this.names=this.name
 				        }
+					},
+					shaxin:function(){
+						location.reload()
 					}
 				},
 				computed:{
@@ -237,7 +271,7 @@
 
 		  new Vue({
 		    router:routeres
-		  }).$mount("#app")
+		  }).$mount("#app") */
 	</script>
 </body>
 	

@@ -53,11 +53,11 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
 .examineHistory{width:100%;position:relative}
 .right-box{margin-left:15px;}
-.agency-right{float:right;width:100%}
-.list-right{float:right;margin-top:10px;width:80%;}
+.agency-right{float:right;width:100%;position:relative;}
+.list-right{float:left;margin-top:10px;margin-left:20%}
 .agency-right span.number{position:absolute;display: inline-block;width:25px;height:25px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.75em;text-align:center;vertical-align:middle;line-height: 25px}
-.agency-title{color:#3C3C3C;font-size:1em;font-style:normal}
-.agency-right p{width:100%;font-size:0.875em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em}
+.agency-right p{width:100%;font-size:1em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
 /*消息弹窗*/
 .popup{display: block;width:100%;height:100%}
@@ -69,7 +69,8 @@ table{border-collapse:collapse;border-spacing:0;}
 .popup-content p.btn a{padding:6px 20px;border-radius:5px;margin:0 5px;text-decoration:none}
 .popup-content p.btn a.cance{border:1px solid #E85C38;color:#E85C38}
 .popup-content p.btn a.ensure{border:0;color:#fff;background-color:#E85C38}
-.layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:60%;max-width: 500px}
+.layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:60%;max-width:500px;}
+.layui-m-layer2{width:60%;height:50%;overflow-y:auto;}
 /*流程查询*/
 .follow-tab,.project-tab{display: block;width:100%;height:3em;border-top:1px solid #F0F0F0;border-bottom:1px solid #F0F0F0;background-color:#fff}
 .follow-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
@@ -79,7 +80,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-right p.follow-present span{display: inline-block;width:7em}
 .agency-right span.arrow{position:absolute;display: inline-block;color:#8C8C8C;top:28px;right: 8px;text-align:center;vertical-align:middle;background:url(/images/tcmp-icon.png)no-repeat 0 -370px;height:20px;width:10px}
 .agency-right p.follow-person{display: inline-block;position: relative}
-.agency-right p.follow-person span{color:#333;padding-right: 8px;text-align}
+.agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;text-align}
 .agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:3px 10px;border:1px solid #E75732;border-radius:5px}
 /*项目查询*/
 .project-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
@@ -92,7 +93,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .search-box .search-btn .search-icon{display: inline-block;width:20px;height:20px;vertical-align:middle;background: url(/images/tcmp-icon.png) no-repeat -70px -247px;margin-right:5px}
 .lucre-name{border:1px solid #EDEDED;display: inline-block;padding:5px}
 .lucre-name p{color:#E75732}
-.lucre-name p.project-price{font-size:1em;font-weight:bold;}
+.lucre-name p.project-price{font-size:1em;font-weight:bold;line-height:2em}
 .lucre-name p.project-lucre{font-size:0.75em}
 /*项目详情*/
 .project-detail{display:block;width:100%;margin-top:10px;border-top:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF}
@@ -100,20 +101,20 @@ table{border-collapse:collapse;border-spacing:0;}
 .project-content li{display: block;padding:0.8em 0.875em;border-top:1px solid #EFEFEF;font-size:0.875em;color:#A3A3A3}
 .project-content li span{color:#000}
 .project-content li input{width:95%;font-size:1em;color:#333;padding:2px;outline:none;border:0}
-.search-container{display:block;width:100%;text-align:center}
+.search-container{display:block;width:100%;text-align:center;position:relative}
 .search-button{display: inline-block;width:70%;max-width:500px;border-radius:5px;text-align:center;background-color:#E75732;color:#fff;height:2.5em;line-height:2.5em;border:0;margin-top:3em} 
 /*流程审批*/
 .examine{display: block;width:100%;height:100%;position:relative;max-width:746px;margin:0 auto;}
 .examine-content{display:block;width:100%;height:auto;}
 .examine-img{position:absolute;display: block;z-index:-5}
-.examine-img img{width:100%}
+.examine-img img{width:100%;height:100%}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1em 1em}
-.examine-title{font-size:1.5em;color:#fff}
-.examine-node li{display: block;width:100%;line-height:1.8em;color:#fff;font-size:0.875em}
+.examine-title{font-size:1.2em;color:#fff;height:2.3em}
+.examine-node li{display: block;width:100%;line-height:1.6em;color:#fff;font-size:0.87em}
 .examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
-.examine-list{display: block;margin-top:10px;width:100%;}
+.examine-list{display: block;width:100%;}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
-.examine-item span{font-size:3em;color:#DBDBDB;text-align:center;cursor:pointer}
+.examine-item span{font-size:2em;color:#DBDBDB;text-align:center;cursor:pointer}
 .examine-item span.status-text{font-size:1em;padding-right:1em;color:#7B7B7B}
 .examine-item .more-close{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat 8px -370px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
 .examine-item .more-open{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat -72px -270px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
@@ -150,8 +151,9 @@ table{border-collapse:collapse;border-spacing:0;}
 .appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center}
 .item-mark .right{float:right;line-height:60px;}
 .item-mark button{border:0px;background:#E75732;color:#fff;margin-right:5px;padding:3px 5px;border-radius:5px;position:relative}
-.content{width:100%;max-height:300px;overflow-y:scroll;display:block}
+.content{width:100%;overflow-y:scroll;display:block}
 .content ul li{display:flex;line-height:44px;border-bottom:1px solid #ccc;justify-content:space-between;margin: 0 10px;padding:0 5px;}
+.content ul li:first-child{border-top:1px solid #ccc}
 .bg{color:#f00}
 
 .searchList{width:100%;position:relative}
@@ -159,6 +161,17 @@ table{border-collapse:collapse;border-spacing:0;}
 
 select{margin:5px;}
 strong{font-style:normal;margin-left:5%;float: left;}
-.await-btn{border:0px solid; background:#FF9900;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
+.await-btn{border:0px solid; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
 .option{line-height:50px;text-align:center}
 .router-link-active{color:#FFC600}
+.langeUse{width:100%;color:#9B9B9B;font-weight:normal;display:flex;justify-content:space-between;line-height:3em;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;}
+.handle{padding-left:0.625em}
+.often{padding-right:0.625em}
+.receiv{vertical-align: middle;}
+.personUser{display:block;width:7em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.back{background:#FFE9C5}
+.cur{height: 42px;color: #ff3c3c;}
+.content .item{display: -webkit-box;display: -webkit-flex;display: -ms-flexbox;display: flex;-ms-flex-align:center;-webkit-box-align:center;box-align:center;-webkit-align-items:center;align-items:center;padding:3.125%;color: #333;text-decoration: none;}
+#tab-nav{display:flex;justify-content:space-around;}
+.searNav{line-height:3em}
+.proList{display:inline-block;width:100%}

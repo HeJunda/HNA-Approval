@@ -22,7 +22,8 @@
           <li>项目编号<span class="fr">{{dataes.projectcode}}</span></li>
           <li>项目部门<span class="fr">{{dataes.dptname}}</span></li>
           <li>项目类型<span class="fr">{{dataes.projecttype}}</span></li>
-          <li>项目收益<span class="fr"></span></li>
+          <li>项目收益<span class="fr">{{yield}}%</span></li>
+          <li>项目经理<span class="fr">{{dataes.trustmanage}}</span></li>
           <li>成立时间<span class="fr">{{dataes.setupdate}}</span></li>
           <li>结束时间<span class="fr">{{dataes.enddate}}</span></li>
           <li>信托/投资规模（元）<span class="fr">{{dataes.trustscale}}</span></li>
@@ -39,19 +40,19 @@
 		el:"#app",
 		data:function(){
 			return{
-				dataes:[]
+				dataes:[],
+				yield:[]
 			}
 		},
 		created:function(){
 			 var _this=this;
 			 var user=getCookie('userid')
 			 var code=localurl('projectcode')
-			 console.log(user)
-			 console.log(code)
+			 var maxyield=localurl('maxyield')
+			 console.log(maxyield)
+			 _this.yield=maxyield
 			 axios.get("/project/getProjectDetail",{params:{userid:user,projectcode:code}}).then(function(response){
 				  console.log(response.data)
-				  //var stres=[];
-				  //stres.push(response.data)
 				  _this.dataes=response.data[0];
 				  console.log(_this.dataes)
 			 }).catch(function(error){

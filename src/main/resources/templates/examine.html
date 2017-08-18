@@ -31,14 +31,11 @@
               </div>  
             </div>
             <div class="examine-list">
-                 <h3 class="examine-item">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}" v-on:click="showDiv($event)"></span></h3>
+                 <h3 class="examine-item"  v-on:click="showDiv($event)">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}"></span></h3>
                  <ul class="examine-details" v-show="showDom" style="display: none">
-                    <li>流程ID<span class="fr">{{dates.instanceid}}</span></li>
                     <li>流程标题<span class="fr">{{dates.flowname}}</span></li>
                     <li>流程名称<span class="fr">{{dates.processname}}</span></li>
-                    <li>发起人ID<span class="fr">{{dates.starteruserid}}</span></li>
                     <li>发起时间<span class="fr">{{dates.starttime}}</span></li>
-                    <li>节点名称<span class="fr">{{dates.nodename}}</span></li>
                     <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
                     <div class="tems">
                     	<ul>
@@ -48,8 +45,9 @@
                  </ul>
                 
                  <p class="space"></p>
-                 <h3 class="examine-item">历史审批记录</h3>
-                 <div id="history">
+                 <!-- <h3 class="examine-item">历史审批记录</h3> -->
+                 <h3 class="examine-item" v-on:click="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
+                 <div id="history" v-show="showHis">
 	                 <ul class="examine-history">
 	                     <li class="history" v-for="msg in histry">
 	                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
@@ -66,13 +64,12 @@
                  </div>
                  <p class="space"></p>
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
-                 <h3 class="examine-item person-item" style="display:none">人员选择<span class="fr" v-on:click="showUser">···</span><span class="status-text fr"></span></h3>
-	        	 
+                 <h3 class="examine-item person-item" style="display:none" v-on:click="showUser">人员选择<span class="fr">···</span><span class="status-text personUser fr">{{personUser}}</span></h3>
             </div>
           </div>
+          <p class="space"></p>
           <div class="search-container">
-          	   <strong class="langeUse" v-on:click="lane()">常用语:</strong>
-	        	 
+          	   <div class="langeUse"><span class="handle">处理意见</span><span class="often" v-on:click="lane()">选择常用语</span></div>
                <textarea class="examine-opinion" placeholder="请填写处理意见" v-model="opinion" v-on:focus="focus()" name="sele" id="sele" required="required"></textarea>
           	   <input class="search-button" v-on:click="submit()" type="submit" value="提交" />
                <!-- <button class="search-button" v-on:click="submit()">提交</button> -->
@@ -96,11 +93,11 @@
           </div>
         </div>
         <!-- 选择人 -->
-          <div class="layui-m-layer layui-m-layer1" v-show="showuser" style="display:none">
+          <div class="layui-m-layer" v-show="showuser" style="display:none">
           <div class="layui-m-layershade" v-on:click="showUser()"></div>
           <div class="layui-m-layermain">
             <div class="layui-m-layersection">
-              <div class="layui-m-layerchild">
+              <div class="layui-m-layerchild layui-m-layer2">
                 <div class="layui-m-layercont">
                   <div class="handle-status clearfix">
                   	<div class="mark">
@@ -109,7 +106,6 @@
 			          <a href="javascript:void(0)" class="icon right">
 			          	<button class="btn" v-on:click="showok()">确定</button>
 			          </a>
-			          
 			      	</header>
 			      	<div class="content">
 			      		<ul>
@@ -127,7 +123,7 @@
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.js"></script>	
+	<script type="text/javascript" src="js/lib/home.js"></script>	
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/iscroll.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>

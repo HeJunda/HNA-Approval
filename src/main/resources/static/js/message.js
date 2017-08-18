@@ -14,14 +14,11 @@ var vm=new Vue({
 					start=_this.dataes.length;
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 					if(response.data.length>0){
-						console.log(response.data.length)
 						_this.dataes=_this.dataes.concat(response.data)
 				 	}else{
-				 		console.log(123)
 				 		me.lock('up');
 		                me.lock('down')
 		                me.noData(true);
-		                $('.dropload-down').remove();
 					}
 					setTimeout(function(){
 	                    me.resetload();
@@ -40,7 +37,7 @@ var vm=new Vue({
 			      '消息提醒',
 			      'background-color: #FFC800; color:#fff;'
 			    ],
-			    content:this.data[index].content
+			    content:this.dataes[index].content
 			});
 		}
 	}

@@ -1,4 +1,4 @@
-var follow=new Vue({
+/*var follow=new Vue({
 	el:'#app',
 	data:{
 		dataes:[],
@@ -55,4 +55,5 @@ var follow=new Vue({
 		}).catch(function(error){
 	    console.log(error);
 	});
-  });    
+  });    */
+

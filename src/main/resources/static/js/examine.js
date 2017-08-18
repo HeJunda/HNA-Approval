@@ -5,6 +5,7 @@ var vm=new Vue({
       showLayer:false,
       showuser:false,
       showLange:false,
+      showHis:true,
       digital:{},
       ObjInfo:{},
       temes:[],
@@ -23,6 +24,7 @@ var vm=new Vue({
       parms:[],
       noname:'',
       personStr:'',
+      personUser:'',
       moom:[],
       add:'',
       language:[]
@@ -49,44 +51,24 @@ var vm=new Vue({
 		var _this=this;
 		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 			_this.digital=response.data[0];
-			//console.log(_this.digital)
-			//_this.actionlist=JSON.parse(response.data.actionlist);
-			//console.log("@@@@@"+response.data[0].instanceid);
 			_this.add=response.data[0].instanceid;
-			vm.showHistory();
+			var instance=_this.add;
+			var user=getCookie('userid');
+			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+				_this.histry=response.data
+				var att=_this.histry[0].attach
+				_this.annex=JSON.parse(att);
+			}).catch(function(error){
+			    console.log(error);
+			});
+			
 		}).catch(function(error){
 		    console.log('服务错误');
 		});		
 	},
 	computed:{
 		showHistory:function(){
-			$('.dropload-down').remove();
 			var _this=this;
-			var instance=_this.add;
-			var user=getCookie('userid');
-			var start=0;
-			$("#history").dropload({
-					scrollArea : window,
-					loadDownFn : function(me){
-						start=_this.histry.length;
-						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:start,limit:10,instanceid:instance}}).then(function(response){
-							if(response.data.length>0){
-							_this.histry=_this.histry.concat(response.data)
- 							var att=_this.histry[0].attach
- 							_this.annex=JSON.parse(att);
-						 	}else{
-			                	me.lock();
-			                   	me.noData();
-							}
-							setTimeout(function(){
-			                    me.resetload();
-			                },1000);
-						}).catch(function(error){
-						    console.log(error);
-						    //me.resetload();
-						});
-					}
-			})
 		}
 	},
 	methods:{
@@ -110,6 +92,9 @@ var vm=new Vue({
 			});
 				this.showDom=!this.showDom;
 			},
+		showNode:function(){
+			this.showHis=!this.showHis 
+		},
 		showTip:function(){
 			this.showLayer=!this.showLayer;
 			var _this=this;
@@ -193,8 +178,6 @@ var vm=new Vue({
 		showUser:function(parame){
 			this.showuser=!this.showuser;
 			var taskId=this.digital.taskid;
-			//var parames=parame.value;
-			//var paramename=parame.nodename;
 			var parm=this.parms.type;
 			var names=this.parms.value;
 			var instance=this.digital.instanceid;
@@ -206,9 +189,12 @@ var vm=new Vue({
 				_this.person=response.data;
 				console.log(_this.person)
 				var personList=[];
+				var personName=[];
 				_this.person.forEach(function(i,index,array){
-					var arrUser=i.userid
+					var arrUser=i.userid;
+					var arrName=i.username;
 					personList.push(arrUser);
+					personName.push(arrName);
 				})
 				
 				$(".content ul").on("click",$(".content li"),function(ev){
@@ -218,13 +204,17 @@ var vm=new Vue({
 						if ($(target).children().hasClass('bg')) {
 							$(target).children('.bg').remove();
 							$(target).removeAttr('data-id');
+							$(target).removeAttr('data-name')
+							$(target).removeClass('back')
 						}else{
 							var lis=document.createElement('span')
 							lis.setAttribute("class","bg");
-							lis.innerHTML="√";
+							lis.innerHTML="<img class='receiv' src='images/receiving.png'/>";
+							target.setAttribute('class','back')
 							if(target.nodeName.toLowerCase() == "li"){
 								var ind=$(".content li").index($(target));
 								$(target).append(lis).attr('data-id',personList[ind]);
+								$(target).append(lis).attr('data-name',personName[ind]);
 							}
 						}
 					}
@@ -234,17 +224,24 @@ var vm=new Vue({
 			});
 		},
 		/*点击确定*/
-		showok:function(){
+		showok:function(){		
 			this.showuser=!this.showuser;
 			var _this=this;
 			var lis=$(".content li")
 			var personArr=[];
+			var personName=[];
 			for(var i=0;i<lis.length;i++){
 				if(lis.eq(i).attr('data-id')!=undefined){
 					personArr.push(lis.eq(i).attr('data-id'));
 				}
+				if(lis.eq(i).attr('data-name')!=undefined){
+					personName.push(lis.eq(i).attr('data-name'));
+				}
 			}
-			_this.personStr=personArr.join(",")
+			console.log("___%"+personName);
+			_this.personStr=personArr.join(',')
+			_this.personUser=personName.join(',')
+			
 			//console.log(_this.personStr)
 			if($(".bg").length=="0"){
 				layer.open({
@@ -325,7 +322,7 @@ var vm=new Vue({
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    skin: 'msg',
 					    time: 3 
-					  });
+					});
 				}
 			}).catch(function(response){
 				console.log(response)

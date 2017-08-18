@@ -14,7 +14,7 @@ var vm=new Vue({
 			var _this=this;
 			var start = 0;
 			
-			$("#clearList").dropload({
+			$("body").dropload({
 				scrollArea : window,
 				loadDownFn : function(me){
 					start=_this.datas.length;
@@ -26,7 +26,6 @@ var vm=new Vue({
 							me.lock('up');
 			                me.lock('down')
 			                me.noData(true);
-			                $('.dropload-down').remove();
 						}
 						setTimeout(function(){
 		                    me.resetload();

@@ -18,18 +18,18 @@
 	        <h3 class="approve">消息列表</h3>   
 	    </header>
 		<div class="container paddinTop" id="message">
-		<div>
-            <ul class="msg-list">
-           		<li class="clearfix" v-for="(item,index) in dataes" v-on:click="add(index)">
-                 	<div class="agency-right">
-                   		<div class="right-box">
-	                 		<h3 class="agency-title">{{item.title}}</h3>
-	                 		<p>{{item.content}}</p>
-	                 		<span class="time fr">{{item.sendDate}}</span>
-                   		</div>
-                	</div>
-              	</li> 
-           	</ul>
+			<div class="agency-list AgList">
+	            <ul class="msg-list">
+	           		<li class="clearfix" v-for="(item,index) in dataes" v-on:click="add(index)">
+	                 	<div class="agency-right">
+	                   		<div class="right-box">
+		                 		<h3 class="agency-title">{{item.title}}</h3>
+		                 		<p>{{item.content}}</p>
+		                 		<span class="time fr">{{item.sendDate}}</span>
+	                   		</div>
+	                	</div>
+	              	</li> 
+	           	</ul>
            	</div>	
 		</div>
 	</div>
@@ -37,7 +37,7 @@
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/lib/jquery.js"></script>
+	<script type="text/javascript" src="js/lib/home.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/message.js"></script>
 </body>

@@ -8,7 +8,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>渤海信托</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
-	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -31,11 +30,7 @@
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
   	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-  	<script type="text/javascript" src="js/lib/jquery.js"></script>
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script type="text/javascript" src="js/lib/iscroll.js"></script>
-  	<script type="text/javascript" src="js/lib/layer.js"></script>
-  	<script type="text/javascript" src="js/lib/dropload.js"></script>
  	<script type="text/javascript">
  	var await={
  			template:`<div class="agency-list" id="await">
@@ -45,8 +40,6 @@
 					      		<a :href="getHref(item.taskid)">
 					      			<div class="agency-right">
 					            		<div class="right-box">
-					            			
-					           				<p class="follow-person">是否成功：<span class="fr">{{item.taskname}}</span></p>
 					           				<p class="follow-person">发送人：<span class="fr">{{item.sendername}}</span></p>
 					           				<p class="follow-person">创建时间：<span class="fr">{{item.createtime}}</span></p>
 					           				<p class="follow-person">流程发起部门：<span class="fr">{{item.startorg}}</span></p>
@@ -64,34 +57,17 @@
 						}
 					},
 					created:function(){
-						$('.dropload-down').remove();
 						var _this=this;
 						var user=getCookie('userid')
-						var start=0;
-						$("#await").dropload({
-							scrollArea : window,
-							loadDownFn : function(me){
-								start=_this.dataes.length;
-								axios.get("/workflow/getSplitRead",{params:{userid:user,start:start,limit:10,hasread:0}}).then(function(response){
-									if(response.data.length>0){
-										_this.dataes=_this.dataes.concat(response.data)
-									 	}else if(response.data.length==0){
-						                	me.lock();
-						                   	me.noData();
-										}
-										setTimeout(function(){
-						                    me.resetload();
-						                },1000);
-								}).catch(function(error){
-								 	console.log(error);
-									me.resetload();
-								});
-							}
-						})
+						axios.get("/workflow/getSplitRead",{params:{userid:user,start:0,limit:10000,hasread:0}}).then(function(response){
+							_this.dataes=response.data
+						}).catch(function(error){
+						 	console.log(error);
+						});
 					},
 					methods:{
 						getHref:function(data){
-				               return '/followAwait.html?taskid='+data;
+				            return '/followAwait.html?taskid='+data;
 				        }
 					}
  	}
@@ -103,7 +79,6 @@
 			      		<a v-bind:href="getHref(item.instanceid)">
 			      			<div class="agency-right">
 			            		<div class="right-box">
-			           				<p class="follow-person">是否成功：<span class="fr">{{item.taskname}}</span></p>
 			           				<p class="follow-person">发送人：<span class="fr">{{item.sendername}}</span></p>
 			           				<p class="follow-person">创建时间：<span class="fr">{{item.createtime}}</span></p>
 			           				<p class="follow-person">流程发起部门：<span class="fr">{{item.startorg}}</span></p>
@@ -111,7 +86,6 @@
 			           				<p class="follow-person">知会处理人：<span class="fr">{{item.recivertime}}</span></p>
 			           				<p class="follow-person">知会意见：<span class="fr">{{item.noticemsg}}</span></p>
 			           			</div>
-			           				
 			           		</div>
 			           	</a>	
 			      		</li>
@@ -124,33 +98,13 @@
 				}
 			},
 			created:function(){
-				$('.dropload-down').remove();
 				var _this=this;
 				var user=getCookie('userid')
-				var start=0;
-				$("#already").dropload({
-					scrollArea : window,
-					loadDownFn : function(me){
-							start=_this.dataes.length;
-						
-						axios.get("/workflow/getSplitRead",{params:{userid:user,start:start,limit:10,hasread:1}}).then(function(response){
-							if(response.data.length>0){
-								_this.dataes=_this.dataes.concat(response.data)
-							 	}else{
-							 		me.lock('up');
-					                me.lock('down')
-					                me.noData(true);
-					                $('.dropload-down').remove();
-								}
-								setTimeout(function(){
-				                    me.resetload();
-				                },1000);
-						}).catch(function(error){
-						 	console.log(error);
-							me.resetload();
-						});
-					}
-				})
+				axios.get("/workflow/getSplitRead",{params:{userid:user,start:0,limit:10000,hasread:1}}).then(function(response){
+					_this.dataes=response.data
+				}).catch(function(error){
+				 	console.log(error);
+				});
 			},
 			methods:{
 				getHref:function(data){
