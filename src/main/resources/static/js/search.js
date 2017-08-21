@@ -48,6 +48,12 @@ function pullLoadData(){
 					                           +'</li>'
 		
                     	   }
+                    	   }else{
+                        	   console.log(123)
+                        	   me.lock('down');
+                        	   me.noData();
+
+                           }
                     	// 为了测试，延迟1秒加载
                            setTimeout(function(){
                                $('.agency-list').find('ul').append(ahtml);
@@ -59,13 +65,6 @@ function pullLoadData(){
                                // 每次数据加载完，必须重置
                                me.resetload();
                            },1000);
-                          
-                       }else if(data.length<=0||data==null){
-                    	   console.log(123)
-	   				 		me.lock('up');
-	   		                me.lock('down')
-	   		                me.noData(true);
-                       }
                     },
                     error: function(xhr, type){
                         //alert('Ajax error!');

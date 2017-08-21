@@ -12,7 +12,7 @@ function tab(index){
 tab(0);
 function pullLoadData(){
 	
-    $('body').dropload({
+    $('#active').dropload({
         scrollArea : window,
         loadDownFn : function(me){
                 $.ajax({
@@ -26,10 +26,8 @@ function pullLoadData(){
                     dataType: 'json',
                     success: function(data){
                        var ahtml = "";
-                     
                        if(data.length>0){
                     	   for(var i=0;i<data.length;i++){
-                    		   console.log(data)
                     		   ahtml=  ahtml+ '<li class="clearfix">'
 					  		                        +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
 								                        +'<div class="agency-left">'
@@ -47,26 +45,22 @@ function pullLoadData(){
 							                        +'</a>'
 					   		                  +'</li>'
                     	   		}
-	                       }else if(data.length<=0){
-	                    	   me.lock();
-	                           me.noData();
-	                       }
-                           setTimeout(function(){
-                                $('.agency-list').find('ul').append(ahtml);
-                                var name=[]
-                                for(var i=0;i<data.length;i++){
-                                	name=data[i].dptname
-                                	//console.log(name)
-                                	keywork.push(name)
-                                	//console.log(keywork)
-                                }                                
-                            me.lock();
- 	                        me.noData();
-                            me.resetload();
-                            },1000);
-                       }
-                    },
-                    error: function(xhr, type){
+                           }else if(data.length==0){
+                       			me.lock('down');
+                       			me.noData();
+                       		}
+                       		setTimeout(function(){
+                       			$('.agency-list').find('ul').append(ahtml);
+                       			var name=[]
+                       			for(var i=0;i<data.length;i++){
+                       				name=data[i].dptname
+                       				keywork.push(name)
+                       			}     
+                       			me.resetload();
+                       		},1000);
+                       		
+                    	},
+                    	error: function(xhr, type){
                         //alert('Ajax error!');
                         me.resetload();
                     }

@@ -10,15 +10,17 @@ var vm=new Vue({
 		$("body").dropload({
 			scrollArea : window,
 			loadDownFn : function(me){
-				var result = [];
-					start=_this.dataes.length;
+				start=_this.dataes.length;
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 					if(response.data.length>0){
 						_this.dataes=_this.dataes.concat(response.data)
 				 	}else{
+				 		console.log(123)
 				 		me.lock('up');
 		                me.lock('down')
 		                me.noData(true);
+		                console.log(me.lock())
+		                console.log(me.noData())
 					}
 					setTimeout(function(){
 	                    me.resetload();
