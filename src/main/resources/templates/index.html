@@ -12,7 +12,7 @@
 <body>
 	<div id="app" class="root">
     <header class="header cleanF">
-        <span class="back"></span>
+        <!-- <span class="back"></span> -->
         <h3 class="approve">移动审批</h3>   
     </header>
     <div class="container paddinTop">
@@ -59,21 +59,23 @@
 			date:{}
 		},
 		created:function(){
-			document.cookie = 'userid='+'fei-chen3';
-			var user=getCookie('userid')
-			/* var token=window.native.getSsoToken()
-			alert(token)
-			var _this=this
+// 			document.cookie = 'userid='+'fei-chen3';
+// 			var user=getCookie('userid')
+			var token=window.hna.SsoToken;
+			var _this=this;
 			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-				alert(response)
 				_this.date=response.data.UserAccount;
-				alert(_this.date);
 				document.cookie = 'userid'+'='+_this.date;
 				var user=getCookie('userid')
-				alert(user)
+				if(_this.data==''){
+					layer.open({
+					    content: '您还未登录，请先登录。'
+					    ,btn: '我知道了'
+					});
+				}
 			}).catch(function(error){
 			    console.log(error);
-			});*/
+			});
 			
 		}
 	})

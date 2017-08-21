@@ -111,7 +111,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1.2em 1em}
 .examine-title{font-size:1em;color:#fff;height:2.3em}
 .examine-node li{display: block;width:100%;line-height:1.6em;color:#fff;font-size:0.625em}
-.examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
+.examine-node li span{display: inline-block;width:25%;color:#fff;font-size:0.875em;text-align:right}
 .examine-list{display: block;width:100%;margin-top:4%}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
 .examine-item span{font-size:2em;color:#DBDBDB;text-align:center;cursor:pointer}
