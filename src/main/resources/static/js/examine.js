@@ -176,6 +176,9 @@ var vm=new Vue({
 		},
 		/*点击选人*/
 		showUser:function(parame){
+			$("content li").removeClass('bg');
+			$(".content ul").off("click",'li');
+			this.personStr=[]
 			this.showuser=!this.showuser;
 			var taskId=this.digital.taskid;
 			var parm=this.parms.type;
@@ -187,7 +190,6 @@ var vm=new Vue({
 			var user=getCookie('userid')
 			axios.get('/workflow/selectPerson',{params:{userid:user,start:0,taskid:taskId,actionvalue:names,nodename:noname,actiontype:parm,instanceid:instance}}).then(function(response){
 				_this.person=response.data;
-				console.log(_this.person)
 				var personList=[];
 				var personName=[];
 				_this.person.forEach(function(i,index,array){
@@ -197,52 +199,43 @@ var vm=new Vue({
 					personName.push(arrName);
 				})
 				
-				$(".content ul").on("click",$(".content li"),function(ev){
-					var ev = ev || window.event;
-					var target = ev.target || ev.srcElement;
-					if(target.nodeName.toLowerCase() == "li"){
-						if ($(target).children().hasClass('bg')) {
-							$(target).children('.bg').remove();
-							$(target).removeAttr('data-id');
-							$(target).removeAttr('data-name')
-							$(target).removeClass('back')
-						}else{
-							var lis=document.createElement('span')
-							lis.setAttribute("class","bg");
-							lis.innerHTML="<img class='receiv' src='images/receiving.png'/>";
-							target.setAttribute('class','back')
-							if(target.nodeName.toLowerCase() == "li"){
-								var ind=$(".content li").index($(target));
-								$(target).append(lis).attr('data-id',personList[ind]);
-								$(target).append(lis).attr('data-name',personName[ind]);
-							}
-						}
+				$(".content ul").on("click",'li',function(){
+					
+					var ind=$(this).index()
+					if($(this).hasClass('bg')){
+						$(this).removeClass('bg')
+						$(this).removeAttr('data-id')
+					}else{
+						$(this).addClass('bg')
+						$(this).attr('data-id',personList[ind])
 					}
 				})
+				
 			},function(err){
 				console.log(err)
 			});
 		},
 		/*点击确定*/
-		showok:function(){		
+		showok:function(){
 			this.showuser=!this.showuser;
+			this.personUser='';
 			var _this=this;
-			var lis=$(".content li")
+			
+			var lis=$(".content li");
 			var personArr=[];
 			var personName=[];
 			for(var i=0;i<lis.length;i++){
+				if(lis.eq(i).hasClass('bg')){
+					personName.push(lis.eq(i).text());
+				}
 				if(lis.eq(i).attr('data-id')!=undefined){
 					personArr.push(lis.eq(i).attr('data-id'));
 				}
-				if(lis.eq(i).attr('data-name')!=undefined){
-					personName.push(lis.eq(i).attr('data-name'));
-				}
 			}
-			console.log("___%"+personName);
-			_this.personStr=personArr.join(',')
-			_this.personUser=personName.join(',')
+			_this.personStr=personName
+			_this.personUser=personArr.join(',')
+			console.log(_this.personUser)
 			
-			//console.log(_this.personStr)
 			if($(".bg").length=="0"){
 				layer.open({
 				    content: '请添加选择人',
@@ -251,6 +244,7 @@ var vm=new Vue({
 				    time: 1
 				});
 			}
+			lis.removeClass('bg')
 		},
 			
 		/*常用语*/
@@ -264,10 +258,8 @@ var vm=new Vue({
     				html+='<option class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</option>'
     			});
     				var L=layer.open({
-    					type: 1,
-    					anim: 'up',
-    					style: 'position:fixed; bottom:0; left:0; width: 100%; height: 200px; padding:10px 0; border:none;box-shadow: 0;',
-    					content: html+"<p class='option'>取消</p>"
+    					style: 'width: 80%;height: 240px;border-bottom: 1px solid #ccc',
+    					content: html
     			})
     			$(document).on("click","option",function(){  
     				var value=$(this).val()
@@ -300,7 +292,7 @@ var vm=new Vue({
 			var comebacks=this.comeback;
 			var formtypes=this.digital.formtype;
 			var taskId=this.digital.taskid;
-			var personStrs=this.personStr;
+			var personStrs=this.personUser;
 			var nonames=this.noname;
 			console.log(nonames)
 			var user=getCookie('userid')
