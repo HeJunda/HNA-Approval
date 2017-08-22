@@ -59,9 +59,9 @@
 			date:{}
 		},
 		created:function(){
- 			document.cookie = 'userid='+'6666';
- 			var user=getCookie('userid')
-			/* var token=window.hna.SsoToken;
+//  			document.cookie = 'userid='+'6666';
+//  			var user=getCookie('userid')
+			var token=window.hna.SsoToken;
 			var _this=this;
 			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
 				_this.date=response.data.UserAccount;
@@ -75,7 +75,7 @@
 				}
 			}).catch(function(error){
 			    console.log(error);
-			}); */
+			});
 			
 		}
 	})

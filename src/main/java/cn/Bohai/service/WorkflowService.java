@@ -218,7 +218,6 @@ public class WorkflowService {
 	    		@SuppressWarnings("rawtypes")
 	    		Map map = resultListMap.get(i);
 	    		
-	    		
 	    		//获取附件信息
 	    		String attachString = (String) map.get("attach");
 	    		if(attachString == null || attachString.equals("") || attachString.equals("[]")){
@@ -247,8 +246,8 @@ public class WorkflowService {
 	    			map.put("attach", attachMapString);
 	    		}
 	    		
-	    		
-	    		
+	    		//获取基本信息类型
+	    		String formtype = (String) map.get("formtype");
 	    		
 	    		//获取基本信息
 	    		String flowinfo = (String) map.get("flowinfo");
@@ -256,7 +255,21 @@ public class WorkflowService {
 	    			
 	    			map.put("flowinfo", "");
 	    			
-	    		} else {
+	    		} else if( formtype.equals("23")){
+	    			
+	    			JSONArray flowInfoJsonArray = JSONArray.parseArray(flowinfo);
+	    			Map<String,String> flowInfoMap = new HashMap<String,String>();
+	    			for (int j = 0; j < flowInfoJsonArray.size(); j++) {
+	    				JSONObject flowInfoJsonObject = (JSONObject) flowInfoJsonArray.get(i);
+	    				String newKey = flowInfoJsonObject.getString("fieldname");
+	    				String newValue = flowInfoJsonObject.getString("defvalue");
+	    				flowInfoMap.put(newKey, newValue);
+					}
+	    			String flowBaseInfoString = JSON.toJSONString(flowInfoMap);
+    				map.put("flowinfo", flowBaseInfoString);
+	    			
+	    		} else if( formtype.equals("11") || formtype.equals("2")){
+	    			
 	    			flowinfo = flowinfo.replace("\\\\", "");
 	    			JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
 	    			String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
@@ -265,6 +278,26 @@ public class WorkflowService {
 	    			} else {
 	    				//去掉多余数字
 	    				Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+	    				Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    				for (String key : baseInfoMap.keySet()) {
+	    					String newkey = key.substring(key.indexOf('|') + 1);
+	    					Object newValue = baseInfoMap.get(key);
+	    					baseInfoMapShow.put(newkey, newValue);
+	    				}
+	    				String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+	    				map.put("flowinfo", flowBaseInfoString);
+	    			}
+	    			
+	    		} else {
+	    			
+	    			flowinfo = flowinfo.replace("\\\\", "");
+//	    			JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
+//	    			String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
+	    			if (flowinfo == null || flowinfo.equals("")) {
+	    				map.put("flowinfo", "");
+	    			} else {
+	    				//去掉多余数字
+	    				Map<String,Object> baseInfoMap = JSON.parseObject(flowinfo, Map.class);
 	    				Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
 	    				for (String key : baseInfoMap.keySet()) {
 	    					String newkey = key.substring(key.indexOf('|') + 1);
