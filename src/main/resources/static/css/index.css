@@ -109,10 +109,10 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-img{position:absolute;display: block;z-index:-5}
 .examine-img img{width:100%;height:100%}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1.2em 1em}
-.examine-title{font-size:1em;color:#fff;height:2.3em}
-.examine-node li{display: block;width:100%;line-height:1.6em;color:#fff;font-size:0.625em;white-space:nowrap;}
+.examine-title{font-size:1.2em;color:#fff;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;}
+.examine-node li{display: block;width:100%;line-height:1.6em;color:#fff;font-size:0.825em;white-space:nowrap;}
 .examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
-.examine-list{display: block;width:100%;margin-top:4%}
+.examine-list{display: block;width:100%;}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
 .examine-item span{font-size:2em;color:#DBDBDB;text-align:center;cursor:pointer}
 .examine-item span.status-text{font-size:1em;padding-right:1em;color:#7B7B7B}
@@ -162,7 +162,7 @@ table{border-collapse:collapse;border-spacing:0;}
 select{margin:5px;}
 strong{font-style:normal;margin-left:5%;float: left;}
 .await-btn{border:0px solid; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
-.option{line-height:50px;text-align:center;border-bottom: 1px solid #ccc;}
+.option{line-height:44px;text-align:center;border-bottom: 1px solid #ccc;}
 .router-link-active{color:#FFC600}
 .langeUse{width:100%;color:#9B9B9B;font-weight:normal;display:flex;justify-content:space-between;line-height:3em;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;}
 .handle{padding-left:0.625em;color:#333}
@@ -178,7 +178,7 @@ strong{font-style:normal;margin-left:5%;float: left;}
 .btn{line-height:60px}
 .xuanz{width:100%;display:flex;flex-wrap: wrap;}
 .perName{width: 21%;text-align: center; line-height: 30px;background:#E75732;border-radius: 20px;margin: 5px;color: #fff;font-size:0.825em;}
-
+select{border:0px solid}
 
 
 

@@ -255,20 +255,16 @@ var vm=new Vue({
     			console.log(response.data)
     			var html='';
     			$.each(response.data,function(i,val){
-    				html+='<option class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</option>'
+    				html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
     			});
-    				var L=layer.open({
-    					style: 'width: 80%;height: 240px;border-bottom: 1px solid #ccc',
-    					content: html
+				var L=layer.open({
+					style: 'width: 80%;height: 240px;border-bottom: 1px solid #ccc',
+					content: html
     			})
-    			$(document).on("click","option",function(){  
-    				var value=$(this).val()
-    				console.log(value)
+    			$(document).on("click","div",function(){
+    				var value=$(this).text()
     				$("#sele").val(value)
-    				_this.opinion=value;
-    				layer.close(L)
-    			}); 
-				$(document).on("click","p",function(){  
+    				_this.div=value;
     				layer.close(L)
     			}); 
         		
