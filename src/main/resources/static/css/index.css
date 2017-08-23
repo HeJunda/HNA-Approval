@@ -70,7 +70,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .popup-content p.btn a.cance{border:1px solid #E85C38;color:#E85C38}
 .popup-content p.btn a.ensure{border:0;color:#fff;background-color:#E85C38}
 .layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:60%;max-width:500px;}
-.layui-m-layer2{width:60%;height:333px;overflow-y:auto;}
+.layui-m-layer2{width:60%;height:333px;}
 /*流程查询*/
 .follow-tab,.project-tab{display: block;width:100%;height:3em;border-top:1px solid #F0F0F0;border-bottom:1px solid #F0F0F0;background-color:#fff}
 .follow-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
@@ -143,17 +143,16 @@ table{border-collapse:collapse;border-spacing:0;}
 .status-icon p span.report{background-position:-120px -145px}
 .status-icon p span.finish{background-position:-120px -192px}
 .status-icon p span.submit{background-position:-121px -241px}
-.paddinTop{padding-top:3em}
 /*下一步选择人*/
 
-.mark{width: 100%;}
-.item-mark{height:60px;}
+.mark{width: 100%;margin-top:-7px;position:relative}
+.item-mark{width:100%;height:60px;}
 .appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center;background:#E75732;color:#fff}
 .item-mark .right{float:right;line-height:60px;}
-.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:5px;position:relative;display:block;margin-top:-7px;line-height:60px;}
-.content{width:100%;overflow-y:scroll;display:block}
+.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:5px;position:relative;display:block;line-height:60px;}
+.content{width:100%;overflow-y:scroll;display:block;height: 273px;overflow-x: hidden;}
 /* .content ul li{display:flex;line-height:44px;justify-content:space-between;margin: 0 10px;padding:0 5px;} */
-.content ul li{float: left;width: 28%;border: 1px solid #E7E7E7;line-height: 2em;border-radius: 26px;margin: 4% 2%;background:#F9F9F9;}
+.content ul li{float: left;width: 28%;border: 1px solid #E7E7E7;line-height: 2em;border-radius: 26px;margin: 4% 2%;background:#F9F9F9;white-space:nowrap;}
 .content ul li.bg{background:#E75732;color:#fff}
 
 .searchList{width:100%;position:relative}

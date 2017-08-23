@@ -261,7 +261,7 @@ var vm=new Vue({
 					style: 'width: 80%;height: 240px;border-bottom: 1px solid #ccc',
 					content: html
     			})
-    			$(document).on("click","div",function(){
+    			$(document).on("click",".option",function(){
     				var value=$(this).text()
     				$("#sele").val(value)
     				_this.div=value;
