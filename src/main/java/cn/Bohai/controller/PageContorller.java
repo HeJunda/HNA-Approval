@@ -122,6 +122,15 @@ public class PageContorller {
 	public  ModelAndView  followAlready(){
 		 return new ModelAndView("followAlready");
 	}
+	
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/agenList")
+	public  ModelAndView  agenList(){
+		 return new ModelAndView("agenList");
+	}
 
 
 

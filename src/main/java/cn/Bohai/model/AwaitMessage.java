@@ -25,6 +25,10 @@ public class AwaitMessage implements Serializable {
      * 流程标题
      */
     private String flowname;
+    /**
+     * 流程类型
+     */
+    private String flowtype;	
 	public String getUserid() {
 		return userid;
 	}
@@ -48,6 +52,12 @@ public class AwaitMessage implements Serializable {
 	}
 	public void setLimit(int limit) {
 		this.limit = limit;
+	}
+	public String getFlowtype() {
+		return flowtype;
+	}
+	public void setFlowtype(String flowtype) {
+		this.flowtype = flowtype;
 	}
     
      

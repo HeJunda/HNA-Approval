@@ -59,6 +59,49 @@ import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
 public class WorkflowService {
 
 	
+	/**
+	 * 获取待办消息分类列表
+	 * @param User
+	 * @throws Exception 
+	 */
+	public JSONArray getAwaitSortList(User user) throws Exception{
+		
+		T2Util.init();
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",user.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("interfaceid","R8107");//待办信息接口(R8101)
+		
+		
+		IDataset iDataset = mw.getDataset();
+		IDatasets result = null;
+		
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	for(int i=0;i<resultListMap.size();i++){
+	    		if(resultListMap.get(i).get("flowtype").equals("_notictask")){
+	    			resultListMap.remove(i);
+	    		}
+	    	}
+	    	String jsonString = JSON.toJSONString(resultListMap);
+	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+	    	System.out.println(jsonString);
+	    	return jsonArray;
+	    }else{
+	    	return null;
+	    }
+	}
+	
+	
 	
 	/**
 	 * 获取待办消息列表
@@ -79,6 +122,7 @@ public class WorkflowService {
 		//请求体
 		mw.put("start",awaitMessage.getStart());
 		mw.put("limit",awaitMessage.getLimit());
+		mw.put("flowtype",awaitMessage.getFlowtype());
 //		mw.put("flowname",awaitMessage.getFlowname());//条件查询
 		mw.put("interfaceid","R8101");//待办信息接口(R8101)
 		

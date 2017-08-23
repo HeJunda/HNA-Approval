@@ -59,23 +59,23 @@
 			date:{}
 		},
 		created:function(){
-//  			document.cookie = 'userid='+'6666';
-//  			var user=getCookie('userid')
-			var token=window.hna.SsoToken;
-			var _this=this;
-			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-				_this.date=response.data.UserAccount;
-				document.cookie = 'userid'+'='+_this.date;
-				var user=getCookie('userid')
-				if(_this.data==''){
-					layer.open({
-					    content: '您还未登录，请先登录。'
-					    ,btn: '我知道了'
-					});
-				}
-			}).catch(function(error){
-			    console.log(error);
-			});
+ 			document.cookie = 'userid='+'6666';
+ 			var user=getCookie('userid')
+// 			var token=window.hna.SsoToken;
+// 			var _this=this;
+// 			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+// 				_this.date=response.data.UserAccount;
+// 				document.cookie = 'userid'+'='+_this.date;
+// 				var user=getCookie('userid')
+// 				if(_this.data==''){
+// 					layer.open({
+// 					    content: '您还未登录，请先登录。'
+// 					    ,btn: '我知道了'
+// 					});
+// 				}
+// 			}).catch(function(error){
+// 			    console.log(error);
+// 			}); 
 			
 		}
 	})

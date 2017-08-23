@@ -38,6 +38,27 @@ public class WorkflowController {
 	private UserService userService;
 	
 	
+	
+
+	/**
+     * 获取待办消息分类列表
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getAwaitSortList",method = RequestMethod.GET)
+	public JSONArray getAwaitSortList(User user){
+//		String jsonString = workflowService.getAwaitMessage(awaitMessage);
+//		JSONArray jsonArray=JSON.parseArray(jsonString);
+//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
+		JSONArray jsonArray = new JSONArray();
+		try {
+			 jsonArray = workflowService.getAwaitSortList(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonArray;
+	} 
+	
+	
 	/**
      * 获取待办消息列表
 	 * @throws Exception 
