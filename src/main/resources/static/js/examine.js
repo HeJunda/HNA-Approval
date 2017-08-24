@@ -258,13 +258,13 @@ var vm=new Vue({
     				html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
     			});
 				var L=layer.open({
-					style: 'width: 80%;height: 240px;border-bottom: 1px solid #ccc',
+					style: 'width: 80%;height: 180px;border-bottom: 1px solid #ccc',
 					content: html
     			})
     			$(document).on("click",".option",function(){
     				var value=$(this).text()
     				$("#sele").val(value)
-    				_this.div=value;
+    				_this.opinion=value;
     				layer.close(L)
     			}); 
         		
@@ -274,53 +274,54 @@ var vm=new Vue({
 		},
 		/*点击提交*/
 		submit:function(){
-			/*if($("#sele").val==""){
+			if(this.opinion==""){
 				layer.open({
 				    content: '输入不能为空',
 				    skin: 'msg',
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    time: 3 
-				  });
-			}*/
-			var _this=this;
-			var str=this.opinion;
-			var parm=this.parms;
-			var comebacks=this.comeback;
-			var formtypes=this.digital.formtype;
-			var taskId=this.digital.taskid;
-			var personStrs=this.personUser;
-			var nonames=this.noname;
-			console.log(nonames)
-			var user=getCookie('userid')
-			console.log(user)
-			axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,remark:str,nextopermap:nonames,actionname:parm.name,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
-				console.log(response.data)
-				console.log(response.data[0].code)
-				if(response.data[0].code=='1'){
+				});
+			}else{
+				var _this=this;
+				var str=this.opinion;
+				var parm=this.parms;
+				var comebacks=this.comeback;
+				var formtypes=this.digital.formtype;
+				var taskId=this.digital.taskid;
+				var personStrs=this.personUser;
+				var nonames=this.noname;
+				console.log(nonames)
+				var user=getCookie('userid')
+				console.log(user)
+				axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,remark:str,nextopermap:nonames,actionname:parm.name,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
+					console.log(response.data)
+					console.log(response.data[0].code)
+					if(response.data[0].code=='1'){
+						layer.open({
+						    content: '提交成功',
+						    skin: 'msg',
+						    style: 'background-color:#ccc; color:#fff; border:none;',
+						    time: 3 
+						  });
+						window.location.href='agenList.html';
+					}else{
+						layer.open({
+						    content: response.data[0].result,
+						    style: 'background-color:#ccc; color:#fff; border:none;',
+						    skin: 'msg',
+						    time: 3 
+						});
+					}
+				}).catch(function(response){
+					console.log(response)
 					layer.open({
-					    content: '提交成功',
-					    skin: 'msg',
-					    style: 'background-color:#ccc; color:#fff; border:none;',
-					    time: 3 
-					  });
-					window.location.href='agency.html';
-				}else{
-					layer.open({
-					    content: response.data[0].result,
+					    content: response.result,
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    skin: 'msg',
 					    time: 3 
 					});
-				}
-			}).catch(function(response){
-				console.log(response)
-				layer.open({
-				    content: response.result,
-				    style: 'background-color:#ccc; color:#fff; border:none;',
-				    skin: 'msg',
-				    time: 3 
-				});
-			})
+				})
+			}
 		}
 	}
 })

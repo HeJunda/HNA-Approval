@@ -19,7 +19,7 @@
 		<div class="container paddinTop" id="clearList">
 	      <div class="agency-list AgList">
            <ul>
-              <li class="clearfix"  v-for="item in datas">
+              <!-- <li class="clearfix"  v-for="">
                	<a :href="'/examine.html?taskid='+item.taskid">
                  	<div class="agency-right">
                    		<div class="right-box">
@@ -28,6 +28,19 @@
                    		</div>
                  	</div>
            	  	</a>
+              </li> -->
+              <li class="clearfix" v-for="item in datas">
+              <a :href="'/examine.html?taskid='+item.taskid">
+                 <div class="agenLeft">
+                     <span :class="item.flowtype|showIcon"></span>
+                 </div>
+                 <div class="agenRight">
+                   <div class="leftBox">
+	                 <h3 class="agency-title">{{item.flowname}}</h3>
+	                 <p class="agenp">{{item.nodename}}</p>
+                   </div>
+                 </div>
+              </a>
               </li>
            </ul>
 	      </div>
@@ -36,7 +49,6 @@
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script type="text/javascript" src="js/lib/iscroll.js"></script>
 	<script type="text/javascript" src="js/lib/home.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/agency.js"></script>

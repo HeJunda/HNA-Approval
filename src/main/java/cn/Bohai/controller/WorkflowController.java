@@ -52,6 +52,9 @@ public class WorkflowController {
 		JSONArray jsonArray = new JSONArray();
 		try {
 			 jsonArray = workflowService.getAwaitSortList(user);
+			 if(jsonArray.size() == 0){
+				 return null;
+			 }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

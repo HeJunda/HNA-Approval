@@ -2,84 +2,131 @@
 <html lang="en"></html>
 <html lang="en" xmnls="www.thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-	<title>渤海信托</title>
-	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+  <title>移动审批</title>
+  <link rel="stylesheet" type="text/css" href="/css/index.css" />
 </head>
 <body>
-	<div id="app" class="root">
-    <header class="header cleanF">
-        <!-- <span class="back"></span> -->
+  <div id="app" class="root">
+    <!-- <header class="header cleanF">
+        <span class="back"></span>
         <h3 class="indexHead">移动审批</h3>   
-    </header>
+    </header> -->
     <div class="container paddinTop">
         <div class="banner">
            <img src="images/banner.png" alt="移动审批"/>
         </div>
     </div>
-	<div class="container">
+  <div class="container">
       <div class="menu-box clearfix">
          <div class="menu-item">
-             <p class="menu-icon"><a href="agency.html"><span class="agency"></span></a></p>
+             <p class="menu-icon"><b v-on:click="agency"><span class="agency"></span></b></p>
              <p>待办</p>
          </div>
          <div class="menu-item">
-             <p class="menu-icon"><a href="follow.html"><span class="follow"></span></a></p>
+             <p class="menu-icon"><b v-on:click="follow"><span class="follow"></span></b></p>
              <p>待阅流程</p>
          </div>
          <div class="menu-item">
-             <p class="menu-icon"><a href="message.html"><span class="message"></span></a></p>
+             <p class="menu-icon"><b v-on:click="message"><span class="message"></span></b></p>
              <p>消息提醒</p>
          </div>
          <div class="menu-item">
-             <p class="menu-icon"><a href="project.html"><span class="project"></span></a></p>
+             <p class="menu-icon"><b v-on:click="project"><span class="project"></span></b></p>
              <p>项目查询</p>
          </div>
          <div class="menu-item">
-             <p class="menu-icon"><a href="search.html"><span class="distance"></span></a></p>
+             <p class="menu-icon"><b v-on:click="search"><span class="distance"></span></b></p>
              <p>流程查询</p>
          </div>
          <div class="menu-item last">
          </div>
       </div>
-	</div>
+
+  </div>
     </div>
     <script src="http://doudou.hnagroup.com:8080/File/Scripts/sso.min.js"></script>
-	<script type="text/javascript" src="/js/lib/vue.min.js"></script>
-	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script>
-	new Vue({
-		el:'#app',
-		data:{
-			date:{}
-		},
-		created:function(){
- 			document.cookie = 'userid='+'6666';
- 			var user=getCookie('userid')
-// 			var token=window.hna.SsoToken;
-// 			var _this=this;
-// 			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-// 				_this.date=response.data.UserAccount;
-// 				document.cookie = 'userid'+'='+_this.date;
-// 				var user=getCookie('userid')
-// 				if(_this.data==''){
-// 					layer.open({
-// 					    content: '您还未登录，请先登录。'
-// 					    ,btn: '我知道了'
-// 					});
-// 				}
-// 			}).catch(function(error){
-// 			    console.log(error);
-// 			}); 
-			
-		}
-	})
-	
-	</script>
+  <script type="text/javascript" src="/js/lib/vue.min.js"></script>
+  <script type="text/javascript" src="js/lib/axios.min.js"></script>
+  <script type="text/javascript" src="js/lib/layer.js"></script>
+  <script type="text/javascript" src="js/lib/cookies.js"></script>
+  <script>
+  new Vue({
+    el:'#app',
+    data:{
+      date:{},
+      dataes:{},
+      loadFlag:false
+    },
+    created:function(){
+        document.cookie = 'userid='+'6666';
+        var user=getCookie('userid')
+        var _this=this;
+      /* var token=window.hna.SsoToken;
+      
+      _this.loading(true)
+      axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+        _this.loading(false)
+        _this.date=response.data.UserAccount;
+        document.cookie = 'userid'+'='+_this.date;
+        var user=getCookie('userid')
+        if(_this.data==''){
+          layer.open({
+              content: '您还未登录，请先登录。'
+              ,btn: '我知道了'
+          });
+        }
+        
+      }).catch(function(error){
+          console.log(error);
+          _this.loading(true)
+      }); */
+      this.loadFlag=true;
+      axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){
+   
+        _this.dataes=response.data
+        if(response.data==true){
+          
+        }
+        this.loadFlag=false
+      }).catch(function(error){
+          console.log(error);
+          this.loadFlag=true
+      });
+      this.loadFlag=false
+    },
+    methods:{
+    	agency:function(){
+    		if(this.dataes==true){
+    			window.location.href='agenList.html'
+    	    }
+    	},
+    	follow:function(){
+    		if(this.dataes==true){
+    			window.location.href='follow.html'
+    	    }
+    	},
+    	message:function(){
+    		if(this.dataes==true){
+    			window.location.href='message.html'
+    	    }
+        },
+        project:function(){
+        	if(this.dataes==true){
+    			window.location.href='project.html'
+    	    }
+        },
+        search:function(){
+        	if(this.dataes==true){
+    			window.location.href='search.html'
+    	    }
+        }
+    }
+  })
+  
+  </script>
 </body>
 </html>

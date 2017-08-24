@@ -11,27 +11,28 @@
 </head>
 <body>
 	<div id="app">
-		<!-- <header class="header cleanF">
-	        <h3>待阅流程</h3>   
-	    </header> -->
-		<div class="container paddinTop">
-		  <div class="follow-tab">
-              <ul class="cleanF">
-                <router-link tag="li" to="await">待阅</router-link>
-                <router-link tag="li" to="already">已阅</router-link>
-              </ul>
-		  </div>	    
+		<div class="container paddinTop">    
 		  
-		  <router-view></router-view>
-		   
+		  <div class="project-tab tab">
+              <div class="cleanF" id="tab-nav">
+                <p class="searNav item cur">待阅</p>
+                <p class="searNav item">已阅</p>
+              </div>
+          </div>
+          <div class="conSearch">
+		    <ul class="agency-list"></ul>
+		    <ul class="agency-list"></ul>
+		</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
   	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+  	<script	type="text/javascript" src="js/home.js"></script>
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
+  	<script	type="text/javascript" src="js/follow.js"></script>
  	<script type="text/javascript">
- 	var await={
+ 	/* var await={
  			template:`<div class="agency-list" id="await">
 						<div class="item-await">
 					   		<ul>
@@ -133,7 +134,7 @@
 
 	new Vue({
 	    router:routeres
-	}).$mount("#app")
+	}).$mount("#app") */
  	</script>
 </body>
 </html>

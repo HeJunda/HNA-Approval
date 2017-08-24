@@ -26,6 +26,11 @@ function pullLoadData(){
                     dataType: 'json',
                     success: function(data){
                        var ahtml = "";
+                       if(data==null){
+							me.lock('up');
+			                me.lock('down')
+			                me.noData(true);
+						}
                        if(data.length>0){
                     	   for(var i=0;i<data.length;i++){
                     		   ahtml=  ahtml+ '<li class="clearfix">'

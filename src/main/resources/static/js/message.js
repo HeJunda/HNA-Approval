@@ -12,12 +12,14 @@ var vm=new Vue({
 			loadDownFn : function(me){
 				start=_this.dataes.length;
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
-					alert(response.data)
-					alert(response.data.length)
+					if(response.data==null){
+						me.lock('up');
+		                me.lock('down')
+		                me.noData(true);
+					}
 					if(response.data.length>0){
 						_this.dataes=_this.dataes.concat(response.data)
 				 	}else{
-				 		alert(123)
 				 		me.lock('up');
 		                me.lock('down')
 		                me.noData(true);
