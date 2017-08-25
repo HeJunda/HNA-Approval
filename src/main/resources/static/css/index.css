@@ -66,7 +66,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agenp{line-height:2em;width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-right{float:right;width:100%;position:relative;}
 .list-right{float:left;margin-top:10px;margin-left:20%}
-.agenRight span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
+.agenRight span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 20px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .agenList span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:95%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-right p{width:100%;font-size:1em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
@@ -150,18 +150,22 @@ table{border-collapse:collapse;border-spacing:0;}
 .status-icon p:last-child{margin-top:0.5em;white-space:nowrap}
 .status-icon p span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle}
 .status-icon p span.cooperation{background-position:-122px 0px}
-.status-icon p span.ballBack{background-position:-122px -50px}
+.status-icon p span.ballBack{background-position:-122px -49px}
 .status-icon p span.overrule{background-position:-121px -96px}
 .status-icon p span.report{background-position:-120px -145px}
 .status-icon p span.finish{background-position:-120px -192px}
 .status-icon p span.submit{background-position:-121px -241px}
+.status-icon p span.branch{background-position:-121px -312px}
+.status-icon p span.refer{background-position:-121px -241px}
+.status-icon p span.handle{background-position:-121px -241px}
+.status-icon p span.blossom{background-position:-118px -351px}
 /*下一步选择人*/
 
 .mark{width: 100%;margin-top:-7px;position:relative}
 .item-mark{width:100%;height:60px;}
 .appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center;background:#E75732;color:#fff}
 .item-mark .right{float:right;line-height:60px;}
-.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:5px;position:relative;display:block;line-height:60px;}
+.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:15px;position:relative;display:block;line-height:60px;}
 .content{width:100%;overflow-y:scroll;display:block;height: 273px;overflow-x: hidden;}
 /* .content ul li{display:flex;line-height:44px;justify-content:space-between;margin: 0 10px;padding:0 5px;} */
 .content ul li{float: left;width: 28%;border: 1px solid #E7E7E7;line-height: 2em;border-radius: 26px;margin: 4% 2%;background:#F9F9F9;white-space:nowrap;}
@@ -173,7 +177,7 @@ table{border-collapse:collapse;border-spacing:0;}
 select{margin:5px;}
 strong{font-style:normal;margin-left:5%;float: left;}
 .await-btn{border:0px solid; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
-.option{line-height:44px;text-align:center;border-bottom: 1px solid #ccc;}
+.option{line-height:40px;text-align:center;border-bottom: 1px solid #F0F0F0;margin-top:-5px;}
 .router-link-active{color:#FFC600}
 .langeUse{width:100%;color:#9B9B9B;font-weight:normal;display:flex;justify-content:space-between;line-height:3em;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;}
 .handle{padding-left:0.625em;color:#333}
@@ -191,5 +195,10 @@ strong{font-style:normal;margin-left:5%;float: left;}
 .perName{width: 21%;text-align: center; line-height: 30px;background:#E75732;border-radius: 20px;margin: 5px;color: #fff;font-size:0.825em;}
 select{border:0px solid}
 input-placeholder{font-size:12px;}
-
-
+.root{position:relative}
+.loading{text-align:center;position:absolute;top:50%;left:50%;transform: translate(-50%,-50%);}
+.loading img{width:50%;}
+.followList{border-bottom:1px solid #F0F0F0;line-height:40px;background:#fff;}
+.follr{margin-right: 15px;}
+.innum{width:20px;height:20px;background:#EF372F;display:block;border-radius:10px;color:#FFF;position:absolute;top:26px;right:152px;}
+.onnum{width:20px;height:20px;background:#EF372F;display:block;border-radius:10px;color:#FFF;position:absolute;top:26px;left:78px;}

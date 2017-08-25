@@ -39,9 +39,19 @@ var vm=new Vue({
 			}else if(value=="打回"){
 				return 'ballBack';
 			}else if(value=="分阅"){
-				return 'report';
+				return 'branch';
 			}else if(value=="协作"){
 				return 'cooperation';
+			}else if(value=="提交"){
+				return 'refer'
+			}else if(value=="办理"){
+				return 'handle'
+			}else if(value=="继续呈报"){
+				return 'report'
+			}else if(value=="结束"){
+				return 'finish'
+			}else if(value=="开户"){
+				return 'blossom'
 			}
 		}
 	},

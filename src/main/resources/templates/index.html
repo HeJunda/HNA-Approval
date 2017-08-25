@@ -45,7 +45,7 @@
          <div class="menu-item last">
          </div>
       </div>
-
+	  <div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
   </div>
     </div>
     <script src="http://doudou.hnagroup.com:8080/File/Scripts/sso.min.js"></script>
@@ -59,7 +59,7 @@
     data:{
       date:{},
       dataes:{},
-      loadFlag:false
+      loading:true
     },
     created:function(){
         document.cookie = 'userid='+'6666';
@@ -67,36 +67,25 @@
         var _this=this;
       /* var token=window.hna.SsoToken;
       
-      _this.loading(true)
       axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-        _this.loading(false)
         _this.date=response.data.UserAccount;
         document.cookie = 'userid'+'='+_this.date;
         var user=getCookie('userid')
-        if(_this.data==''){
-          layer.open({
-              content: '您还未登录，请先登录。'
-              ,btn: '我知道了'
-          });
-        }
         
       }).catch(function(error){
           console.log(error);
-          _this.loading(true)
       }); */
-      this.loadFlag=true;
-      axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){
-   
-        _this.dataes=response.data
-        if(response.data==true){
-          
-        }
-        this.loadFlag=false
-      }).catch(function(error){
-          console.log(error);
-          this.loadFlag=true
-      });
-      this.loadFlag=false
+      if(_this.dataes==""){
+    	  axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){
+   	        _this.dataes=response.data;
+   	   		_this.loading=false
+   	      }).catch(function(error){
+   	          console.log(error);
+   	      });
+      }else{
+    	  this.dataes==true
+      }
+      
     },
     methods:{
     	agency:function(){
