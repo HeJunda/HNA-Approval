@@ -62,7 +62,7 @@
       loading:true
     },
     created:function(){
-        document.cookie = 'userid='+'6666';
+        document.cookie = 'userid='+'jd.he';
         var user=getCookie('userid')
         var _this=this;
       /* var token=window.hna.SsoToken;
@@ -75,16 +75,14 @@
       }).catch(function(error){
           console.log(error);
       }); */
-      if(_this.dataes==""){
     	  axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){
+    		  alert(response.data)
    	        _this.dataes=response.data;
    	   		_this.loading=false
    	      }).catch(function(error){
    	          console.log(error);
    	      });
-      }else{
-    	  this.dataes==true
-      }
+      
       
     },
     methods:{

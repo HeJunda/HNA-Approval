@@ -156,9 +156,10 @@ table{border-collapse:collapse;border-spacing:0;}
 .status-icon p span.finish{background-position:-120px -192px}
 .status-icon p span.submit{background-position:-121px -241px}
 .status-icon p span.branch{background-position:-121px -312px}
-.status-icon p span.refer{background-position:-121px -241px}
-.status-icon p span.handle{background-position:-121px -241px}
+.status-icon p span.refer{background-position:-119px -351px}
+.status-icon p span.handle{background-position:-119px -277px}
 .status-icon p span.blossom{background-position:-118px -351px}
+.status-icon p span.other{background-position:-27px -307px}
 /*下一步选择人*/
 
 .mark{width: 100%;margin-top:-7px;position:relative}

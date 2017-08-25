@@ -52,6 +52,8 @@ var vm=new Vue({
 				return 'finish'
 			}else if(value=="开户"){
 				return 'blossom'
+			}else{
+				return 'other'
 			}
 		}
 	},
