@@ -30,7 +30,6 @@ var vm=new Vue({
 		created:function(){
 			var user=getCookie('userid')
 			var type=localurl('flowtype')
-			console.log(type)
 			var _this=this;
 			var start = 0;
 			

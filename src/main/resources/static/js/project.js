@@ -85,11 +85,9 @@ function pullLoadData(){
 
 function sear(){//点击
     // dropload
-	console.log(keywork)
 	var lis=document.getElementsByTagName('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
-	console.log(txt)
 	if(txt=='') return;
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";

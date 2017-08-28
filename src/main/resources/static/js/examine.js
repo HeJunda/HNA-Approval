@@ -89,9 +89,8 @@ var vm=new Vue({
 			var _this=this;
 			var user=getCookie('userid')
 			var instance=this.digital.instanceid;
-			console.log(instance)
 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
-				console.log(response.data)
+				
 				_this.dates=response.data[0];
 				var info=JSON.parse(_this.dates.flowinfo)
 				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
@@ -115,7 +114,6 @@ var vm=new Vue({
 			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 				_this.aclist=response.data;
 				_this.list=JSON.parse(_this.aclist[0].actionlist)
-				console.log(_this.list);
 			}).catch(function(error){
 			    console.log(error);
 			});
@@ -148,7 +146,7 @@ var vm=new Vue({
 	        	    btn: ['确定','取消'],
 	        	    yes: function(index){
 	        	    	 var check=document.querySelectorAll("input[name='Comeback']");
-	        	    	 console.log(check)
+	        	    	 
 	        	    	 for(var i=0;i<check.length;i++){
 	        	    		 if(check[i].checked){
 	            	    		 this.comeback=check[i].value;
@@ -168,14 +166,14 @@ var vm=new Vue({
 	        /*人物弹出框(二)*/
 	        if(name.type==2||name.type==3||name.type==4||name.type==7||name.type==9){
 	        	document.querySelector(".person-item").style.display="block";
-	        	console.log(name.type)
+	        
 	        	var _this=this;
 	        	if(name.type==2){
 	        		var user=getCookie('userid')
 	        		axios.get("/workflow/getNextNode",{params:{userid:user,actionvalue:names,taskid:taskId}}).then(function(response){
-	        			console.log(response.data)
+	        			
 	            		_this.noname=response.data.nodename
-	            		console.log(_this.noname)
+	            	
 	            	},function(err){
 	            		console.log(err)
 	            	})
@@ -246,8 +244,6 @@ var vm=new Vue({
 			}
 			_this.personStr=personName
 			_this.personUser=personArr.join(',')
-			console.log(_this.personUser)
-			
 			if($(".bg").length=="0"){
 				layer.open({
 				    content: '请添加选择人',
@@ -264,7 +260,7 @@ var vm=new Vue({
 			var _this=this;
 			var user=getCookie('userid');
 			axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
-    			console.log(response.data)
+    			
     			var html='';
     			$.each(response.data,function(i,val){
     				html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
@@ -302,12 +298,9 @@ var vm=new Vue({
 				var taskId=this.digital.taskid;
 				var personStrs=this.personUser;
 				var nonames=this.noname;
-				console.log(nonames)
 				var user=getCookie('userid')
-				console.log(user)
 				axios.post("/workflow/processProcessing",{userid:user,taskid:taskId,remark:str,nextopermap:nonames,actionname:parm.name,actiontype:parm.type,actionvalue:parm.value,comeback:comebacks,formtype:formtypes,receiveuserids:personStrs}).then(function(response){
-					console.log(response.data)
-					console.log(response.data[0].code)
+				
 					if(response.data[0].code=='1'){
 						layer.open({
 						    content: '提交成功',

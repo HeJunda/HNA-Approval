@@ -30,11 +30,10 @@ new Vue({
 		axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
 			if(response.data!=''){
 				_this.dataes=response.data
-				console.log(_this.dataes)
 			}else{
 				$('#app').append('<div class="conText">暂无数据</div>')
 			}
-			
+			$('.followInfo').css('display','none')
 		}).catch(function(error){
 		 	console.log(error);
 		});

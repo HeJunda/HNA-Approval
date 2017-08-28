@@ -23,7 +23,6 @@ var vm=new Vue({
 						if(response.data.length>0){
 							_this.dataes=_this.dataes.concat(response.data)
 					 	}else{
-					 		console.log(123)
 			                me.lock('down')
 			                me.noData(true);
 						}
