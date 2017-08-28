@@ -7,6 +7,7 @@ function tab(index){
 	start = -10;
 	$(".agency-list").html("<ul></ul>");
 	pullLoadData();
+	$('.conText').remove()
 }
 
 tab(0);
@@ -31,7 +32,6 @@ function pullLoadData(){
                     },
                     dataType: 'json',
                     success: function(data){
-                    	if(data.code!=undefined){
                     		var ahtml = "";
                             if(data==null){
      							me.lock('up');
@@ -70,11 +70,7 @@ function pullLoadData(){
                             			}     
                             			me.resetload();
                             		},1000);
-                    	}else{
-                    		$('.dropload-down').remove()
-                    	}
-                       
-                       		
+               
                     	},
                     	error: function(xhr, type){
                         //alert('Ajax error!');

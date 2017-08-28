@@ -69,7 +69,6 @@ $(function(){
 	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
 	    $('.agency-list').html('')
 	    if(itemIndex == '0'){
-			console.log(itemIndex)
 		    $.ajax({
 		        type: 'GET',
 		        url: '/workflow/getSplitRead',
@@ -81,7 +80,7 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
-		        	if(data.code!=undefined){
+		        	if(data==""){
 		        		var result=''
 			                for(var i = 0; i < data.length; i++){
 			                    result +=   '<li class="clearfix">'
@@ -100,6 +99,7 @@ $(function(){
 		                	$('.agency-list').append(result);
 		        	}else{
 		        		$('.conSearch').text()
+		        		$('.agency-list').append('<div class="conText">暂无数据</div>')
 		        	}
 		        	
 			            
@@ -122,7 +122,7 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
-		        	if(data.code!=undefined){
+		        	if(data==""){
 		        		var result = '';
 			            for(var i = 0; i < data.length; i++){
 			            	console.log(data)
@@ -144,6 +144,7 @@ $(function(){
 			            $('.agency-list').append(result);
 		        	}else{
 		        		$('.conSearch').text()
+		        		$('.agency-list').append('<div class="conText">暂无数据</div>')
 		        	}
 		            
 		        },

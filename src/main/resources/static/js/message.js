@@ -7,7 +7,7 @@ var vm=new Vue({
 		var _this=this;
 		var user=getCookie('userid');
 		var start = 0;
-		$("#message").dropload({
+		$("body").dropload({
 			scrollArea : window,
 			domDown : {
 				domClass : 'dropload-down',
@@ -19,7 +19,7 @@ var vm=new Vue({
 				start=_this.dataes.length;
 				
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
-					if(response.data.code==1){
+					
 						if(response.data.length>0){
 							_this.dataes=_this.dataes.concat(response.data)
 					 	}else{
@@ -30,9 +30,7 @@ var vm=new Vue({
 						setTimeout(function(){
 		                    me.resetload();
 		                },1000);
-					}else{
-						$('.dropload-down').remove()
-					}
+					
 				}).catch(function(error){
 				 	console.log(error);
 					me.resetload();

@@ -37,7 +37,6 @@ function pullLoadData(){
                     },
                     dataType: 'json',
                     success: function(data){
-                    	if(data.code!=undefined){
                     		var ahtml = "";
                     	    if(data.length>0){
                     	    for(var i=0;i<data.length;i++){
@@ -73,9 +72,7 @@ function pullLoadData(){
                                // 每次数据加载完，必须重置
                                me.resetload();
                            },1000);
-                    	}else{
-                    		$('.dropload-down').remove()
-                    	}
+                    	
                         
                     },
                     error: function(xhr, type){
