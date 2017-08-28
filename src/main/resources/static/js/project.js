@@ -31,44 +31,49 @@ function pullLoadData(){
                     },
                     dataType: 'json',
                     success: function(data){
-                       var ahtml = "";
-                       if(data==null){
-							me.lock('up');
-			                me.lock('down')
-			                me.noData(true);
-						}
-                       if(data.length>0){
-                    	   for(var i=0;i<data.length;i++){
-                    		   ahtml=  ahtml+ '<li class="clearfix">'
-					  		                        +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
-								                        +'<div class="agency-left">'
-								                            +'<div class="lucre-name">'
-								                             +'<p class="project-price">'+data[i].predictmaxyield+'%</p>'
-								                             +'<p class="project-lucre">预计收益</p>'
-								                            +'</div>'
-								                        +'</div>'
-								                        +'<div class="list-right">'
-								                         	+'<div class="right-box">'
-								                           	    +'<h3 class="agency-title">'+data[i].dptname+'</h3>'
-								                           		+'<p>'+data[i].projectname+'</p>'
-								                           	+'</div>'
-								                        +'</div>'
-							                        +'</a>'
-					   		                  +'</li>'
-                    	   		}
-                           }else if(data.length==0){
-                       			me.lock('down');
-                       			me.noData();
-                       		}
-                       		setTimeout(function(){
-                       			$('.agency-list').find('ul').append(ahtml);
-                       			var name=[]
-                       			for(var i=0;i<data.length;i++){
-                       				name=data[i].dptname
-                       				keywork.push(name)
-                       			}     
-                       			me.resetload();
-                       		},1000);
+                    	if(data.code!=undefined){
+                    		var ahtml = "";
+                            if(data==null){
+     							me.lock('up');
+     			                me.lock('down')
+     			                me.noData(true);
+     						}
+                            if(data.length>0){
+                         	   for(var i=0;i<data.length;i++){
+                         		   ahtml=  ahtml+ '<li class="clearfix">'
+     					  		                        +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
+     								                        +'<div class="agency-left">'
+     								                            +'<div class="lucre-name">'
+     								                             +'<p class="project-price">'+data[i].predictmaxyield+'%</p>'
+     								                             +'<p class="project-lucre">预计收益</p>'
+     								                            +'</div>'
+     								                        +'</div>'
+     								                        +'<div class="list-right">'
+     								                         	+'<div class="right-box">'
+     								                           	    +'<h3 class="agency-title">'+data[i].dptname+'</h3>'
+     								                           		+'<p>'+data[i].projectname+'</p>'
+     								                           	+'</div>'
+     								                        +'</div>'
+     							                        +'</a>'
+     					   		                  +'</li>'
+                         	   		}
+                                }else if(data.length==0){
+                            			me.lock('down');
+                            			me.noData();
+                            		}
+                            		setTimeout(function(){
+                            			$('.agency-list').find('ul').append(ahtml);
+                            			var name=[]
+                            			for(var i=0;i<data.length;i++){
+                            				name=data[i].dptname
+                            				keywork.push(name)
+                            			}     
+                            			me.resetload();
+                            		},1000);
+                    	}else{
+                    		$('.dropload-down').remove()
+                    	}
+                       
                        		
                     	},
                     	error: function(xhr, type){

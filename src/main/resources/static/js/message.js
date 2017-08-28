@@ -7,7 +7,7 @@ var vm=new Vue({
 		var _this=this;
 		var user=getCookie('userid');
 		var start = 0;
-		$("body").dropload({
+		$("#message").dropload({
 			scrollArea : window,
 			domDown : {
 				domClass : 'dropload-down',
@@ -17,22 +17,22 @@ var vm=new Vue({
 			},
 			loadDownFn : function(me){
 				start=_this.dataes.length;
+				
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
-					if(response.data==null){
-						me.lock('up');
-		                me.lock('down')
-		                me.noData(true);
+					if(response.data.code==1){
+						if(response.data.length>0){
+							_this.dataes=_this.dataes.concat(response.data)
+					 	}else{
+					 		console.log(123)
+			                me.lock('down')
+			                me.noData(true);
+						}
+						setTimeout(function(){
+		                    me.resetload();
+		                },1000);
+					}else{
+						$('.dropload-down').remove()
 					}
-					if(response.data.length>0){
-						_this.dataes=_this.dataes.concat(response.data)
-				 	}else{
-				 		me.lock('up');
-		                me.lock('down')
-		                me.noData(true);
-					}
-					setTimeout(function(){
-	                    me.resetload();
-	                },1000);
 				}).catch(function(error){
 				 	console.log(error);
 					me.resetload();

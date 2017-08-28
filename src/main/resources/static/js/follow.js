@@ -81,22 +81,27 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
-		        	var result=''
-		                for(var i = 0; i < data.length; i++){
-		                    result +=   '<li class="clearfix">'
-							      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
-							      			+'<div class="followList">'
-							            		+'<div class="right-box">'
-							           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
-							           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
-							           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
-							           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
-							           			+'</div>'
-							           		+'</div>'
-							           	+'</a>'	
-							      	+'</li>'
-	                }
-	                	$('.agency-list').append(result);
+		        	if(data.code!=undefined){
+		        		var result=''
+			                for(var i = 0; i < data.length; i++){
+			                    result +=   '<li class="clearfix">'
+								      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
+								      			+'<div class="followList">'
+								            		+'<div class="right-box">'
+								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
+								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
+								           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
+								           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
+								           			+'</div>'
+								           		+'</div>'
+								           	+'</a>'	
+								      	+'</li>'
+		                }
+		                	$('.agency-list').append(result);
+		        	}else{
+		        		$('.conSearch').text()
+		        	}
+		        	
 			            
 	        		},
 	        		error: function(err){
@@ -117,25 +122,30 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
-		            var result = '';
-		            for(var i = 0; i < data.length; i++){
-		            	console.log(data)
-		                result +=   '<li class="clearfix">'
-					                	+'<a href="/followAlready.html?instanceid='+data[i].instanceid+'">'
-							      			+'<div class="followList">'
-							            		+'<div class="right-box">'
-							           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
-							           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
-							           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
-							           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
-							           				+'<p class="follow-person">知会处理人：<span class="fr follr">'+data[i].recivertime+'</span></p>'
-							           				+'<p class="follow-person">知会意见：<span class="fr follr">'+data[i].noticemsg+'</span></p>'
-							           			+'</div>'
-							           		+'</div>'
-							           	+'</a>'
-									+'</li>'
-		            }
-		            $('.agency-list').append(result);
+		        	if(data.code!=undefined){
+		        		var result = '';
+			            for(var i = 0; i < data.length; i++){
+			            	console.log(data)
+			                result +=   '<li class="clearfix">'
+						                	+'<a href="/followAlready.html?instanceid='+data[i].instanceid+'">'
+								      			+'<div class="followList">'
+								            		+'<div class="right-box">'
+								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
+								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
+								           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
+								           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
+								           				+'<p class="follow-person">知会处理人：<span class="fr follr">'+data[i].recivertime+'</span></p>'
+								           				+'<p class="follow-person">知会意见：<span class="fr follr">'+data[i].noticemsg+'</span></p>'
+								           			+'</div>'
+								           		+'</div>'
+								           	+'</a>'
+										+'</li>'
+			            }
+			            $('.agency-list').append(result);
+		        	}else{
+		        		$('.conSearch').text()
+		        	}
+		            
 		        },
 		        error: function(err){
 		            console.log(err);

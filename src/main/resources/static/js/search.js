@@ -2,7 +2,9 @@ var start = -10;//开始位置初始化
 var rows = 10;//每页显示条数
 var userid = getCookie("userid");//用户id
 var keywork=[];
+var ind = 0;
 function tab(index){
+	ind = index;
 	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
 	//重新初始化变量
 	start = -10;
@@ -27,7 +29,7 @@ function pullLoadData(){
             // 加载菜单一的数据
                 $.ajax({
                     type: 'GET',
-                    url: '/workflow/getMyInitiatedProcess',
+                    url: ind == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/',
                     data:{
                     	start:start+=10,
                     	limit:10,
@@ -35,12 +37,8 @@ function pullLoadData(){
                     },
                     dataType: 'json',
                     success: function(data){
-                    	if(data==null){
-							me.lock('up');
-			                me.lock('down')
-			                me.noData(true);
-						}
-                        var ahtml = "";
+                    	if(data.code!=undefined){
+                    		var ahtml = "";
                     	    if(data.length>0){
                     	    for(var i=0;i<data.length;i++){
                     		   ahtml= ahtml+ '<li class="clearfix">'
@@ -48,10 +46,10 @@ function pullLoadData(){
 					                           		  +'<div class="agency-right">'
 					                           		  +'<div class="right-box">'
 					                              		+'<h3 class="agency-title">'+data[i].flowname+'</h3>'
-					                              		+'<p class="follow-person">发起人：<span class="fr">'+data[i].startername+'</span></p>'
+					                              		+'<p class="follow-person">发起人：<span class="fr">'+data[i].assigneename+'</span></p>'
 					                              		+'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
 					                              		+'<p class="follow-person">当前审批人：<span class="fr">'+data[i].assigneename+'</span></p>'
-					                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+data[i].starterorgname+'</span></p>'
+					                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+data[i].startorg+'</span></p>'
 					                              		+'<span class="prompt fr">'+data[i].flowstatus+'</span>'
 					                                  +'</div>'
 					                                  +'</div>'
@@ -60,7 +58,6 @@ function pullLoadData(){
 		
                     	   }
                     	   }else{
-                        	   console.log(123)
                         	   me.lock('down');
                         	   me.noData();
 
@@ -76,6 +73,10 @@ function pullLoadData(){
                                // 每次数据加载完，必须重置
                                me.resetload();
                            },1000);
+                    	}else{
+                    		$('.dropload-down').remove()
+                    	}
+                        
                     },
                     error: function(xhr, type){
                         //alert('Ajax error!');
@@ -86,6 +87,7 @@ function pullLoadData(){
         	}
     });
 }
+
 
 //实现搜索
 function sear(){
