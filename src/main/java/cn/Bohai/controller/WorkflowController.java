@@ -147,7 +147,7 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getNextNode",method = RequestMethod.GET)
-	public JSONArray getNextNode(NextNode nextNode) throws Exception{
+	public JSONArray getNextNode(NextNode nextNode){
 	    JSONArray jsonArray = new JSONArray();
 		try {
 			 jsonArray = workflowService.getNextNode(nextNode);
@@ -211,7 +211,7 @@ public class WorkflowController {
 	 * @throws Exception 
      */
 	@RequestMapping(value = "/getCommonlanguage",method = RequestMethod.GET)
-	public JSONArray getCommonlanguage(User user) throws Exception{
+	public JSONArray getCommonlanguage(User user){
 		JSONArray jsonArray = new JSONArray();
 		try {
 			 jsonArray = workflowService.getCommonlanguage(user);

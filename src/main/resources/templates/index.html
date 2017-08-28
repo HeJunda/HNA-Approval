@@ -62,16 +62,17 @@
       loading:true
     },
     created:function(){
-        /* document.cookie = 'userid='+'jd.he';
-        var user=getCookie('userid') */
+       
         var users=getCookie('userid')
-        if(users==''){
+         if(users==''){
         	var _this=this;
-          	var token=window.hna.SsoToken;
-          	axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-            	_this.date=response.data.UserAccount;
-            	document.cookie = 'userid'+'='+_this.date;
-            	var user=getCookie('userid')
+//           	var token=window.hna.SsoToken;
+//           	axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+//             	_this.date=response.data.UserAccount;
+//             	document.cookie = 'userid'+'='+_this.date;
+//             	var user=getCookie('userid')
+				document.cookie = 'userid='+'jd.he';
+        		var user=getCookie('userid')
             	axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){
       		  		alert(response.data)
      	        	_this.dataes=response.data;
@@ -80,9 +81,9 @@
      	      	}).catch(function(error){
      	          console.log(error);
      	    	});
-            }).catch(function(error){
-                console.log(error);
-            });
+//             }).catch(function(error){
+//                 console.log(error);
+//             });
         }else{
         	this.dataes=true;
 	   		this.loading=false
