@@ -36,6 +36,12 @@ var vm=new Vue({
 			
 			$("body").dropload({
 				scrollArea : window,
+				domDown : {
+					domClass : 'dropload-down',
+					domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+					domLoad : '<div class="dropload-load">加载中...</div>',
+					domNoData : '<div class="dropload-noData">暂无数据</div>'
+				},
 				loadDownFn : function(me){
 					start=_this.datas.length;
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){

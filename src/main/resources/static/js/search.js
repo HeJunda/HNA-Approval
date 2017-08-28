@@ -17,6 +17,12 @@ function pullLoadData(){
 	
     $('#active').dropload({
         scrollArea : window,
+        domDown : {
+			domClass : 'dropload-down',
+			domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+			domLoad : '<div class="dropload-load">加载中...</div>',
+			domNoData : '<div class="dropload-noData">暂无数据</div>'
+		},
         loadDownFn : function(me){
             // 加载菜单一的数据
                 $.ajax({
