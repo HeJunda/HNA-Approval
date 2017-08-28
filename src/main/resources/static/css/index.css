@@ -68,7 +68,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .list-right{float:left;margin-top:10px;margin-left:20%}
 .agenRight span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 20px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .agenList span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
-.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:95%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-right p{width:100%;font-size:1em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
 /*消息弹窗*/
@@ -122,7 +122,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-img img{width:100%;height:100%}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1.2em 1em}
 .examine-title{font-size:1.2em;color:#fff;line-height:2em;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;}
-.examine-node li{display: block;width:100%;line-height:1.6em;color:#fff;font-size:0.825em;white-space:nowrap;}
+.examine-node li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display: block;width:90%;line-height:1.6em;color:#fff;font-size:0.825em;}
 .examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
 .examine-list{display: block;width:100%;}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
@@ -147,7 +147,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .handle-status .status-icon{display: inline-block;width:33.3%;float:left;height:auto;border:1px solid #F2F2F2;padding:0.625em;box-sizing: border-box;cursor:pointer}
 .handle-status .active{background-color:#FDBB84;border-color: #FB9339}
 .status-icon p{text-align:center;width:100%}
-.status-icon p:last-child{margin-top:0.5em;white-space:nowrap}
+.status-icon p:last-child{margin-top:0.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .status-icon p span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle}
 .status-icon p span.cooperation{background-position:-122px 0px}
 .status-icon p span.ballBack{background-position:-122px -49px}
@@ -178,7 +178,7 @@ table{border-collapse:collapse;border-spacing:0;}
 select{margin:5px;}
 strong{font-style:normal;margin-left:5%;float: left;}
 .await-btn{border:0px solid; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
-.option{line-height:40px;text-align:center;border-bottom: 1px solid #F0F0F0;margin-top:-5px;}
+.option{line-height:40px;text-align:center;border-bottom: 1px solid #F0F0F0;margin-top:-5px;cursor:pointer}
 .router-link-active{color:#FFC600}
 .langeUse{width:100%;color:#9B9B9B;font-weight:normal;display:flex;justify-content:space-between;line-height:3em;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;}
 .handle{padding-left:0.625em;color:#333}

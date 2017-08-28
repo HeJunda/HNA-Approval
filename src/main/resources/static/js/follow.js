@@ -89,9 +89,9 @@ $(function(){
 		        	}else{
 		        		$('.conSearch').text()
 		        		$('.agency-list').append('<div class="conText">暂无数据</div>')
-		        		$('.followInfo').css('display','none')
+		        		
 		        	}
-		            
+		        	$('.followInfo').css('display','none')
 		        },
 		        error: function(err){
 		            console.log(err);

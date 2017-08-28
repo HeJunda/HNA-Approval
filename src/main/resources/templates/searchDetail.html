@@ -49,12 +49,13 @@
 			 var _this=this;
 			 var user=getCookie('userid')
 			 var code=localurl('index')
+			 var urld=localurl('urls')
 			 console.log(user)
 			 console.log(code)
-			 axios.get("/workflow/getMyInitiatedProcess",{params:{userid:user}}).then(function(response){
+			 axios.get(urld,{params:{userid:user}}).then(function(response){
 				  console.log(response.data)
 				  _this.dataes=response.data[code];
-				  console.log(_this.dataes)
+				  //console.log(_this.dataes)
 			 }).catch(function(error){
 				  console.log(error);
 			 });

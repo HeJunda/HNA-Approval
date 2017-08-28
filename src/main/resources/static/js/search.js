@@ -3,8 +3,10 @@ var rows = 10;//每页显示条数
 var userid = getCookie("userid");//用户id
 var keywork=[];
 var ind = 0;
+
 function tab(index){
 	ind = index;
+	
 	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
 	//重新初始化变量
 	start = -10;
@@ -16,7 +18,7 @@ function tab(index){
 tab(0);
 //实现下拉加载
 function pullLoadData(){
-	
+	var urls = ind == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
     $('#active').dropload({
         scrollArea : window,
         domDown : {
@@ -29,7 +31,7 @@ function pullLoadData(){
             // 加载菜单一的数据
                 $.ajax({
                     type: 'GET',
-                    url: ind == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/',
+                    url: urls,
                     data:{
                     	start:start+=10,
                     	limit:10,
@@ -41,7 +43,7 @@ function pullLoadData(){
                     	    if(data.length>0){
                     	    for(var i=0;i<data.length;i++){
                     		   ahtml= ahtml+ '<li class="clearfix">'
-					                             +'<a href="/searchDetail.html?index='+i+'">'
+					                             +'<a href="/searchDetail.html?urls='+urls+'&index='+i+'">'
 					                           		  +'<div class="agency-right">'
 					                           		  +'<div class="right-box">'
 					                              		+'<h3 class="agency-title">'+data[i].flowname+'</h3>'
