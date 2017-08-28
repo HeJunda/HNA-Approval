@@ -95,8 +95,6 @@ public class UserService {
 	 */
 	public Boolean testBohaiLoginNOPWD(String userid) throws Exception{
 		
-		
-		System.out.println("我传入:"+userid);
 		T2Util.init();
 		
 		//请求体
