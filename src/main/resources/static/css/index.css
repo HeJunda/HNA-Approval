@@ -205,3 +205,4 @@ input-placeholder{font-size:12px;}
 .onnum{width:20px;height:20px;background:#EF372F;display:block;border-radius:10px;color:#FFF;position:absolute;top:26px;left:78px;}
 .conText{text-align:center;font-size:12px;line-height:44px;}
 .followInfo{text-align:center;font-size:12px;line-height:44px;}
+.agenText{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}

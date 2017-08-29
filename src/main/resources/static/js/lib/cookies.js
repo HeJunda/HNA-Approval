@@ -15,6 +15,10 @@ function getCookie(name){
 	return '';
 }
 
+function removeCookie(name){
+	setCookie(name,1,-1)
+}
+
 function localurl(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var url=window.location.search;

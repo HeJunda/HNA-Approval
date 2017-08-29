@@ -46,7 +46,7 @@ function pullLoadData(){
 					                             +'<a href="/searchDetail.html?urls='+urls+'&index='+i+'">'
 					                           		  +'<div class="agency-right">'
 					                           		  +'<div class="right-box">'
-					                              		+'<h3 class="agency-title">'+data[i].flowname+'</h3>'
+					                              		+'<h3 class="agenText">'+data[i].flowname+'</h3>'
 					                              		+'<p class="follow-person">发起人：<span class="fr">'+data[i].assigneename+'</span></p>'
 					                              		+'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
 					                              		+'<p class="follow-person">当前审批人：<span class="fr">'+data[i].assigneename+'</span></p>'

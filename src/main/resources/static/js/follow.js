@@ -44,6 +44,7 @@ $(function(){
 		        	}else{
 		        		$('.conSearch').text()
 		        		$('.agency-list').append('<div class="conText">暂无数据</div>')
+		        		$('.followInfo').css('display','none')
 		        	}
 		        	
 			            

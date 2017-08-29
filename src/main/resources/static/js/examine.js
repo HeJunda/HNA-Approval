@@ -62,6 +62,7 @@ var vm=new Vue({
 		var user=getCookie('userid')
 		var _this=this;
 		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+			console.log(response.data)
 			_this.digital=response.data[0];
 			_this.add=response.data[0].instanceid;
 			var instance=_this.add;
@@ -90,7 +91,6 @@ var vm=new Vue({
 			var user=getCookie('userid')
 			var instance=this.digital.instanceid;
 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
-				
 				_this.dates=response.data[0];
 				var info=JSON.parse(_this.dates.flowinfo)
 				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
@@ -287,7 +287,7 @@ var vm=new Vue({
 				    content: '输入不能为空',
 				    skin: 'msg',
 				    style: 'background-color:#ccc; color:#fff; border:none;',
-				    time: 3 
+				    time: 2
 				});
 			}else{
 				var _this=this;
@@ -306,15 +306,15 @@ var vm=new Vue({
 						    content: '提交成功',
 						    skin: 'msg',
 						    style: 'background-color:#ccc; color:#fff; border:none;',
-						    time: 3 
+						    time: 2
 						  });
-						window.location.href='agenList.html';
+						setTimeout(function(){window.location.href='agenList.html'},1000)
 					}else{
 						layer.open({
 						    content: response.data[0].result,
 						    style: 'background-color:#ccc; color:#fff; border:none;',
 						    skin: 'msg',
-						    time: 3 
+						    time: 2
 						});
 					}
 				}).catch(function(response){
@@ -323,7 +323,7 @@ var vm=new Vue({
 					    content: response.result,
 					    style: 'background-color:#ccc; color:#fff; border:none;',
 					    skin: 'msg',
-					    time: 3 
+					    time: 2
 					});
 				})
 			}

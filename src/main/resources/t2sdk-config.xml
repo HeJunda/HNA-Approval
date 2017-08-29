@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <t2sdk-configuration>
-	<performance debug="true" localServerName="t2sdksddsgndj"
+	<performance debug="true" localServerName="t2sdksdherk"
 		reconnInterval="8" callBackTime="60000" heartbeatTime="60000" 
 		sendPoolSize="2" senderQueueLength="30" />
 	<parents>
