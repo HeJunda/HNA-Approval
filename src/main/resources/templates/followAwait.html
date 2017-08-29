@@ -36,7 +36,7 @@
 			      			<div class="agency-right">
 			            		<div class="right-box">
 			           				<h3 class="agency-title">{{item.flowname}}</h3>
-			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
+			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.dptname}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
 			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
 			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
@@ -100,7 +100,8 @@
  			console.log(user)
  			console.log(code)
  			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:code,flowtype:'_notictask'}}).then(function(response){
-				_this.dataes=response.data;
+				console.log(response.data)
+ 				_this.dataes=response.data;
 				var name=JSON.parse(_this.dataes[0].actionlist)
 				_this.await=name;
 				_this.datil=response.data[0]

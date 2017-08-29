@@ -68,7 +68,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .list-right{float:left;margin-top:10px;margin-left:20%}
 .agenRight span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 20px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .agenList span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
-.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-right p{width:100%;font-size:1em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
 /*消息弹窗*/
@@ -130,7 +130,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-item span.status-text{font-size:1em;padding-right:1em;color:#7B7B7B}
 .examine-item .more-close{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat 8px -370px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
 .examine-item .more-open{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat -72px -321px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
-.examine-details li{font-size:0.875em;color:#7F7F7F;background-color:#fff;border-bottom:1px solid #E7E7E7;padding:0 0.625em;line-height:2.5em}
+.examine-details li{clear: both;font-size:0.875em;color:#7F7F7F;background-color:#fff;border-bottom:1px solid #E7E7E7;padding:0 0.625em;line-height:2.5em}
 .examine-details li span{font-size:0.875em;color:#333;font-size:1em}
 .space{height:0.625em;width:100%;background-color:#F9F9F9}
 .examine-opinion{width:95%;height:6em;border:0;border-bottom:1px solid #E7E7E7;padding:0.625em;font-size:0.875em;color:#333;margin:0 auto;display: block;}
