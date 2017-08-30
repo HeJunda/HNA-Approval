@@ -7,7 +7,7 @@ code,kbd,pre,samp{font-family:"Microsoft yahei";}
 small{font-size:12px;}
 ul,ol{list-style:none;}
 a{text-decoration:none;color: #333;}
-a:hover{text-decoration: underline;}
+a:hover{text-decoration:none;border:1px solid #fff;}
 sup{vertical-align:text-top;}
 sub{vertical-align:text-bottom;}
 legend{color:#000;}
@@ -68,9 +68,10 @@ table{border-collapse:collapse;border-spacing:0;}
 .list-right{float:left;margin-top:10px;margin-left:20%}
 .agenRight span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 20px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .agenList span.number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
-.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.agency-right p{width:100%;font-size:1em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+.agency-title{color:#3C3C3C;font-size:0.925em;font-style:normal;line-height:2.5em;width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agency-right p{width:100%;font-size:0.825em;color:#7F7F7F;padding-top: 0.8em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
+.projtext{font-size:0.825em}
 /*消息弹窗*/
 .popup{display: block;width:100%;height:100%}
 .popup .popup-title{background-color:#E75732;color:#fff;font-size:1.5em;height:3em;line-height:3em}
@@ -93,7 +94,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-right span.arrow{position:absolute;display: inline-block;color:#8C8C8C;top:28px;right: 8px;text-align:center;vertical-align:middle;background:url(/images/tcmp-icon.png)no-repeat 0 -370px;height:20px;width:10px}
 .agency-right p.follow-person{display: inline-block;position: relative}
 .agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;text-align}
-.agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:3px 10px;border:1px solid #E75732;border-radius:5px}
+.agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:2px 8px;border:1px solid #E75732;border-radius:5px}
 /*项目查询*/
 .project-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
 .project-tab ul li a{text-decoration:none;padding:0.75em 0;}
@@ -105,7 +106,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .search-box .search-btn .search-icon{display: inline-block;width:20px;height:20px;vertical-align:middle;background: url(/images/tcmp-icon.png) no-repeat -70px -297px;margin-right:5px}
 .lucre-name{border:1px solid #EDEDED;display: inline-block;padding:5px}
 .lucre-name p{color:#E75732}
-.lucre-name p.project-price{font-size:1em;font-weight:bold;line-height:2em}
+.lucre-name p.project-price{font-size:0.925em;font-weight:bold;line-height:2em}
 .lucre-name p.project-lucre{font-size:0.75em}
 /*项目详情*/
 .project-detail{display:block;width:100%;margin-top:10px;border-top:1px solid #EFEFEF;border-bottom:1px solid #EFEFEF}
@@ -205,4 +206,4 @@ input-placeholder{font-size:12px;}
 .onnum{width:20px;height:20px;background:#EF372F;display:block;border-radius:10px;color:#FFF;position:absolute;top:26px;left:78px;}
 .conText{text-align:center;font-size:12px;line-height:44px;}
 .followInfo{text-align:center;font-size:12px;line-height:44px;}
-.agenText{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agenText{color:#3C3C3C;font-size:0.825em;font-style:normal;line-height:2em;width:70%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}

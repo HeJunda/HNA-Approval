@@ -19,16 +19,18 @@ var vm=new Vue({
 				start=_this.dataes.length;
 				
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
-					
-						if(response.data.length>0){
-							_this.dataes=_this.dataes.concat(response.data)
-					 	}else{
-			                me.lock('down')
-			                me.noData(true);
-						}
-						setTimeout(function(){
-		                    me.resetload();
-		                },1000);
+					if(response.data.length>0){
+						console.log(response.data.length)
+						_this.dataes=_this.dataes.concat(response.data)
+					}else{
+						console.log(response.data.length)
+						me.lock('up')
+			            me.lock('down')
+			            me.noData(true);
+					}
+					setTimeout(function(){
+		                me.resetload();
+		            },1000);
 					
 				}).catch(function(error){
 				 	console.log(error);

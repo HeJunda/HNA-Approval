@@ -51,7 +51,7 @@ function pullLoadData(){
      								                        +'<div class="list-right">'
      								                         	+'<div class="right-box">'
      								                           	    +'<h3 class="agency-title">'+data[i].dptname+'</h3>'
-     								                           		+'<p>'+data[i].projectname+'</p>'
+     								                           		+'<p class="projtext">'+data[i].projectname+'</p>'
      								                           	+'</div>'
      								                        +'</div>'
      							                        +'</a>'
