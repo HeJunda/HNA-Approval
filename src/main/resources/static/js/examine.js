@@ -252,7 +252,7 @@ var vm=new Vue({
 				    time: 1
 				});
 			}
-			lis.removeClass('bg')
+			//lis.removeClass('bg')
 		},
 			
 		/*常用语*/
@@ -272,7 +272,7 @@ var vm=new Vue({
     			$(document).on("click",".option",function(){
     				var value=$(this).text()
     				$("#sele").val(value)
-    				_this.opinion=value;
+    				_this.opinion=$("#sele").val();
     				layer.close(L)
     			}); 
         		
@@ -291,7 +291,7 @@ var vm=new Vue({
 				});
 			}else{
 				var _this=this;
-				var str=this.opinion;
+				var str=$("#sele").val();
 				var parm=this.parms;
 				var comebacks=this.comeback;
 				var formtypes=this.digital.formtype;

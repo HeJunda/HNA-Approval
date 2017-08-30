@@ -28,7 +28,7 @@ $(function(){
 			                for(var i = 0; i < data.length; i++){
 			                    result +=   '<li class="clearfix">'
 								      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
-								      			+'<div class="followList">'
+								      			+'<div class="agency-right">'
 								            		+'<div class="right-box">'
 								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
@@ -72,7 +72,7 @@ $(function(){
 			            for(var i = 0; i < data.length; i++){
 			                result +=   '<li class="clearfix">'
 						                	+'<a href="/followAlready.html?instanceid='+data[i].instanceid+'">'
-								      			+'<div class="followList">'
+								      			+'<div class="agency-right">'
 								            		+'<div class="right-box">'
 								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
