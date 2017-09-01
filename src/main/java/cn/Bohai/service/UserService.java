@@ -203,7 +203,8 @@ public class UserService {
 	 */
 	public String getSSOInfo(Token token) throws Exception{
 		try {
-			String userInfo = SSOUtil.CheckTokenBySSO(token.getToken());
+			SSOUtil sso = new SSOUtil();
+			String userInfo = sso.CheckTokenBySSO(token.getToken());
 			return userInfo;
 		} catch (Exception e) {
 			// TODO: handle exception

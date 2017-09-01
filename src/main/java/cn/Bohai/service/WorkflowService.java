@@ -17,6 +17,7 @@ import java.util.Map;
 
 
 
+
 //import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +61,57 @@ public class WorkflowService {
 
 	
 	/**
+	 * 获取待办消息总条数
+	 * @param User
+	 * @throws Exception 
+	 */
+	public int getAwaitTotalNum(User user) throws Exception{
+		
+		T2Util.init();
+		MapWriter mw = new MapWriter();
+		
+		//校验参数
+		mw.put("userid",user.getUserid());
+		mw.put("clienttype",CommonParameter.clienttype);
+		mw.put("clientsign",CommonParameter.clientsign);
+		mw.put("checkcode",CommonParameter.checkcode);
+		
+		//请求体
+		mw.put("interfaceid","R8107");//待办信息接口(R8101)
+		
+		
+		IDataset iDataset = mw.getDataset();
+		IDatasets result = null;
+		
+		int totalNum = 0;
+		//访问接口
+	    result = T2Util.send("8000", iDataset);
+	    if(result != null){
+	    	@SuppressWarnings("rawtypes")
+	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	
+	    	
+	    	for(int i=0;i<resultListMap.size();i++){
+	    		if(resultListMap.get(i).get("flowtype").equals("_notictask")){
+	    			resultListMap.remove(i);
+	    		} else {
+	    			String tasknum = (String) resultListMap.get(i).get("tasknum");
+	    			int a = Integer.parseInt(tasknum);
+	    			totalNum = totalNum + a;
+	    		}
+	    	}
+//	    	String jsonString = JSON.toJSONString(resultListMap);
+//	    	JSONArray jsonArray = JSONArray.parseArray(jsonString);
+//	    	System.out.println(jsonString);
+	    	return totalNum;
+	    }else{
+	    	return 0;
+	    }
+	}
+	
+	
+	
+	/**
 	 * 获取待办消息分类列表
 	 * @param User
 	 * @throws Exception 
@@ -87,6 +139,7 @@ public class WorkflowService {
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
+	    	
 	    	for(int i=0;i<resultListMap.size();i++){
 	    		if(resultListMap.get(i).get("flowtype").equals("_notictask")){
 	    			resultListMap.remove(i);

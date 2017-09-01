@@ -1,6 +1,7 @@
 package cn.Bohai.Utils;
 
 import cn.Bohai.Utils.RSAUtils;
+import cn.Bohai.common.CommonParameter;
 import cn.Bohai.model.CheckUserAuthEntity;
 
 import java.io.BufferedReader;
@@ -11,10 +12,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-
-
-
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -95,7 +92,7 @@ public class SSOUtil {
 	        System.out.println("body:"+body);
 
 			//sso服务公钥
-			String publicKeyStr = RSAUtils.loadKeyStringByPath("/app/www/htdocs/hna_apl/sso_rsa_public_key.pem");
+			String publicKeyStr = RSAUtils.loadKeyStringByPath(CommonParameter.publicKeyLocation);
 			String bodyEncrypt;
 			try {
 				//加密body参数
@@ -133,8 +130,11 @@ public class SSOUtil {
 			//打印返回代码和返回信息
 //	        System.out.println("respCode:"+checkUserAuthEntity.getHeader().getRespCode()+",respMsg:"+checkUserAuthEntity.getHeader().getRespMsg());
 	        
+//			 PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+//			resolver.getResources("classpath:private_key.pem")
+			
 			//解密body内容
-			String privateKeyStr = RSAUtils.loadKeyStringByPath("/app/www/htdocs/hna_apl/private_key.pem");
+			String privateKeyStr = RSAUtils.loadKeyStringByPath(CommonParameter.privateKeyLocation);
 			try {
 				String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
 		        System.out.println("bodyDecrypt:"+bodyDecrypt);

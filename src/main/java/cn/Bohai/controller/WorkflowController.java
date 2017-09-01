@@ -34,10 +34,24 @@ public class WorkflowController {
     
 	@Autowired
 	private WorkflowService workflowService;
-	@Autowired
-	private UserService userService;
 	
 	
+	
+	
+	/**
+     * 获取待办消息总条数
+	 * @throws Exception 
+     */
+	@RequestMapping(value = "/getAwaitTotalNum",method = RequestMethod.GET)
+	public int getAwaitTotalNum(User user){
+		int TotalNum = 0;
+		try {
+			TotalNum = workflowService.getAwaitTotalNum(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return TotalNum;
+	} 
 	
 
 	/**
@@ -182,9 +196,7 @@ public class WorkflowController {
 		
 	    JSONArray jsonArray = new JSONArray();
 		try {
-			if(userService.testBohaiLoginNOPWD(processing.getUserid())){
-				jsonArray = workflowService.processProcessing(processing);
-			}
+			jsonArray = workflowService.processProcessing(processing);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
