@@ -6,10 +6,11 @@ var vm=new Vue({
       showuser:false,
       showLange:false,
       showHis:true,
+      showAtt:false,
       digital:{},
       ObjInfo:{},
       temes:[],
-      annex:'',
+      annex:[],
       attach:'',
       histry:[],
       aclist:'',
@@ -69,8 +70,15 @@ var vm=new Vue({
 			var user=getCookie('userid');
 			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 				_this.histry=response.data
-				var att=_this.histry[0].attach
-				_this.annex=JSON.parse(att);
+				var arr=[];
+				for(var i=0;i<response.data.length;i++){
+					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+					var left = str.split(',')
+					arr.push(left)
+				}
+
+				_this.annex=arr
+				console.log(_this.annex)
 			}).catch(function(error){
 			    console.log(error);
 			});

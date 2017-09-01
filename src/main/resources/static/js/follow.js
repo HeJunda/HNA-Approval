@@ -23,6 +23,7 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
+		        	console.log(data)
 		        	if(data!=""){
 		        		var result=''
 			                for(var i = 0; i < data.length; i++){
@@ -30,6 +31,7 @@ $(function(){
 								      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
 								      			+'<div class="agency-right">'
 								            		+'<div class="right-box">'
+								            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
 								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
 								           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
@@ -67,6 +69,7 @@ $(function(){
 		        },
 		        dataType: 'json',
 		        success: function(data){
+		        	console.log(data)
 		        	if(data!=""){
 		        		var result = '';
 			            for(var i = 0; i < data.length; i++){
@@ -74,12 +77,12 @@ $(function(){
 						                	+'<a href="/followAlready.html?instanceid='+data[i].instanceid+'">'
 								      			+'<div class="agency-right">'
 								            		+'<div class="right-box">'
+								            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
 								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
 								           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
 								           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
-								           				+'<p class="follow-person">知会处理人：<span class="fr follr">'+data[i].recivertime+'</span></p>'
-								           				+'<p class="follow-person">知会意见：<span class="fr follr">'+data[i].noticemsg+'</span></p>'
+								           				
 								           			+'</div>'
 								           		+'</div>'
 								           	+'</a>'
@@ -101,7 +104,6 @@ $(function(){
 		}
 	})
 	$('.tab .item').eq(0).click()
-	
 })
 
 

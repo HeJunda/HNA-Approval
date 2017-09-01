@@ -44,6 +44,7 @@ var vm=new Vue({
 				loadDownFn : function(me){
 					start=_this.datas.length;
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
+						console.log(response.data)
 						if(response.data==[]){
 							me.lock('up');
 			                me.lock('down')

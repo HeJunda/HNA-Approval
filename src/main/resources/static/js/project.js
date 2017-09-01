@@ -50,8 +50,8 @@ function pullLoadData(){
      								                        +'</div>'
      								                        +'<div class="list-right">'
      								                         	+'<div class="right-box">'
-     								                           	    +'<h3 class="agency-title">'+data[i].dptname+'</h3>'
-     								                           		+'<p class="projtext">'+data[i].projectname+'</p>'
+     								                           	    +'<h3 class="agency-title">'+data[i].projectname+'</h3>'
+     								                           		+'<p class="projtext">'+data[i].dptname+'</p>'
      								                           	+'</div>'
      								                        +'</div>'
      							                        +'</a>'
@@ -65,7 +65,7 @@ function pullLoadData(){
                             			$('.agency-list').find('ul').append(ahtml);
                             			var name=[]
                             			for(var i=0;i<data.length;i++){
-                            				name=data[i].dptname
+                            				name=data[i].projectname
                             				keywork.push(name)
                             			}     
                             			me.resetload();
