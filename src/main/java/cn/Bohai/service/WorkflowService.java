@@ -1,9 +1,14 @@
 package cn.Bohai.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 //import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 
@@ -18,9 +23,18 @@ import java.util.Map;
 
 
 
+
+import java.util.TreeMap;
+
+
+
+
+
+
 //import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import cn.Bohai.Utils.COMMONUtils;
 import cn.Bohai.Utils.T2Util;
 import cn.Bohai.common.CommonParameter;
 //import cn.Bohai.model.Attach;
@@ -373,35 +387,62 @@ public class WorkflowService {
 	    			if (baseFlowinfoJsonString == null || baseFlowinfoJsonString.equals("")) {
 	    				map.put("flowinfo", "");
 	    			} else {
-	    				//去掉多余数字
-	    				Map<String,Object> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
-	    				Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    				
+	    				Map<String,String> baseInfoMap = JSON.parseObject(baseFlowinfoJsonString, Map.class);
+	    				HashMap<Integer, String> baseInfoMapShow = new HashMap<Integer,String>();
 	    				for (String key : baseInfoMap.keySet()) {
-	    					String newkey = key.substring(key.indexOf('|') + 1);
-	    					Object newValue = baseInfoMap.get(key);
-	    					baseInfoMapShow.put(newkey, newValue);
+	    					String newValue = key.substring(key.indexOf('|') + 1) + ":" + baseInfoMap.get(key);
+	    					String newKey = key.substring(0,key.indexOf('|'));
+	    					Integer order = Integer.valueOf(newKey);
+	    					baseInfoMapShow.put(order, newValue);
 	    				}
-	    				String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+//	    				Map<Integer, String> orderMap = new TreeMap<Integer, String>(
+//	    						new Comparator<Integer>() {
+//	    							public int compare(Integer obj1, Integer obj2) {
+//	    								return obj1.compareTo(obj2);  // 升序排序
+//	    							}
+//	    						});
+//	    				orderMap.putAll(baseInfoMapShow);
+	    				
+	    				//排序
+	    				
+	    				List<TreeMap<String,String>> finalDate = new ArrayList<TreeMap<String,String>>();
+	    				for(int j=0;j<baseInfoMapShow.size();j++){
+	    					TreeMap<String,String> finalInfoMapShow = new TreeMap<String,String>();
+	    					String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
+	    					String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
+	    					finalInfoMapShow.put(newKey, newValue);
+	    					finalDate.add(finalInfoMapShow);
+	    				}
+	    				String flowBaseInfoString = JSON.toJSONString(finalDate);
 	    				map.put("flowinfo", flowBaseInfoString);
 	    			}
 	    			
 	    		} else {
 	    			
 	    			flowinfo = flowinfo.replace("\\\\", "");
-//	    			JSONObject flowinfoJsonObject = JSONObject.parseObject(flowinfo);
-//	    			String baseFlowinfoJsonString = (String) flowinfoJsonObject.get("0|基本信息");
 	    			if (flowinfo == null || flowinfo.equals("")) {
 	    				map.put("flowinfo", "");
 	    			} else {
-	    				//去掉多余数字
-	    				Map<String,Object> baseInfoMap = JSON.parseObject(flowinfo, Map.class);
-	    				Map<String,Object> baseInfoMapShow = new HashMap<String,Object>();
+	    				
+	    				Map<String,String> baseInfoMap = JSON.parseObject(flowinfo, Map.class);
+	    				HashMap<Integer, String> baseInfoMapShow = new HashMap<Integer,String>();
 	    				for (String key : baseInfoMap.keySet()) {
-	    					String newkey = key.substring(key.indexOf('|') + 1);
-	    					Object newValue = baseInfoMap.get(key);
-	    					baseInfoMapShow.put(newkey, newValue);
+	    					String newValue = key.substring(key.indexOf('|') + 1) + ":" + baseInfoMap.get(key);
+	    					String newKey = key.substring(0,key.indexOf('|'));
+	    					Integer order = Integer.valueOf(newKey);
+	    					baseInfoMapShow.put(order, newValue);
 	    				}
-	    				String flowBaseInfoString = JSON.toJSONString(baseInfoMapShow);
+	    				//排序
+	    				List<TreeMap<String,String>> finalDate = new ArrayList<TreeMap<String,String>>();
+	    				for(int j=0;j<baseInfoMapShow.size();j++){
+	    					TreeMap<String,String> finalInfoMapShow = new TreeMap<String,String>();
+	    					String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
+	    					String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
+	    					finalInfoMapShow.put(newKey, newValue);
+	    					finalDate.add(finalInfoMapShow);
+	    				}
+	    				String flowBaseInfoString = JSON.toJSONString(finalDate);
 	    				map.put("flowinfo", flowBaseInfoString);
 	    			}
 	    		}
