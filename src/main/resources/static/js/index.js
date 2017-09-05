@@ -40,27 +40,27 @@ new Vue({
     },
     methods:{
     	agency:function(){
-    		if(this.dataes=true){
+    		if(this.dataes=true && this.loading==false){
     			window.location.href='agenList.html'
     	    }
     	},
     	follow:function(){
-    		if(this.dataes=true){
+    		if(this.dataes=true && this.loading==false){
     			window.location.href='follow.html'
     	    }
     	},
     	message:function(){
-    		if(this.dataes=true){
+    		if(this.dataes=true && this.loading==false){
     			window.location.href='message.html'
     	    }
         },
         project:function(){
-        	if(this.dataes=true){
+        	if(this.dataes=true && this.loading==false){
     			window.location.href='project.html'
     	    }
         },
         search:function(){
-        	if(this.dataes=true){
+        	if(this.dataes=true&&this.loading==false){
     			window.location.href='search.html'
     	    }
         }

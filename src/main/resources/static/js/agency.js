@@ -72,9 +72,10 @@ var vm=new Vue({
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
-			                me.lock('down')
-			                me.noData(true);
+							_this.datas=response.data;
 						}
+						me.lock('down')
+		                me.noData(true);
 						setTimeout(function(){
 		                    me.resetload();
 		                },1000);

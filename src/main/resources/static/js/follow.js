@@ -14,6 +14,12 @@ $(function(){
 	 var dropload = $('.agency-list').dropload({
         scrollArea:window,
 	        distance:50,
+	        domUp : {
+	            domClass   : 'dropload-up',
+	            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+	            domLoad    : '<div class="dropload-load">加载中...</div>'
+	        },
 	        domDown:{
 	            domClass : 'dropload-down',
 	            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
@@ -21,7 +27,6 @@ $(function(){
 	            domNoData : '<div class="dropload-noData">数据加载完毕</div>'
 	        },
 	        loadDownFn : function(me){
-	        	console.log(itemIndex)
 	            $.ajax({
 			        type: 'GET',
 			        url: '/workflow/getSplitRead',
@@ -33,30 +38,31 @@ $(function(){
 			        },
 			        dataType: 'json',
 			        success: function(data){
+			        	
 			        	if(data!=""){
-			        		var result=''
+			        		var result=result ||'' 
 				                for(var i = 0; i < data.length; i++){
-				                    result +=   '<li class="clearfix">'
-									      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
+				                	//console.log(data)
+				                    result += '<li class="clearfix">'
+									      		+'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
-									           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
-									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
-									           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
-									           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 18%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">'+(data[i].taskname==undefined?"":data[i].taskname)+'</span></p>'
+									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
+									           				+'<p class="follow-person">发送人：<span class="fr follr">'+(data[i].sendername==undefined?"":data[i].sendername)+'</span></p>'
+									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+(data[i].createtime==undefined?"":data[i].createtime)+'</span></p>'
+									           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+(data[i].startorg==undefined?"":data[i].startorg)+'</span></p>'
+									           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+(data[i].startname==undefined?"":data[i].startname)+'</span></p>'
 									           			+'</div>'
 									           		+'</div>'
 									           	+'</a>'	
 									      	+'</li>'
 			                }
+			        		//console.log(result)
 			                $('.agency-list ul').append(result);
-			                $('.followInfo').css('display','none');
 			                
 			        	}else{
 			        		$('.conSearch').text()
-			        		$('.agency-list').append('<div class="conText">暂无数据</div>')
-			        		$('.followInfo').css('display','none')
 			        	}
 			        	   
 			             	// 锁定
@@ -73,7 +79,6 @@ $(function(){
 	             
 	        },
 	        loadUpFn : function(me){
-	        	console.log(itemIndex)
 	            $.ajax({
 			        type: 'GET',
 			        url: '/workflow/getSplitRead',
@@ -85,6 +90,7 @@ $(function(){
 			        },
 			        dataType: 'json',
 			        success: function(data){
+			        	
 			        	if(data!=""){
 			        		var result=''
 				                for(var i = 0; i < data.length; i++){
@@ -92,6 +98,7 @@ $(function(){
 									      		+'<a href="/followAwait.html?taskid='+data[i].taskid+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr">'+data[i].taskname+'</span></p>'
 									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
 									           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
@@ -103,12 +110,9 @@ $(function(){
 									      	+'</li>'
 			                }
 			                $('.agency-list ul').append(result);
-			                $('.followInfo').css('display','none');
 			                
 			        	}else{
 			        		$('.conSearch').text()
-			        		$('.agency-list').append('<div class="conText">暂无数据</div>')
-			        		$('.followInfo').css('display','none')
 			        	}
 			        	// 每次数据加载完，必须重置
                         me.resetload();		            
@@ -221,7 +225,7 @@ $(function(){
 		    })
 		}*/
 	})
-	$('.tab .item').eq(0).click()
+	//$('.tab .item').eq(0).click()
 })
 
 
