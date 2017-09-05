@@ -6,7 +6,7 @@ var ind = 0;
 
 function tab(index){
 	ind = index;
-	
+	console.log(ind)
 	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
 	//重新初始化变量
 	start = -10;
@@ -19,6 +19,7 @@ tab(0);
 //实现下拉加载
 function pullLoadData(){
 	var urls = ind == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+	
     $('#active').dropload({
         scrollArea : window,
         domUp : {
@@ -46,17 +47,20 @@ function pullLoadData(){
                 dataType: 'json',
                 success: function(data){
                 		var ahtml = "";
+                		
                 	    for(var i=0;i<data.length;i++){
+                	    	var startname = ind == 0 ? data[i].starter : data[i].startername;
+                    		var startorg = ind == 0 ? data[i].startorg : data[i].starterorgname;
                 		   ahtml= ahtml+ '<li class="clearfix">'
 				                             +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
 				                           		  +'<div class="agency-right">'
 				                           		  +'<div class="right-box">'
 				                              		+'<h3 class="agenText">'+data[i].flowname+'</h3>'
 				                              		+'<p class="follow-person">流程编号：<span class="fr">'+data[i].instanceid+'</span></p>'
-				                              		+'<p class="follow-person">发起人：<span class="fr">'+data[i].starter+'</span></p>'
+				                              		+'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
 				                              		+'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
 				                              		+'<p class="follow-person">当前审批人：<span class="fr">'+data[i].assigneename+'</span></p>'
-				                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+data[i].startorg+'</span></p>'
+				                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+startorg+'</span></p>'
 				                              		+'<span class="prompt fr">'+data[i].flowstatus+'</span>'
 				                                  +'</div>'
 				                                  +'</div>'
@@ -100,19 +104,22 @@ function pullLoadData(){
                     dataType: 'json',
                     success: function(data){
                     	console.log(data)
+                    	
                     		var ahtml = "";
                     	    if(data.length>0){
                     	    for(var i=0;i<data.length;i++){
-                    		   ahtml= ahtml+ '<li class="clearfix">'
+                    	    	var startname = ind == 0?data[i].starter:data[i].startername;
+                        		var startorg = ind == 0?data[i].startorg:data[i].starterorgname;
+                    		    ahtml= ahtml+ '<li class="clearfix">'
 					                             +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
 					                           		  +'<div class="agency-right">'
 					                           		  +'<div class="right-box">'
 					                              		+'<h3 class="agenText">'+data[i].flowname+'</h3>'
 					                              		+'<p class="follow-person">流程编号：<span class="fr">'+data[i].instanceid+'</span></p>'
-					                              		+'<p class="follow-person">发起人：<span class="fr">'+data[i].starter+'</span></p>'
+					                              		+'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
 					                              		+'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
 					                              		+'<p class="follow-person">当前审批人：<span class="fr">'+data[i].assigneename+'</span></p>'
-					                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+data[i].startorg+'</span></p>'
+					                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+startorg+'</span></p>'
 					                              		+'<span class="prompt fr">'+data[i].flowstatus+'</span>'
 					                                  +'</div>'
 					                                  +'</div>'
@@ -157,6 +164,7 @@ function sear(){
 	var txt = gulpval.value
 	if(txt==''){
 		pullLoadData();
+		$('.dropload-down').eq(0).remove()
 	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";

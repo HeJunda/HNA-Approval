@@ -143,7 +143,7 @@ function sear(){//点击
 	var txt = gulpval.value
 	if(txt=='') {
 		pullLoadData();
-		$(".dropload-load").remove()
+		$('.dropload-down').eq(0).remove()
 	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";
