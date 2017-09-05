@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-	<title>流程详情</title>
+	<title>待办任务</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
 	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
@@ -36,12 +36,12 @@
                     <li>流程标题<span class="fr">{{dates.flowname}}</span></li>
                     <li>流程名称<span class="fr">{{dates.processname}}</span></li>
                     <li>发起时间<span class="fr">{{dates.starttime}}</span></li>
-                    <li v-for="(val,key) in ObjInfo">{{key}}<span class="fr">{{val}}</span></li>
-                    <div class="tems">
+                    <li  v-for="val in ObjInfo"><p v-for="(ie,key) in val">{{key}}<span class="fr">{{ie}}</span></p></li>
+                    <!-- <div class="tems">
                     	<ul>
                     		 <li v-for="(val,key) in temes"><a :href="'http://10.72.8.130:7004'+val" class="tems">附件：{{key}}</a>	</li>
                     	</ul>
-            	 	</div>
+            	 	</div> -->
                  </ul>
                 
                  <p class="space"></p>

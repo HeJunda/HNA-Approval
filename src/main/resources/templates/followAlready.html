@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-	<title>已阅</title>
+	<title>已阅任务</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css" />
 </head>
 <body>
@@ -59,7 +59,8 @@
  			console.log(user)
  			console.log(code)
  			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
-				_this.dataes=response.data;
+				console.log(response.data)
+ 				_this.dataes=response.data;
 				_this.showes=false
  			}).catch(function(error){
  			    console.log(error);

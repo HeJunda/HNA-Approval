@@ -1,7 +1,8 @@
 new Vue({
 	el:"#app",
 	data:{
-		dataes:[]
+		dataes:[],
+		agenshow:false
 	},
 	filters:{
 		showIcon:function(type){
@@ -20,7 +21,6 @@ new Vue({
 			}else if(type=="23178"){
 				return 'other-icon';
 			}
-			
 		}
 	},
 	created:function(){
@@ -34,6 +34,7 @@ new Vue({
 				$('#app').append('<div class="conText">暂无数据</div>')
 			}
 			$('.followInfo').css('display','none')
+			_this.agenshow=true
 		}).catch(function(error){
 		 	console.log(error);
 		});

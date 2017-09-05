@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-	<title>待阅</title>
+	<title>待阅任务</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
 	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
-		<!-- <header class="header cleanF">
-	        <h3>待阅</h3>   
-	    </header> -->
 		<div class="container paddinTop">
 			<div class="examine-content">
             <div class="examine-img"><img src="images/examine.png"/></div>
@@ -36,6 +33,7 @@
 			      			<div class="agency-right">
 			            		<div class="right-box">
 			           				<h3 class="agency-title">{{item.flowname}}</h3>
+			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
 			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.dptname}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
 			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
@@ -51,24 +49,28 @@
 			<h3 class="examine-item" v-on:click="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
             <div id="history" v-show="showHis">
              	<ul class="examine-history">
-                 	<li class="history" v-for="msg in histry">
-                		<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
-                		<div class="history-describe">
-                  			{{msg.remark}}
-                		</div>
-                		<div class="history-enclosure">
-                     		<ul>
-                 		 		<li v-for="(val,key) in annex"><a :href="'http://10.72.8.130:7004'+val" class="tems">附件：{{key}}</a>	</li>
-                 			</ul>
-                		</div>
-              		</li>
-             	</ul>	
+                     <li class="history" v-for="(msg,ind) in histry">
+                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
+                    	<div class="history-describe">
+                      		{{msg.remark}}
+                    	</div>
+                    	<div class="history-enclosure">
+                         	<ul>
+                         		<li v-show="annex[ind][1] ? true : false ">
+                         			<a :href="'http://10.72.8.130:7004'+annex[ind][1]" class="tems">
+	                         			附件：{{annex[ind][0]}}
+	                        		</a>
+	                        	</li>
+	                    	</ul>
+                    	</div>
+                  	</li>
+                 </ul>		
             </div>
                  
             <div class="search-container">
        			<button v-for="val in await" v-on:click="submit()" class="search-button">{{val.name}}</button>
        		</div>
-			
+		
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
@@ -90,7 +92,7 @@
 			sub:[],
 			datil:[],
 			histry:[],
-			annex:'',
+			annex:[],
 			add:''
  		},
  		created:function(){
@@ -111,8 +113,16 @@
  				var user=getCookie('userid');
  				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 					_this.histry=response.data
-						var att=_this.histry[0].attach
-	 				_this.annex=JSON.parse(att);
+					/* var att=_this.histry[0].attach
+					console.log(att)
+	 				_this.annex=JSON.parse(att); */
+	 				var arr=[];
+	 				$.each(response.data,function(i){
+	 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+						var left = str.split(',')
+						arr.push(left)
+	 				})
+	 				_this.annex=arr
  				}).catch(function(error){
  				    console.log(error);
  				});

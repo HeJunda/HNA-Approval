@@ -21,13 +21,10 @@
 	       		<ul class="project-content">
 	       			<li>流程编号<span class="fr">{{dataes.instanceid}}</span></li>
 	          		<li>流程名称<span class="fr">{{dataes.processname}}</span></li>
-	          		<li>发起人<span class="fr">{{dataes.startername}}</span></li>
-	          		<li>发起部门名称<span class="fr">{{dataes.starterorgname}}</span></li>
+	          		<li>发起人<span class="fr">{{dataes.starter}}</span></li>
+	          		<li>发起部门名称<span class="fr">{{dataes.orgname}}</span></li>
 	          		<li>发起时间<span class="fr">{{dataes.starttime}}</span></li>
-	          		<li>流程状态<span class="fr">{{dataes.flowstatus}}</span></li>
 	          		<li>当前节点<span class="fr">{{dataes.nodename}}</span></li>
-	          		<li>当前处理人<span class="fr">{{dataes.assigneename}}</span></li>
-	          		<li>结束时间<span class="fr">{{dataes.endtime}}</span></li>
 	       		</ul>
       		</div>
     	</div>    
@@ -48,13 +45,12 @@
 		created:function(){
 			 var _this=this;
 			 var user=getCookie('userid')
-			 var code=localurl('index')
-			 var urld=localurl('urls')
+			 var code=localurl('instance')
 			 console.log(user)
 			 console.log(code)
-			 axios.get(urld,{params:{userid:user}}).then(function(response){
+			 axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
 				  console.log(response.data)
-				  _this.dataes=response.data[code];
+				  _this.dataes=response.data[0];
 				  //console.log(_this.dataes)
 			 }).catch(function(error){
 				  console.log(error);

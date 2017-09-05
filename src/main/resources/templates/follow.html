@@ -7,7 +7,8 @@
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>待阅流程</title>
-	<link rel="stylesheet" type="text/css" href="/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/index.css"/>
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
@@ -19,18 +20,16 @@
                 <p class="searNav item">已阅</p>
               </div>
           </div>
-          
-          <!-- <div class="conSearch">
-		    <ul class="agency-list"></ul>
-		  </div> -->
-		  <div class="conSearch">
-        		<div class="lists">
-	        		<div class="agency-list" id="active">
+		  <div class="conSearch" id="Iscroll">
+        		<div class="lists agency_lists wrapper" id="active">
+        			<div id="pullDown" class="">
+			            <div class="pullDownLabel"></div>
+			        </div>
+	        		<div class="agency-list">
 	        			<ul></ul>
 	        		</div>
         		</div>
           </div>
-		<div class="followInfo">加载中...</div>
 		
 		</div>
 	</div>
@@ -38,6 +37,7 @@
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
   	<script type="text/javascript" src="js/lib/axios.min.js"></script>
   	<script	type="text/javascript" src="js/home.js"></script>
+  	<script type="text/javascript" src="js/lib/dropload.js"></script>
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
   	<script	type="text/javascript" src="js/follow.js"></script>
  	<script type="text/javascript">

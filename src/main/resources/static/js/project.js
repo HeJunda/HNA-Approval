@@ -12,16 +12,74 @@ function tab(index){
 
 tab(0);
 function pullLoadData(){
-	
     $('#active').dropload({
         scrollArea : window,
+        domUp : {
+            domClass   : 'dropload-up',
+            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+            domLoad    : '<div class="dropload-load">加载中...</div>'
+        },
         domDown : {
 			domClass : 'dropload-down',
 			domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 			domLoad : '<div class="dropload-load">加载中...</div>',
 			domNoData : '<div class="dropload-noData">暂无数据</div>'
 		},
-        loadDownFn : function(me){
+		loadUpFn : function(me){
+            $.ajax({
+                type: 'GET',
+                url: '/project/getProjectList',
+                data:{
+                	start:0,
+                	limit:10,
+                	userid:userid
+                },
+                dataType: 'json',
+                success: function(data){
+                	var ahtml = "";
+             	    for(var i=0;i<data.length;i++){
+             		   ahtml=ahtml+ '<li class="clearfix">'
+		  		                        +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
+					                        +'<div class="agency-left">'
+					                            +'<div class="lucre-name">'
+					                             +'<p class="project-price">'+data[i].predictmaxyield+'%</p>'
+					                             +'<p class="project-lucre">预计收益</p>'
+					                            +'</div>'
+					                        +'</div>'
+					                        +'<div class="list-right">'
+					                         	+'<div class="right-box">'
+					                           	    +'<h3 class="agency-title">'+data[i].projectname+'</h3>'
+					                           		+'<p class="projtext">'+data[i].dptname+'</p>'
+					                           	+'</div>'
+					                        +'</div>'
+				                        +'</a>'
+		   		                  +'</li>'
+             	   		}
+                		setTimeout(function(){
+                			$('.agency-list').find('ul').html(ahtml);
+                			var name=[]
+                			for(var i=0;i<data.length;i++){
+                				name=data[i].projectname
+                				keywork.push(name)
+                			}     
+    		                start=0;
+    		                me.resetload();
+    		                if(data.length>=10){
+    		                	me.noData();
+                                me.unlock();
+    		                }
+                            
+                            
+                		},1000);
+                        /*$(".dropload-up").remove()*/
+                	},
+                	error: function(xhr, type){
+                		me.resetload();
+	                }
+	            });
+	    	},
+	        loadDownFn : function(me){
                 $.ajax({
                     type: 'GET',
                     url: '/project/getProjectList',
@@ -33,11 +91,6 @@ function pullLoadData(){
                     dataType: 'json',
                     success: function(data){
                     		var ahtml = "";
-                            if(data==null){
-     							me.lock('up');
-     			                me.lock('down')
-     			                me.noData(true);
-     						}
                             if(data.length>0){
                          	   for(var i=0;i<data.length;i++){
                          		   ahtml=  ahtml+ '<li class="clearfix">'
@@ -56,11 +109,12 @@ function pullLoadData(){
      								                        +'</div>'
      							                        +'</a>'
      					   		                  +'</li>'
-                         	   		}
-                                }else if(data.length==0){
+                         	   			}
+                                	}else if(data.length==0){
                             			me.lock('down');
                             			me.noData();
                             		}
+                            		
                             		setTimeout(function(){
                             			$('.agency-list').find('ul').append(ahtml);
                             			var name=[]
@@ -70,14 +124,13 @@ function pullLoadData(){
                             			}     
                             			me.resetload();
                             		},1000);
-               
                     	},
                     	error: function(xhr, type){
-                        //alert('Ajax error!');
                         me.resetload();
                     }
                 });
         	}
+	    	
     });
 }
 
@@ -88,7 +141,10 @@ function sear(){//点击
 	var lis=document.getElementsByTagName('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
-	if(txt=='') return;
+	if(txt=='') {
+		pullLoadData();
+		$(".dropload-load").remove()
+	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";
 	}

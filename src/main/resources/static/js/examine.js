@@ -63,7 +63,6 @@ var vm=new Vue({
 		var user=getCookie('userid')
 		var _this=this;
 		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
-			console.log(response.data)
 			_this.digital=response.data[0];
 			_this.add=response.data[0].instanceid;
 			var instance=_this.add;
@@ -76,9 +75,7 @@ var vm=new Vue({
 					var left = str.split(',')
 					arr.push(left)
 				}
-
 				_this.annex=arr
-				console.log(_this.annex)
 			}).catch(function(error){
 			    console.log(error);
 			});
@@ -274,9 +271,12 @@ var vm=new Vue({
     				html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
     			});
 				var L=layer.open({
-					style: 'width: 80%;height: 180px;border-bottom: 1px solid #ccc',
-					content: html
-    			})
+				    title: [
+				            '常用语',
+				            'background-color: #E75732; color:#fff;'
+				          ]
+				          ,content: html
+				        });
     			$(document).on("click",".option",function(){
     				var value=$(this).text()
     				$("#sele").val(value)

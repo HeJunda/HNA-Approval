@@ -35,25 +35,43 @@ var vm=new Vue({
 			
 			$("body").dropload({
 				scrollArea : window,
+				domUp : {
+		            domClass   : 'dropload-up',
+		            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+		            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+		            domLoad    : '<div class="dropload-load">加载中...</div>'
+		        },
 				domDown : {
 					domClass : 'dropload-down',
 					domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 					domLoad : '<div class="dropload-load">加载中...</div>',
 					domNoData : '<div class="dropload-noData">暂无数据</div>'
 				},
+				loadUpFn : function(me){
+					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:0,limit:10,flowtype:type}}).then(function(response){
+						_this.datas=response.data;
+						setTimeout(function(){
+							me.resetload();
+			                start=0;
+			                me.unlock();
+	                        me.noData(false);
+			            },1000);
+					}).catch(function(error){
+					 	console.log(error);
+						me.resetload();
+					});
+		        },
 				loadDownFn : function(me){
 					start=_this.datas.length;
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
 						console.log(response.data)
 						if(response.data==[]){
-							me.lock('up');
 			                me.lock('down')
 			                me.noData(true);
 						}
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
-							me.lock('up');
 			                me.lock('down')
 			                me.noData(true);
 						}
