@@ -69,10 +69,7 @@ function pullLoadData(){
     		                	me.noData();
                                 me.unlock();
     		                }
-                            
-                            
                 		},1000);
-                        /*$(".dropload-up").remove()*/
                 	},
                 	error: function(xhr, type){
                 		me.resetload();
@@ -135,7 +132,6 @@ function pullLoadData(){
 }
 
 //实现搜索
-
 function sear(){//点击
     // dropload
 	var lis=document.getElementsByTagName('li')

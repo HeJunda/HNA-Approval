@@ -54,12 +54,12 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
 .agenRight{float:right;width:100%;position:relative;}
 .agenLeft span{margin-top: 0.7em;display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle;margin-left:0.625em}
-.agenLeft span.fund-icon{background-position:-63px -188px}
-.agenLeft span.project-icon{background-position:-63px -140px}
-.agenLeft span.approve-icon{background-position:-64px -40px}
-.agenLeft span.info-icon{background-position:-63px -96px}
-.agenLeft span.xucp-icon{background-position:-65px 0px}
-.agenLeft span.other-icon{background-position:-65px -237px}
+.agenLeft span.fund-icon{background-position:-60px -188px}
+.agenLeft span.project-icon{background-position:-60px -140px}
+.agenLeft span.approve-icon{background-position:-60px -40px}
+.agenLeft span.info-icon{background-position:-60px -96px}
+.agenLeft span.xucp-icon{background-position:-60px 0px}
+.agenLeft span.other-icon{background-position:-60px -237px}
 .agenLeft{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
 .examineHistory{width:100%;position:relative}
 .right-box{margin-left:15px;}
