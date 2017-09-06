@@ -43,7 +43,6 @@
                     	</ul>
             	 	</div> -->
                  </ul>
-                
                  <p class="space"></p>
                  <!-- <h3 class="examine-item">历史审批记录</h3> -->
                  <h3 class="examine-item" v-on:click="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
@@ -70,7 +69,6 @@
 		         <div class="search-container">
 		          	   <div class="langeUse"><span class="handle">处理意见</span><span class="often" v-on:click="lane()">选择常用语</span></div>
 		               <textarea class="examine-opinion" placeholder="请填写处理意见" id="sele"></textarea>
-		          	   
 		         </div>
                  <p class="space"></p>
                  <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
@@ -81,7 +79,6 @@
             	 <input class="search-button" v-on:click="submit()" type="submit" value="提交" />
             </div>
           </div>
-          
           
         </div>
         <!-- ICON -->
@@ -133,7 +130,6 @@
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/home.js"></script>	
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script type="text/javascript" src="js/lib/iscroll.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/examine.js"></script>
 </body>

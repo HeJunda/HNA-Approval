@@ -40,11 +40,14 @@ $(function(){
 			        success: function(data){
 			        	
 			        	if(data!=""){
-			        		var result=result ||'' 
+			        		var result='' ;
 				                for(var i = 0; i < data.length; i++){
+				                	var one= '/followAwait.html?taskid='+data[i].taskid+''
+				                	var two= '/followAlready.html?instanceid='+data[i].instanceid+''
+				                		var hrefs = itemIndex == 0 ? one: two;
 				                	//console.log(data)
 				                    result += '<li class="clearfix">'
-									      		+'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
+									      		+'<a href="'+hrefs+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
 									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 18%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">'+(data[i].taskname==undefined?"":data[i].taskname)+'</span></p>'
@@ -59,7 +62,10 @@ $(function(){
 									      	+'</li>'
 			                }
 			        		//console.log(result)
-			                $('.agency-list ul').append(result);
+				            setTimeout(function(){
+				            	$('.agency-list ul').append($(result));
+				            })
+			                
 			                
 			        	}else{
 			        		$('.conSearch').text()

@@ -59,9 +59,57 @@ var vm=new Vue({
 		}
 	},
 	created:function(){
+		$('.dropload-down').css('display','none')
 		var taskId=localurl('taskid')
 		var user=getCookie('userid')
 		var _this=this;
+		
+		$("body").dropload({
+			scrollArea : window,
+			domUp : {
+	            domClass   : 'dropload-up',
+	            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+	            domLoad    : '<div class="dropload-load">加载中...</div>'
+	        },
+			/*domDown : {
+				domClass : 'dropload-down',
+				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+				domLoad : '<div class="dropload-load">加载中...</div>',
+				domNoData : '<div class="dropload-noData">暂无数据</div>'
+			},*/
+			loadUpFn : function(me){
+				axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+					_this.digital=response.data[0];
+					_this.add=response.data[0].instanceid;
+					var instance=_this.add;
+					var user=getCookie('userid');
+					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+						_this.histry=response.data
+						var arr=[];
+						for(var i=0;i<response.data.length;i++){
+							var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+							var left = str.split(',')
+							arr.push(left)
+						}
+						_this.annex=arr;
+						setTimeout(function(){
+							me.resetload();
+			                me.unlock();
+	                        me.noData(false);
+			            },1000);
+					}).catch(function(error){
+					    console.log(error);
+					    me.resetload();
+					});
+				}).catch(function(error){
+				    console.log(error);
+				    me.resetload();
+				});		
+				
+	        }
+		});
+		
 		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 			_this.digital=response.data[0];
 			_this.add=response.data[0].instanceid;
@@ -81,8 +129,8 @@ var vm=new Vue({
 			});
 			
 		}).catch(function(error){
-		    console.log('服务错误');
-		});		
+		    console.log(error);
+		});
 	},
 	computed:{
 		showHistory:function(){
@@ -316,7 +364,7 @@ var vm=new Vue({
 						    style: 'background-color:#ccc; color:#fff; border:none;',
 						    time: 2
 						  });
-						setTimeout(function(){window.location.href='agenList.html'},1000)
+						setTimeout(function(){window.location.reload='agenList.html'},1000)
 					}else{
 						layer.open({
 						    content: response.data[0].result,
