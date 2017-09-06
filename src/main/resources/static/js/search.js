@@ -1,26 +1,27 @@
-var start = -10;//开始位置初始化
-var rows = 10;//每页显示条数
-var userid = getCookie("userid");//用户id
-var keywork=[];
-var ind = 0;
 
-function tab(index){
-	ind = index;
-	console.log(ind)
-	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
-	//重新初始化变量
-	start = -10;
-	//重新初始化容器
-	$(".agency-list").html("<ul></ul>");
-	pullLoadData();
-}
-//初始加载
-tab(0);
-//实现下拉加载
-function pullLoadData(){
-	var urls = ind == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+    var itemIndex = 0;
+	function getList(item){
+		$('.agency-list').find('ul').html('');
+		itemIndex = item;
+		start=0;
+		// 解锁
+		var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+		console.log(itemIndex)
+        dropload.unlock();
+        dropload.noData(false);
+     	// 重置
+        dropload.resetload();
+        
+	}
+
+	var start = 0;//开始位置初始化
+	var rows = 10;//每页显示条数
+	var userid = getCookie("userid");//用户id
+	var keywork=[];
+
 	
-    $('#active').dropload({
+	
+	var dropload=$('#active').dropload({
         scrollArea : window,
         domUp : {
             domClass   : 'dropload-up',
@@ -36,6 +37,7 @@ function pullLoadData(){
 		},
 		loadUpFn : function(me){
             // 加载菜单一的数据
+			var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
             $.ajax({
                 type: 'GET',
                 url: urls,
@@ -49,8 +51,8 @@ function pullLoadData(){
                 		var ahtml = "";
                 		
                 	    for(var i=0;i<data.length;i++){
-                	    	var startname = ind == 0 ? data[i].starter : data[i].startername;
-                    		var startorg = ind == 0 ? data[i].startorg : data[i].starterorgname;
+                	    	var startname = itemIndex == 0 ? data[i].starter : data[i].startername;
+                    		var startorg = itemIndex == 0 ? data[i].startorg : data[i].starterorgname;
                 		   ahtml= ahtml+ '<li class="clearfix">'
 				                             +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
 				                           		  +'<div class="agency-right">'
@@ -93,48 +95,48 @@ function pullLoadData(){
     	},
         loadDownFn : function(me){
             // 加载菜单一的数据
+        	console.log(start)
+        	var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
                 $.ajax({
                     type: 'GET',
                     url: urls,
                     data:{
-                    	start:start+=10,
+                    	start:start,
                     	limit:10,
                     	userid:userid
                     },
                     dataType: 'json',
                     success: function(data){
-                    	console.log(data)
-                    	
                     		var ahtml = "";
                     	    if(data.length>0){
-                    	    for(var i=0;i<data.length;i++){
-                    	    	var startname = ind == 0?data[i].starter:data[i].startername;
-                        		var startorg = ind == 0?data[i].startorg:data[i].starterorgname;
-                    		    ahtml= ahtml+ '<li class="clearfix">'
-					                             +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
-					                           		  +'<div class="agency-right">'
-					                           		  +'<div class="right-box">'
-					                              		+'<h3 class="agenText">'+data[i].flowname+'</h3>'
-					                              		+'<p class="follow-person">流程编号：<span class="fr">'+data[i].instanceid+'</span></p>'
-					                              		+'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
-					                              		+'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
-					                              		+'<p class="follow-person">当前审批人：<span class="fr">'+data[i].assigneename+'</span></p>'
-					                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+startorg+'</span></p>'
-					                              		+'<span class="prompt fr">'+data[i].flowstatus+'</span>'
-					                                  +'</div>'
-					                                  +'</div>'
-					                             	+'</a>'
-					                           +'</li>'
-		
-                    	   }
+                    	    	for(var i=0;i<data.length;i++){
+	                    	    	var startname = itemIndex == 0?data[i].starter:data[i].startername;
+	                        		var startorg = itemIndex == 0?data[i].startorg:data[i].starterorgname;
+	                    		    ahtml= ahtml+ '<li class="clearfix">'
+						                             +'<a href="/searchDetail.html?instance='+(data[i].instanceid==undefined?"":data[i].instanceid)+'">'
+						                           		  +'<div class="agency-right">'
+						                           		  +'<div class="right-box">'
+						                              		+'<h3 class="agenText">'+(data[i].flowname==undefined?"":data[i].flowname)+'</h3>'
+						                              		+'<p class="follow-person">流程编号：<span class="fr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
+						                              		+'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
+						                              		+'<p class="follow-person">发起时间：<span class="fr">'+(data[i].starttime==undefined?"":data[i].starttime)+'</span></p>'
+						                              		+'<p class="follow-person">当前审批人：<span class="fr">'+(data[i].assigneename==undefined?"":data[i].assigneename)+'</span></p>'
+						                              		+'<p class="follow-person">当前审批部门：<span class="fr">'+startorg+'</span></p>'
+						                              		+'<span class="prompt fr">'+data[i].flowstatus+'</span>'
+						                                  +'</div>'
+						                                  +'</div>'
+						                             	+'</a>'
+						                           +'</li>'
+                    	    	}
                     	   }else{
-                        	   me.lock('down');
+                        	   me.lock();
                         	   me.noData();
 
                            }
                     	// 为了测试，延迟1秒加载
                            setTimeout(function(){
                                $('.agency-list').find('ul').append(ahtml);
+                               start+=10;
                                var name=[]
                                for(var i=0;i<data.length;i++){
                             	   name=data[i].flowname
@@ -154,7 +156,15 @@ function pullLoadData(){
                 });
         	}
     });
-}
+    $('.tab .item').on('click',function(){
+		$('.followInfo').css('display','block')
+		var $this = $(this);
+		console.log($this.index())
+		$('.agency-list ul').html('')
+	    getList($this.index())
+	    $this.addClass('cur').siblings('.item').removeClass('cur');
+	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+	})
 
 
 //实现搜索
@@ -163,8 +173,7 @@ function sear(){
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
 	if(txt==''){
-		pullLoadData();
-		$('.dropload-down').eq(0).remove()
+		getList(itemIndex)
 	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";

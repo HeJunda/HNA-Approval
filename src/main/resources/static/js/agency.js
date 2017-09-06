@@ -6,19 +6,19 @@ var vm=new Vue({
 		filters:{
 			showIcon:function(type){
 				if(type=="10000"){
-					return 'approve-icon';
+					return 'images/one.png';
 				}else if(type=="10003"){
-					return 'project-icon';
+					return 'images/two.png';
 				}else if(type=="11932"){
-					return 'other-icon';
+					return 'images/three.png';
 				}else if(type=="10001"){
-					return 'fund-icon';
+					return 'images/four.png';
 				}else if(type=="11781"){
-					return 'info-icon';
+					return 'images/five.png';
 				}else if(type=="33812"){
-					return 'xucp-icon';
+					return 'images/siex.png';
 				}else if(type=="23178"){
-					return 'other-icon';
+					return 'images/siex.png';
 				}
 			}
 		},

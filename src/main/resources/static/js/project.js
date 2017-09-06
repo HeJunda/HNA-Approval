@@ -1,8 +1,22 @@
-var start = -10;
-var rows = 10;
-var userid = getCookie("userid");
-var keywork=[];
-function tab(index){
+ var itemIndex = 0;
+	function getList(item){
+		$('.agency-list').find('ul').html('');
+		itemIndex = item;
+		start=0;
+		// 解锁
+		var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+		console.log(itemIndex)
+        dropload.unlock();
+        dropload.noData(false);
+     	// 重置
+        dropload.resetload();
+	}
+	var start = 0;
+	var rows = 10;
+	var userid = getCookie("userid");
+	var keywork=[];
+
+/*function tab(index){
 	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
 	start = -10;
 	$(".agency-list").html("<ul></ul>");
@@ -10,9 +24,8 @@ function tab(index){
 	$('.conText').remove()
 }
 
-tab(0);
-function pullLoadData(){
-    $('#active').dropload({
+tab(0);*/
+    var dropload=$('#active').dropload({
         scrollArea : window,
         domUp : {
             domClass   : 'dropload-up',
@@ -81,7 +94,7 @@ function pullLoadData(){
                     type: 'GET',
                     url: '/project/getProjectList',
                     data:{
-                    	start:start+=10,
+                    	start:start,
                     	limit:10,
                     	userid:userid
                     },
@@ -94,14 +107,14 @@ function pullLoadData(){
      					  		                        +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
      								                        +'<div class="agency-left">'
      								                            +'<div class="lucre-name">'
-     								                             +'<p class="project-price">'+data[i].predictmaxyield+'%</p>'
+     								                             +'<p class="project-price">'+(data[i].predictmaxyield==undefined?"":data[i].predictmaxyield)+'%</p>'
      								                             +'<p class="project-lucre">预计收益</p>'
      								                            +'</div>'
      								                        +'</div>'
      								                        +'<div class="list-right">'
      								                         	+'<div class="right-box">'
-     								                           	    +'<h3 class="agency-title">'+data[i].projectname+'</h3>'
-     								                           		+'<p class="projtext">'+data[i].dptname+'</p>'
+     								                           	    +'<h3 class="agency-title">'+(data[i].projectname==undefined?"":data[i].projectname)+'</h3>'
+     								                           		+'<p class="projtext">'+(data[i].dptname==undefined?"":data[i].dptname)+'</p>'
      								                           	+'</div>'
      								                        +'</div>'
      							                        +'</a>'
@@ -114,6 +127,7 @@ function pullLoadData(){
                             		
                             		setTimeout(function(){
                             			$('.agency-list').find('ul').append(ahtml);
+                            			start+=10;
                             			var name=[]
                             			for(var i=0;i<data.length;i++){
                             				name=data[i].projectname
@@ -129,7 +143,15 @@ function pullLoadData(){
         	}
 	    	
     });
-}
+    $('.tab .item').on('click',function(){
+		$('.followInfo').css('display','block')
+		var $this = $(this);
+		console.log($this.index())
+		$('.agency-list ul').html('')
+	    getList($this.index())
+	    $this.addClass('cur').siblings('.item').removeClass('cur');
+	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+	})
 
 //实现搜索
 function sear(){//点击
@@ -138,8 +160,7 @@ function sear(){//点击
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
 	if(txt=='') {
-		pullLoadData();
-		$('.dropload-down').eq(0).remove()
+		getList();
 	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";

@@ -19,7 +19,7 @@
            	  <li class="clearfix" v-for="v in dataes">
 	              <a :href="'agency.html?flowtype='+v.flowtype">
 	                 <div class="agenLeft">
-	                     <span :class="v.flowtype|showIcon"></span>
+	                     <span><img :src="v.flowtype|showIcon"/></span>
 	                 </div>
 	                 <div class="agenRight">
 	                   <div class="leftBox">

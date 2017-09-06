@@ -18,7 +18,7 @@
               <li class="clearfix" v-for="item in datas">
               <a :href="'/examine.html?taskid='+item.taskid">
                  <div class="agenLeft">
-                     <span :class="item.flowtype|showIcon"></span>
+                     <span><img :src="item.flowtype|showIcon"/></span>
                  </div>
                  <div class="agenRight">
                    <div class="leftBox">

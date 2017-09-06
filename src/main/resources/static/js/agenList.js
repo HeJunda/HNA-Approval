@@ -7,23 +7,23 @@ new Vue({
 	filters:{
 		showIcon:function(type){
 			if(type=="10000"){
-				return 'approve-icon';
+				return 'images/one.png';
 			}else if(type=="10003"){
-				return 'project-icon';
+				return 'images/two.png';
 			}else if(type=="11932"){
-				return 'other-icon';
+				return 'images/three.png';
 			}else if(type=="10001"){
-				return 'fund-icon';
+				return 'images/four.png';
 			}else if(type=="11781"){
-				return 'info-icon';
+				return 'images/five.png';
 			}else if(type=="33812"){
-				return 'xucp-icon';
+				return 'images/siex.png';
 			}else if(type=="23178"){
-				return 'other-icon';
+				return 'images/siex.png';
 			}
 		}
 	},
-	created:function(){
+	mounted:function(){
 		var user=getCookie('userid')
 		var _this=this;
 		
@@ -43,6 +43,7 @@ new Vue({
 			},
 			loadUpFn : function(me){
 				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
+					console.log(response.data)
 					_this.dataes=response.data;
 					_this.agenshow=true
 					setTimeout(function(){
@@ -57,6 +58,7 @@ new Vue({
 	        },
 			loadDownFn : function(me){
 				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
+					
 					if(response.data.length>0){
 						_this.dataes=response.data;
 					}

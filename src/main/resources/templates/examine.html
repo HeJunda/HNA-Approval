@@ -23,9 +23,9 @@
                  <h3 class="examine-title">{{digital.flowname}}</h3>
                  <ul class="examine-node">
                   <li><span>流程编号：</span>{{digital.instanceid}}</li>
+                  <li><span>流程名称：</span>{{digital.processname}}</li>
                   <li><span>发 起 人：</span>{{digital.starter}}</li>
                   <li><span>发起时间：</span>{{digital.starttime}}</li>
-                  <li><span>流程名称：</span>{{digital.processname}}</li>
                  </ul>
               </div>  
             </div>
@@ -71,7 +71,7 @@
 		               <textarea class="examine-opinion" placeholder="请填写处理意见" id="sele"></textarea>
 		         </div>
                  <p class="space"></p>
-                 <h3 class="examine-item">处理<span class="fr" v-on:click="showTip">···</span><span class="status-text fr">{{status}}</span></h3>
+                 <h3 class="examine-item" v-on:click="showTip">处理<span class="fr">···</span><span class="status-text fr">{{status}}</span></h3>
                  <h3 class="examine-item person-item" style="display:none" v-on:click="showUser">
                  	人员选择<span class="fr">···</span><span class="status-text personUser fr"></span>
                  	<div class="xuanz"><p class="perName" v-for="v in personStr">{{v}}</p></div>

@@ -72,12 +72,6 @@ var vm=new Vue({
 	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
 	            domLoad    : '<div class="dropload-load">加载中...</div>'
 	        },
-			/*domDown : {
-				domClass : 'dropload-down',
-				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">暂无数据</div>'
-			},*/
 			loadUpFn : function(me){
 				axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 					_this.digital=response.data[0];
@@ -364,7 +358,7 @@ var vm=new Vue({
 						    style: 'background-color:#ccc; color:#fff; border:none;',
 						    time: 2
 						  });
-						setTimeout(function(){window.location.reload='agenList.html'},1000)
+						setTimeout(function(){window.location.href='agenList.html'})
 					}else{
 						layer.open({
 						    content: response.data[0].result,

@@ -60,7 +60,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agenLeft span.info-icon{background-position:-60px -96px}
 .agenLeft span.xucp-icon{background-position:-60px 0px}
 .agenLeft span.other-icon{background-position:-60px -237px}
-.agenLeft{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
+.agenLeft{position:relative;width:80px;float:left;margin-right:-80px;text-align:center;line-height: 62px;}
 .examineHistory{width:100%;position:relative}
 .right-box{margin-left:15px;}
 .leftBox{margin-left:25%;}
