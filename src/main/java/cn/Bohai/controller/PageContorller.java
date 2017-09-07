@@ -131,6 +131,15 @@ public class PageContorller {
 	public  ModelAndView  agenList(){
 		 return new ModelAndView("agenList");
 	}
+	
+	/**
+     * 用户登录校验
+     * @throws Exception 
+     */
+	@RequestMapping(value="/searchAwait")
+	public  ModelAndView  searchAwait(){
+		 return new ModelAndView("searchAwait");
+	}
 
 
 
