@@ -2,7 +2,14 @@
 $(function(){
 	var userid = getCookie("userid");
 	
-	var itemIndex = 0;
+	if(sessionStorage.length==0){
+ 		var itemIndex = sessionStorage.getItem('flag')
+ 	}else{
+ 		var itemIndex = 0;
+ 	}
+
+    //$this.addClass('cur').siblings('.item').removeClass('cur');
+   $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
 		itemIndex = item;
 		// 解锁
@@ -134,6 +141,7 @@ $(function(){
 	    });
 	
 	$('.tab .item').on('click',function(){
+		sessionStorage.setItem('flag',$(this).index())
 		$('.followInfo').css('display','block')
 		var $this = $(this);
 		$('.agency-list ul').html('')

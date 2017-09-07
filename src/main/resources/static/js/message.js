@@ -43,14 +43,14 @@ var vm=new Vue({
 				
 				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
 					
-					if(response.data.length>10){
+					if(response.data.length>0){
 						_this.dataes=_this.dataes.concat(response.data)
 						
 					}else{
-						_this.dataes=response.data
+						me.lock('down')
+				         me.noData(true);
 					}
-					 me.lock('down')
-			         me.noData(true);
+					 
 					setTimeout(function(){
 		                me.resetload();
 		            },1000);
@@ -67,7 +67,7 @@ var vm=new Vue({
 			layer.open({
 			    title: [
 			      '消息提醒',
-			      'background-color: #FFC800; color:#fff;'
+			      'background-color: #E75732; color:#fff;'
 			    ],
 			    content:this.dataes[index].content
 			});

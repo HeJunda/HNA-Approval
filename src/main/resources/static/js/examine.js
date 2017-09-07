@@ -160,6 +160,20 @@ var vm=new Vue({
 			var user=getCookie('userid')
 			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 				_this.aclist=response.data;
+				if(response.data==[]){
+					setTimeout(function(){
+						_this.showLayer=false; 
+					},1000)
+					setTimeout(function(){
+						layer.open({
+						    content: '数据获取失败,请重新尝试。'
+						    ,skin: 'msg'
+						    ,time: 3 //2秒后自动关闭
+						 })
+					},2000)
+					
+					 
+				}
 				_this.list=JSON.parse(_this.aclist[0].actionlist)
 			}).catch(function(error){
 			    console.log(error);

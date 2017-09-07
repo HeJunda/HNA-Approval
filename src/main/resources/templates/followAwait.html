@@ -19,9 +19,9 @@
                  <h3 class="examine-title">{{datil.flowname}}</h3>
                  <ul class="examine-node">
                   <li><span>流程编号：</span>{{datil.instanceid}}</li>
+                  <li><span>流程名称：</span>{{datil.processname}}</li>
                   <li><span>发 起 人：</span>{{datil.starter}}</li>
                   <li><span>发起时间：</span>{{datil.starttime}}</li>
-                  <li><span>流程名称：</span>{{datil.processname}}</li>
                  </ul>
               </div>  
             </div>
@@ -34,9 +34,9 @@
 			            		<div class="right-box">
 			           				<h3 class="agency-title">{{item.flowname}}</h3>
 			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
+			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
 			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.dptname}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
-			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
 			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
 			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
 			           			</div>
@@ -66,9 +66,8 @@
                   	</li>
                  </ul>		
             </div>
-                 
             <div class="search-container">
-       			<button v-for="val in await" v-on:click="submit()" class="search-button">{{val.name}}</button>
+       			<button v-for="val in await" v-on:click="submit()" class="search-but">{{val.name}}</button>
        		</div>
 		
 		</div>

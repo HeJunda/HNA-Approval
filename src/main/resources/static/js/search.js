@@ -1,6 +1,13 @@
 
-    var itemIndex = 0;
-	function getList(item){
+    if(sessionStorage.length==0){
+ 		var itemIndex = sessionStorage.getItem('flag')
+ 	}else{
+ 		var itemIndex = 0;
+ 	}
+
+     //$this.addClass('cur').siblings('.item').removeClass('cur');
+    $('.searNav').eq(itemIndex).addClass('cur')
+    function getList(item){
 		$('.agency-list').find('ul').html('');
 		itemIndex = item;
 		start=0;
@@ -18,8 +25,6 @@
 	var rows = 10;//每页显示条数
 	var userid = getCookie("userid");//用户id
 	var keywork=[];
-
-	
 	
 	var dropload=$('#active').dropload({
         scrollArea : window,
@@ -97,6 +102,7 @@
             // 加载菜单一的数据
         	console.log(start)
         	var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+        	
                 $.ajax({
                     type: 'GET',
                     url: urls,
@@ -112,8 +118,11 @@
                     	    	for(var i=0;i<data.length;i++){
 	                    	    	var startname = itemIndex == 0?data[i].starter:data[i].startername;
 	                        		var startorg = itemIndex == 0?data[i].startorg:data[i].starterorgname;
+	                        		var one= '/searchDetail.html?instance='+data[i].instanceid+''
+				                	var two= '/searchAwait.html?instance='+data[i].instanceid+''
+				                	var hrefs = itemIndex == 0 ? one: two;
 	                    		    ahtml= ahtml+ '<li class="clearfix">'
-						                             +'<a href="/searchDetail.html?instance='+(data[i].instanceid==undefined?"":data[i].instanceid)+'">'
+						                             +'<a href="'+hrefs+'">'
 						                           		  +'<div class="agency-right">'
 						                           		  +'<div class="right-box">'
 						                              		+'<h3 class="agenText">'+(data[i].flowname==undefined?"":data[i].flowname)+'</h3>'
@@ -157,11 +166,13 @@
         	}
     });
     $('.tab .item').on('click',function(){
+    	sessionStorage.setItem('flag',$(this).index())
 		$('.followInfo').css('display','block')
 		var $this = $(this);
 		console.log($this.index())
 		$('.agency-list ul').html('')
 	    getList($this.index())
+	    console.log($this.index())
 	    $this.addClass('cur').siblings('.item').removeClass('cur');
 	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
 	})

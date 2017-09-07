@@ -73,29 +73,6 @@
 		
 		</div>
 	</div>
-	<!-- <div id="app">
-		<div class="container paddinTop">
-			<div class="agency-list" id="await">
-				<div class="item-await">
-			   		<ul>
-			      		<li class="clearfix" v-for="item in dataes">
-			      			<div class="agency-right">
-			            		<div class="right-box">
-			           				<h3 class="agency-title">{{item.flowname}}</h3>
-			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
-			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
-			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
-			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
-			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
-			           			</div>
-			           		</div>
-			      		</li>
-			        </ul>
-		    	</div>		
-			</div>
-		</div>
-		<div class="followInfo" v-show="showes">加载中...</div>
-	</div> -->
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
   	<script type="text/javascript" src="js/lib/axios.min.js"></script>
@@ -120,7 +97,7 @@
  		created:function(){
  			var _this=this;
  			var user=getCookie('userid')
- 			var code=localurl('instanceid')
+ 			var code=localurl('instance')
  			
  			$("body").dropload({
 			scrollArea : window,
@@ -193,30 +170,6 @@
  			}
  		}
  	})
- 	/* new Vue({
- 		el:'#app',
- 		data:function(){
- 			return{
- 				dataes:[],
- 				await:{},
- 				showes:true
- 			}
- 		},
- 		created:function(){
- 			var _this=this;
- 			var user=getCookie('userid')
- 			var code=localurl('instanceid')
- 			console.log(user)
- 			console.log(code)
- 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
-				console.log(response.data)
- 				_this.dataes=response.data;
-				_this.showes=false
- 			}).catch(function(error){
- 			    console.log(error);
- 			});	
- 		} 
- 	}) */
  	</script>
 </body>
 </html>

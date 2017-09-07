@@ -1,4 +1,11 @@
- var itemIndex = 0;
+ 	if(sessionStorage.length==0){
+ 		var itemIndex = sessionStorage.getItem('flag')
+ 	}else{
+ 		var itemIndex = 0;
+ 	}
+	
+
+    $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
 		$('.agency-list').find('ul').html('');
 		itemIndex = item;
@@ -144,6 +151,7 @@ tab(0);*/
 	    	
     });
     $('.tab .item').on('click',function(){
+    	sessionStorage.setItem('flag',$(this).index())
 		$('.followInfo').css('display','block')
 		var $this = $(this);
 		console.log($this.index())
