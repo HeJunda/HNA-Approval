@@ -10,13 +10,13 @@ new Vue({
     created:function(){
     		var users=getCookie('userid')
         	var _this=this;
-        	var token='6666'
+        	var token=window.hna.SsoToken;
         	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
-//    			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-//             	_this.date=response.data.UserAccount;
-             	document.cookie = 'userid'+'='+'6666';
+    			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+             	_this.date=response.data.UserAccount;
+             	document.cookie = 'userid'+'='+_this.date;
              	var user=getCookie('userid')
         			axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){  
            	        _this.dataes=response.data;
@@ -30,9 +30,9 @@ new Vue({
            	    }).catch(function(error){
            	        console.log(error);
            	    });
-//             }).catch(function(error){
-//                 console.log(error);
-//             });
+             }).catch(function(error){
+                 console.log(error);
+             });
     		}else{
     			_this.dataes=true;
       	   		_this.loading=false;

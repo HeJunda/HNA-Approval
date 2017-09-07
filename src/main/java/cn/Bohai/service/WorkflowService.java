@@ -99,7 +99,10 @@ public class WorkflowService {
 		
 		int totalNum = 0;
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -149,7 +152,10 @@ public class WorkflowService {
 		IDatasets result = null;
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");;
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -198,7 +204,10 @@ public class WorkflowService {
 		IDatasets result = null;
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -241,7 +250,12 @@ public class WorkflowService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
+		
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -282,7 +296,10 @@ public class WorkflowService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -321,7 +338,10 @@ public class WorkflowService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -487,7 +507,10 @@ public class WorkflowService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	
 	    	@SuppressWarnings("rawtypes")
@@ -556,7 +579,11 @@ public class WorkflowService {
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
+
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -601,7 +628,10 @@ public class WorkflowService {
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -640,7 +670,10 @@ public class WorkflowService {
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -689,7 +722,10 @@ public class WorkflowService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -726,7 +762,10 @@ public class WorkflowService {
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -765,7 +804,10 @@ public class WorkflowService {
 		IDataset iDataset = mw.getDataset();
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);

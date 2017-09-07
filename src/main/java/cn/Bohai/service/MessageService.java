@@ -46,7 +46,10 @@ public class MessageService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);

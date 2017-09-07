@@ -60,7 +60,10 @@ public class UserService {
 		
 		
 		//访问登录校验
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	
 	    	@SuppressWarnings("rawtypes")
@@ -132,7 +135,10 @@ public class UserService {
 		
 		
 		//访问登录校验
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	
 	    	@SuppressWarnings("rawtypes")
@@ -183,7 +189,10 @@ public class UserService {
 		
 		
 		//访问接口
-	    result = T2Util.send("8000", iDataset);
+		long startTime=System.currentTimeMillis();   //获取开始时间
+		result = T2Util.send("8000", iDataset);
+		long endTime=System.currentTimeMillis(); //获取结束时间
+		System.out.println("接口调用时间： "+(endTime-startTime)+"ms");
 	    if(result != null){
 	    	@SuppressWarnings("rawtypes")
 	    	List<Map> resultListMap = T2Util.dataset2MapList(result);
@@ -203,8 +212,12 @@ public class UserService {
 	 */
 	public String getSSOInfo(Token token) throws Exception{
 		try {
-			SSOUtil sso = new SSOUtil();
-			String userInfo = sso.CheckTokenBySSO(token.getToken());
+//			SSOUtil sso = new SSOUtil();
+			long startTime=System.currentTimeMillis();   //获取开始时间
+			String userInfo = SSOUtil.CheckTokenBySSO(token.getToken());
+			long endTime=System.currentTimeMillis(); //获取结束时间
+			System.out.println("兜兜接口调用时间： "+(endTime-startTime)+"ms");
+			
 			return userInfo;
 		} catch (Exception e) {
 			// TODO: handle exception
