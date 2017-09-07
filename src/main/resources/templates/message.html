@@ -24,9 +24,9 @@
 	           		<li class="clearfix" v-for="(item,index) in dataes" v-on:click="add(index)">
 	                 	<div class="agency-right">
 	                   		<div class="right-box">
-		                 		<h3 class="agency-title">{{item.title}}</h3>
-		                 		<p>{{item.content}}</p>
-		                 		<span class="time fr">{{item.sendDate}}</span>
+		                 		<h3 class="agency-title" v-html="item.title"></h3>
+		                 		<p v-html="item.content"></p>
+		                 		<span class="time fr" v-html="item.sendDate"></span>
 	                   		</div>
 	                	</div>
 	              	</li> 

@@ -16,12 +16,12 @@
 			<div class="examine-content">
             <div class="examine-img"><img src="images/examine.png"/></div>
               <div class="examine-info" v-for="item in dataes">
-                 <h3 class="examine-title">{{item.flowname}}</h3>
+                 <h3 class="examine-title" v-html="item.flowname"></h3>
                  <ul class="examine-node">
-                  <li><span>流程编号：</span>{{item.instanceid}}</li>
-                  <li><span>流程名称：</span>{{item.processname}}</li>
-                  <li><span>发 起 人：</span>{{item.starter}}</li>
-                  <li><span>发起时间：</span>{{item.starttime}}</li>
+                  <li><span>流程编号：</span><span v-html="item.instanceid"></span></li>
+                  <li><span>流程名称：</span><span v-html="item.processname"></span></li>
+                  <li><span>发 起 人：</span><span v-html="item.starter"></span></li>
+                  <li><span>发起时间：</span><span v-html="item.starttime"></span></li>
                  </ul>
               </div>  
             </div>

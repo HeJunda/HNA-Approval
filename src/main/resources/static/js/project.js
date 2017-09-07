@@ -7,7 +7,7 @@
 		itemIndex = item;
 		start=0;
 		// 解锁
-		var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+		var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
 		console.log(itemIndex)
         dropload.unlock();
         dropload.noData(false);
@@ -19,15 +19,6 @@
 	var userid = getCookie("userid");
 	var keywork=[];
 
-/*function tab(index){
-	$("#tab-nav").find("p").eq(index).addClass("cur").siblings('p').removeClass('cur');
-	start = -10;
-	$(".agency-list").html("<ul></ul>");
-	pullLoadData();
-	$('.conText').remove()
-}
-
-tab(0);*/
     var dropload=$('#active').dropload({
         scrollArea : window,
         domUp : {
@@ -43,9 +34,10 @@ tab(0);*/
 			domNoData : '<div class="dropload-noData">暂无数据</div>'
 		},
 		loadUpFn : function(me){
+			var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
             $.ajax({
                 type: 'GET',
-                url: '/project/getProjectList',
+                url: urls,
                 data:{
                 	start:0,
                 	limit:10,
@@ -89,9 +81,10 @@ tab(0);*/
 	            });
 	    	},
 	        loadDownFn : function(me){
+	        	var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
                 $.ajax({
                     type: 'GET',
-                    url: '/project/getProjectList',
+                    url: urls,
                     data:{
                     	start:start,
                     	limit:10,

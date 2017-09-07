@@ -1,3 +1,4 @@
+//就是这个页面
 
 $(function(){
 	var userid = getCookie("userid");
@@ -68,10 +69,15 @@ $(function(){
 									      	+'</li>'
 			                }
 			        		
-				            setTimeout(function(){
-				            	console.log(data)
-				            	$('.agency-list ul').append($(result));
-				            })
+				            
+				            	//console.log(data);
+				             setTimeout(function(){
+				            	 $('.agency-list ul').append($(result));
+				             },1000)
+				                	
+				                
+				            	
+				            
 			                
 			        	}else{
 			        		$('.conSearch').text()

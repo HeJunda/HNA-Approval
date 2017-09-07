@@ -22,9 +22,9 @@
                  </div>
                  <div class="agenRight">
                    <div class="leftBox">
-	                 <h3 class="agency-title">{{item.flowname}}</h3>
-	                 <p class="agenptxt"><span>发起人</span><span class="answer">{{item.starter}}</span></p>
-	                 <p class="agenptxt"><span>发起时间</span><span class="answer">{{item.starttime}}</span></p>
+	                 <h3 class="agency-title" v-html="item.flowname"></h3>
+	                 <p class="agenptxt"><span>发起人</span><span class="answer" v-html="item.starter"></span></p>
+	                 <p class="agenptxt"><span>发起时间</span><span class="answer" v-html="item.starttime"></span></p>
                    </div>
                  </div>
               </a>

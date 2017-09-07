@@ -8,7 +8,7 @@
 		itemIndex = item;
 		start=0;
 		// 解锁
-		var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+		var urls = itemIndex == 0?'/workflow/getMyInitiatedProcess/':'/workflow/getDoneMessage/';
 		console.log(itemIndex)
         dropload.unlock();
         dropload.noData(false);
@@ -37,7 +37,7 @@
 		},
 		loadUpFn : function(me){
             // 加载菜单一的数据
-			var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+			var urls = itemIndex == 0?'/workflow/getMyInitiatedProcess/':'/workflow/getDoneMessage/';
             $.ajax({
                 type: 'GET',
                 url: urls,
@@ -51,8 +51,8 @@
                 		var ahtml = "";
                 		
                 	    for(var i=0;i<data.length;i++){
-                	    	var startname = itemIndex == 0 ? data[i].starter : data[i].startername;
-                    		var startorg = itemIndex == 0 ? data[i].startorg : data[i].starterorgname;
+                	    	var startname = itemIndex == 0 ? data[i].startername : data[i].starter;
+                    		var startorg = itemIndex == 0 ? data[i].starterorgname : data[i].startorg;
                 		   ahtml= ahtml+ '<li class="clearfix">'
 				                             +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
 				                           		  +'<div class="agency-right">'
@@ -89,7 +89,7 @@
     	},
         loadDownFn : function(me){
             // 加载菜单一的数据
-        	var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
+        	var urls = itemIndex == 0?'/workflow/getMyInitiatedProcess/':'/workflow/getDoneMessage/';
         	
                 $.ajax({
                     type: 'GET',
@@ -104,8 +104,8 @@
                     		var ahtml = "";
                     	    if(data!=''){
                     	    	for(var i=0;i<data.length;i++){
-	                    	    	var startname = itemIndex == 0?data[i].starter:data[i].startername;
-	                        		var startorg = itemIndex == 0?data[i].startorg:data[i].starterorgname;
+	                    	    	var startname = itemIndex == 0?data[i].startername:data[i].starter;
+	                        		var startorg = itemIndex == 0?data[i].starterorgname:data[i].startorg;
 	                        		var one= '/searchDetail.html?instance='+data[i].instanceid+''
 				                	var two= '/searchAwait.html?instance='+data[i].instanceid+''
 				                	var hrefs = itemIndex == 0 ? one: two;
