@@ -2,12 +2,8 @@
 $(function(){
 	var userid = getCookie("userid");
 	
-	if(sessionStorage.length==0){
- 		var itemIndex = sessionStorage.getItem('flag')
- 	}else{
- 		var itemIndex = 0;
- 	}
-
+ 	var itemIndex = sessionStorage.getItem('flag')
+ 	
     //$this.addClass('cur').siblings('.item').removeClass('cur');
    $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
@@ -34,6 +30,7 @@ $(function(){
 	            domNoData : '<div class="dropload-noData">数据加载完毕</div>'
 	        },
 	        loadDownFn : function(me){
+	        	$('.agency-list ul').html('')
 	            $.ajax({
 			        type: 'GET',
 			        url: '/workflow/getSplitRead',
@@ -59,7 +56,7 @@ $(function(){
 									      		+'<a href="'+hrefs+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 14%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">'+data[i].taskname+'</span></p>'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 20%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
 									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
 									           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
@@ -114,7 +111,7 @@ $(function(){
 									      		+'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 14%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;">'+data[i].taskname+'</span></p>'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 20%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
 									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
 									           				+'<p class="follow-person">发送人：<span class="fr follr">'+(data[i].sendername==undefined?"":data[i].sendername)+'</span></p>'
 									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+(data[i].createtime==undefined?"":data[i].createtime)+'</span></p>'
@@ -125,7 +122,7 @@ $(function(){
 									           	+'</a>'	
 									      	+'</li>'
 			                }
-			                $('.agency-list ul').append(result);
+			                $('.agency-list ul').html(result);
 			                
 			        	}else{
 			        		$('.conSearch').text()

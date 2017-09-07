@@ -1,10 +1,6 @@
- 	if(sessionStorage.length==0){
- 		var itemIndex = sessionStorage.getItem('flag')
- 	}else{
- 		var itemIndex = 0;
- 	}
-	
 
+ 	var itemIndex = sessionStorage.getItem('flag')
+ 	
     $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
 		$('.agency-list').find('ul').html('');
@@ -78,18 +74,14 @@ tab(0);*/
              	   		}
                 		setTimeout(function(){
                 			$('.agency-list').find('ul').html(ahtml);
-                			var name=[]
-                			for(var i=0;i<data.length;i++){
-                				name=data[i].projectname
-                				keywork.push(name)
-                			}     
-    		                start=0;
-    		                me.resetload();
-    		                if(data.length>=10){
-    		                	me.noData();
-                                me.unlock();
-    		                }
-                		},1000);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                            // 重置页数，重新获取loadDownFn的数据
+                            start = 10;
+                            // 解锁loadDownFn里锁定的情况
+                            me.unlock();
+                            me.noData(false);
+                        },1000);
                 	},
                 	error: function(xhr, type){
                 		me.resetload();

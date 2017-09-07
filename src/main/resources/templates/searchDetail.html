@@ -8,55 +8,168 @@
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>流程详情</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
 	<div id="app">
-		<!-- <header class="header cleanF">
-	        <a href="javascript:void(0)" onclick="JavaScript:history.back(-1);"><span class="back"></span></a>
-	        <h3>流程详情</h3>   
-	  	</header> -->
 		<div class="container paddinTop">
-      		<div class="project-detail">
-	       		<h3 class="project-title">{{dataes.flowname}}</h3>
-	       		<ul class="project-content">
-	       			<li>流程编号<span class="fr">{{dataes.instanceid}}</span></li>
-	          		<li>流程名称<span class="fr">{{dataes.processname}}</span></li>
-	          		<li>发起人<span class="fr">{{dataes.starter}}</span></li>
-	          		<li>发起部门名称<span class="fr">{{dataes.orgname}}</span></li>
-	          		<li>发起时间<span class="fr">{{dataes.starttime}}</span></li>
-	          		<li>当前节点<span class="fr">{{dataes.nodename}}</span></li>
-	       		</ul>
-      		</div>
-    	</div>    
+			<div class="examine-content">
+            <div class="examine-img"><img src="images/examine.png"/></div>
+              <div class="examine-info" v-for="item in dataes">
+                 <h3 class="examine-title">{{item.flowname}}</h3>
+                 <ul class="examine-node">
+                  <li><span>流程编号：</span>{{item.instanceid}}</li>
+                  <li><span>流程名称：</span>{{item.processname}}</li>
+                  <li><span>发 起 人：</span>{{item.starter}}</li>
+                  <li><span>发起时间：</span>{{item.starttime}}</li>
+                 </ul>
+              </div>  
+            </div>
+			<div class="agency-list" id="await">
+				<h3 class="examine-item" v-on:click="showDemo($event)">更多信息<span v-bind="{class:showDiv?'fr more-open':'fr more-close'}"></span></h3>
+				<div class="item-await examine-details" v-show="showDiv" style="display: none">
+			   		<ul>
+			      		<li class="clearfix" v-for="item in dataes">
+			      			<div class="agency-right">
+			            		<div class="right-box">
+			           				<h3 class="agency-title">{{item.flowname}}</h3>
+			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
+			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
+			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
+			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
+			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
+			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+			           			</div>
+			           		</div>
+			 
+			      		</li>
+			        </ul>
+		    	</div>		
+			</div>
+			<h3 class="examine-item" v-on:click="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
+            <div id="history" v-show="showHis">
+             	<ul class="examine-history">
+                     <li class="history" v-for="(msg,ind) in histry">
+                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
+                    	<div class="history-describe">
+                      		{{msg.remark}}
+                    	</div>
+                    	<div class="history-enclosure">
+                         	<ul>
+                         		<li v-show="annex[ind][1] ? true : false ">
+                         			<a :href="'http://10.72.8.130:7004'+annex[ind][1]" class="tems">
+	                         			附件：{{annex[ind][0]}}
+	                        		</a>
+	                        	</li>
+	                    	</ul>
+                    	</div>
+                  	</li>
+                 </ul>		
+            </div>
+                 
+            <div class="search-container">
+       			<button v-for="val in await" v-on:click="submit()" class="search-button">{{val.name}}</button>
+       		</div>
+		
+		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
-	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script type="text/javascript" src="js/lib/layer.js"></script>
-	
-	<script type="text/javascript">
-	new Vue({
-		el:"#app",
-		data:function(){
-			return{
-				dataes:[]
-			}
-		},
-		created:function(){
-			 var _this=this;
-			 var user=getCookie('userid')
-			 var code=localurl('instance')
-			 console.log(user)
-			 console.log(code)
-			 axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
-				  console.log(response.data)
-				  _this.dataes=response.data[0];
-				  //console.log(_this.dataes)
-			 }).catch(function(error){
-				  console.log(error);
-			 });
-		}
-	})
-	</script>
+  	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
+  	<script type="text/javascript" src="js/lib/axios.min.js"></script>
+  	<script	type="text/javascript" src="js/home.js"></script>
+  	<script	type="text/javascript" src="js/lib/cookies.js"></script>
+  	<script type="text/javascript" src="js/lib/layer.js"></script>
+  	<script type="text/javascript" src="js/lib/dropload.js"></script>
+ 	<script type="text/javascript">
+ 	var vum=new Vue({
+ 		el:'#app',
+ 		data:{
+			showDiv:false,
+			showHis:true,
+			dataes:[],
+			await:{},
+			sub:[],
+			datil:[],
+			histry:[],
+			annex:[],
+			add:''
+ 		},
+ 		created:function(){
+ 			var _this=this;
+ 			var user=getCookie('userid')
+ 			var code=localurl('instance')
+ 			
+ 			$("body").dropload({
+			scrollArea : window,
+			domUp : {
+	            domClass   : 'dropload-up',
+	            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+	            domLoad    : '<div class="dropload-load">加载中...</div>'
+	        },
+			loadUpFn : function(me){
+				axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
+	 				_this.dataes=response.data;
+	 				var instance=_this.dataes[0].instanceid;
+	 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+						_this.histry=response.data
+		 				var arr=[];
+		 				$.each(response.data,function(i){
+		 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+							var left = str.split(',')
+							arr.push(left)
+		 				})
+		 				_this.annex=arr
+						setTimeout(function(){
+							me.resetload();
+			                me.unlock();
+	                        me.noData(false);
+			            },1000);
+					}).catch(function(error){
+					    console.log(error);
+					    me.resetload();
+					});
+				}).catch(function(error){
+				    console.log(error);
+				    me.resetload();
+				});		
+				
+	        }
+		});
+ 			
+ 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
+ 				_this.dataes=response.data;
+ 				var instance=_this.dataes[0].instanceid;
+ 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+					_this.histry=response.data
+	 				var arr=[];
+	 				$.each(response.data,function(i){
+	 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+						var left = str.split(',')
+						arr.push(left)
+	 				})
+	 				_this.annex=arr
+ 				}).catch(function(error){
+ 				    console.log(error);
+ 				});
+ 			}).catch(function(error){
+ 			    console.log(error);
+ 			});	
+ 		},
+ 		computed:{
+ 			showHistory:function(){
+ 				var _this=this;
+ 			}
+ 		},
+ 		methods:{
+ 			showDemo:function(){
+ 				this.showDiv=!this.showDiv;
+ 			},
+ 			showNode:function(){
+ 				this.showHis=!this.showHis 
+ 			}
+ 		}
+ 	})
+ 	</script>
 </body>
 </html>

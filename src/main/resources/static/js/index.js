@@ -47,6 +47,7 @@ new Vue({
     	follow:function(){
     		if(this.dataes=true && this.loading==false){
     			window.location.href='follow.html'
+    			sessionStorage.setItem('flag',0)
     	    }
     	},
     	message:function(){
@@ -57,11 +58,13 @@ new Vue({
         project:function(){
         	if(this.dataes=true && this.loading==false){
     			window.location.href='project.html'
+    			sessionStorage.setItem('flag',0)
     	    }
         },
         search:function(){
         	if(this.dataes=true&&this.loading==false){
     			window.location.href='search.html'
+    			sessionStorage.setItem('flag',0)
     	    }
         }
     }

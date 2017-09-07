@@ -14,18 +14,18 @@
 	<div id="app">
 	<div  v-show="agenshow">
 		<div class="container paddinTop" >
-	      <div class="agency-list">
+	      <div class="agency-list-agency">
            <ul>
            	  <li class="clearfix" v-for="v in dataes">
 	              <a :href="'agency.html?flowtype='+v.flowtype">
-	                 <div class="agenLeft">
+	                 <div class="agenLeft-agency">
 	                     <span><img :src="v.flowtype|showIcon"/></span>
 	                 </div>
-	                 <div class="agenRight">
-	                   <div class="leftBox">
-		                 <h3 class="agency-title">{{v.flowtypename}}</h3>
-		                 <p class="agenp">{{v.firsttaskname}}</p>
-		                 <span class="number fr">{{v.tasknum}}</span>
+	                 <div class="agenRight-agency">
+	                   <div class="agenleftBox">
+		                 <h3 class="agency-title-anency">{{v.flowtypename}}</h3>
+		                 <p class="agenp-agency">{{v.firsttaskname}}</p>
+		                 <span class="number frs">{{v.tasknum}}</span>
 	                   </div>
 	                 </div>
 	              </a>

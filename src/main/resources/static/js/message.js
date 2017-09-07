@@ -28,7 +28,7 @@ var vm=new Vue({
 					
 					setTimeout(function(){
 		                me.resetload();
-		                start=0;
+		                start=10;
 		                me.unlock();
                         me.noData(false);
 		            },1000);
@@ -52,6 +52,7 @@ var vm=new Vue({
 					}
 					 
 					setTimeout(function(){
+						start+=10;
 		                me.resetload();
 		            },1000);
 					_this.meShow=true;

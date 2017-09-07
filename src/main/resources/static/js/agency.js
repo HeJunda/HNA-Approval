@@ -52,7 +52,7 @@ var vm=new Vue({
 						_this.datas=response.data;
 						setTimeout(function(){
 							me.resetload();
-			                start=0;
+			                start=10;
 			                me.unlock();
 	                        me.noData(false);
 			            },1000);
@@ -62,9 +62,8 @@ var vm=new Vue({
 					});
 		        },
 				loadDownFn : function(me){
-					start=_this.datas.length;
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-						console.log(response.data)
+						console.log(_this.datas)
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
@@ -73,6 +72,7 @@ var vm=new Vue({
 						}
 						
 						setTimeout(function(){
+							start+=10;
 		                    me.resetload();
 		                },1000);
 					}).catch(function(error){

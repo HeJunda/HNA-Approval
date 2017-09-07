@@ -1,9 +1,5 @@
 
-    if(sessionStorage.length==0){
- 		var itemIndex = sessionStorage.getItem('flag')
- 	}else{
- 		var itemIndex = 0;
- 	}
+ 	var itemIndex = sessionStorage.getItem('flag')
 
      //$this.addClass('cur').siblings('.item').removeClass('cur');
     $('.searNav').eq(itemIndex).addClass('cur')
@@ -22,7 +18,6 @@
 	}
 
 	var start = 0;//开始位置初始化
-	var rows = 10;//每页显示条数
 	var userid = getCookie("userid");//用户id
 	var keywork=[];
 	
@@ -74,22 +69,16 @@
 				                             	+'</a>'
 				                           +'</li>'
                 	   }
-                	// 为了测试，延迟1秒加载
-                       setTimeout(function(){
-                           $('.agency-list').find('ul').html(ahtml);
-                           var name=[]
-                           for(var i=0;i<data.length;i++){
-                        	   name=data[i].flowname
-                           	   keywork.push(name)
-                           } 
-                           // 每次数据加载完，必须重置
-                            start=0;
-	   		                me.resetload();
-	   		                if(data.length>=10){
-	   		                	me.noData();
-	                               me.unlock();
-	   		                }
-                       },1000);
+                	    setTimeout(function(){
+                	    	$('.agency-list').find('ul').html(ahtml);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                            // 重置页数，重新获取loadDownFn的数据
+                            start = 10;
+                            // 解锁loadDownFn里锁定的情况
+                            me.unlock();
+                            me.noData(false);
+                        },1000);
                 },
                 error: function(xhr, type){
                     //alert('Ajax error!');
@@ -100,7 +89,6 @@
     	},
         loadDownFn : function(me){
             // 加载菜单一的数据
-        	console.log(start)
         	var urls = itemIndex == 0?'/workflow/getDoneMessage/':'/workflow/getMyInitiatedProcess/';
         	
                 $.ajax({
@@ -114,7 +102,7 @@
                     dataType: 'json',
                     success: function(data){
                     		var ahtml = "";
-                    	    if(data.length>0){
+                    	    if(data!=''){
                     	    	for(var i=0;i<data.length;i++){
 	                    	    	var startname = itemIndex == 0?data[i].starter:data[i].startername;
 	                        		var startorg = itemIndex == 0?data[i].startorg:data[i].starterorgname;
