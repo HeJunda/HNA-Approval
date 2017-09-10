@@ -145,7 +145,11 @@
                     	complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
                 	　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
                 	 　　　　　 ajaxTimeoutTest.abort();
-                	　　　　　  alert("超时");
+                	　　　　　   layer.open({
+		               		    content: '请求超时'
+		            		        ,skin: 'msg'
+		            		        ,time: 2 //2秒后自动关闭
+		            		      });
                 	　　　　}
                 	　　},
                     	error: function(error){
