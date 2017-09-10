@@ -1,3 +1,4 @@
+var aaaaaa=true;//你来一个判断数据是否加载完毕的变量
 var vm=new Vue({
 		el:"#app",
 		data:{
@@ -53,6 +54,7 @@ var vm=new Vue({
 						setTimeout(function(){
 							me.resetload();
 			                start=10;
+			                aaaaaa=true;
 			                me.unlock();
 	                        me.noData(false);
 			            },1000);
@@ -63,16 +65,16 @@ var vm=new Vue({
 		        },
 				loadDownFn : function(me){
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-						console.log(_this.datas.length)
-						if(response.data.length<=10){
-							_this.data=response.data
-						}
-						if(response.data.length>0){
+						console.log(response.data.length)
+						if(aaaaaa&&response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
+							aaaaaa = false;
+							_this.data=response.data
 							me.lock()
 			                me.noData(true);
 						}
+						
 						
 						setTimeout(function(){
 							start+=10;

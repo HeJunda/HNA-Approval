@@ -28,7 +28,9 @@ var vm=new Vue({
       personUser:'',
       moom:[],
       add:'',
-      language:[]
+      language:[],
+      exaMore:true,
+      exbMore:true
 	},
 	/*过滤ICON图标*/
 	filters:{
@@ -142,13 +144,27 @@ var vm=new Vue({
 			var user=getCookie('userid')
 			var instance=this.digital.instanceid;
 			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
+				var more=response.data[0].formtype
+				console.log(more)
+				if(more==23){
+					_this.exaMore=false;
+					
+				}else{
+					_this.exbMore=false
+				}
 				_this.dates=response.data[0];
 				var info=JSON.parse(_this.dates.flowinfo)
 				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
 				_this.ObjInfo=info
-				//console.log(_this.dates.attach);
-				var tem=_this.dates.attach
+				var tem=_this.dates.attach;
+				console.log(tem)
 				_this.temes=JSON.parse(tem);
+				
+				if(more==23){
+					console.log($(".examine-details li:last-child span"))
+					$(".examine-details li:last-child span").removeClass("")
+				}
+				
 			}).catch(function(error){
 			    console.log(error);
 			});
