@@ -389,13 +389,16 @@ public class WorkflowService {
 	    		} else if( formtype.equals("23")){
 	    			
 	    			JSONArray flowInfoJsonArray = JSONArray.parseArray(flowinfo);
+	    			Iterator<Object> it = flowInfoJsonArray.iterator();
 	    			Map<String,String> flowInfoMap = new HashMap<String,String>();
-	    			for (int j = 0; j < flowInfoJsonArray.size(); j++) {
-	    				JSONObject flowInfoJsonObject = (JSONObject) flowInfoJsonArray.get(i);
+	    			while (it.hasNext()) {
+	    				JSONObject flowInfoJsonObject = (JSONObject) it.next();
 	    				String newKey = flowInfoJsonObject.getString("fieldname");
 	    				String newValue = flowInfoJsonObject.getString("defvalue");
 	    				flowInfoMap.put(newKey, newValue);
-					}
+	    			}
+//	    			for (int j = 0; j < flowInfoJsonArray.size(); j++) {
+//					}
 	    			String flowBaseInfoString = JSON.toJSONString(flowInfoMap);
     				map.put("flowinfo", flowBaseInfoString);
 	    			
@@ -448,19 +451,21 @@ public class WorkflowService {
 	    				Map<String,String> baseInfoMap = JSON.parseObject(flowinfo, Map.class);
 	    				HashMap<Integer, String> baseInfoMapShow = new HashMap<Integer,String>();
 	    				for (String key : baseInfoMap.keySet()) {
-	    					String newValue = key.substring(key.indexOf('|') + 1) + ":" + baseInfoMap.get(key);
-	    					String newKey = key.substring(0,key.indexOf('|'));
-	    					Integer order = Integer.valueOf(newKey);
-	    					baseInfoMapShow.put(order, newValue);
+    						String newValue = key.substring(key.indexOf('|') + 1) + ":" + baseInfoMap.get(key);
+    						String newKey = key.substring(0,key.indexOf('|'));
+    						Integer order = Integer.valueOf(newKey);
+    						baseInfoMapShow.put(order, newValue);
 	    				}
 	    				//排序
 	    				List<TreeMap<String,String>> finalDate = new ArrayList<TreeMap<String,String>>();
 	    				for(int j=0;j<baseInfoMapShow.size();j++){
 	    					TreeMap<String,String> finalInfoMapShow = new TreeMap<String,String>();
-	    					String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
-	    					String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
-	    					finalInfoMapShow.put(newKey, newValue);
-	    					finalDate.add(finalInfoMapShow);
+	    					if(baseInfoMapShow.get(j) != null ){
+	    						String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
+	    						String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
+	    						finalInfoMapShow.put(newKey, newValue);
+	    						finalDate.add(finalInfoMapShow);
+	    					}
 	    				}
 	    				String flowBaseInfoString = JSON.toJSONString(finalDate);
 	    				map.put("flowinfo", flowBaseInfoString);
