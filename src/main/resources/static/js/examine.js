@@ -83,6 +83,7 @@ var vm=new Vue({
 						var arr=[];
 						for(var i=0;i<response.data.length;i++){
 							var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+							
 							var left = str.split(',')
 							arr.push(left)
 						}
@@ -114,8 +115,11 @@ var vm=new Vue({
 				var arr=[];
 				for(var i=0;i<response.data.length;i++){
 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+					//console.log(str)
 					var left = str.split(',')
 					arr.push(left)
+					console.log(arr)
+//					console.log(arr[0][0].substring(0,arr[0][0].indexOf('.'))+'.pdf')
 				}
 				_this.annex=arr
 			}).catch(function(error){

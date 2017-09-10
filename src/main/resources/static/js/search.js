@@ -94,6 +94,7 @@
                 $.ajax({
                     type: 'GET',
                     url: urls,
+                    timeout:10000,
                     data:{
                     	start:start,
                     	limit:10,
@@ -145,6 +146,16 @@
                     	
                         
                     },
+                    complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                	　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
+                	 　　　　　 ajaxTimeoutTest.abort();
+                	　　　　　  layer.open({
+	                		    content: '请求超时'
+	                		        ,skin: 'msg'
+	                		        ,time: 2 //2秒后自动关闭
+	                		      });
+                	　　　　}
+                	　　},
                     error: function(xhr, type){
                         //alert('Ajax error!');
                         // 即使加载出错，也得重置

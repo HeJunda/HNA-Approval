@@ -8,7 +8,7 @@
 		start=0;
 		// 解锁
 		var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
-		console.log(itemIndex)
+//		console.log(itemIndex)
         dropload.unlock();
         dropload.noData(false);
      	// 重置
@@ -38,6 +38,7 @@
             $.ajax({
                 type: 'GET',
                 url: urls,
+                timeout:10000,
                 data:{
                 	start:0,
                 	limit:10,
@@ -75,7 +76,18 @@
                             me.noData(false);
                         },1000);
                 	},
-                	error: function(xhr, type){
+                	complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+            	　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
+            	 　　　　　 ajaxTimeoutTest.abort();
+            	　　　　　  layer.open({
+		          		    content: '请求超时'
+		        		        ,skin: 'msg'
+		        		        ,time: 2 //2秒后自动关闭
+		        		    });
+            	　　　　}
+            	　　},
+                	error: function(error){
+                		alert(error)
                 		me.resetload();
 	                }
 	            });
@@ -85,6 +97,7 @@
                 $.ajax({
                     type: 'GET',
                     url: urls,
+                    settimeout:3000,
                     data:{
                     	start:start,
                     	limit:10,
@@ -92,6 +105,7 @@
                     },
                     dataType: 'json',
                     success: function(data){
+//                    	console.log(data)
                     		var ahtml = "";
                             if(data.length>0){
                          	   for(var i=0;i<data.length;i++){
@@ -128,7 +142,15 @@
                             			me.resetload();
                             		},1000);
                     	},
-                    	error: function(xhr, type){
+                    	complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+                	　　　　if(status=='timeout'){//超时,status还有success,error等值的情况
+                	 　　　　　 ajaxTimeoutTest.abort();
+                	　　　　　  alert("超时");
+                	　　　　}
+                	　　},
+                    	error: function(error){
+                    		console.log(111)
+                    	console.log(error)
                         me.resetload();
                     }
                 });
@@ -139,7 +161,7 @@
     	sessionStorage.setItem('flag',$(this).index())
 		$('.followInfo').css('display','block')
 		var $this = $(this);
-		console.log($this.index())
+//		console.log($this.index())
 		$('.agency-list ul').html('')
 	    getList($this.index())
 	    $this.addClass('cur').siblings('.item').removeClass('cur');

@@ -11,7 +11,7 @@ a:hover{text-decoration:none;border:1px solid #fff;}
 sup{vertical-align:text-top;}
 sub{vertical-align:text-bottom;}
 legend{color:#000;}
-fieldset,img{border:0;}
+fieldset,img{border:0;width:55%}
 button,input,select,textarea{font-size:75%;}
 table{border-collapse:collapse;border-spacing:0;}
 .fl,.ftrue{float:left;display:block;}
@@ -25,6 +25,7 @@ table{border-collapse:collapse;border-spacing:0;}
 /*首页*/
 
 .container{display:block;width:100%;height:100%;margin:0 auto;padding:0;position:relative}
+.containerAnency{display:block;width:100%;height:100%;margin:0 auto;padding:0;position:relative}
 .header{display:block;width:100%;height:3em;text-align:center;border-bottom: 1px solid #D8D8D8;box-shadow:0px 3px 3px #EFEFEF;z-index: 10;position:fixed;background-color:#fff;line-height: 48px;}
 .header .back{position:relative;display: inline-block;height:30px;width:15px;background: url(/images/tcmp-icon.png) no-repeat -1px -328px;float:left;vertical-align:middle;margin-top:0.5em;margin-left:10px;cursor: pointer;}
 .header .approve{display: inline-block;float:left;text-align:center;width:100%;font-size:1em;padding:0.75em 0}
@@ -41,11 +42,14 @@ table{border-collapse:collapse;border-spacing:0;}
 .menu-icon span.project{background-position: 3px -254px}
 .menu-box .last{height:111px}
 .menu-item p{padding:0.625em 0}
+.agenLeft-agency span img{width:41%;}
 /*代办列表*/
 .agency-list{width:100%;background-color: #F9F9F9;overflow:hidden}
 .agency-list-agency{width:100%;background-color: #F9F9F9;overflow:hidden}
+.agencyListAgency{width:100%;background-color: #F9F9F9;overflow:hidden}
 .agencylist{width:100%;}
 .agency-list ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
+.clearfies ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .agency-list-agency ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .agency-left,.agency-right{display: inline-block;padding:10px 0}
 .agency-left span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle;margin-left:0.625em}
@@ -140,7 +144,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-info{display: block;width:90%;margin:0 auto;padding:1.2em 1em}
 .examine-title{font-size:1.2em;color:#fff;line-height:2.1em;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;}
 .examine-node li{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display: block;width:90%;line-height:1.6em;color:#fff;font-size:0.825em;}
-.examine-node li span{display: inline-block;width:5em;color:#fff;font-size:0.875em;text-align:right}
+.examine-node li span{width:5em;color:#fff;font-size:0.875em;text-align:right}
 .examine-list{display: block;width:100%;}
 .examine-item{display: block;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;font-size:1em;#333;line-height:2.5em;font-weight:normal;background-color: #fff;padding:0 0.625em}
 .examine-item span{font-size:2.5em;color:#E75732;text-align:center;cursor:pointer}
@@ -149,14 +153,16 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-item .more-open{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat -72px -321px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
 .examine-details li{clear: both;font-size:0.875em;color:#7F7F7F;background-color:#fff;border-bottom:1px solid #E7E7E7;padding:0 0.625em;line-height:2.5em}
 .examine-details li span{font-size:0.875em;color:#333;font-size:1em}
+.examine-details li:last-child span{float:none;}
+.examine-details li:not(:last-child) span{width: 70%;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .space{height:0.625em;width:100%;background-color:#F9F9F9}
 .examine-opinion{width:95%;height:6em;border:0;border-bottom:1px solid #E7E7E7;padding:0.625em;font-size:0.875em;color:#333;margin:0 auto;display: block;}
 .examine-history{position:relative;height:auto;display: block}
-.history{padding:0 1em;border-bottom:1px solid #EDEDED;display: block;height:auto;background-color:#fff}
+.history{padding:0.8em 1em;border-bottom:5px solid #F5F5F5;display: block;height:auto;background-color:#fff}
 .history-title{font-size:1em;color:#333;font-weight: normal;border-bottom: 1px solid #EDEDED;line-height:2.5em}
 .history-title i.principal{margin-left:10px;font-size:0.75em;color:#333;font-style:normal;}
 .history-title span{font-size:0.875em;color:#333}
-.history-describe{display: block;min-height: 3em;font-size:0.875em;color:#333;padding:0.5em 0;border-bottom: 1px solid #EDEDED}
+.history-describe{display: block;min-height: 3em;font-size:0.875em;color:#333;padding:0.5em 0}
 .history-enclosure ul li{font-size:0.875em;color:#333;padding:0.625em 0}
 .history-type{position:relative;display: block;height:60px}
 .history-type>img{position:absolute;bottom: 0;right:0;width:100%;height:100%;max-width:90px;max-height:60px}

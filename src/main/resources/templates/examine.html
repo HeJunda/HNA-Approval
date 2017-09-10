@@ -32,16 +32,11 @@
             <div class="examine-list">
                  <h3 class="examine-item"  v-on:click="showDiv($event)">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}"></span></h3>
                  <ul class="examine-details" v-show="showDom" style="display: none">
-                 	<li>流程编号<span class="fr">{{dates.instanceid}}</span></li>
-                    <li>流程标题<span class="fr">{{dates.flowname}}</span></li>
-                    <li>流程名称<span class="fr">{{dates.processname}}</span></li>
-                    <li>发起时间<span class="fr">{{dates.starttime}}</span></li>
-                    <li  v-for="val in ObjInfo"><p v-for="(ie,key) in val">{{key}}<span class="fr">{{ie}}</span></p></li>
-                    <!-- <div class="tems">
-                    	<ul>
-                    		 <li v-for="(val,key) in temes"><a :href="'http://10.72.8.130:7004'+val" class="tems">附件：{{key}}</a>	</li>
-                    	</ul>
-            	 	</div> -->
+                 	<li>流程编号<span class="fr" v-html="dates.instanceid"></span></li>
+                    <li>流程标题<span class="fr" v-html="dates.flowname"></span></li>
+                    <li>流程名称<span class="fr" v-html="dates.processname"></span></li>
+                    <li>发起时间<span class="fr" v-html="dates.starttime"></span></li>
+                    <li  v-for="val in ObjInfo"><p v-for="(ie,key) in val"><span>{{key}}</span><span class="fr">{{ie}}</span></p></li>
                  </ul>
                  <p class="space"></p>
                  <!-- <h3 class="examine-item">历史审批记录</h3> -->
@@ -49,10 +44,8 @@
                  <div id="history" v-show="showHis">
 	                 <ul class="examine-history">
 	                     <li class="history" v-for="(msg,ind) in histry">
-	                    	<h3 class="history-title">{{msg.nodename}}<i class="principal">{{msg.approveuser}}</i><span class="fr">{{msg.approvetime}}</span></h3>
-	                    	<div class="history-describe">
-	                      		{{msg.remark}}
-	                    	</div>
+	                    	<h3 class="history-title" v-html="msg.nodename"><i class="principal" v-html="msg.approveuser"></i><span class="fr" v-for="msg.approvetime"></span></h3>
+	                    	<div class="history-describe" v-html="msg.remark"></div>
 	                    	<div class="history-enclosure">
 	                         	<ul>
 	                         		<li v-show="annex[ind][1] ? true : false ">

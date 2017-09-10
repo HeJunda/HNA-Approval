@@ -39,13 +39,17 @@ new Vue({
 				domClass : 'dropload-down',
 				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">暂无数据</div>'
+				domNoData : '<div class="dropload-noData">数据加载完毕</div>'
 			},
 			loadUpFn : function(me){
+				var conH=$('.clearfix').height()//每个li的高度
+				var clien=document.documentElement.clientHeight//当前屏幕的高度
 				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
-					console.log(response.data)
+					console.log(response.data.length)
 					_this.dataes=response.data;
 					_this.agenshow=true
+					var H=conH*response.data.length;
+					
 					setTimeout(function(){
 						me.resetload();
 		                me.unlock();
@@ -58,7 +62,7 @@ new Vue({
 	        },
 			loadDownFn : function(me){
 				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
-					
+					console.log(response.data)
 					if(response.data.length>0){
 						_this.dataes=response.data;
 					}

@@ -63,7 +63,10 @@ var vm=new Vue({
 		        },
 				loadDownFn : function(me){
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-						console.log(_this.datas)
+						console.log(_this.datas.length)
+						if(response.data.length<=10){
+							_this.data=response.data
+						}
 						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
