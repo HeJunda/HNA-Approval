@@ -4,13 +4,14 @@ new Vue({
       date:{},
       dataes:'',
       number:'',
+      itemInd:'',
       loading:false
     },
     created:function(){
     		var users=getCookie('userid')
         	var _this=this;
-        	var token=window.hna.SsoToken;
-    		//var token="jd.he";
+        	//var token=window.hna.SsoToken;
+    		var token="6666";
         	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
@@ -34,7 +35,11 @@ new Vue({
              });
     		}else{
     			axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
+    				var user=getCookie('userid')
             		_this.number=response.data;
+            		/*sessionStorage.setItem('flasn',_this.number)
+            		_this.itemInd = sessionStorage.getItem('flasn')*/
+            		
            	    }).catch(function(error){
            	        console.log(error);
            	    });
@@ -44,8 +49,10 @@ new Vue({
     },
     mounted:function(){
     	var _this=this
+    	var user=getCookie('userid')
     	axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
     		_this.number=response.data;
+    		
    	    }).catch(function(error){
    	        console.log(error);
    	    });

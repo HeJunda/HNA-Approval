@@ -23,7 +23,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .cleanR{clear: right;}
 .clearfix:after{content:'\0020';display:block;height:0;overflow:hidden;clear:both;}
 /*首页*/
-
+.infoColor{color:#7F7F7F}
 .container{display:block;width:100%;height:100%;margin:0 auto;padding:0;position:relative}
 .containerAnency{display:block;width:100%;height:100%;margin:0 auto;padding:0;position:relative}
 .header{display:block;width:100%;height:3em;text-align:center;border-bottom: 1px solid #D8D8D8;box-shadow:0px 3px 3px #EFEFEF;z-index: 10;position:fixed;background-color:#fff;line-height: 48px;}

@@ -37,7 +37,7 @@
                     <li>流程名称<span class="fr" v-html="dates.processname"></span></li>
                     <li>发起时间<span class="fr" v-html="dates.starttime"></span></li>
                     <li v-show="exaMore"  v-for="val in ObjInfo"><p v-for="(ie,key) in val"><span>{{key}}</span><span class="fr">{{ie}}</span></p></li>
-                    <li v-show="exbMore"  v-for="(val,key) in ObjInfo"><p><span>{{key}}</span><span class="fr">{{val}}</span></p></li>
+                    <li v-show="exbMore"  v-for="(val,key) in ObjInfo"><p><span class="infoColor">{{key}}</span><span class="fr">{{val}}</span></p></li>
                  </ul>
                  <p class="space"></p>
                  <!-- <h3 class="examine-item">历史审批记录</h3> -->
