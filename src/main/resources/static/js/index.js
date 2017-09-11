@@ -29,7 +29,8 @@ new Vue({
 	           	   	axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
 	            		
 	           	   		_this.number=response.data;
-		           	   	sessionStorage.setItem('count',_this.number)
+		           	   	sessionStorage.setItem('count',_this.number);
+		           	   	_this.session=true;
 	            		_this.loading=false;
 	           	    }).catch(function(error){
 	           	        console.log(error);
@@ -44,6 +45,7 @@ new Vue({
     			axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
     				
             		_this.number=response.data;
+            		_this.session=true;
     				_this.loading=false;
             		
            	    }).catch(function(error){
@@ -51,6 +53,7 @@ new Vue({
            	    });
     			_this.dataes=true;
       	   		_this.loading=false;
+      	   		_this.session=true;
     		}	
     },
     methods:{

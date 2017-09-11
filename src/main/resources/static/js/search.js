@@ -39,7 +39,9 @@
 		loadUpFn : function(me){
             // 加载菜单一的数据
 			var urls = itemIndex == 0?'/workflow/getMyInitiatedProcess/':'/workflow/getDoneMessage/';
-            $.ajax({
+			var gulpval=document.getElementById('gulpwork');
+			gulpval.value="";
+			$.ajax({
                 type: 'GET',
                 url: urls,
                 data:{

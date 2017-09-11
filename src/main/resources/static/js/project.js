@@ -36,6 +36,8 @@
 		},
 		loadUpFn : function(me){
 			var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
+			var gulpval=document.getElementById('gulpwork');
+			gulpval.value="";
             $.ajax({
                 type: 'GET',
                 url: urls,
