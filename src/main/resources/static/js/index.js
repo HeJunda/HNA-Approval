@@ -32,9 +32,9 @@ new Vue({
            	    }).catch(function(error){
            	        console.log(error);
            	    });
-             /*}).catch(function(error){
+             }).catch(function(error){
                  console.log(error);
-             });*/
+             });
     		}else{
     			axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
     				
