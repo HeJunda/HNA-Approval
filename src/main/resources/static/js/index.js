@@ -13,14 +13,14 @@ new Vue({
     	}
     		var users=getCookie('userid')
         	var _this=this;
-        	//var token=window.hna.SsoToken;
-    		var token="6666";
+        	var token=window.hna.SsoToken;
+    		//var token="6666";
         	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
-    			/*axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-             	_this.date=response.data.UserAccount;*/
-             	document.cookie = 'userid'+'='+'6666';
+    			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
+             	_this.date=response.data.UserAccount;
+             	document.cookie = 'userid'+'='+_this.date;
              	var user=getCookie('userid')
         			axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){  
            	        _this.dataes=response.data;
@@ -29,7 +29,6 @@ new Vue({
 	            		
 	           	   		_this.number=response.data;
 		           	   	sessionStorage.setItem('count',_this.number)
-//	            		_this.itemInd = sessionStorage.getItem('flasn')
 	            		_this.loading=false;
 	           	    }).catch(function(error){
 	           	        console.log(error);
@@ -37,16 +36,14 @@ new Vue({
            	    }).catch(function(error){
            	        console.log(error);
            	    });
-             /*}).catch(function(error){
+             }).catch(function(error){
                  console.log(error);
-             });*/
+             });
     		}else{
     			axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
     				
             		_this.number=response.data;
     				_this.loading=false;
-            		/*sessionStorage.setItem('flasn',_this.number)
-            		_this.itemInd = sessionStorage.getItem('flasn')*/
             		
            	    }).catch(function(error){
            	        console.log(error);
