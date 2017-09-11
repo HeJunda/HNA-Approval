@@ -4,11 +4,13 @@ new Vue({
       date:{},
       dataes:'',
       number:'',
-      loading:false
+      loading:false,
+      session:false
     },
     created:function(){
     	if(sessionStorage.getItem('count')){
     		this.number = sessionStorage.getItem('count')
+    		this.session=true;
     	}
     		var users=getCookie('userid')
         	var _this=this;
