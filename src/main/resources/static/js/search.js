@@ -1,6 +1,6 @@
 
  	var itemIndex = sessionStorage.getItem('flag')
-
+ 	var searchs=false;
      //$this.addClass('cur').siblings('.item').removeClass('cur');
     $('.searNav').eq(itemIndex).addClass('cur')
     function getList(item){
@@ -88,6 +88,7 @@
             });
     	},
         loadDownFn : function(me){
+        	searchs=false;
             // 加载菜单一的数据
         	var urls = itemIndex == 0?'/workflow/getMyInitiatedProcess/':'/workflow/getDoneMessage/';
         	
@@ -103,6 +104,7 @@
                     dataType: 'json',
                     success: function(data){
                     		var ahtml = "";
+                    		
                     	    if(data!=''){
                     	    	for(var i=0;i<data.length;i++){
 	                    	    	var startname = itemIndex == 0?data[i].startername:data[i].starter;
@@ -140,6 +142,7 @@
                             	   name=data[i].flowname
                                	   keywork.push(name)
                                } 
+                               searchs=true;
                                // 每次数据加载完，必须重置
                                me.resetload();
                            },1000);
@@ -165,15 +168,19 @@
         	}
     });
     $('.tab .item').on('click',function(){
-    	sessionStorage.setItem('flag',$(this).index())
-		$('.followInfo').css('display','block')
-		var $this = $(this);
-		console.log($this.index())
-		$('.agency-list ul').html('')
-	    getList($this.index())
-	    console.log($this.index())
-	    $this.addClass('cur').siblings('.item').removeClass('cur');
-	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+    	console.log(searchs)
+    	if(searchs){
+    		sessionStorage.setItem('flag',$(this).index())
+    		$('.followInfo').css('display','block')
+    		var $this = $(this);
+    		console.log($this.index())
+    		$('.agency-list ul').html('')
+    	    getList($this.index())
+    	    console.log($this.index())
+    	    $this.addClass('cur').siblings('.item').removeClass('cur');
+    	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+    	    keywork=[]
+    	}
 	})
 
 
@@ -186,14 +193,14 @@ function sear(){
 		getList(itemIndex)
 	}
 	for(i=0;i<lis.length;i++){
-		lis[i].style.display="none";
+		lis.eq(i).css("display","none");
 	}
 	console.log(lis.length)
 	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
 			console.log(lis[i])
-			lis[i].style.display = 'block';
+			lis.eq(i).css("display","block");
 		}
 	}
 }

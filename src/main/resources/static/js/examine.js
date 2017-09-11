@@ -30,7 +30,8 @@ var vm=new Vue({
       add:'',
       language:[],
       exaMore:true,
-      exbMore:true
+      exbMore:true,
+      html:''
 	},
 	/*过滤ICON图标*/
 	filters:{
@@ -124,6 +125,15 @@ var vm=new Vue({
 //					console.log(arr[0][0].substring(0,arr[0][0].indexOf('.'))+'.pdf')
 				}
 				_this.annex=arr
+				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
+	    			
+	    			//var html='';
+	    			$.each(response.data,function(i,val){
+	    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
+	    			});
+	        	},function(err){
+	        		console.log(err)
+	        	})
 			}).catch(function(error){
 			    console.log(error);
 			});
@@ -338,31 +348,21 @@ var vm=new Vue({
 			
 		/*常用语*/
 		lane:function(){
-			var _this=this;
-			var user=getCookie('userid');
-			axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
-    			
-    			var html='';
-    			$.each(response.data,function(i,val){
-    				html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
-    			});
-				var L=layer.open({
-				    title: [
-				            '常用语',
-				            'background-color: #E75732; color:#fff;'
-				          ]
-				          ,content: html
-				        });
-    			$(document).on("click",".option",function(){
-    				var value=$(this).text()
-    				$("#sele").val(value)
-    				_this.opinion=$("#sele").val();
-    				layer.close(L)
-    			}); 
-        		
-        	},function(err){
-        		console.log(err)
-        	})
+			var _this=this
+			var L=layer.open({
+			    title: [
+			            '常用语',
+			            'background-color: #E75732; color:#fff;'
+			          ]
+			          ,content: _this.html
+			        });
+			
+			$(document).on("click",".option",function(){
+				var value=$(this).text()
+				$("#sele").val(value)
+				_this.opinion=$("#sele").val();
+				layer.close(L)
+			}); 
 		},
 		/*点击提交*/
 		submit:function(){

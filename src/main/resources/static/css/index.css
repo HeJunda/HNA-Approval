@@ -42,7 +42,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .menu-icon span.project{background-position: 3px -254px}
 .menu-box .last{height:111px}
 .menu-item p{padding:0.625em 0}
-.agenLeft-agency span img{width:41%;}
+.agenLeft-agency span img{width:45%;}
 /*代办列表*/
 .agency-list{width:100%;background-color: #F9F9F9;overflow:hidden}
 .agency-list-agency{width:100%;background-color: #F9F9F9;overflow:hidden}
@@ -86,8 +86,8 @@ table{border-collapse:collapse;border-spacing:0;}
 
 .agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2.5em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-title-anency{color:#3C3C3C;font-size:0.925em;font-style:normal;line-height:2.5em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.agency-right p{width:100%;font-size:1em;line-height:2em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
-.agency-right p:first-child{border-bottom:1px solid #f7f7f7;}
+.agency-right p{width:100%;font-size:1em;line-height:1.5em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+/* .agency-right p:first-child{border-bottom:1px solid #f7f7f7;} */
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
 .projtext{font-size:0.825em}
 /* #active{width:100%; height:500px;}
@@ -154,7 +154,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .examine-item .more-close{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat 8px -370px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
 .examine-item .more-open{display: inline-block;width:20px;height:20px;background:url(/images/tcmp-icon.png) no-repeat -72px -321px;vertical-align:middle;margin-top:0.625em;cursor:pointer;font-size:1em}
 .examine-details li{clear: both;font-size:0.875em;color:#7F7F7F;background-color:#fff;border-bottom:1px solid #E7E7E7;padding:0 0.625em;line-height:2.5em}
-.examine-details li span{font-size:0.875em;color:#333;font-size:1em}
+.examine-details li span{font-size:0.875em;font-size:1em}
 /* .examine-details li:last-child span{float:none;} */
 .examine-details li:not(:last-child) span{width: 70%;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .space{height:0.625em;width:100%;background-color:#F9F9F9}

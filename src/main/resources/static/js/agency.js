@@ -65,21 +65,27 @@ var vm=new Vue({
 		        },
 				loadDownFn : function(me){
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-						console.log(response.data.length)
-						if(aaaaaa&&response.data.length>0){
-							//alert(111111111111)
+						//console.log(response.data.length)
+//						if(aaaaaa&&response.data.length>0&&response.data.length==10){
+//							//alert(111111111111+response.data.length)
+//							_this.datas=_this.datas.concat(response.data)
+//							start+=10;
+//						}else{
+//							//alert("没有："+response.data.length)
+//							aaaaaa = false;
+//							_this.datas=response.data
+//							me.lock()
+//			                me.noData(true);
+//						}
+						if(response.data.length>0){
 							_this.datas=_this.datas.concat(response.data)
 						}else{
-							//alert(222222222222)
-							aaaaaa = false;
-							_this.data=response.data
 							me.lock()
 			                me.noData(true);
 						}
 						
-						
 						setTimeout(function(){
-							start+=10;
+							start+=10
 		                    me.resetload();
 		                },1000);
 					}).catch(function(error){

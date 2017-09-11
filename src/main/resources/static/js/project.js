@@ -1,6 +1,6 @@
 
  	var itemIndex = sessionStorage.getItem('flag')
- 	
+ 	var projects = false;
     $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
 		$('.agency-list').find('ul').html('');
@@ -93,6 +93,7 @@
 	            });
 	    	},
 	        loadDownFn : function(me){
+	        	projects=false
 	        	var urls = itemIndex == 0?'/project/getProjectList/':'/project/getMyDeptProjectList/';
                 $.ajax({
                     type: 'GET',
@@ -140,6 +141,7 @@
                             				name=data[i].projectname
                             				keywork.push(name)
                             			}     
+                            			projects=true
                             			me.resetload();
                             		},1000);
                     	},
@@ -163,14 +165,17 @@
 	    	
     });
     $('.tab .item').on('click',function(){
-    	sessionStorage.setItem('flag',$(this).index())
-		$('.followInfo').css('display','block')
-		var $this = $(this);
-//		console.log($this.index())
-		$('.agency-list ul').html('')
-	    getList($this.index())
-	    $this.addClass('cur').siblings('.item').removeClass('cur');
-	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+    	if(projects){
+    		sessionStorage.setItem('flag',$(this).index())
+    		$('.followInfo').css('display','block')
+    		var $this = $(this);
+//    		console.log($this.index())
+    		$('.agency-list ul').html('')
+    	    getList($this.index())
+    	    $this.addClass('cur').siblings('.item').removeClass('cur');
+    	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+    	    keywork=[];
+    	}
 	})
 
 //实现搜索
@@ -189,7 +194,7 @@ function sear(){//点击
 	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
-			lis[i].style.display = 'block';
+			lis[i].style.display = "block";
 		}
 	}
 }

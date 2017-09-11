@@ -2,7 +2,7 @@
 
 $(function(){
 	var userid = getCookie("userid");
-	
+	var follows = false;
  	var itemIndex = sessionStorage.getItem('flag')
  	
     //$this.addClass('cur').siblings('.item').removeClass('cur');
@@ -31,6 +31,7 @@ $(function(){
 	            domNoData : '<div class="dropload-noData">数据加载完毕</div>'
 	        },
 	        loadDownFn : function(me){
+	        	follows=false
 	        	$('.agency-list ul').html('')
 	            $.ajax({
 			        type: 'GET',
@@ -57,7 +58,7 @@ $(function(){
 									      		+'<a href="'+hrefs+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 20%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
 									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
 									           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
 									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
@@ -65,14 +66,16 @@ $(function(){
 									           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
 									           			+'</div>'
 									           		+'</div>'
-									           	+'</a>'	
-									      	+'</li>'
+									           	+'</a>'
+									           +'</li>'
+									      	+'<p class="space"></p>'
 			                }
 			        		
 				            
 				            	//console.log(data);
 				             setTimeout(function(){
 				            	 $('.agency-list ul').append($(result));
+				            	 follows=true
 				             },1000)
 				                	
 				                
@@ -117,7 +120,7 @@ $(function(){
 									      		+'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
 									      			+'<div class="agency-right">'
 									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 20%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
+									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
 									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
 									           				+'<p class="follow-person">发送人：<span class="fr follr">'+(data[i].sendername==undefined?"":data[i].sendername)+'</span></p>'
 									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+(data[i].createtime==undefined?"":data[i].createtime)+'</span></p>'
@@ -127,6 +130,7 @@ $(function(){
 									           		+'</div>'
 									           	+'</a>'	
 									      	+'</li>'
+									    	+'<p class="space"></p>'
 			                }
 			                $('.agency-list ul').html(result);
 			                
@@ -144,13 +148,16 @@ $(function(){
 	    });
 	
 	$('.tab .item').on('click',function(){
-		sessionStorage.setItem('flag',$(this).index())
-		$('.followInfo').css('display','block')
-		var $this = $(this);
-		$('.agency-list ul').html('')
-	    getList($this.index())
-	    $this.addClass('cur').siblings('.item').removeClass('cur');
-	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+		if(follows){
+			sessionStorage.setItem('flag',$(this).index())
+			$('.followInfo').css('display','block')
+			var $this = $(this);
+			$('.agency-list ul').html('')
+		    getList($this.index())
+		    $this.addClass('cur').siblings('.item').removeClass('cur');
+		    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
+		}
+		
 	})
 })
 
