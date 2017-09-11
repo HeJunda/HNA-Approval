@@ -28,7 +28,7 @@ $(function(){
 	            domClass : 'dropload-down',
 	            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 	            domLoad : '<div class="dropload-load">加载中...</div>',
-	            domNoData : '<div class="dropload-noData">数据加载完毕</div>'
+	            domNoData : '<div class="dropload-noData">暂无数据</div>'
 	        },
 	        loadDownFn : function(me){
 	        	follows=false
@@ -70,18 +70,9 @@ $(function(){
 									           +'</li>'
 									      	+'<p class="space"></p>'
 			                }
-			        		
-				            
-				            	//console.log(data);
-				             setTimeout(function(){
-				            	 $('.agency-list ul').append($(result));
-				            	 follows=true
-				             },1000)
-				                	
-				                
-				            	
-				            
-			                
+			            	//console.log(data);
+			            	 $('.agency-list ul').append($(result));
+			            	 follows=true
 			        	}else{
 			        		$('.conSearch').text()
 			        		

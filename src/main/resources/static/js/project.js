@@ -4,6 +4,7 @@
     $('.searNav').eq(itemIndex).addClass('cur')
 	function getList(item){
 		$('.agency-list').find('ul').html('');
+		isSear = false;
 		itemIndex = item;
 		start=0;
 		// 解锁
@@ -64,6 +65,7 @@
 					                        +'</div>'
 				                        +'</a>'
 		   		                  +'</li>'
+		   		               +'<p class="space"></p>'
              	   		}
                 		setTimeout(function(){
                 			$('.agency-list').find('ul').html(ahtml);
@@ -127,6 +129,7 @@
      								                        +'</div>'
      							                        +'</a>'
      					   		                  +'</li>'
+     					   		                  +'<p class="space"></p>'
                          	   			}
                                 	}else if(data.length==0){
                             			me.lock('down');
@@ -143,6 +146,11 @@
                             			}     
                             			projects=true
                             			me.resetload();
+                            			if(isSear){
+                                     	   dropload.lock();
+                                     	   dropload.noData();
+                                     	   dropload.resetload();
+                                        }
                             		},1000);
                     	},
                     	complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
@@ -166,6 +174,7 @@
     });
     $('.tab .item').on('click',function(){
     	if(projects){
+    		var gulpval=document.getElementById('gulpwork')
     		sessionStorage.setItem('flag',$(this).index())
     		$('.followInfo').css('display','block')
     		var $this = $(this);
@@ -175,9 +184,11 @@
     	    $this.addClass('cur').siblings('.item').removeClass('cur');
     	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
     	    keywork=[];
+    	    gulpval.value="";
     	}
 	})
 
+var isSear = false;
 //实现搜索
 function sear(){//点击
     // dropload
@@ -186,17 +197,23 @@ function sear(){//点击
 	var txt = gulpval.value
 	if(txt=='') {
 		getList(itemIndex);
+		isSear = true;
 	}
 	for(i=0;i<lis.length;i++){
-		lis[i].style.display="none";
+		lis.eq(i).css("display","none");
 	}
-	console.log(lis.length)
-	console.log(keywork.length)
+//	console.log(lis.length)
+//	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
-			lis[i].style.display = "block";
+			lis.eq(i).css("display","block");
 		}
 	}
+	if(!isSear){
+ 	   dropload.lock();
+ 	   dropload.noData();
+ 	   dropload.resetload();
+    }
 }
 
 

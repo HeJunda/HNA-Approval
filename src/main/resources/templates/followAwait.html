@@ -32,8 +32,9 @@
 			      		<li class="clearfix" v-for="item in dataes">
 			      			<div class="agency-right">
 			            		<div class="right-box">
-			           				<h3 class="agency-title">{{item.flowname}}</h3>
+			           				<!-- <h3 class="agency-title">{{item.flowname}}</h3> -->
 			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
+			           				<p class="follow-person">流程标题：<span class="fr" style="width:65%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.flowname}}</span></p>
 			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
 			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.dptname}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>

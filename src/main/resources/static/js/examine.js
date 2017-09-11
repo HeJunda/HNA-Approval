@@ -91,6 +91,14 @@ var vm=new Vue({
 							arr.push(left)
 						}
 						_this.annex=arr;
+						axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
+			    			
+			    			$.each(response.data,function(i,val){
+			    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
+			    			});
+			        	},function(err){
+			        		console.log(err)
+			        	})
 						setTimeout(function(){
 							me.resetload();
 			                me.unlock();
@@ -127,7 +135,6 @@ var vm=new Vue({
 				_this.annex=arr
 				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
 	    			
-	    			//var html='';
 	    			$.each(response.data,function(i,val){
 	    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
 	    			});

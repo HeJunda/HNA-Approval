@@ -5,6 +5,7 @@
     $('.searNav').eq(itemIndex).addClass('cur')
     function getList(item){
 		$('.agency-list').find('ul').html('');
+		isSear = false;
 		itemIndex = item;
 		start=0;
 		// 解锁
@@ -68,6 +69,7 @@
 				                                  +'</div>'
 				                             	+'</a>'
 				                           +'</li>'
+				                           +'<p class="space"></p>'
                 	   }
                 	    setTimeout(function(){
                 	    	$('.agency-list').find('ul').html(ahtml);
@@ -78,6 +80,7 @@
                             // 解锁loadDownFn里锁定的情况
                             me.unlock();
                             me.noData(false);
+                            
                         },1000);
                 },
                 error: function(xhr, type){
@@ -127,6 +130,7 @@
 						                                  +'</div>'
 						                             	+'</a>'
 						                           +'</li>'
+						                           +'<p class="space"></p>'
                     	    	}
                     	   }else{
                         	   me.lock();
@@ -145,6 +149,11 @@
                                searchs=true;
                                // 每次数据加载完，必须重置
                                me.resetload();
+                               if(isSear){
+                            	   dropload.lock();
+                            	   dropload.noData();
+                            	   dropload.resetload();
+                               }
                            },1000);
                     	
                         
@@ -170,6 +179,7 @@
     $('.tab .item').on('click',function(){
     	console.log(searchs)
     	if(searchs){
+    		var gulpval=document.getElementById('gulpwork')
     		sessionStorage.setItem('flag',$(this).index())
     		$('.followInfo').css('display','block')
     		var $this = $(this);
@@ -179,28 +189,37 @@
     	    console.log($this.index())
     	    $this.addClass('cur').siblings('.item').removeClass('cur');
     	    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
-    	    keywork=[]
+    	    keywork=[];
+    	    gulpval.value=""
     	}
 	})
 
-
+var isSear = false;
 //实现搜索
 function sear(){
+	
 	var lis=$('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
 	if(txt==''){
 		getList(itemIndex)
+		isSear = true;
 	}
+	
 	for(i=0;i<lis.length;i++){
 		lis.eq(i).css("display","none");
 	}
-	console.log(lis.length)
-	console.log(keywork.length)
+//	console.log(lis.length)
+//	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
-			console.log(lis[i])
+//			console.log(lis[i])
 			lis.eq(i).css("display","block");
 		}
 	}
+	if(!isSear){
+ 	   dropload.lock();
+ 	   dropload.noData();
+ 	   dropload.resetload();
+    }
 }
