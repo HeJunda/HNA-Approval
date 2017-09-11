@@ -179,7 +179,7 @@
 
 //实现搜索
 function sear(){
-	var lis=document.getElementsByTagName('li')
+	var lis=$('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
 	if(txt==''){
@@ -188,8 +188,11 @@ function sear(){
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";
 	}
+	console.log(lis.length)
+	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
+			console.log(lis[i])
 			lis[i].style.display = 'block';
 		}
 	}

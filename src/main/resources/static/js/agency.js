@@ -67,8 +67,10 @@ var vm=new Vue({
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
 						console.log(response.data.length)
 						if(aaaaaa&&response.data.length>0){
+							//alert(111111111111)
 							_this.datas=_this.datas.concat(response.data)
 						}else{
+							//alert(222222222222)
 							aaaaaa = false;
 							_this.data=response.data
 							me.lock()

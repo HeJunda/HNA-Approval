@@ -87,7 +87,7 @@
             	　　　　}
             	　　},
                 	error: function(error){
-                		alert(error)
+                		console.log(error)
                 		me.resetload();
 	                }
 	            });
@@ -107,6 +107,7 @@
                     success: function(data){
 //                    	console.log(data)
                     		var ahtml = "";
+                    		keywork=[];
                             if(data.length>0){
                          	   for(var i=0;i<data.length;i++){
                          		   ahtml=  ahtml+ '<li class="clearfix">'
@@ -175,15 +176,17 @@
 //实现搜索
 function sear(){//点击
     // dropload
-	var lis=document.getElementsByTagName('li')
+	var lis=$('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
 	if(txt=='') {
-		getList();
+		getList(itemIndex);
 	}
 	for(i=0;i<lis.length;i++){
 		lis[i].style.display="none";
 	}
+	console.log(lis.length)
+	console.log(keywork.length)
 	for(var i=0; i<keywork.length; i++){
 		if(keywork[i].indexOf(txt)>-1){
 			lis[i].style.display = 'block';

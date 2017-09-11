@@ -39,7 +39,7 @@ new Vue({
 				domClass : 'dropload-down',
 				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">数据加载完毕</div>'
+				domNoData : '<div class="dropload-noData">暂无数据</div>'
 			},
 			loadUpFn : function(me){
 				var conH=$('.clearfix').height()//每个li的高度

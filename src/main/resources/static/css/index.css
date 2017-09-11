@@ -48,7 +48,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-list-agency{width:100%;background-color: #F9F9F9;overflow:hidden}
 .agencyListAgency{width:100%;background-color: #F9F9F9;overflow:hidden}
 .agencylist{width:100%;}
-.agency-list ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
+.agency-list ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .clearfies ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .agency-list-agency ul li{position:relative;zoom: 1;;display: block;border-bottom:1px solid #EEEEEE;border-top:1px solid #EEEEEE;margin:8px 0;background-color:#fff;width:100%;height:auto;padding:5px 0;line-height: 100%;}
 .agency-left,.agency-right{display: inline-block;padding:10px 0}
@@ -69,7 +69,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agenLeft span.xucp-icon{background-position:-60px 0px}
 .agenLeft span.other-icon{background-position:-60px -237px}
 .agenLeft{position:relative;width:80px;float:left;margin-right:-80px;text-align:center;line-height: 62px;}
-.agenLeft span img{width:101%}
+.agenLeft span img{width:90%}
 .agenLeft-agency{position:relative;width:80px;float:left;margin-right:-80px;text-align:center;line-height: 76px;}
 .examineHistory{width:100%;position:relative}
 .right-box{margin-left:15px;}
@@ -84,9 +84,10 @@ table{border-collapse:collapse;border-spacing:0;}
 .number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:20px;right: 20px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 .number{position:absolute;display: inline-block;width:22px;height:22px;border-radius: 50%;background-color:#E75732;color:#fff;top:25px;right: 8px;font-size:0.5em;text-align:center;vertical-align:middle;line-height: 22px}
 
-.agency-title{color:#3C3C3C;font-size:0.925em;font-style:normal;line-height:2.5em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.agency-title{color:#3C3C3C;font-size:1em;font-style:normal;line-height:2.5em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .agency-title-anency{color:#3C3C3C;font-size:0.925em;font-style:normal;line-height:2.5em;width:75%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.agency-right p{width:100%;font-size:0.825em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+.agency-right p{width:100%;font-size:1em;line-height:2em;color:#7F7F7F;padding-top: 0.5em;overflow:hidden;text-overflow:ellipsis;white-space: nowrap}
+.agency-right p:first-child{border-bottom:1px solid #f7f7f7;}
 .agency-right span.time{position:absolute;display: inline-block;color:#8C8C8C;top:17px;right: 8px;font-size:1em;text-align:center;vertical-align:middle;}
 .projtext{font-size:0.825em}
 /* #active{width:100%; height:500px;}
