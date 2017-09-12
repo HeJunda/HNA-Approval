@@ -1,3 +1,4 @@
+var  changlang = false
 var vm=new Vue({
 	el:'#app',
 	data:{
@@ -28,10 +29,11 @@ var vm=new Vue({
       personUser:'',
       moom:[],
       add:'',
+      html:'',
       language:[],
       exaMore:true,
-      exbMore:true,
-      html:''
+      exbMore:true
+     
 	},
 	/*过滤ICON图标*/
 	filters:{
@@ -76,26 +78,27 @@ var vm=new Vue({
 	            domLoad    : '<div class="dropload-load">加载中...</div>'
 	        },
 			loadUpFn : function(me){
-				axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
-					_this.digital=response.data[0];
-					_this.add=response.data[0].instanceid;
-					var instance=_this.add;
-					var user=getCookie('userid');
-					axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
-						_this.histry=response.data
-						var arr=[];
-						for(var i=0;i<response.data.length;i++){
-							var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
-							
-							var left = str.split(',')
-							arr.push(left)
-						}
-						_this.annex=arr;
-						axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
-			    			
-			    			$.each(response.data,function(i,val){
-			    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
-			    			});
+				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
+					
+	    			$.each(response.data,function(i,val){
+	    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'	
+	    			});
+	    			changlang = true
+	    			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+						_this.digital=response.data[0];
+						_this.add=response.data[0].instanceid;
+						var instance=_this.add;
+						var user=getCookie('userid');
+						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+							_this.histry=response.data
+							var arr=[];
+							for(var i=0;i<response.data.length;i++){
+								var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+								
+								var left = str.split(',')
+								arr.push(left)
+							}
+							_this.annex=arr;
 			        	},function(err){
 			        		console.log(err)
 			        	})
@@ -115,29 +118,29 @@ var vm=new Vue({
 				
 	        }
 		});
-		
-		axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
-			_this.digital=response.data[0];
-			_this.add=response.data[0].instanceid;
-			var instance=_this.add;
-			var user=getCookie('userid');
-			axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
-				_this.histry=response.data
-				var arr=[];
-				for(var i=0;i<response.data.length;i++){
-					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
-					//console.log(str)
-					var left = str.split(',')
-					arr.push(left)
-					console.log(arr)
-//					console.log(arr[0][0].substring(0,arr[0][0].indexOf('.'))+'.pdf')
-				}
-				_this.annex=arr
-				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
-	    			
-	    			$.each(response.data,function(i,val){
-	    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
-	    			});
+		axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
+			
+			$.each(response.data,function(i,val){
+				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
+			});
+			changlang = true
+			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+				_this.digital=response.data[0];
+				_this.add=response.data[0].instanceid;
+				var instance=_this.add;
+				var user=getCookie('userid');
+				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
+					_this.histry=response.data
+					var arr=[];
+					for(var i=0;i<response.data.length;i++){
+						var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+						//console.log(str)
+						var left = str.split(',')
+						arr.push(left)
+						console.log(arr)
+//	    						console.log(arr[0][0].substring(0,arr[0][0].indexOf('.'))+'.pdf')
+					}
+					_this.annex=arr
 	        	},function(err){
 	        		console.log(err)
 	        	})
@@ -355,21 +358,24 @@ var vm=new Vue({
 			
 		/*常用语*/
 		lane:function(){
-			var _this=this
-			var L=layer.open({
-			    title: [
-			            '常用语',
-			            'background-color: #E75732; color:#fff;'
-			          ]
-			          ,content: _this.html
-			        });
+			var _this=this;
+			if(changlang){
+				var L=layer.open({
+				    title: [
+				            '常用语',
+				            'background-color: #E75732; color:#fff;'
+				          ]
+				          ,content: _this.html
+				        });
+				
+				$(document).on("click",".option",function(){
+					var value=$(this).text()
+					$("#sele").val(value)
+					_this.opinion=$("#sele").val();
+					layer.close(L)
+				}); 
+			}
 			
-			$(document).on("click",".option",function(){
-				var value=$(this).text()
-				$("#sele").val(value)
-				_this.opinion=$("#sele").val();
-				layer.close(L)
-			}); 
 		},
 		/*点击提交*/
 		submit:function(){
@@ -399,7 +405,7 @@ var vm=new Vue({
 						    style: 'background-color:#ccc; color:#fff; border:none;',
 						    time: 2
 						  });
-						setTimeout(function(){window.location.href='agenList.html'})
+						setTimeout(function(){window.location.href='agenList.html'},1000)
 					}else{
 						layer.open({
 						    content: response.data[0].result,

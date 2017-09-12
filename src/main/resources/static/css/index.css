@@ -192,7 +192,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .item-mark{width:100%;height:60px;}
 .appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center;background:#E75732;color:#fff}
 .item-mark .right{float:right;line-height:60px;}
-.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:15px;position:relative;display:block;line-height:60px;}
+.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:15px;position:relative;display:block;line-height:55px;}
 .content{width:100%;overflow-y:scroll;display:block;height: 273px;overflow-x: hidden;}
 /* .content ul li{display:flex;line-height:44px;justify-content:space-between;margin: 0 10px;padding:0 5px;} */
 .content ul li{float: left;width: 28%;border: 1px solid #E7E7E7;line-height: 2em;border-radius: 26px;margin: 4% 2%;background:#F9F9F9;white-space:nowrap;}

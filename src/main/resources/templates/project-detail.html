@@ -16,16 +16,16 @@
 	  </header> -->
 		<div class="container paddinTop">
       <div class="project-detail">
-       <h3 class="project-title">{{dataes.projectname}}</h3>
+       <h3 class="project-title" v-html="dataes.projectname"></h3>
        <ul class="project-content">
-          <li>项目编号<span class="fr">{{dataes.projectcode}}</span></li>
-          <li>项目部门<span class="fr">{{dataes.dptname}}</span></li>
-          <li>项目类型<span class="fr">{{dataes.projecttype}}</span></li>
-          <li>项目收益<span class="fr">{{yield}}%</span></li>
-          <li>项目经理<span class="fr">{{dataes.trustmanage}}</span></li>
-          <li>成立时间<span class="fr">{{dataes.setupdate}}</span></li>
-          <li>结束时间<span class="fr">{{dataes.enddate}}</span></li>
-          <li>信托/投资规模（元）<span class="fr">{{dataes.trustscale}}</span></li>
+          <li>项目编号<span class="fr" v-html="dataes.projectcode"></span></li>
+          <li>项目部门<span class="fr" v-html="dataes.dptname"></span></li>
+          <li>项目类型<span class="fr" v-html="dataes.projecttype"></span></li>
+          <li>项目收益<span style="float:right">%</span><span class="fr" v-html="yield"></span></li>
+          <li>项目经理<span class="fr" v-html="dataes.trustmanage"></span></li>
+          <li>成立时间<span class="fr" v-html="dataes.setupdate"></span></li>
+          <li>结束时间<span class="fr" v-html="dataes.enddate"></span></li>
+          <li>信托/投资规模（元）<span class="fr" v-html="dataes.trustscale"></span></li>
        </ul>
       </div>
     </div>    

@@ -3,6 +3,7 @@
 $(function(){
 	var userid = getCookie("userid");
 	var follows = false;
+	var follLoad = true;
  	var itemIndex = sessionStorage.getItem('flag')
  	
     //$this.addClass('cur').siblings('.item').removeClass('cur');
@@ -28,7 +29,7 @@ $(function(){
 	            domClass : 'dropload-down',
 	            domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 	            domLoad : '<div class="dropload-load">加载中...</div>',
-	            domNoData : '<div class="dropload-noData">暂无数据</div>'
+	            domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 	        },
 	        loadDownFn : function(me){
 	        	follows=false
@@ -38,45 +39,42 @@ $(function(){
 			        url: '/workflow/getSplitRead',
 			        data:{
 			        	userid:userid,
-			        	start:0,
+			        	start:0,//这里为什么为0？这个start不起zuo'y
 			        	limit:10000,
 			        	hasread:itemIndex
 			        },
 			        dataType: 'json',
 			        success: function(data){
-			        	
 			        	if(data!=""){
-			        		console.log(data)
-			        		console.log(data[0].taskname)
 			        		var result='' ;
-				                for(var i = 0; i < data.length; i++){
-				                	var one= '/followAwait.html?taskid='+data[i].taskid+''
-				                	var two= '/followAlready.html?instanceid='+data[i].instanceid+''
-				                		var hrefs = itemIndex == 0 ? one: two;
-				                	//console.log(data)
-				                    result += '<li class="clearfix">'
-									      		+'<a href="'+hrefs+'">'
-									      			+'<div class="agency-right">'
-									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
-									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
-									           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
-									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
-									           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
-									           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
-									           			+'</div>'
-									           		+'</div>'
-									           	+'</a>'
-									           +'</li>'
-									      	+'<p class="space"></p>'
-			                }
-			            	//console.log(data);
-			            	 $('.agency-list ul').append($(result));
-			            	 follows=true
-			        	}else{
-			        		$('.conSearch').text()
-			        		
-			        	}
+			                for(var i = 0; i < data.length; i++){
+			                	var one= '/followAwait.html?taskid='+data[i].taskid+''
+			                	var two= '/followAlready.html?instanceid='+data[i].instanceid+''
+			                		var hrefs = itemIndex == 0 ? one: two;
+			                	//console.log(data)
+			                    result += '<li class="clearfix">'
+								      		+'<a href="'+hrefs+'">'
+								      			+'<div class="agency-right">'
+								            		+'<div class="right-box">'
+								            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
+								            			+'<p class="follow-person">流程编号：<span class="fr follr">'+data[i].instanceid+'</span></p>'
+								           				+'<p class="follow-person">发送人：<span class="fr follr">'+data[i].sendername+'</span></p>'
+								           				+'<p class="follow-person">创建时间：<span class="fr follr">'+data[i].createtime+'</span></p>'
+								           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+data[i].startorg+'</span></p>'
+								           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+data[i].startname+'</span></p>'
+								           			+'</div>'
+								           		+'</div>'
+								           	+'</a>'
+								           +'</li>'
+								      	+'<p class="space"></p>'
+					                }
+				            	//console.log(data);
+				            	 $('.agency-list ul').append($(result));
+				        	}else{
+				        		$('.conSearch').text()
+				        		
+				        	}
+			        		follows=true
 			        	
 			        		// 锁定
 		                    me.lock();//

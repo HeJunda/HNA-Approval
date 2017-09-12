@@ -8,6 +8,7 @@ var vm=new Vue({
 		var _this=this;
 		var user=getCookie('userid');
 		var start = 0;
+		var isLoad = true;
 		$("body").dropload({
 			scrollArea : window,
 			domUp : {
@@ -20,15 +21,16 @@ var vm=new Vue({
 				domClass : 'dropload-down',
 				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">暂无数据</div>'
+				domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 			},
 			loadUpFn : function(me){
 				axios.get("/message/getMessageList",{params:{userid:user,start:0,limit:10}}).then(function(response){
-					_this.dataes=response.data;
 					
+					_this.dataes=response.data;
 					setTimeout(function(){
-		                me.resetload();
+						me.resetload();
 		                start=10;
+		                isLoad=true;
 		                me.unlock();
                         me.noData(false);
 		            },1000);
@@ -39,28 +41,29 @@ var vm=new Vue({
 				});
 	        },
 			loadDownFn : function(me){
-				start=_this.dataes.length;
-				
-				axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
-					if(response.data.length<=10){
-						_this.data=response.data
-					}
-					if(response.data.length>0){
-						_this.dataes=_this.dataes.concat(response.data)
-					}else{
-						me.lock()
-				        me.noData(true);
-					}
-					 
-					setTimeout(function(){
-						start+=10;
-		                me.resetload();
-		            },1000);
-					_this.meShow=true;
-				}).catch(function(error){
-				 	console.log(error);
-					me.resetload();
-				});
+				if(isLoad){
+					axios.get("/message/getMessageList",{params:{userid:user,start:start,limit:10}}).then(function(response){
+						if(response.data.length>0&&response.data.length==10){
+							//alert(111111111111+response.data.length)
+							_this.dataes=_this.dataes.concat(response.data)
+							start+=10;
+						}else{
+							//alert("没有："+response.data.length)
+							isLoad = false;
+							_this.dataes=_this.dataes.concat(response.data)
+							me.lock()
+			                me.noData(true);
+						}
+						 
+						setTimeout(function(){
+			                me.resetload();
+			            },1000);
+						_this.meShow=true;
+					}).catch(function(error){
+					 	console.log(error);
+						me.resetload();
+					});
+				}
 			}
 		}) 
 	},

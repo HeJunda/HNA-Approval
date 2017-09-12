@@ -15,7 +15,7 @@ new Vue({
     		var users=getCookie('userid')
         	var _this=this;
         	var token=window.hna.SsoToken;
-    		//var token="6666";
+    		、、var token="jd.he";
         	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
@@ -59,7 +59,8 @@ new Vue({
     methods:{
     	agency:function(){
     		if(this.dataes=true && this.loading==false){
-    			window.location.href='agenList.html'
+    			window.location.href='agenList.html';
+    			
     	    }
     	},
     	follow:function(){

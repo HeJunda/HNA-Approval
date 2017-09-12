@@ -9,11 +9,11 @@ new Vue({
 			if(type=="10000"){
 				return 'images/one.png';
 			}else if(type=="10003"){
-				return 'images/two.png';
+				return 'images/four.png';
 			}else if(type=="11932"){
 				return 'images/three.png';
 			}else if(type=="10001"){
-				return 'images/four.png';
+				return 'images/two.png';
 			}else if(type=="11781"){
 				return 'images/five.png';
 			}else if(type=="33812"){
@@ -39,7 +39,7 @@ new Vue({
 				domClass : 'dropload-down',
 				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">暂无数据</div>'
+				domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 			},
 			loadUpFn : function(me){
 				var conH=$('.clearfix').height()//每个li的高度

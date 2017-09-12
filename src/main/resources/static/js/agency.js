@@ -1,4 +1,3 @@
-var aaaaaa=true;//你来一个判断数据是否加载完毕的变量
 var vm=new Vue({
 		el:"#app",
 		data:{
@@ -9,11 +8,11 @@ var vm=new Vue({
 				if(type=="10000"){
 					return 'images/one.png';
 				}else if(type=="10003"){
-					return 'images/two.png';
+					return 'images/four.png';
 				}else if(type=="11932"){
 					return 'images/three.png';
 				}else if(type=="10001"){
-					return 'images/four.png';
+					return 'images/two.png';
 				}else if(type=="11781"){
 					return 'images/five.png';
 				}else if(type=="33812"){
@@ -33,7 +32,8 @@ var vm=new Vue({
 			var type=localurl('flowtype')
 			var _this=this;
 			var start = 0;
-			
+			var isLoad = true;
+			//alert("看vues是否加载2遍")
 			$("body").dropload({
 				scrollArea : window,
 				domUp : {
@@ -46,7 +46,7 @@ var vm=new Vue({
 					domClass : 'dropload-down',
 					domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
 					domLoad : '<div class="dropload-load">加载中...</div>',
-					domNoData : '<div class="dropload-noData">暂无数据</div>'
+					domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 				},
 				loadUpFn : function(me){
 					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:0,limit:10,flowtype:type}}).then(function(response){
@@ -54,7 +54,7 @@ var vm=new Vue({
 						setTimeout(function(){
 							me.resetload();
 			                start=10;
-			                aaaaaa=true;
+			                isLoad=true;
 			                me.unlock();
 	                        me.noData(false);
 			            },1000);
@@ -64,34 +64,30 @@ var vm=new Vue({
 					});
 		        },
 				loadDownFn : function(me){
-					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-						//console.log(response.data.length)
-//						if(aaaaaa&&response.data.length>0&&response.data.length==10){
-//							//alert(111111111111+response.data.length)
-//							_this.datas=_this.datas.concat(response.data)
-//							start+=10;
-//						}else{
-//							//alert("没有："+response.data.length)
-//							aaaaaa = false;
-//							_this.datas=response.data
-//							me.lock()
-//			                me.noData(true);
-//						}
-						if(response.data.length>0){
-							_this.datas=_this.datas.concat(response.data)
-						}else{
-							me.lock()
-			                me.noData(true);
-						}
-						
-						setTimeout(function(){
-							start+=10
-		                    me.resetload();
-		                },1000);
-					}).catch(function(error){
-					 	console.log(error);
-						me.resetload();
-					});
+					if(isLoad){
+						axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
+							//console.log(response.data.length)
+							if(response.data.length>0&&response.data.length==10){
+								//alert(111111111111+response.data.length)
+								_this.datas=_this.datas.concat(response.data)
+								start+=10;
+							}else{
+								//alert("没有："+response.data.length)
+								isLoad = false;
+								_this.datas=_this.datas.concat(response.data)
+								me.lock()
+				                me.noData(true);
+							}
+							
+							//setTimeout(function(){
+								//刚才这里也start+=10;有个这个一次加载20个
+			                    me.resetload();
+			                //},1000);
+						}).catch(function(error){
+						 	console.log(error);
+							me.resetload();
+						});
+					}
 				}
 			})
 		}

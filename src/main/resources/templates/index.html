@@ -22,23 +22,23 @@
     </div>
   <div class="container">
       <div class="menu-box clearfix">
-         <div class="menu-item" v-on:click="agency">
+         <div class="menu-item" v-on:click.stop="agency()">
              <p class="menu-icon"><span class="agency"><img src="images/first.png"/></span><em class="Inumber" v-show="session" v-html="number"></em></p>
              <p>待办任务</p>
          </div>
-         <div class="menu-item" v-on:click="follow">
+         <div class="menu-item" v-on:click.stop="follow()">
              <p class="menu-icon"><span class="follow"><img src="images/second.png"/></span></p>
              <p>待阅流程</p>
          </div>
-         <div class="menu-item" v-on:click="message">
+         <div class="menu-item" v-on:click.stop="message()">
              <p class="menu-icon"><span class="message"><img src="images/third.png"/></span></p>
              <p>消息提醒</p>
          </div>
-         <div class="menu-item" v-on:click="project">
+         <div class="menu-item" v-on:click.stop="project()">
              <p class="menu-icon"><span class="project"><img src="images/fourth.png"/></span></p>
              <p>项目查询</p>
          </div>
-         <div class="menu-item" v-on:click="search">
+         <div class="menu-item" v-on:click.stop="search()">
              <p class="menu-icon"><span class="distance"><img src="images/fiveth.png"/></span></p>
              <p>流程查询</p>
          </div>

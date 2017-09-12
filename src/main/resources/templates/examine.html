@@ -30,7 +30,7 @@
               </div>  
             </div>
             <div class="examine-list">
-                 <h3 class="examine-item"  v-on:click="showDiv($event)">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}"></span></h3>
+                 <h3 class="examine-item"  v-on:click.stop="showDiv($event)">更多信息<span v-bind="{class:showDom?'fr more-open':'fr more-close'}"></span></h3>
                  <ul class="examine-details" v-show="showDom" style="display: none">
                  	<li>流程编号<span class="fr" v-html="dates.instanceid"></span></li>
                     <li>流程标题<span class="fr" v-html="dates.flowname"></span></li>
@@ -41,7 +41,7 @@
                  </ul>
                  <p class="space"></p>
                  <!-- <h3 class="examine-item">历史审批记录</h3> -->
-                 <h3 class="examine-item" v-on:click="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
+                 <h3 class="examine-item" v-on:click.stop="showNode($event)">历史审批记录<span v-bind="{class:showHis?'fr more-open':'fr more-close'}"></span></h3>
                  <div id="history" v-show="showHis">
 	                 <ul class="examine-history">
 	                     <li class="history" v-for="(msg,ind) in histry">
@@ -61,29 +61,29 @@
                  </div>
                  <p class="space"></p>
 		         <div class="search-container">
-		          	   <div class="langeUse"  v-on:click="lane()"><span class="handle">处理意见</span><span class="often">选择常用语</span></div>
+		          	   <div class="langeUse" v-on:click.stop="lane()"><span class="handle">处理意见</span><span class="often">选择常用语</span></div>
 		               <textarea class="examine-opinion" placeholder="请填写处理意见" id="sele"></textarea>
 		         </div>
                  <p class="space"></p>
-                 <h3 class="examine-item" v-on:click="showTip">处理<span class="fr">···</span><span class="status-text fr">{{status}}</span></h3>
-                 <h3 class="examine-item person-item" style="display:none" v-on:click="showUser">
+                 <h3 class="examine-item" v-on:click.stop="showTip">处理<span class="fr">···</span><span class="status-text fr">{{status}}</span></h3>
+                 <h3 class="examine-item person-item" style="display:none" v-on:click.stop="showUser">
                  	人员选择<span class="fr">···</span><span class="status-text personUser fr"></span>
                  	<div class="xuanz"><p class="perName" v-for="v in personStr">{{v}}</p></div>
                  </h3>
-            	 <input class="search-button" v-on:click="submit()" type="submit" value="提交" />
+            	 <input class="search-button" v-on:click.stop="submit()" type="submit" value="提交" />
             </div>
           </div>
           
         </div>
         <!-- ICON -->
         <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
-          <div class="layui-m-layershade" v-on:click="hideDiv"></div>
+          <div class="layui-m-layershade" v-on:click.stop="hideDiv"></div>
           <div class="layui-m-layermain">
             <div class="layui-m-layersection">
               <div class="layui-m-layerchild">
                 <div class="layui-m-layercont">
                   <div class="handle-status clearfix">
-                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
+                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click.stop="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
                    
                   </div>
                 </div>
@@ -93,7 +93,7 @@
         </div>
         <!-- 选择人 -->
           <div class="layui-m-layer" v-show="showuser" style="display:none">
-          <div class="layui-m-layershade" v-on:click="showUser()"></div>
+          <div class="layui-m-layershade" v-on:click.stop="showUser()"></div>
           <div class="layui-m-layermain">
             <div class="layui-m-layersection">
               <div class="layui-m-layerchild layui-m-layer2">
@@ -103,7 +103,7 @@
 					<header class="item-mark">
 			          <h3 class="appro">选择处理人</h3>
 			          <a href="javascript:void(0)" class="icon right">
-			          	<button class="btn" v-on:click="showok()">确定</button>
+			          	<button class="btn" v-on:click.stop="showok()">确定</button>
 			          </a>
 			      	</header>
 			      	<div class="content">
