@@ -199,7 +199,7 @@
 var isSear = false;
 //实现搜索
 function sear(){
-	
+	if(searchs){
 	var lis=$('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
@@ -224,4 +224,5 @@ function sear(){
  	   dropload.noData();
  	   dropload.resetload();
     }
+	}
 }

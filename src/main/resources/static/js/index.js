@@ -15,7 +15,7 @@ new Vue({
     		var users=getCookie('userid')
         	var _this=this;
         	var token=window.hna.SsoToken;
-    		、、var token="jd.he";
+    		//var token="jd.he";
         	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')

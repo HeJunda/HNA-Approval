@@ -194,6 +194,7 @@ var isSear = false;
 //实现搜索
 function sear(){//点击
     // dropload
+	if(projects){
 	var lis=$('li')
 	var gulpval=document.getElementById('gulpwork')
 	var txt = gulpval.value
@@ -216,6 +217,7 @@ function sear(){//点击
  	   dropload.noData();
  	   dropload.resetload();
     }
+	}
 }
 
 
