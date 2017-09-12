@@ -397,8 +397,6 @@ public class WorkflowService {
 	    				String newValue = flowInfoJsonObject.getString("defvalue");
 	    				flowInfoMap.put(newKey, newValue);
 	    			}
-//	    			for (int j = 0; j < flowInfoJsonArray.size(); j++) {
-//					}
 	    			String flowBaseInfoString = JSON.toJSONString(flowInfoMap);
     				map.put("flowinfo", flowBaseInfoString);
 	    			
@@ -432,10 +430,12 @@ public class WorkflowService {
 	    				List<TreeMap<String,String>> finalDate = new ArrayList<TreeMap<String,String>>();
 	    				for(int j=0;j<baseInfoMapShow.size();j++){
 	    					TreeMap<String,String> finalInfoMapShow = new TreeMap<String,String>();
-	    					String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
-	    					String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
-	    					finalInfoMapShow.put(newKey, newValue);
-	    					finalDate.add(finalInfoMapShow);
+	    					if(baseInfoMapShow.get(j) != null ){
+	    						String newValue = baseInfoMapShow.get(j).substring(baseInfoMapShow.get(j).indexOf(':') + 1);
+	    						String newKey = baseInfoMapShow.get(j).substring(0,baseInfoMapShow.get(j).indexOf(':'));
+	    						finalInfoMapShow.put(newKey, newValue);
+	    						finalDate.add(finalInfoMapShow);
+	    					}
 	    				}
 	    				String flowBaseInfoString = JSON.toJSONString(finalDate);
 	    				map.put("flowinfo", flowBaseInfoString);
