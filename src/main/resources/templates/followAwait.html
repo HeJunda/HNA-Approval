@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"></meta>
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
-	<title>待阅任务</title>
+	<title>待阅流程</title>
 	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
 	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak="true">
 		<div class="container paddinTop">
 			<div class="examine-content">
             <div class="examine-img"><img src="images/examine.png"/></div>
@@ -71,7 +71,7 @@
             <div class="search-container">
        			<button v-for="val in await" v-on:click="submit()" class="search-but">{{val.name}}</button>
        		</div>
-		
+			<div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
@@ -83,11 +83,14 @@
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
   	
  	<script type="text/javascript">
+ 	var moreInfo = false;
+ 	var moreHis = false;
  	var vum=new Vue({
  		el:'#app',
  		data:{
 			showDiv:false,
 			showHis:true,
+			loading:true,
 			dataes:[],
 			await:{},
 			sub:[],
@@ -101,7 +104,7 @@
  			var user=getCookie('userid')
  			var code=localurl('taskid')
  			
- 			$("body").dropload({
+ 			var dropload = $("body").dropload({
 			scrollArea : window,
 			domUp : {
 	            domClass   : 'dropload-up',
@@ -116,6 +119,8 @@
 				domNoData : '<div class="dropload-noData">暂无数据</div>'
 			},*/
 			loadUpFn : function(me){
+				moreInfo = false;
+			 	moreHis = false;
 				axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:code,flowtype:'_notictask'}}).then(function(response){
 	 				_this.dataes=response.data;
 					var name=JSON.parse(_this.dataes[0].actionlist)
@@ -126,7 +131,9 @@
 					var instance=_this.add;
 	 				var user=getCookie('userid');
 	 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
-						_this.histry=response.data
+						_this.histry=response.data;
+						moreInfo = true;
+						moreHis = true;
 						/* var att=_this.histry[0].attach
 						console.log(att)
 		 				_this.annex=JSON.parse(att); */
@@ -137,6 +144,7 @@
 							arr.push(left)
 		 				})
 		 				_this.annex=arr
+		 				
 						setTimeout(function(){
 							me.resetload();
 			                me.unlock();
@@ -153,6 +161,9 @@
 				
 	        }
 		});
+ 			dropload.lock('up');
+			dropload.noData();
+			dropload.resetload();
  			
  			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:code,flowtype:'_notictask'}}).then(function(response){
  				_this.dataes=response.data;
@@ -164,7 +175,8 @@
 				var instance=_this.add;
  				var user=getCookie('userid');
  				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
-					_this.histry=response.data
+					_this.histry=response.data;
+					
 					/* var att=_this.histry[0].attach
 					console.log(att)
 	 				_this.annex=JSON.parse(att); */
@@ -175,6 +187,12 @@
 						arr.push(left)
 	 				})
 	 				_this.annex=arr
+	 				_this.loading=false;
+					moreInfo = true;
+					moreHis = true;
+					dropload.unlock('up');
+					dropload.noData();
+					dropload.resetload();
  				}).catch(function(error){
  				    console.log(error);
  				});
@@ -189,10 +207,14 @@
  		},
  		methods:{
  			showDemo:function(){
- 				this.showDiv=!this.showDiv;
+ 				if(moreInfo){
+ 					this.showDiv=!this.showDiv;
+ 				}
  			},
  			showNode:function(){
- 				this.showHis=!this.showHis 
+ 				if(moreHis){
+ 					this.showHis=!this.showHis;
+ 				}
  			},
  			submit:function(){
  				var _this=this;

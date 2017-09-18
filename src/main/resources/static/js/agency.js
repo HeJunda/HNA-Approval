@@ -1,94 +1,151 @@
-var vm=new Vue({
-		el:"#app",
-		data:{
-			datas:[]
-		},
-		filters:{
-			showIcon:function(type){
-				if(type=="10000"){
-					return 'images/one.png';
-				}else if(type=="10003"){
-					return 'images/four.png';
-				}else if(type=="11932"){
-					return 'images/three.png';
-				}else if(type=="10001"){
-					return 'images/two.png';
-				}else if(type=="11781"){
-					return 'images/five.png';
-				}else if(type=="33812"){
-					return 'images/siex.png';
-				}else if(type=="23178"){
-					return 'images/siex.png';
-				}
-			}
-		},
-		methods:{
-            getTitleHref:function(val){
-                return '/examine.html?taskid='+val;
-            } 
+var imgUrl;
+function showIcon(type){
+	if(type=="10000"){
+		imgUrl = 'images/two.png';
+	}else if(type=="10003"){
+		imgUrl = 'images/four.png';
+	}else if(type=="11932"){
+		imgUrl = 'images/siex.png';
+	}else if(type=="10001"){
+		imgUrl = 'images/five.png';
+	}else if(type=="11781"){
+		imgUrl = 'images/three.png';
+	}else if(type=="33812"){
+		imgUrl = 'images/one.png';
+	}else if(type=="23178"){
+		imgUrl = 'images/siex.png';
+	}
+}
+showIcon(window.location.search.substring(10));
+
+	var start = 0;//开始位置初始化
+	var userid = getCookie("userid");//用户id
+	var type = localurl('flowtype');
+	var isEnd=true;
+	var dropload=$('body').dropload({
+        scrollArea : window,
+        domUp : {
+            domClass   : 'dropload-up',
+            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+            domLoad    : '<div class="dropload-load">加载中...</div>'
         },
-		created:function(){
-			var user=getCookie('userid')
-			var type=localurl('flowtype')
-			var _this=this;
-			var start = 0;
-			var isLoad = true;
-			//alert("看vues是否加载2遍")
-			$("body").dropload({
-				scrollArea : window,
-				domUp : {
-		            domClass   : 'dropload-up',
-		            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
-		            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
-		            domLoad    : '<div class="dropload-load">加载中...</div>'
-		        },
-				domDown : {
-					domClass : 'dropload-down',
-					domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-					domLoad : '<div class="dropload-load">加载中...</div>',
-					domNoData : '<div class="dropload-noData">暂无更多数据</div>'
-				},
-				loadUpFn : function(me){
-					axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:0,limit:10,flowtype:type}}).then(function(response){
-						_this.datas=response.data;
-						setTimeout(function(){
-							me.resetload();
-			                start=10;
-			                isLoad=true;
-			                me.unlock();
-	                        me.noData(false);
-			            },1000);
-					}).catch(function(error){
-					 	console.log(error);
-						me.resetload();
-					});
-		        },
-				loadDownFn : function(me){
-					if(isLoad){
-						axios.get("/workflow/getAwaitMessage",{params:{userid:user,start:start,limit:10,flowtype:type}}).then(function(response){
-							//console.log(response.data.length)
-							if(response.data.length>0&&response.data.length==10){
-								//alert(111111111111+response.data.length)
-								_this.datas=_this.datas.concat(response.data)
-								start+=10;
-							}else{
-								//alert("没有："+response.data.length)
-								isLoad = false;
-								_this.datas=_this.datas.concat(response.data)
-								me.lock()
-				                me.noData(true);
-							}
-							
-							//setTimeout(function(){
-								//刚才这里也start+=10;有个这个一次加载20个
-			                    me.resetload();
-			                //},1000);
-						}).catch(function(error){
-						 	console.log(error);
-							me.resetload();
-						});
-					}
-				}
-			})
-		}
-})
+        domDown : {
+			domClass : 'dropload-down',
+			domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+			domLoad : '<div class="dropload-load">加载中...</div>',
+			domNoData : '<div class="dropload-noData">暂无更多数据</div>'
+		},
+		loadUpFn : function(me){
+            // 加载菜单一的数据
+			$.ajax({
+                type: 'GET',
+                async: false,
+                url: '/workflow/getAwaitMessage',
+                data:{
+                	start:0,
+                	limit:10,
+                	userid:userid,
+                	flowtype:type
+                },
+                dataType: 'json',
+                success: function(data){
+                		var ahtml = "";
+                	    for(var i=0;i<data.length;i++){
+                		   ahtml += '<li class="clearfix">'
+				                           +'<a href="/examine.html?taskid='+data[i].taskid+'">' 
+					                              +'<div class="agenLeft">'
+					                                  +'<span><img src="'+imgUrl+'"/></span>'
+					                              +'</div>'
+					                              +'<div class="agenRight">'
+					                                +'<div class="leftBox">'
+					             	                 +'<h3 class="agency-title">'+data[i].flowname+'</h3>'
+					             	                 +'<p class="agenptxt"><span>发起人</span><span class="answer">'+data[i].starter+'</span></p>'
+					             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
+					                                +'</div>'
+					                              +'</div>'
+					                           +'</a>'
+					                           +'<p class="space"></p>'
+					                           +'</li>'
+                	    }
+                	    
+                	    setTimeout(function(){
+                	    	$('.agency-list').find('ul').html(ahtml);
+                            // 每次数据加载完，必须重置
+                            me.resetload();
+                            // 重置页数，重新获取loadDownFn的数据
+                            start = 10;
+                            isEnd = true;
+                            // 解锁loadDownFn里锁定的情况
+                            me.unlock();
+                            me.noData(false);
+                            
+                        },1000);
+                },
+                error: function(xhr, type){
+                    //alert('Ajax error!');
+                    // 即使加载出错，也得重置
+                    me.resetload();
+                }
+            });
+    	},
+        loadDownFn : function(me){
+        	if(isEnd){
+                $.ajax({
+                    type: 'GET',
+                    async: false,
+                    url: '/workflow/getAwaitMessage',
+                    data:{
+                    	start:start,
+                    	limit:10,
+                    	userid:userid,
+                    	flowtype:type
+                    },
+                    dataType: 'json',
+                    
+                    success: function(data){
+                    		var ahtml = "";
+                    	    if(data.length>0){
+                    	    	for(var i=0;i<data.length;i++){
+	                    		    ahtml= ahtml+ '<li class="clearfix">'
+						                           +'<a href="/examine.html?taskid='+data[i].taskid+'">'
+							                              +'<div class="agenLeft">'
+							                                  +'<span><img src="'+imgUrl+'"/></span>'
+							                              +'</div>'
+							                              +'<div class="agenRight">'
+							                                +'<div class="leftBox">'
+							             	                 +'<h3 class="agency-title">'+data[i].flowname+'</h3>'
+							             	                 +'<p class="agenptxt"><span>发起人</span><span class="answer">'+data[i].starter+'</span></p>'
+							             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
+							                                +'</div>'
+							                              +'</div>'
+							                           +'</a>'
+							                           +'<p class="space"></p>'
+							                           +'</li>'
+                    	    	}
+                    	    	start+=10;
+                    	    	$('.agency-list').find('ul').append(ahtml);
+                    	    	if(data.length<10){
+                         		   isEnd = false;
+                             	   me.lock();
+                             	   me.noData();
+                    	    	}
+                    	    	 me.resetload();
+                    	   }else{
+                    		   isEnd = false;
+                        	   me.lock()
+                        	   me.noData();
+                        	   me.resetload();
+                           }
+                    },
+                    error: function(err){
+                        me.resetload();
+                    }
+                });
+        	}else{
+          	   me.lock();
+          	   me.noData();
+          	   me.resetload();
+        	}
+        }
+    });

@@ -4,57 +4,53 @@ new Vue({
       date:{},
       dataes:'',
       number:'',
-      loading:false,
-      session:false
+      loading:false
     },
     created:function(){
     	if(sessionStorage.getItem('count')){
-    		this.number = sessionStorage.getItem('count')
-    		this.session=true;
+    		this.number = sessionStorage.getItem('count');
     	}
-    		var users=getCookie('userid')
-        	var _this=this;
-        	var token=window.hna.SsoToken;
-    		//var token="jd.he";
-        	if(token!=''){
+    	var users=getCookie('userid')
+    	var _this=this;
+    	var token=window.hna.SsoToken;
+    	//alert(token)
+//    	var token="6666";
+    	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
     			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
-             	_this.date=response.data.UserAccount;
+    			_this.date=response.data.UserAccount;
              	document.cookie = 'userid'+'='+_this.date;
+//    			document.cookie = 'userid'+'='+'6666';
              	var user=getCookie('userid')
         			axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){  
-           	        _this.dataes=response.data;
-           	   		
-	           	   	axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
-	            		
-	           	   		_this.number=response.data;
-		           	   	sessionStorage.setItem('count',_this.number);
-		           	   	_this.session=true;
-	            		_this.loading=false;
+        				_this.dataes=response.data;
+               	   		axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
+               	   			_this.number=response.data;
+               	   			sessionStorage.setItem('count',_this.number);
+               	   			_this.loading=false;
+	               	    }).catch(function(error){
+	               	        console.log(error);
+	               	    });
 	           	    }).catch(function(error){
 	           	        console.log(error);
 	           	    });
-           	    }).catch(function(error){
-           	        console.log(error);
-           	    });
              }).catch(function(error){
                  console.log(error);
              });
-    		}else{
-    			axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
-    				
-            		_this.number=response.data;
-            		_this.session=true;
-    				_this.loading=false;
-            		
-           	    }).catch(function(error){
-           	        console.log(error);
-           	    });
-    			_this.dataes=true;
-      	   		_this.loading=false;
-      	   		_this.session=true;
-    		}	
+		}else{
+				axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
+	        		_this.number=response.data;
+					_this.loading=false;
+	        		
+	       	    }).catch(function(error){
+	       	        console.log(error);
+	       	    });
+				_this.dataes=true;
+	  	   		_this.loading=false;
+		}
+    	
+    			
     },
     methods:{
     	agency:function(){

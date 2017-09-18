@@ -1,4 +1,7 @@
-var  changlang = false
+var changlang = false;
+var moreInfo = false;
+var moreHis = false;
+var lodeDown = false;
 var vm=new Vue({
 	el:'#app',
 	data:{
@@ -32,7 +35,8 @@ var vm=new Vue({
       html:'',
       language:[],
       exaMore:true,
-      exbMore:true
+      exbMore:true,
+      loading:true
      
 	},
 	/*过滤ICON图标*/
@@ -68,8 +72,7 @@ var vm=new Vue({
 		var taskId=localurl('taskid')
 		var user=getCookie('userid')
 		var _this=this;
-		
-		$("body").dropload({
+		var dropload = $("body").dropload({
 			scrollArea : window,
 			domUp : {
 	            domClass   : 'dropload-up',
@@ -78,12 +81,16 @@ var vm=new Vue({
 	            domLoad    : '<div class="dropload-load">加载中...</div>'
 	        },
 			loadUpFn : function(me){
+			
+				changlang = false;
+				moreInfo = false;
+				moreHis = false;
 				axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
-					
+					_this.html=""
 	    			$.each(response.data,function(i,val){
 	    				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'	
 	    			});
-	    			changlang = true
+	    			
 	    			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 						_this.digital=response.data[0];
 						_this.add=response.data[0].instanceid;
@@ -91,6 +98,9 @@ var vm=new Vue({
 						var user=getCookie('userid');
 						axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 							_this.histry=response.data
+							moreInfo = true;
+							moreHis=true;
+							changlang = true;
 							var arr=[];
 							for(var i=0;i<response.data.length;i++){
 								var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
@@ -102,6 +112,7 @@ var vm=new Vue({
 			        	},function(err){
 			        		console.log(err)
 			        	})
+			        	_this.loading=false
 						setTimeout(function(){
 							me.resetload();
 			                me.unlock();
@@ -115,15 +126,17 @@ var vm=new Vue({
 				    console.log(error);
 				    me.resetload();
 				});		
-				
-	        }
+				}
 		});
+		dropload.lock('up');
+		dropload.noData();
+		dropload.resetload();
 		axios.get("/workflow/getCommonlanguage",{params:{userid:user}}).then(function(response){
 			
 			$.each(response.data,function(i,val){
 				_this.html+='<div class="option" value="'+response.data[i].phrase+'">'+response.data[i].phrase+'</div>'
 			});
-			changlang = true
+			
 			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
 				_this.digital=response.data[0];
 				_this.add=response.data[0].instanceid;
@@ -138,9 +151,45 @@ var vm=new Vue({
 						var left = str.split(',')
 						arr.push(left)
 						console.log(arr)
-//	    						console.log(arr[0][0].substring(0,arr[0][0].indexOf('.'))+'.pdf')
 					}
 					_this.annex=arr
+
+					axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
+						console.log(response.data)
+						_this.dates=response.data[0];
+						_this.loading=false;
+						moreInfo = true;
+						moreHis = true;
+						changlang = true;
+						console.log(_this.dates)
+						var info=_this.dates.flowinfo
+						
+						//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
+						_this.ObjInfo=JSON.parse(info)
+						console.log(_this.ObjInfo)
+						var more=response.data[0].formtype;
+						console.log(more)
+						if(more==23){
+							_this.exaMore=false;
+							_this.exbMore=true;
+						}else{
+							_this.exaMore=true;
+							_this.exbMore=false
+						}
+						//_this.dates=response.data[0];
+						if(more==23){
+							console.log($(".examine-details li:last-child span"))
+							$(".examine-details li:last-child span").removeClass("")
+						}
+						
+						
+						/*dropload.unlock('up');
+						dropload.noData();
+						dropload.resetload();*/
+					}).catch(function(error){
+					    console.log(error);
+					});
+					
 	        	},function(err){
 	        		console.log(err)
 	        	})
@@ -152,46 +201,17 @@ var vm=new Vue({
 		    console.log(error);
 		});
 	},
-	computed:{
-		showHistory:function(){
-			var _this=this;
-		}
-	},
 	methods:{
 		/*点击更多详情*/
 		showDiv:function(event){
-			var _this=this;
-			var user=getCookie('userid')
-			var instance=this.digital.instanceid;
-			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
-				var more=response.data[0].formtype
-				console.log(more)
-				if(more==23){
-					_this.exaMore=false;
-					
-				}else{
-					_this.exbMore=false
-				}
-				_this.dates=response.data[0];
-				var info=JSON.parse(_this.dates.flowinfo)
-				//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
-				_this.ObjInfo=info
-				var tem=_this.dates.attach;
-				console.log(tem)
-				_this.temes=JSON.parse(tem);
-				
-				if(more==23){
-					console.log($(".examine-details li:last-child span"))
-					$(".examine-details li:last-child span").removeClass("")
-				}
-				
-			}).catch(function(error){
-			    console.log(error);
-			});
+			if(moreInfo){
 				this.showDom=!this.showDom;
-			},
+			}
+		},
 		showNode:function(){
-			this.showHis=!this.showHis 
+			if(moreHis){
+				this.showHis=!this.showHis 
+			}
 		},
 		showTip:function(){
 			this.showLayer=!this.showLayer;
@@ -359,6 +379,7 @@ var vm=new Vue({
 		/*常用语*/
 		lane:function(){
 			var _this=this;
+			
 			if(changlang){
 				var L=layer.open({
 				    title: [
@@ -381,7 +402,7 @@ var vm=new Vue({
 		submit:function(){
 			if(this.opinion==""){
 				layer.open({
-				    content: '输入不能为空',
+				    content: '处理方式不能为空',
 				    skin: 'msg',
 				    style: 'background-color:#ccc; color:#fff; border:none;',
 				    time: 2
@@ -406,6 +427,9 @@ var vm=new Vue({
 						    time: 2
 						  });
 						setTimeout(function(){window.location.href='agenList.html'},1000)
+						var count=parseInt(sessionStorage.getItem('count')-1);
+						sessionStorage.setItem('count',count)
+						
 					}else{
 						layer.open({
 						    content: response.data[0].result,

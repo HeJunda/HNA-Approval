@@ -13,34 +13,21 @@
 </head>
 <body>
 	<div id="app">
-		<!-- <header class="header cleanF">
-	        <a href="javascript:void(0)" onclick="JavaScript:history.back(-1);"><span class="back"></span></a>
-	        <h3>消息列表</h3>   
-	    </header> -->
-	    <div v-show="meShow" style="display:none">
-		<div class="container paddinTop" id="message">
-			<div class="agency-list AgList">
-	            <ul class="msg-list">
-	           		<li class="clearfix" v-for="(item,index) in dataes" v-on:click="add(index)">
-	                 	<div class="agency-right">
-	                   		<div class="right-box">
-		                 		<h3 class="agency-title" v-html="item.title"></h3>
-		                 		<p v-html="item.content"></p>
-		                 		<span class="time fr" v-html="item.sendDate"></span>
-	                   		</div>
-	                	</div>
-	                	<p class="space"></p>	
-	              	</li> 
-	           	</ul>
-           	</div>	
-		</div>
+	    <div>
+			<div class="container paddinTop" id="message">
+				<div class="agency-list AgList">
+		            <ul class="msg-list">
+		            
+		           	</ul>
+		           	<div class="messageLoad">加载中...</div>	
+	           	</div>	
+			</div>
 		</div>	
 	</div>
-	<script type="text/javascript" src="js/lib/vue.min.js"></script>
-	<script type="text/javascript" src="js/lib/axios.min.js"></script>
   	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/layer.js"></script>
 	<script type="text/javascript" src="js/lib/home.js"></script>
+	<script type="text/javascript" src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=2.5.2"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>
 	<script type="text/javascript" src="js/message.js"></script>
 </body>

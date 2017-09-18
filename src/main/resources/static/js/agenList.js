@@ -1,82 +1,120 @@
-new Vue({
-	el:"#wrap",
-	data:{
-		dataes:[],
-		agenshow:false
+var imgUrl;
+function showIcon(type){
+	console.log(type)
+	if(type=="10000"){
+		imgUrl = 'images/two.png';
+	}else if(type=="10003"){
+		imgUrl = 'images/four.png';
+	}else if(type=="11932"){
+		imgUrl = 'images/siex.png';
+	}else if(type=="10001"){
+		imgUrl = 'images/five.png';
+	}else if(type=="11781"){
+		imgUrl = 'images/three.png';
+	}else if(type=="33812"){
+		imgUrl = 'images/one.png';
+	}else if(type=="23178"){
+		imgUrl = 'images/siex.png';
+	}
+}
+
+
+var user=getCookie('userid')
+$("body").dropload({
+	scrollArea : window,
+	domUp : {
+        domClass   : 'dropload-up',
+        domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+        domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+        domLoad    : '<div class="dropload-load">加载中...</div>'
+    },
+	domDown : {
+		domClass : 'dropload-down',
+		domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+		domLoad : '<div class="dropload-load">加载中...</div>',
+		domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 	},
-	filters:{
-		showIcon:function(type){
-			if(type=="10000"){
-				return 'images/one.png';
-			}else if(type=="10003"){
-				return 'images/four.png';
-			}else if(type=="11932"){
-				return 'images/three.png';
-			}else if(type=="10001"){
-				return 'images/two.png';
-			}else if(type=="11781"){
-				return 'images/five.png';
-			}else if(type=="33812"){
-				return 'images/siex.png';
-			}else if(type=="23178"){
-				return 'images/siex.png';
-			}
-		}
-	},
-	mounted:function(){
-		var user=getCookie('userid')
-		var _this=this;
-		
-		$("body").dropload({
-			scrollArea : window,
-			domUp : {
-	            domClass   : 'dropload-up',
-	            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
-	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
-	            domLoad    : '<div class="dropload-load">加载中...</div>'
-	        },
-			domDown : {
-				domClass : 'dropload-down',
-				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-				domLoad : '<div class="dropload-load">加载中...</div>',
-				domNoData : '<div class="dropload-noData">暂无更多数据</div>'
-			},
-			loadUpFn : function(me){
-				var conH=$('.clearfix').height()//每个li的高度
-				var clien=document.documentElement.clientHeight//当前屏幕的高度
-				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
-					console.log(response.data.length)
-					_this.dataes=response.data;
-					_this.agenshow=true
-					var H=conH*response.data.length;
-					
-					setTimeout(function(){
-						me.resetload();
-		                me.unlock();
-                        me.noData(false);
-		            },1000);
-				}).catch(function(error){
-				 	console.log(error);
-					me.resetload();
-				});
-	        },
-			loadDownFn : function(me){
-				axios.get("/workflow/getAwaitSortList",{params:{userid:user}}).then(function(response){
-					console.log(response.data)
-					if(response.data.length>0){
-						_this.dataes=response.data;
-					}
-					me.lock('down')
-	                me.noData(true);
-					_this.agenshow=true
-					setTimeout(function(){
-	                    me.resetload();
-	                },1000);
-				}).catch(function(error){
-				 	console.log(error);
-					me.resetload();
-				});
-			}
-		})
+	
+	loadUpFn : function(me){
+		$.ajax({
+            type: 'GET',
+            async: false,
+            url: '/workflow/getAwaitSortList',
+            data:{
+            	userid:user
+            },
+            dataType: 'json',
+            
+            success: function(data){
+            		var ahtml = "";
+        	    	for(var i=0;i<data.length;i++){
+        	    		showIcon(data[i].flowtype);
+            		    ahtml= ahtml+ '<li class="clearfix">'
+			                	        +'<a href="agency.html?flowtype='+data[i].flowtype+'">'
+			             	               +'<div class="agenLeft-agency">'
+			             	                   +'<span><img src="'+imgUrl+'"/></span>'
+			             	               +'</div>'
+			             	               +'<div class="agenRight-agency">'
+			             	                 +'<div class="agenleftBox">'
+			             		                 +'<h3 class="agency-title-anency">'+data[i].flowtypename+'</h3>'
+			             		                 +'<p class="agenp-agency">'+data[i].firsttaskname+'</p>'
+			             		                 +'<span class="number frs">'+data[i].tasknum+'</span>'
+			             	                 +'</div>'
+			             	               +'</div>'
+			             	            +'</a>'
+			             	        +'</li>'
+        	    	}
+        	    	$('.agenLists').find('ul').html(ahtml);
+        	    	me.resetload();
+        	    	 me.unlock();
+                     me.noData(false);
+                   	 
+            },
+            error: function(err){
+                me.resetload();
+            }
+        });
+    },
+	loadDownFn : function(me){
+		$.ajax({
+            type: 'GET',
+            async: false,
+            url: '/workflow/getAwaitSortList',
+            data:{
+            	userid:user
+            },
+            dataType: 'json',
+            
+            success: function(data){
+            	console.log(data)
+        		var ahtml = "";
+    	    	for(var i=0;i<data.length;i++){
+    	    		showIcon(data[i].flowtype);
+        		    ahtml= ahtml+ '<li class="clearfix">'
+		                	        +'<a href="agency.html?flowtype='+data[i].flowtype+'">'
+		             	               +'<div class="agenLeft-agency">'
+		             	                   +'<span><img src="'+imgUrl+'"/></span>'
+		             	               +'</div>'
+		             	               +'<div class="agenRight-agency">'
+		             	                 +'<div class="agenleftBox">'
+		             		                 +'<h3 class="agency-title-anency">'+data[i].flowtypename+'</h3>'
+		             		                 +'<p class="agenp-agency">'+data[i].firsttaskname+'</p>'
+		             		                 +'<span class="number frs">'+data[i].tasknum+'</span>'
+		             	                 +'</div>'
+		             	               +'</div>'
+		             	            +'</a>'
+		             	        +'</li>'
+    	    	}
+    	    	$('.agenLists').find('ul').html(ahtml);
+    	    	
+    	    	 me.lock();
+           	     me.noData();
+           	     me.resetload();
+            },
+            error: function(err){
+                me.resetload();
+            }
+        });
 	}
 })
+

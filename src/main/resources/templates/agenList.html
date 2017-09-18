@@ -12,11 +12,11 @@
 </head>
 <body>
 	<div id="wrap">
-	<div  v-show="agenshow">
+	<div>
 		<div class="containerAnency paddinTop" >
-	      <div class="agency-list-agency">
+	      <div class="agency-list-agency agenLists">
            <ul>
-           	  <li class="clearfix" v-for="v in dataes">
+           	  <!-- <li class="clearfix" v-for="v in dataes">
 	              <a :href="'agency.html?flowtype='+v.flowtype">
 	                 <div class="agenLeft-agency">
 	                     <span><img :src="v.flowtype|showIcon"/></span>
@@ -29,15 +29,13 @@
 	                   </div>
 	                 </div>
 	              </a>
-              </li>
+              </li> -->
              
            </ul>
 	      </div>
 		</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/lib/vue.min.js"></script>
-	<script type="text/javascript" src="js/lib/axios.min.js"></script>
 	<script	type="text/javascript" src="js/home.js"></script>
 	<script	type="text/javascript" src="js/lib/cookies.js"></script>
 	<script type="text/javascript" src="js/lib/dropload.js"></script>

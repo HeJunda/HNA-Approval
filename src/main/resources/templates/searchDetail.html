@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak="true">
 		<div class="container paddinTop">
 			<div class="examine-content">
             <div class="examine-img"><img src="images/examine.png"/></div>
@@ -72,8 +72,9 @@
             <div class="search-container">
        			<button v-for="val in await" v-on:click="submit()" class="search-button">{{val.name}}</button>
        		</div>
-		
 		</div>
+		
+		<div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
   	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
@@ -83,11 +84,14 @@
   	<script type="text/javascript" src="js/lib/layer.js"></script>
   	<script type="text/javascript" src="js/lib/dropload.js"></script>
  	<script type="text/javascript">
+ 	var moreInfo = false;
+ 	var moreHis = false;
  	var vum=new Vue({
  		el:'#app',
  		data:{
 			showDiv:false,
 			showHis:true,
+			loading:true,
 			dataes:[],
 			await:{},
 			sub:[],
@@ -101,7 +105,7 @@
  			var user=getCookie('userid')
  			var code=localurl('instance')
  			
- 			$("body").dropload({
+ 			var dropload = $("body").dropload({
 			scrollArea : window,
 			domUp : {
 	            domClass   : 'dropload-up',
@@ -110,11 +114,15 @@
 	            domLoad    : '<div class="dropload-load">加载中...</div>'
 	        },
 			loadUpFn : function(me){
+				moreInfo = false;
+			 	moreHis = false;
 				axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
 	 				_this.dataes=response.data;
 	 				var instance=_this.dataes[0].instanceid;
 	 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 						_this.histry=response.data
+						moreInfo = true;
+					 	moreHis = true;
 		 				var arr=[];
 		 				$.each(response.data,function(i){
 		 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
@@ -138,19 +146,29 @@
 				
 	        }
 		});
+ 			dropload.lock('up');
+			dropload.noData();
+			dropload.resetload();
  			
  			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
  				_this.dataes=response.data;
  				var instance=_this.dataes[0].instanceid;
  				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 					_this.histry=response.data
+					
 	 				var arr=[];
 	 				$.each(response.data,function(i){
 	 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
 						var left = str.split(',')
 						arr.push(left)
 	 				})
-	 				_this.annex=arr
+	 				_this.annex = arr;
+	 				_this.loading = false;
+	 				moreInfo = true;
+				 	moreHis = true;
+				 	dropload.unlock('up');
+					dropload.noData();
+					dropload.resetload();
  				}).catch(function(error){
  				    console.log(error);
  				});
@@ -165,10 +183,14 @@
  		},
  		methods:{
  			showDemo:function(){
- 				this.showDiv=!this.showDiv;
+ 				if(moreInfo){
+ 					this.showDiv=!this.showDiv;
+ 				}
  			},
  			showNode:function(){
- 				this.showHis=!this.showHis 
+ 				if(moreHis){
+ 					this.showHis=!this.showHis;
+ 				}
  			}
  		}
  	})

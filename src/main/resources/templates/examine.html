@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
 </head>
 <body>
-	<div id="app">
+	<div id="app" v-cloak="true">
 		<!-- <header class="header cleanF">
 	        <h3 class="">流程详情</h3>   
 	    </header> -->
@@ -36,7 +36,13 @@
                     <li>流程标题<span class="fr" v-html="dates.flowname"></span></li>
                     <li>流程名称<span class="fr" v-html="dates.processname"></span></li>
                     <li>发起时间<span class="fr" v-html="dates.starttime"></span></li>
-                    <li v-show="exaMore"  v-for="val in ObjInfo"><p v-for="(ie,key) in val"><span>{{key}}</span><span class="fr">{{ie}}</span></p></li>
+                    <li v-show="exaMore"  v-for="val in ObjInfo">
+	                    <p v-for="(ie2,val2) in val">
+	                    	<span>{{val2}}</span>
+		                    <span class="fr">{{ie2}}</span>
+		                   
+	                    </p>
+                    </li>
                     <li v-show="exbMore"  v-for="(val,key) in ObjInfo"><p><span class="infoColor">{{key}}</span><span class="fr">{{val}}</span></p></li>
                  </ul>
                  <p class="space"></p>
@@ -65,12 +71,12 @@
 		               <textarea class="examine-opinion" placeholder="请填写处理意见" id="sele"></textarea>
 		         </div>
                  <p class="space"></p>
-                 <h3 class="examine-item" v-on:click.stop="showTip">处理<span class="fr">···</span><span class="status-text fr">{{status}}</span></h3>
+                 <h3 class="examine-item" v-on:click.stop="showTip">处理方式<span class="fr">···</span><span class="status-text fr">{{status}}</span></h3>
                  <h3 class="examine-item person-item" style="display:none" v-on:click.stop="showUser">
                  	人员选择<span class="fr">···</span><span class="status-text personUser fr"></span>
                  	<div class="xuanz"><p class="perName" v-for="v in personStr">{{v}}</p></div>
                  </h3>
-            	 <input class="search-button" v-on:click.stop="submit()" type="submit" value="提交" />
+            	 <input id="search-but" v-on:click.stop="submit()" type="submit" value="提交" style=""/>
             </div>
           </div>
           
@@ -118,6 +124,7 @@
             </div>
           </div>
         </div>
+        <div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
 	</div>
 	<script type="text/javascript" src="js/lib/vue.min.js"></script>
 	<script type="text/javascript" src="js/lib/axios.min.js"></script>

@@ -32,7 +32,7 @@ $(function(){
 	            domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 	        },
 	        loadDownFn : function(me){
-	        	follows=false
+	        	follows=false;
 	        	$('.agency-list ul').html('')
 	            $.ajax({
 			        type: 'GET',
@@ -69,7 +69,7 @@ $(function(){
 								      	+'<p class="space"></p>'
 					                }
 				            	//console.log(data);
-				            	 $('.agency-list ul').append($(result));
+				            	 $('.agency-list ul').append($(result)||'');
 				        	}else{
 				        		$('.conSearch').text()
 				        		
@@ -90,6 +90,7 @@ $(function(){
 	             
 	        },
 	        loadUpFn : function(me){
+	        	follows=false;
 	            $.ajax({
 			        type: 'GET',
 			        url: '/workflow/getSplitRead',
@@ -126,6 +127,7 @@ $(function(){
 			        	}else{
 			        		$('.conSearch').text()
 			        	}
+			        	follows=true;
 			        	// 每次数据加载完，必须重置
                         me.resetload();		            
 		        		},
