@@ -1,4 +1,4 @@
-
+//仿的这个，你看一下，我怕写错哪里了
 	var start = 0;//开始位置初始化
 	var userid = getCookie("userid");//用户id
 	var isEnd = true;
@@ -65,7 +65,6 @@
             });
     	},
         loadDownFn : function(me){
-        	console.log(isEnd)
         	if(isEnd){
                 $.ajax({
                     type: 'GET',
@@ -158,6 +157,7 @@
          	   drop();
          },
          error: function(err){
+        	 console.log(err)
          }
      });
 	function add(text,e){

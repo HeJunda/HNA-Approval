@@ -22,34 +22,36 @@ showIcon(window.location.search.substring(10));
 	var userid = getCookie("userid");//用户id
 	var type = localurl('flowtype');
 	var isEnd=true;
-	var dropload=$('body').dropload({
-        scrollArea : window,
-        domUp : {
-            domClass   : 'dropload-up',
-            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
-            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
-            domLoad    : '<div class="dropload-load">加载中...</div>'
-        },
-        domDown : {
-			domClass : 'dropload-down',
-			domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
-			domLoad : '<div class="dropload-load">加载中...</div>',
-			domNoData : '<div class="dropload-noData">暂无更多数据</div>'
-		},
-		loadUpFn : function(me){
+	var dropload;
+	function drop(){
+		dropload=$('body').dropload({
+			scrollArea : window,
+				domUp : {
+	            domClass   : 'dropload-up',
+	            domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',
+	            domUpdate  : '<div class="dropload-update">↑释放更新</div>',
+	            domLoad    : '<div class="dropload-load">加载中...</div>'
+	        },
+	        domDown : {
+				domClass : 'dropload-down',
+				domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+				domLoad : '<div class="dropload-load">加载中...</div>',
+				domNoData : '<div class="dropload-noData">暂无更多数据</div>'
+			},
+			loadUpFn : function(me){
             // 加载菜单一的数据
-			$.ajax({
-                type: 'GET',
-                async: false,
-                url: '/workflow/getAwaitMessage',
-                data:{
-                	start:0,
-                	limit:10,
-                	userid:userid,
-                	flowtype:type
-                },
-                dataType: 'json',
-                success: function(data){
+				$.ajax({
+	                type: 'GET',
+	                async: false,
+	                url: '/workflow/getAwaitMessage',
+	                data:{
+	                	start:0,
+	                	limit:10,
+	                	userid:userid,
+	                	flowtype:type
+	                },
+	                dataType: 'json',
+	                success: function(data){
                 		var ahtml = "";
                 	    for(var i=0;i<data.length;i++){
                 		   ahtml += '<li class="clearfix">'
@@ -79,7 +81,6 @@ showIcon(window.location.search.substring(10));
                             // 解锁loadDownFn里锁定的情况
                             me.unlock();
                             me.noData(false);
-                            
                         },1000);
                 },
                 error: function(xhr, type){
@@ -137,15 +138,64 @@ showIcon(window.location.search.substring(10));
                         	   me.noData();
                         	   me.resetload();
                            }
-                    },
-                    error: function(err){
-                        me.resetload();
-                    }
-                });
-        	}else{
-          	   me.lock();
-          	   me.noData();
-          	   me.resetload();
-        	}
-        }
-    });
+                    	},
+	                    error: function(err){
+	                        me.resetload();
+	                    }
+                	});
+	        	}else{
+	          	   me.lock();
+	          	   me.noData();
+	          	   me.resetload();
+	        	}
+	        }
+	    })
+	}
+
+	$.ajax({//我都忘了，这个搜索那个是没有的，不知道你仿那个
+		
+        type: 'GET',
+        async: false,
+        url: '/workflow/getAwaitMessage',
+        data:{
+        	start:start,
+        	limit:10,
+        	userid:userid,
+        	flowtype:type
+        },
+        dataType: 'json',
+        success: function(data){
+    		var ahtml = "";
+    		if(data.length>0){
+    			for(var i=0;i<data.length;i++){
+    				ahtml += '<li class="clearfix">'
+	                           +'<a href="/examine.html?taskid='+data[i].taskid+'">' 
+		                              +'<div class="agenLeft">'
+		                                  +'<span><img src="'+imgUrl+'"/></span>'
+		                              +'</div>'
+		                              +'<div class="agenRight">'
+		                                +'<div class="leftBox">'
+		             	                 +'<h3 class="agency-title">'+data[i].flowname+'</h3>'
+		             	                 +'<p class="agenptxt"><span>发起人</span><span class="answer">'+data[i].starter+'</span></p>'
+		             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
+		                                +'</div>'
+		                              +'</div>'
+		                           +'</a>'
+		                           +'<p class="space"></p>'
+		                           +'</li>'
+    			}
+    			$('.messageLoad').remove()
+     	    	start+=10;
+    			$('.agency-list').find('ul').append(ahtml);
+     	    	if(data.length<10){
+          		   isEnd = false;
+     	    	}
+    		}else{
+      		   isEnd = false;
+            }
+     	   	drop();
+	    },
+	    error: function(err){
+	    	console.log(err)
+	    }
+	});
