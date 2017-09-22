@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hundsun.t2sdk.common.share.dataset.MapWriter;
@@ -28,6 +29,8 @@ import java.util.Map;
 @Service
 public class UserService {
 	
+	@Autowired
+    private SSOUtil ssoUtil;
 	
 	
 	/**
@@ -214,7 +217,7 @@ public class UserService {
 		try {
 //			SSOUtil sso = new SSOUtil();
 			long startTime=System.currentTimeMillis();   //获取开始时间
-			String userInfo = SSOUtil.CheckTokenBySSO(token.getToken());
+			String userInfo = ssoUtil.CheckTokenBySSO(token.getToken());
 			long endTime=System.currentTimeMillis(); //获取结束时间
 			System.out.println("兜兜接口调用时间： "+(endTime-startTime)+"ms");
 			

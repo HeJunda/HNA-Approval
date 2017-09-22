@@ -12,12 +12,45 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
+@Service
+@ConfigurationProperties(prefix="ssoKey")
+@PropertySource("classpath:application.properties")
 public class SSOUtil {
-	 /**  
+	
+	//公钥地址
+    private String ssoPublicKey;
+	
+	
+	//私钥地址
+	private String ssoPrivateKey;
+	
+	
+	 public String getSsoPublicKey() {
+		return ssoPublicKey;
+	}
+
+	public void setSsoPublicKey(String ssoPublicKey) {
+		this.ssoPublicKey = ssoPublicKey;
+	}
+
+	public String getSsoPrivateKey() {
+		return ssoPrivateKey;
+	}
+
+	public void setSsoPrivateKey(String ssoPrivateKey) {
+		this.ssoPrivateKey = ssoPrivateKey;
+	}
+
+	/**  
      * 向指定URL发送POST方法的请求  
      *   
      * @param url  
@@ -26,7 +59,7 @@ public class SSOUtil {
      *            请求参数，请求参数应该是name1=value1&name2=value2的形式。  
      * @return URL所代表远程资源的响应  
      */  
-	 public static String sendPost(String url, String param) {  
+	 public  String sendPost(String url, String param) {  
 	        PrintWriter out = null;  
 	        BufferedReader in = null;  
 	        String result = "";  
@@ -80,7 +113,7 @@ public class SSOUtil {
 	     * @param token
 	     * @return
 	     */
-	    public static String CheckTokenBySSO(String token) {
+	    public  String CheckTokenBySSO(String token) {
 	    	String retValue = "";
 	    	//第三方应用的appid
 	        String appId = "C75E89BB45354E23BA4A4E1B696271EE";
@@ -92,7 +125,7 @@ public class SSOUtil {
 	        System.out.println("body:"+body);
 
 			//sso服务公钥
-			String publicKeyStr = RSAUtils.loadKeyStringByPath(CommonParameter.publicKeyLocation);
+			String publicKeyStr = RSAUtils.loadKeyStringByPath(ssoPublicKey);
 			String bodyEncrypt;
 			try {
 				//加密body参数
@@ -134,7 +167,7 @@ public class SSOUtil {
 //			resolver.getResources("classpath:private_key.pem")
 			
 			//解密body内容
-			String privateKeyStr = RSAUtils.loadKeyStringByPath(CommonParameter.privateKeyLocation);
+			String privateKeyStr = RSAUtils.loadKeyStringByPath(ssoPrivateKey);
 			try {
 				String bodyDecrypt = RSAUtils.decryptByPrivateKey(checkUserAuthEntity.getBody(), privateKeyStr, "utf-8");
 		        System.out.println("bodyDecrypt:"+bodyDecrypt);
@@ -145,8 +178,6 @@ public class SSOUtil {
 				return "";
 			}
 			
-//	        return retValue;
-//	        
 	    }
 
 //    public static void main(String[] args) throws UnsupportedEncodingException {
