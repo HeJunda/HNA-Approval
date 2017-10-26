@@ -465,6 +465,8 @@ public class WorkflowService {
 	    		} else {
 	    			
 	    			flowinfo = flowinfo.replace("\\\\", "");
+	    			flowinfo = flowinfo.replace("]", "");
+	    			flowinfo = flowinfo.replace("[", "");
 	    			if (flowinfo == null || flowinfo.equals("")) {
 	    				map.put("flowinfo", "");
 	    			} else {
