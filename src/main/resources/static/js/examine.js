@@ -146,13 +146,15 @@ var vm=new Vue({
 					_this.histry=response.data
 					var arr=[];
 					for(var i=0;i<response.data.length;i++){
-						var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
-						//console.log(str)
-						var left = str.split(',')
-						arr.push(left)
-						console.log(arr)
+						var strs1 = response.data[i].attach.replace(/\{/g,'').replace(/\}/g,'').replace(/\"/g,'');
+						var arrs1 = strs1.split(',');
+						var arrs2 = [];
+						for(var ii = 0;ii<arrs1.length;ii++){
+							arrs2.push(arrs1[ii].split(':'))
+						}
+						arr.push(arrs2);
 					}
-					_this.annex=arr
+					_this.annex=arr;
 
 					axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
 						console.log(response.data)
@@ -400,7 +402,7 @@ var vm=new Vue({
 		},
 		/*点击提交*/
 		submit:function(){
-			if(this.opinion==""){
+			if(this.status==""){
 				layer.open({
 				    content: '处理方式不能为空',
 				    skin: 'msg',

@@ -7,8 +7,8 @@
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>已阅流程</title>
-	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
-	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
+	<link rel="stylesheet" type="text/css" href="./css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="./css/dropload.css"></link>
 </head>
 <body>
 	<div id="app" v-cloak="true">
@@ -58,10 +58,10 @@
                     	</div>
                     	<div class="history-enclosure">
                          	<ul>
-                         		<li v-show="annex[ind][1] ? true : false ">
-                         			<a :href="'http://10.72.8.130:7004'+annex[ind][1]" class="tems">
-	                         			附件：{{annex[ind][0]}}
-	                        		</a>
+                         		<li v-for="(a1,b1) in annex[ind]" v-show="a1[0]">
+	                        		<a :href="histry[ind].serviceLocation+a1[1]+histry[ind].checkCode" class="tems">
+	                         			附件：{{a1[0]}}
+	                        		</a> 
 	                        	</li>
 	                    	</ul>
                     	</div>
@@ -75,13 +75,13 @@
 			<div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/lib/vue.min.js"></script>
-  	<script type="text/javascript" src="js/lib/vue-router.min.js"></script>
-  	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-  	<script	type="text/javascript" src="js/home.js"></script>
-  	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-  	<script type="text/javascript" src="js/lib/layer.js"></script>
-  	<script type="text/javascript" src="js/lib/dropload.js"></script>
+	<script type="text/javascript" src="./js/lib/vue.min.js"></script>
+  	<script type="text/javascript" src="./js/lib/vue-router.min.js"></script>
+  	<script type="text/javascript" src="./js/lib/axios.min.js"></script>
+  	<script	type="text/javascript" src="./js/home.js"></script>
+  	<script	type="text/javascript" src="./js/lib/cookies.js"></script>
+  	<script type="text/javascript" src="./js/lib/layer.js"></script>
+  	<script type="text/javascript" src="./js/lib/dropload.js"></script>
  	<script type="text/javascript">
  	var moreInfo = false;
  	var moreHis = false;
@@ -125,9 +125,13 @@
 						moreHis = true;
 						var arr=[];
 		 				$.each(response.data,function(i){
-		 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
-							var left = str.split(',')
-							arr.push(left)
+		 					var strs1 = response.data[i].attach.replace(/\{/g,'').replace(/\}/g,'').replace(/\"/g,'');
+							var arrs1 = strs1.split(',');
+							var arrs2 = [];
+							for(var ii = 0;ii<arrs1.length;ii++){
+								arrs2.push(arrs1[ii].split(':'))
+							}
+							arr.push(arrs2);
 		 				})
 		 				_this.annex=arr
 						setTimeout(function(){

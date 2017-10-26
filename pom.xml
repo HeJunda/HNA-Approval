@@ -6,7 +6,7 @@
 	<groupId>hna.orderDetail</groupId>
 	<artifactId>orderdetail</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>orderdetail</name>
 	<description>Demo project for Spring Boot</description>
@@ -26,11 +26,6 @@
 	</properties>
 
 	<dependencies>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.mybatis.spring.boot</groupId> -->
-<!-- 			<artifactId>mybatis-spring-boot-starter</artifactId> -->
-<!-- 			<version>1.3.0</version> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
@@ -38,12 +33,27 @@
 		<dependency>
 		    <groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-web</artifactId>
+		    <!-- 移除嵌入式tomcat插件 -->
+		    <exclusions>
+		        <exclusion>
+		            <groupId>org.springframework.boot</groupId>
+		            <artifactId>spring-boot-starter-tomcat</artifactId>
+		        </exclusion>
+		    </exclusions>
 		</dependency>
-<!-- 		 添加servlet api依赖 -->
+		
+        <!-- 添加servlet api依赖 -->
+		<dependency>
+		   <groupId>org.apache.tomcat</groupId>
+		   <artifactId>tomcat-servlet-api</artifactId>
+		   <version>8.0.36</version>
+		   <scope>provided</scope>
+		</dependency>
+		
 <!-- 		<dependency> -->
 <!-- 		    <groupId>javax.servlet</groupId> -->
 <!-- 		    <artifactId>javax.servlet-api</artifactId> -->
-<!-- 		    <version>3.1.0</version> -->
+<!-- 		    <version>4.0.0</version> -->
 <!-- 		    <scope>provided</scope> -->
 <!-- 		</dependency> -->
 		
@@ -51,42 +61,17 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-eureka</artifactId> -->
-<!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.samba.jcifs</groupId> -->
-<!-- 		    <artifactId>jcifs</artifactId> -->
-<!-- 		    <version>1.3.18-kohsuke-1</version> -->
-<!-- 		</dependency> -->
-		
-	<!-- 	<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>${druid.version}</version>
-		</dependency> -->
-		
 		
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.17</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!--                <groupId>org.springframework.boot</groupId> -->
-<!--                <artifactId>spring-boot-starter-web</artifactId> -->
-<!--         </dependency> -->
 		<dependency>
 		    <groupId>dom4j</groupId>
 		    <artifactId>dom4j</artifactId>
@@ -111,14 +96,6 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>1.9</version>
 		</dependency>
-		
-       <!--安装额外jar到本地仓库 -->
-<!-- 		<dependency>   -->
-<!-- 		    <groupId>other.hundson.base</groupId>   -->
-<!-- 		    <artifactId>T2sdk</artifactId>   -->
-<!-- 		    <version>1.0.0</version>   -->
-<!-- 		</dependency>  -->
-		
 <!-- 		使用system scope引用本地jar -->
 	    <dependency>  
 	        <groupId>com.hundsun</groupId>  
@@ -126,38 +103,56 @@
 	        <version>1.0.0</version>  
 	        <scope>system</scope>  
 	        <systemPath>${project.basedir}/lib/com.hundsun.t2sdk-1.0.0.jar</systemPath>  
-	    </dependency>  
-
-		<!--分页插件 -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>com.\hundson.pagehelper</groupId> -->
-<!-- 			<artifactId>pagehelper</artifactId> -->
-<!-- 			<version>4.1.1</version> -->
-<!-- 		</dependency> -->
+	    </dependency> 
+	    
+	     
 	</dependencies>
+	
+	
 	<build> 
-	<resources>
-        <resource>
-            <directory>lib</directory>
-            <targetPath>BOOT-INF/lib/</targetPath>
-            <includes>
-                <include>**/*.jar</include>
-            </includes>
-        </resource>
-        <resource>
-            <directory>src/main/resources</directory>
-            <targetPath>BOOT-INF/classes/</targetPath>
-        </resource>
-     </resources>
-	    <plugins>  
+<!-- 		<resources> -->
+<!-- 	        <resource> -->
+<!-- 	            <directory>lib</directory> -->
+<!-- 	            <targetPath>BOOT-INF/lib/</targetPath> -->
+<!-- 	            <includes> -->
+<!-- 	                <include>**/*.jar</include> -->
+<!-- 	            </includes> -->
+<!-- 	        </resource> -->
+<!-- 	        <resource> -->
+<!-- 	            <directory>src/main/resources</directory> -->
+<!-- 	            <targetPath>BOOT-INF/classes/</targetPath> -->
+<!-- 	        </resource> -->
+<!-- 	    </resources> -->
+        
+	    <plugins>
+	    
+<!-- 	        <plugin> -->
+<!-- 	          <groupId>org.apache.maven.plugins</groupId> -->
+<!-- 	          <artifactId>maven-war-plugin</artifactId> -->
+<!-- 	          <configuration> -->
+<!-- 	              <failOnMissingWebXml>false</failOnMissingWebXml> -->
+<!-- 	            <webResources> -->
+<!-- 	              <resource> -->
+<!-- 	                <directory>lib</directory> -->
+<!-- 	                <targetPath>WEB-INF/lib/</targetPath> -->
+<!-- 	               <includes> -->
+<!-- 	                 <include>**/*.jar</include> -->
+<!-- 	               </includes> -->
+<!-- 	             </resource> -->
+<!-- 	           </webResources> -->
+<!-- 	          </configuration> -->
+<!-- 	        </plugin>   -->
+
+
 	        <plugin>  
 	            <groupId>org.springframework.boot</groupId>  
 	            <artifactId>spring-boot-maven-plugin</artifactId>  
 	            <configuration>  
-<!-- 	                <fork>true</fork>   -->
-					<excuteable>true</excuteable>
+	                <fork>true</fork>  
+<!-- 					<excuteable>true</excuteable>  -->
 	            </configuration>  
 	        </plugin>
+
 	    </plugins>  
 	</build>
 

@@ -1,5 +1,6 @@
 package cn.Bohai.controller;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import ch.qos.logback.classic.Logger;
 import cn.Bohai.model.Attach;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
@@ -36,7 +38,7 @@ public class WorkflowController {
 	private WorkflowService workflowService;
 	
 	
-	
+	private final Logger log = Logger.getLogger(this.getClass());
 	
 	/**
      * 获取待办消息总条数
@@ -60,9 +62,6 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/getAwaitSortList",method = RequestMethod.GET)
 	public JSONArray getAwaitSortList(User user){
-//		String jsonString = workflowService.getAwaitMessage(awaitMessage);
-//		JSONArray jsonArray=JSON.parseArray(jsonString);
-//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
 		JSONArray jsonArray = new JSONArray();
 		try {
 			 jsonArray = workflowService.getAwaitSortList(user);
@@ -79,9 +78,6 @@ public class WorkflowController {
      */
 	@RequestMapping(value = "/getAwaitMessage",method = RequestMethod.GET)
 	public JSONArray getAwaitMessage(AwaitMessage awaitMessage){
-//		String jsonString = workflowService.getAwaitMessage(awaitMessage);
-//		JSONArray jsonArray=JSON.parseArray(jsonString);
-//	    JSONObject jsonObject  = JSONObject.parseObject(jsonArray.get(0).toString());
 		JSONArray jsonArray = new JSONArray();
 		try {
 			 jsonArray = workflowService.getAwaitMessage(awaitMessage);

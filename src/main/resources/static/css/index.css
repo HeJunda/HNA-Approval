@@ -104,7 +104,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .popup-content p.btn a{padding:6px 20px;border-radius:5px;margin:0 5px;text-decoration:none}
 .popup-content p.btn a.cance{border:1px solid #E85C38;color:#E85C38}
 .popup-content p.btn a.ensure{border:0;color:#fff;background-color:#E85C38}
-.layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:60%;max-width:500px;overflow:hidden}
+.layui-m-layer1 .layui-m-layerchild {border-radius:8px !important;width:80%;max-width:500px;overflow:hidden}
 .layui-m-layer2{width:60%;height:333px;}
 /*流程查询*/
 .follow-tab,.project-tab{display: block;width:100%;height:3em;border-top:1px solid #F0F0F0;border-bottom:1px solid #F0F0F0;background-color:#fff}
@@ -179,7 +179,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .handle-status .status-icon{display: inline-block;width:33.3%;float:left;height:auto;border:1px solid #F2F2F2;padding:0.625em;box-sizing: border-box;cursor:pointer}
 .handle-status .active{background-color:#FDBB84;border-color: #FB9339}
 .status-icon p{text-align:center;width:100%}
-.status-icon p:last-child{margin-top:0.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.status-icon p:last-child{margin-top:0.5em;overflow:hidden;font-size: 12px; height: 32px;overflow: hidden;line-height: 17px;}
 .status-icon p span{display: inline-block;width:40px;height:40px;background:url(/images/tcmp-icon.png) no-repeat;vertical-align:middle}
 .status-icon p span.cooperation{background-position:-122px 0px}
 .status-icon p span.ballBack{background-position:-122px -49px}

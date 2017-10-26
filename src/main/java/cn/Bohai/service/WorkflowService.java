@@ -1,9 +1,11 @@
 package cn.Bohai.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 //import java.util.Iterator;
@@ -31,6 +33,11 @@ import java.util.TreeMap;
 
 
 
+
+
+
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
 //import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -71,9 +78,27 @@ import com.hundsun.t2sdk.interfaces.share.dataset.IDatasets;
  * Created by Junda on 2017/6/6.
  */
 @Service
+@ConfigurationProperties(prefix="fileService")
 public class WorkflowService {
+	
+	
+	//附件服务器地址
+    private String location;
+    
 
 	
+	public String getLocation() {
+		return location;
+	}
+
+
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+
+
 	/**
 	 * 获取待办消息总条数
 	 * @param User
@@ -348,6 +373,7 @@ public class WorkflowService {
 	    	for(int i=0;i<resultListMap.size();i++){
 	    		@SuppressWarnings("rawtypes")
 	    		Map map = resultListMap.get(i);
+	    		map.put("serviceLocation", location);
 	    		
 	    		//获取附件信息
 	    		String attachString = (String) map.get("attach");
@@ -375,6 +401,8 @@ public class WorkflowService {
 	    			}
 	    			String attachMapString = JSON.toJSONString(attachMap);
 	    			map.put("attach", attachMapString);
+	    			map.put("checkCode", getAttachCheckCode(processInformation.getUserid()));
+	    			map.put("serverLocation", location);
 	    		}
 	    		
 	    		//获取基本信息类型
@@ -386,7 +414,7 @@ public class WorkflowService {
 	    			
 	    			map.put("flowinfo", "");
 	    			
-	    		} else if( formtype.equals("23")){
+	    		} else if( formtype.equals("23") || formtype.equals("27")){
 	    			
 	    			JSONArray flowInfoJsonArray = JSONArray.parseArray(flowinfo);
 	    			Iterator<Object> it = flowInfoJsonArray.iterator();
@@ -523,13 +551,14 @@ public class WorkflowService {
 	    	for(int i=0;i<resultListMap.size();i++){
 	    		@SuppressWarnings("rawtypes")
 	    		Map map = resultListMap.get(i);
+	    		map.put("serviceLocation", location);
 	    		String attachString = (String) map.get("attach");
 	    		
 	    		if(attachString == null || attachString.equals("") || attachString.equals("[]")){
 	    			map.put("attach", "");
 	    		}else{
-	    			//去掉斜杠
-	    			attachString = attachString.replace("\\\\", "");
+//	    			//去掉斜杠
+//	    			attachString = attachString.replace("\\\\", "");
 	    			// 去掉“[”
 	    			attachString = attachString.replace("[", "");
 	    			// 去掉“]”
@@ -539,6 +568,14 @@ public class WorkflowService {
 	    			List<String> attachlist = Arrays.asList(attachString.split(",")); 
 	    			
 	    			Map<String,String> attachMap = new HashMap<String,String>();
+	    			attachMap.put("jfadkfe", "sdfe//faefdfefeeffefef/dfef");
+	    			for (int j=0;j<attachlist.size();j++) {
+	    				String oneAttachString = attachlist.get(j);
+	    				String[] oneAttachArray = oneAttachString.split("\\|");
+	    				String newkey = oneAttachArray[0];
+	    				String newValue = oneAttachArray[2];
+	    				attachMap.put(newkey, newValue);
+	    			}
 	    			for (int j=0;j<attachlist.size();j++) {
 	    				String oneAttachString = attachlist.get(j);
 	    				String[] oneAttachArray = oneAttachString.split("\\|");
@@ -548,6 +585,8 @@ public class WorkflowService {
 	    			}
 	    			String attachMapString = JSON.toJSONString(attachMap);
 	    			map.put("attach", attachMapString);
+	    			map.put("checkCode", getAttachCheckCode(historicalApproval.getUserid()));
+	    			map.put("serverLocation", location);
 	    		}
 	    	}
 	    	String jsonString = JSON.toJSONString(resultListMap);
@@ -823,6 +862,28 @@ public class WorkflowService {
 	    }else{
 	    	return null;
 	    }
+	}
+	
+	/**
+	 * 获取附件链接校验参数(MD5加密)
+	 * @param userid
+	 * @throws Exception 
+	 */
+	public String getAttachCheckCode(String userid){
+		
+		//获取时间戳
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDHHMMSS");
+		String logintime = sdf.format(date);
+		
+	    //生成校验码
+		String Code = CommonParameter.clienttype+"|"+userid+"|"+logintime+"|"+"TCMPABCD123321";
+		String CodeMD5 = COMMONUtils.ToMD5(Code);
+		
+		String checkCode = "&uid="+userid+"&code="+CodeMD5+"&oatime="+logintime+"&optype="+CommonParameter.clienttype;
+		
+		return checkCode;
+		
 	}
 	
 	

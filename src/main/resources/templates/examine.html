@@ -7,8 +7,8 @@
     <meta name="format-detection" content="telephone=no"></meta>
     <meta name="apple-mobile-web-app-capable" content="yes"></meta>
 	<title>待办任务</title>
-	<link rel="stylesheet" type="text/css" href="/css/index.css"></link>
-	<link rel="stylesheet" type="text/css" href="/css/dropload.css"></link>
+	<link rel="stylesheet" type="text/css" href="./css/index.css"></link>
+	<link rel="stylesheet" type="text/css" href="./css/dropload.css"></link>
 </head>
 <body>
 	<div id="app" v-cloak="true">
@@ -55,10 +55,10 @@
 	                    	<div class="history-describe" v-html="msg.remark"></div>
 	                    	<div class="history-enclosure">
 	                         	<ul>
-	                         		<li v-show="annex[ind][1] ? true : false ">
-	                         			<a :href="'http://10.72.8.130:7004'+annex[ind][1]" class="tems">
-		                         			附件：{{annex[ind][0]}}
-		                        		</a>
+	                         		<li v-for="(a1,b1) in annex[ind]" v-show="a1[0]">
+	                         			<a :href="histry[ind].serviceLocation+a1[1]+histry[ind].checkCode" class="tems">
+		                         			附件：{{a1[0]}}
+		                        		</a> 
 		                        	</li>
 		                    	</ul>
 	                    	</div>
@@ -126,12 +126,12 @@
         </div>
         <div class="loading" v-show="loading"><img src="images/loading.gif" alt="loading..."/></div>
 	</div>
-	<script type="text/javascript" src="js/lib/vue.min.js"></script>
-	<script type="text/javascript" src="js/lib/axios.min.js"></script>
-	<script type="text/javascript" src="js/lib/layer.js"></script>
-	<script type="text/javascript" src="js/lib/home.js"></script>	
-	<script	type="text/javascript" src="js/lib/cookies.js"></script>
-	<script type="text/javascript" src="js/lib/dropload.js"></script>
-	<script type="text/javascript" src="js/examine.js"></script>
+	<script type="text/javascript" src="./js/lib/vue.min.js"></script>
+	<script type="text/javascript" src="./js/lib/axios.min.js"></script>
+	<script type="text/javascript" src="./js/lib/layer.js"></script>
+	<script type="text/javascript" src="./js/lib/home.js"></script>	
+	<script	type="text/javascript" src="./js/lib/cookies.js"></script>
+	<script type="text/javascript" src="./js/lib/dropload.js"></script>
+	<script type="text/javascript" src="./js/examine.js"></script>
 </body>
 </html>

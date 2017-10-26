@@ -23,7 +23,7 @@ import com.google.gson.GsonBuilder;
 
 @Service
 @ConfigurationProperties(prefix="ssoKey")
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 public class SSOUtil {
 	
 	//公钥地址
@@ -33,8 +33,11 @@ public class SSOUtil {
 	//私钥地址
 	private String ssoPrivateKey;
 	
+	//sso服务地址
+    private String ssoUrl;
 	
-	 public String getSsoPublicKey() {
+	
+	public String getSsoPublicKey() {
 		return ssoPublicKey;
 	}
 
@@ -48,6 +51,16 @@ public class SSOUtil {
 
 	public void setSsoPrivateKey(String ssoPrivateKey) {
 		this.ssoPrivateKey = ssoPrivateKey;
+	}
+	
+	
+
+	public String getSsoUrl() {
+		return ssoUrl;
+	}
+
+	public void setSsoUrl(String ssoUrl) {
+		this.ssoUrl = ssoUrl;
 	}
 
 	/**  
@@ -118,7 +131,8 @@ public class SSOUtil {
 	    	//第三方应用的appid
 	        String appId = "C75E89BB45354E23BA4A4E1B696271EE";
 	        //sso服务器地址
-	        String ssoUrl = "http://10.70.70.248:8080/ssoserver/service/gateway.do";
+//	        String ssoUrl = "http://10.70.70.248:8080/ssoserver/service/gateway.do";
+//	        String ssoUrl = "http://jjrs.hnagroup.net:8223/ssoserver/service/gateway.do";
 	        
 	        String body = "{\"token\":\""+token+"\"}";
 	        
