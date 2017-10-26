@@ -1,6 +1,5 @@
 package cn.Bohai.controller;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +37,7 @@ public class WorkflowController {
 	private WorkflowService workflowService;
 	
 	
-	private final Logger log = Logger.getLogger(this.getClass());
+//	private final Logger log = Logger.getLogger(this.getClass());
 	
 	/**
      * 获取待办消息总条数
