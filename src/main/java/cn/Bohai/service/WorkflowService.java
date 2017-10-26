@@ -445,13 +445,6 @@ public class WorkflowService {
 	    					Integer order = Integer.valueOf(newKey);
 	    					baseInfoMapShow.put(order, newValue);
 	    				}
-//	    				Map<Integer, String> orderMap = new TreeMap<Integer, String>(
-//	    						new Comparator<Integer>() {
-//	    							public int compare(Integer obj1, Integer obj2) {
-//	    								return obj1.compareTo(obj2);  // 升序排序
-//	    							}
-//	    						});
-//	    				orderMap.putAll(baseInfoMapShow);
 	    				
 	    				//排序
 	    				
@@ -568,14 +561,6 @@ public class WorkflowService {
 	    			List<String> attachlist = Arrays.asList(attachString.split(",")); 
 	    			
 	    			Map<String,String> attachMap = new HashMap<String,String>();
-	    			attachMap.put("jfadkfe", "sdfe//faefdfefeeffefef/dfef");
-	    			for (int j=0;j<attachlist.size();j++) {
-	    				String oneAttachString = attachlist.get(j);
-	    				String[] oneAttachArray = oneAttachString.split("\\|");
-	    				String newkey = oneAttachArray[0];
-	    				String newValue = oneAttachArray[2];
-	    				attachMap.put(newkey, newValue);
-	    			}
 	    			for (int j=0;j<attachlist.size();j++) {
 	    				String oneAttachString = attachlist.get(j);
 	    				String[] oneAttachArray = oneAttachString.split("\\|");
