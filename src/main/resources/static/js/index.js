@@ -12,16 +12,16 @@ new Vue({
     	}
     	var users=getCookie('userid')
     	var _this=this;
-    	var token=window.hna.SsoToken;
+//    	var token=window.hna.SsoToken;
     	//alert(token)
-//    	var token="6666";
+    	var token="jd.he";
     	if(token!=''){
         		_this.loading=true;
     			removeCookie('userid')
     			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
     			_this.date=response.data.UserAccount;
-             	document.cookie = 'userid'+'='+_this.date;
-//    			document.cookie = 'userid'+'='+'6666';
+//             	document.cookie = 'userid'+'='+_this.date;
+    			document.cookie = 'userid'+'='+'jd.he';
              	var user=getCookie('userid')
         			axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){  
         				_this.dataes=response.data;
