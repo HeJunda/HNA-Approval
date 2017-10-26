@@ -116,7 +116,7 @@
 				moreInfo = false;
 			 	moreHis = false;
 				axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
-	 				
+
 					_this.dataes=response.data;
 	 				var instance=_this.dataes[0].instanceid;
 	 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
@@ -125,13 +125,9 @@
 						moreHis = true;
 						var arr=[];
 		 				$.each(response.data,function(i){
-		 					var strs1 = response.data[i].attach.replace(/\{/g,'').replace(/\}/g,'').replace(/\"/g,'');
-							var arrs1 = strs1.split(',');
-							var arrs2 = [];
-							for(var ii = 0;ii<arrs1.length;ii++){
-								arrs2.push(arrs1[ii].split(':'))
-							}
-							arr.push(arrs2);
+		 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
+							var left = str.split(',')
+							arr.push(left)
 		 				})
 		 				_this.annex=arr
 						setTimeout(function(){
