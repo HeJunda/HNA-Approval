@@ -602,6 +602,7 @@ public class WorkflowService {
 		mw.put("checkcode",CommonParameter.checkcode);
 		
 		//请求体
+		mw.put("flowname",myInitiatedProcessing.getFlowname());
 		mw.put("start",myInitiatedProcessing.getStart());
 		mw.put("limit",myInitiatedProcessing.getLimit());
 		mw.put("interfaceid","R8129");//我发起的流程(R8129)
