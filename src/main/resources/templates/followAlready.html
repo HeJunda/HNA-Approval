@@ -61,7 +61,7 @@
                          		<li v-for="(a1,b1) in annex[ind]" v-show="a1[0]">
 	                        		<a :href="histry[ind].serviceLocation+a1[1]+histry[ind].checkCode" class="tems">
 	                         			附件：{{a1[0]}}
-	                        		</a> 
+	                        		</a>
 	                        	</li>
 	                    	</ul>
                     	</div>
@@ -145,7 +145,7 @@
 				    me.resetload();
 				});		
 	        }
-	        
+
 		});
  			dropload.lock('up');
 			dropload.noData();
@@ -165,11 +165,17 @@
 					_this.histry=response.data;
 					
 	 				var arr=[];
-	 				$.each(response.data,function(i){
-	 					var str=((response.data[i].attach).slice(2,response.data[i].attach.length-2).replace('":"',','))
-						var left = str.split(',')
-						arr.push(left)
+	 				$.each(response.data,function(yind,yel){
+                        var strs1 = yel.attach.replace(/\{/g,'').replace(/\}/g,'').replace(/\"/g,'');
+                        var arrs1 = strs1.split(',');
+                        var arrs2 = [];
+                        $.each(arrs1,function(zind,zel){
+                            arrs2.push(zel.split(':'))
+						})
+                        arr.push(arrs2);
 	 				})
+
+
 	 				_this.annex=arr;
 	 				_this.loading=false;
 					moreInfo = true;
