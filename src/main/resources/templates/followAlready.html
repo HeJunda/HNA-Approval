@@ -39,10 +39,10 @@
 			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
 			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
-			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+									<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+									<p class="follow-person" v-for="(flow1,flow2) in flowInfoLi">{{flow2}}：<span class="fr">{{flow1}}</span></p>
 			           			</div>
 			           		</div>
-			 
 			      		</li>
 			        </ul>
 		    	</div>		
@@ -97,7 +97,8 @@
 			datil:[],
 			histry:[],
 			annex:[],
-			add:''
+			add:'',
+            flowInfoLi:null
  		},
  		created:function(){
  			var _this=this;
@@ -152,6 +153,14 @@
 			
  			axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:code}}).then(function(response){
  				_this.dataes=response.data;
+ 				var flowInfo = {};
+ 				$.each(JSON.parse(response.data[0].flowinfo),function(inds,el){
+                    for(var indds in el){
+                        flowInfo[indds] = el[indds].substring(1)
+					}
+				})
+                _this.flowInfoLi = flowInfo
+				console.log(flowInfo);
  				var instance=_this.dataes[0].instanceid;
  				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 					_this.histry=response.data;
