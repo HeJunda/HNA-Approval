@@ -160,7 +160,6 @@
 					}
 				})
                 _this.flowInfoLi = flowInfo
-				console.log(flowInfo);
  				var instance=_this.dataes[0].instanceid;
  				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 					_this.histry=response.data;
