@@ -142,6 +142,20 @@ var vm=new Vue({
 				_this.add=response.data[0].instanceid;
 				var instance=_this.add;
 				var user=getCookie('userid');
+				_this.aclist=response.data;
+				if(response.data==[]){
+					setTimeout(function(){
+						_this.showLayer=false;
+					},1000)
+					setTimeout(function(){
+						layer.open({
+							content: '数据获取失败,请重新尝试。'
+							,skin: 'msg'
+							,time: 3 //2秒后自动关闭
+						 })
+					},2000)
+				}
+				_this.list=JSON.parse(_this.aclist[0].actionlist)
 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
 					_this.histry=response.data
 					var arr=[];
@@ -217,29 +231,29 @@ var vm=new Vue({
 		},
 		showTip:function(){
 			this.showLayer=!this.showLayer;
-			var _this=this;
-			var taskId=_this.digital.taskid;
-			var user=getCookie('userid')
-			axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
-				_this.aclist=response.data;
-				if(response.data==[]){
-					setTimeout(function(){
-						_this.showLayer=false; 
-					},1000)
-					setTimeout(function(){
-						layer.open({
-						    content: '数据获取失败,请重新尝试。'
-						    ,skin: 'msg'
-						    ,time: 3 //2秒后自动关闭
-						 })
-					},2000)
-					
-					 
-				}
-				_this.list=JSON.parse(_this.aclist[0].actionlist)
-			}).catch(function(error){
-			    console.log(error);
-			});
+			// var _this=this;
+			// var taskId=_this.digital.taskid;
+			// var user=getCookie('userid')
+			// axios.get("/workflow/getAwaitDetail",{params:{userid:user,taskid:taskId}}).then(function(response){
+			// 	_this.aclist=response.data;
+			// 	if(response.data==[]){
+			// 		setTimeout(function(){
+			// 			_this.showLayer=false;
+			// 		},1000)
+			// 		setTimeout(function(){
+			// 			layer.open({
+			// 			    content: '数据获取失败,请重新尝试。'
+			// 			    ,skin: 'msg'
+			// 			    ,time: 3 //2秒后自动关闭
+			// 			 })
+			// 		},2000)
+            //
+            //
+			// 	}
+			// 	_this.list=JSON.parse(_this.aclist[0].actionlist)
+			// }).catch(function(error){
+			//     console.log(error);
+			// });
 		},
 		hideDiv:function(){
 			this.showLayer=!this.showLayer;
