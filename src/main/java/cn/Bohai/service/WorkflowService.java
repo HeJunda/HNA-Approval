@@ -474,7 +474,7 @@ public class WorkflowService {
 	    				Map<String,String> baseInfoMap = JSON.parseObject(flowinfo, Map.class);
 	    				HashMap<Integer, String> baseInfoMapShow = new HashMap<Integer,String>();
 	    				for (String key : baseInfoMap.keySet()) {
-    						String newValue = key.substring(key.indexOf('|') + 1) + ":" + baseInfoMap.get(key);
+    						String newValue = key.substring(key.indexOf('|') + 1) + baseInfoMap.get(key);
     						String newKey = key.substring(0,key.indexOf('|'));
     						Integer order = Integer.valueOf(newKey);
     						baseInfoMapShow.put(order, newValue);
