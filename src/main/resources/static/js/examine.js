@@ -115,6 +115,7 @@ var vm=new Vue({
 			        	},function(err){
 			        		console.log(err)
 			        	})
+                        console.log("/workflow/getAwaitDetail")
 			        	_this.loading=false
 						setTimeout(function(){
 							me.resetload();
@@ -174,18 +175,16 @@ var vm=new Vue({
 					_this.annex=arr;
 
 					axios.get("/workflow/getProcessInformation",{params:{userid:user,instanceid:instance}}).then(function(response){
-						console.log(response.data)
+						console.log(response+"-------------");
 						_this.dates=response.data[0];
 						_this.loading=false;
 						moreInfo = true;
 						moreHis = true;
 						changlang = true;
-						console.log(_this.dates)
-						var info=_this.dates.flowinfo
+						var info=_this.dates.flowinfo;
 						
 						//var bsicInfo=JSON.stringify(JSON.parse(info['0|基本信息']))
-						_this.ObjInfo=JSON.parse(info)
-						console.log(_this.ObjInfo)
+						_this.ObjInfo=JSON.parse(info);
 						var more=response.data[0].formtype;
 						console.log(more)
 						if(more==23){
@@ -200,25 +199,15 @@ var vm=new Vue({
 							console.log($(".examine-details li:last-child span"))
 							$(".examine-details li:last-child span").removeClass("")
 						}
-						
-						
+
+
 						/*dropload.unlock('up');
 						dropload.noData();
 						dropload.resetload();*/
-					}).catch(function(error){
-					    console.log(error);
-					});
-					
-	        	},function(err){
-	        		console.log(err)
+					})
 	        	})
-			}).catch(function(error){
-			    console.log(error);
-			});
-			
-		}).catch(function(error){
-		    console.log(error);
-		});
+			})
+		})
 	},
 	methods:{
 		/*点击更多详情*/

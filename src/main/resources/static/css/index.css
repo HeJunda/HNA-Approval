@@ -125,7 +125,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .search{display: block;background-color:#EAEAEA;padding:1em 0;}
 .search-box{display: block;width:80%;margin:0 auto;background-color:#fff;border-radius:20px;}
 .search-box input{border:0;padding:5px;margin-left: 10px;width:60%;outline:none}
-.search-box .search-btn{color:#E75732;display: inline-block;padding-right:10px;vertical-align:middle;line-height:1.875em;line-height:26px;font-size:12px;}
+.search-box .search-btn{color:#E75732;display: inline-block;padding-right:10px;vertical-align:middle;line-height:31px;font-size:12px;}
 .search-box .search-btn .search-icon{display: inline-block;width:20px;height:20px;vertical-align:middle;background: url(/images/tcmp-icon.png) no-repeat -70px -297px;margin-right:5px}
 .lucre-name{border:1px solid #EDEDED;display: inline-block;padding:5px}
 .lucre-name p{color:#E75732}
