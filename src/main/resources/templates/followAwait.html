@@ -132,9 +132,7 @@
                     /* zhiyog */
                     var flowInfo = {};
                     $.each(JSON.parse(response.data[0].flowinfo),function(inds,el){
-                        for(var indds in el){
-                            flowInfo[indds] = el[indds];
-                        }
+                        flowInfo[inds] = el;
                     })
 
                     _this.flowInfoLi = flowInfo
