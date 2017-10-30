@@ -36,7 +36,7 @@
 			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
 			           				<p class="follow-person">流程标题：<span class="fr" style="width:65%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.flowname}}</span></p>
 			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
-			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
+			           				<p class="follow-person" v-if="item.nodename">当前审批节点名称：<span class="fr">{{item.nodename}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
 			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
 									<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
