@@ -34,12 +34,13 @@
 			            		<div class="right-box">
 			           				<!-- <h3 class="agency-title">{{item.flowname}}</h3> -->
 			           				<p class="follow-person">流程编号：<span class="fr">{{item.instanceid}}</span></p>
-			           				<p class="follow-person">流程标题：<span class="fr" style="width:65%;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{item.flowname}}</span></p>
+			           				<p class="follow-person">流程标题：<span class="fr">{{item.flowname}}</span></p>
 			           				<p class="follow-person">流程名称：<span class="fr">{{item.processname}}</span></p>
 			           				<p class="follow-person">当前审批节点名称：<span class="fr">{{item.dptname}}</span></p>
 			           				<p class="follow-person">发起部门名称：<span class="fr">{{item.orgname}}</span></p>
 			           				<p class="follow-person">发起人：<span class="fr">{{item.starter}}</span></p>
 			           				<p class="follow-person">发起时间：<span class="fr">{{item.starttime}}</span></p>
+									<p class="follow-person" v-for="(flow1,flow2) in flowInfoLi">{{flow2}}：<span class="fr">{{flow1}}</span></p>
 			           			</div>
 			           		</div>
 			 
@@ -97,7 +98,8 @@
 			datil:[],
 			histry:[],
 			annex:[],
-			add:''
+			add:'',
+            flowInfoLi: null
  		},
  		created:function(){
  			var _this=this;
@@ -127,7 +129,17 @@
 					_this.await=name;
 					_this.datil=response.data[0]
 	 				_this.add=response.data[0].instanceid;
-					
+                    /* zhiyog */
+                    var flowInfo = {};
+                    $.each(JSON.parse(response.data[0].flowinfo),function(inds,el){
+                        for(var indds in el){
+                            flowInfo[indds] = el[indds];
+                        }
+                    })
+
+                    _this.flowInfoLi = flowInfo
+                    /* zhiyog */
+
 					var instance=_this.add;
 	 				var user=getCookie('userid');
 	 				axios.get("/workflow/getHistoricalApproval",{params:{userid:user,start:0,limit:10000,instanceid:instance}}).then(function(response){
@@ -144,7 +156,7 @@
 							arr.push(left)
 		 				})
 		 				_this.annex=arr
-		 				
+
 						setTimeout(function(){
 							me.resetload();
 			                me.unlock();
@@ -171,6 +183,15 @@
 				_this.await=name;
 				_this.datil=response.data[0]
  				_this.add=response.data[0].instanceid;
+
+                /* zhiyog */
+                var flowInfo = {};
+                $.each(JSON.parse(response.data[0].flowinfo),function(inds,el){
+                    flowInfo[inds] = el;
+                })
+
+                _this.flowInfoLi = flowInfo
+                /* zhiyog */
 				
 				var instance=_this.add;
  				var user=getCookie('userid');

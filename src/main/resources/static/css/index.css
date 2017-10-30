@@ -36,7 +36,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .menu-box .menu-item{position: relative;display:inline-block;min-height:4em;width:33%;float: left;text-align: center;border-bottom: 1px solid #EEEEEE;border-right: 1px solid #EEEEEE;padding:1em 0}
 .menu-box .menu-item:nth-child(3n){border-right: 0}
 .menu-icon span{display:inline-block;width:50px;height:50px;text-align:center;vertical-align: middle;background: url(/images/tcmp-icon.png)no-repeat;}
-.menu-icon span.agency{background-position: 3px 0px}
+.menu-icon span.agency{background-position: 3px 0}
 .menu-icon span.follow{background-position: 3px -65px}
 .menu-icon span.message{background-position: 3px -127px}
 .menu-icon span.distance{background-position: 3px -190px}
@@ -59,7 +59,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-left span.project-icon{background-position:-63px -144px}
 .agency-left span.approve-icon{background-position:-64px -48px}
 .agency-left span.info-icon{background-position:-63px -96px}
-.agency-left span.xucp-icon{background-position:-65px 0px}
+.agency-left span.xucp-icon{background-position:-65px 0}
 .agency-left{position:relative;width:80px;float:left;margin-right:-80px;text-align:center}
 .agenRight{float:right;width:100%;position:relative;}
 .agenRight-agency{float:right;width:100%;position:relative;}
@@ -68,7 +68,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agenLeft span.project-icon{background-position:-60px -140px}
 .agenLeft span.approve-icon{background-position:-60px -40px}
 .agenLeft span.info-icon{background-position:-60px -96px}
-.agenLeft span.xucp-icon{background-position:-60px 0px}
+.agenLeft span.xucp-icon{background-position:-60px 0}
 .agenLeft span.other-icon{background-position:-60px -237px}
 .agenLeft{position:relative;width:80px;float:left;margin-right:-80px;text-align:center;line-height: 62px;}
 .agenLeft span img{width:90%;padding-top: 1em;}
@@ -116,7 +116,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-right p.follow-present span{display: inline-block;width:7em}
 .agency-right span.arrow{position:absolute;display: inline-block;color:#8C8C8C;top:28px;right: 8px;text-align:center;vertical-align:middle;background:url(/images/tcmp-icon.png)no-repeat 0 -370px;height:20px;width:10px}
 .agency-right p.follow-person{display: inline-block;position: relative}
-.agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;text-align}
+.agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;width: 40%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;text-align: right;}
 .agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:2px 8px;border:1px solid #E75732;border-radius:5px}
 /*项目查询*/
 .project-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
@@ -139,11 +139,11 @@ table{border-collapse:collapse;border-spacing:0;}
 .project-content li input{width:95%;font-size:1em;color:#333;padding:2px;outline:none;border:0}
 .search-container{display:block;width:100%;text-align:center;position:relative}
 .search-button{-webkit-appearance:none;cursor:pointer;margin-left:15%;display: inline-block;width:70%;max-width:500px;border-radius:5px;-moz-border-radius:5px;text-align:center;background-color:#E75732;color:#fff;height:2.5em;line-height:2.5em;border:0;margin-top:3em;margin-bottom: 3em;text-shadow:0px 1px 0px #E75732;} 
-.search-button:active{position:relative;top:1;border:2px inset;}
+.search-button:active{position:relative;top:1px;border:2px inset;}
 .search-but{-webkit-appearance:none;cursor:pointer;;display: inline-block;width:70%;max-width:500px;border-radius:5px;-moz-border-radius:5px;text-align:center;background-color:#E75732;color:#fff;height:2.5em;line-height:2.5em;border:0;margin-top:3em;margin-bottom: 3em;text-shadow:0px 1px 0px #E75732;}
-.search-but:active{position:relative;top:1;border:2px inset;}
+.search-but:active{position:relative;top:1px;border:2px inset;}
 #search-but{-webkit-appearance:none;margin-left:15%;cursor:pointer;;display: inline-block;width:70%;max-width:500px;border-radius:5px;-moz-border-radius:5px;text-align:center;background-color:#E75732;color:#fff;height:2.5em;line-height:2.5em;border:0;margin-top:3em;margin-bottom: 3em;}
-#search-but:active{position:relative;top:1;border:2px inset;}
+#search-but:active{position:relative;top:1px;border:2px inset;}
 
 /*流程审批*/
 .examine{display: block;width:100%;height:100%;position:relative;max-width:746px;margin:0 auto;}
@@ -198,7 +198,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .item-mark{width:100%;height:60px;}
 .appro{position:absolute;top:0;left:0;bottom:0;right:0;line-height:60px;text-align:center;background:#E75732;color:#fff}
 .item-mark .right{float:right;line-height:60px;}
-.item-mark button{border:0px;background:#E75732;color:#fff;margin-right:15px;position:relative;display:block;line-height:55px;}
+.item-mark button{border:0;background:#E75732;color:#fff;margin-right:15px;position:relative;display:block;line-height:55px;}
 .content{width:100%;overflow-y:scroll;display:block;height: 273px;overflow-x: hidden;}
 /* .content ul li{display:flex;line-height:44px;justify-content:space-between;margin: 0 10px;padding:0 5px;} */
 .content ul li{float: left;width: 28%;border: 1px solid #E7E7E7;line-height: 2em;border-radius: 26px;margin: 4% 2%;background:#F9F9F9;white-space:nowrap;}
@@ -209,7 +209,7 @@ table{border-collapse:collapse;border-spacing:0;}
 
 select{margin:5px;}
 strong{font-style:normal;margin-left:5%;float: left;}
-.await-btn{border:0px solid; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
+.await-btn{border:none; background:#E75732;margin-left:15px;font-size:16px;color:#fff;padding:4% 30%;margin-top:60%}
 .option{line-height:40px;text-align:center;border-bottom: 1px solid #F0F0F0;margin-top:-5px;cursor:pointer}
 .router-link-active{color:#FFC600}
 .langeUse{width:100%;color:#9B9B9B;font-weight:normal;display:flex;justify-content:space-between;line-height:3em;border-top:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;}
@@ -226,7 +226,7 @@ strong{font-style:normal;margin-left:5%;float: left;}
 .btn{line-height:60px}
 .xuanz{width:100%;display:flex;flex-wrap: wrap;}
 .perName{width: 21%;text-align: center; line-height: 30px;background:#E75732;border-radius: 20px;margin: 5px;color: #fff;font-size:0.825em;}
-select{border:0px solid}
+select{border:none;}
 input-placeholder{font-size:12px;}
 .root{position:relative}
 .loading{width:100%; height:100%;text-align:center;position:fixed;top:0;left:0;right: 0;bottom: 0;}
