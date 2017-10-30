@@ -79,7 +79,6 @@
             	 <input id="search-but" v-on:click.stop="submit()" type="submit" value="提交" style=""/>
             </div>
           </div>
-          
         </div>
         <!-- ICON -->
         <div class="layui-m-layer layui-m-layer1" v-show="showLayer" style="display:none">
@@ -89,8 +88,12 @@
               <div class="layui-m-layerchild">
                 <div class="layui-m-layercont">
                   <div class="handle-status clearfix">
-                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click.stop="showIcon(item)"><p><span v-bind:class="item.name|showTubiao"></span></p><p>{{item.name}}</p></div>
-                   
+                    <div v-for="item in list" class="status-icon" :class="{active: activeName ==item.name}" v-on:click.stop="showIcon(item)">
+                        <p>
+                            <span v-bind:class="item.name|showTubiao"></span>
+                        </p>
+                        <p>{{item.name}}</p>
+                    </div>
                   </div>
                 </div>
               </div>
