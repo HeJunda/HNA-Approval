@@ -156,7 +156,7 @@
  				var flowInfo = {};
  				$.each(JSON.parse(response.data[0].flowinfo),function(inds,el){
                     for(var indds in el){
-                        flowInfo[indds] = el[indds].substring(1)
+                        flowInfo[indds] = el[indds];
 					}
 				})
                 _this.flowInfoLi = flowInfo
