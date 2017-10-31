@@ -12,20 +12,21 @@ new Vue({
     	}
     	var users=getCookie('userid')
     	var _this=this;
-//    	var token=window.hna.SsoToken;
+    	var token=window.hna.SsoToken;
     	//alert(token)
-    	var token="jd.he";
+   	// var token="mx.dong";
     	if(token!=''){
         		_this.loading=true;
-    			removeCookie('userid')
+                removeCookie('userid')
     			axios.get("/user/getSSOInfo",{params:{token:token}}).then(function(response){
     			_this.date=response.data.UserAccount;
-//             	document.cookie = 'userid'+'='+_this.date;
-    			document.cookie = 'userid'+'='+'jd.he';
+             	document.cookie = 'userid'+'='+_this.date;
+   			// document.cookie = 'userid'+'='+'mx.dong';
              	var user=getCookie('userid')
         			axios.get('/user/testBohaiLoginNOPWD',{params:{userid:user}}).then(function(response){  
         				_this.dataes=response.data;
                	   		axios.get('/workflow/getAwaitTotalNum',{params:{userid:user}}).then(function(response){
+               	   			console.log(response)
                	   			_this.number=response.data;
                	   			sessionStorage.setItem('count',_this.number);
                	   			_this.loading=false;
