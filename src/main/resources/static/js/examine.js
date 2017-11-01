@@ -37,7 +37,7 @@ var vm=new Vue({
       exaMore:true,
       exbMore:true,
       loading:true
-     
+
 	},
 	/*过滤ICON图标*/
 	filters:{
@@ -459,3 +459,5 @@ var vm=new Vue({
 		}
 	}
 })
+$('.Linodename').html(sessionStorage.getItem('nodenameLi'));
+$('.Listarter').html(sessionStorage.getItem('starterLi'));

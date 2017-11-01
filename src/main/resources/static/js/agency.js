@@ -1,4 +1,5 @@
 var imgUrl;
+var dataLi;
 function showIcon(type){
 	if(type=="10000"){
 		imgUrl = 'images/two.png';
@@ -24,7 +25,7 @@ showIcon(window.location.search.substring(10));
 	var isEnd=true;
 	var dropload;
 	function drop(){
-		dropload=$('body').dropload({
+		dropload=$('.js-bodys').dropload({
 			scrollArea : window,
 				domUp : {
 	            domClass   : 'dropload-up',
@@ -42,7 +43,7 @@ showIcon(window.location.search.substring(10));
             // 加载菜单一的数据
 				$.ajax({
 	                type: 'GET',
-	                async: false,
+	                async: true,
 	                url: '/workflow/getAwaitMessage',
 	                data:{
 	                	start:0,
@@ -53,9 +54,9 @@ showIcon(window.location.search.substring(10));
 	                dataType: 'json',
 	                success: function(data){
                 		var ahtml = "";
+                        dataLi = data;
                 	    for(var i=0;i<data.length;i++){
-                		   ahtml += '<li class="clearfix">'
-				                           +'<a href="/examine.html?taskid='+data[i].taskid+'">' 
+                		   ahtml += '<li class="clearfix" data-index="'+i+'">'
 					                              +'<div class="agenLeft">'
 					                                  +'<span><img src="'+imgUrl+'"/></span>'
 					                              +'</div>'
@@ -66,7 +67,6 @@ showIcon(window.location.search.substring(10));
 					             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 					                                +'</div>'
 					                              +'</div>'
-					                           +'</a>'
 					                           +'<p class="space"></p>'
 					                           +'</li>'
                 	    }
@@ -94,7 +94,7 @@ showIcon(window.location.search.substring(10));
         	if(isEnd){
                 $.ajax({
                     type: 'GET',
-                    async: false,
+                    async: true,
                     url: '/workflow/getAwaitMessage',
                     data:{
                     	start:start,
@@ -105,11 +105,11 @@ showIcon(window.location.search.substring(10));
                     dataType: 'json',
                     
                     success: function(data){
+                        	dataLi = data;
                     		var ahtml = "";
                     	    if(data.length>0){
                     	    	for(var i=0;i<data.length;i++){
-	                    		    ahtml= ahtml+ '<li class="clearfix">'
-						                           +'<a href="/examine.html?taskid='+data[i].taskid+'">'
+	                    		    ahtml= ahtml+ '<li class="clearfix"  data-index="'+i+'">'
 							                              +'<div class="agenLeft">'
 							                                  +'<span><img src="'+imgUrl+'"/></span>'
 							                              +'</div>'
@@ -120,7 +120,6 @@ showIcon(window.location.search.substring(10));
 							             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 							                                +'</div>'
 							                              +'</div>'
-							                           +'</a>'
 							                           +'<p class="space"></p>'
 							                           +'</li>'
                     	    	}
@@ -155,7 +154,7 @@ showIcon(window.location.search.substring(10));
 	$.ajax({//我都忘了，这个搜索那个是没有的，不知道你仿那个
 		
         type: 'GET',
-        async: false,
+        async: true,
         url: '/workflow/getAwaitMessage',
         data:{
         	start:start,
@@ -167,9 +166,9 @@ showIcon(window.location.search.substring(10));
         success: function(data){
     		var ahtml = "";
     		if(data.length>0){
+    			dataLi = data;
     			for(var i=0;i<data.length;i++){
-    				ahtml += '<li class="clearfix">'
-	                           +'<a href="/examine.html?taskid='+data[i].taskid+'">' 
+    				ahtml += '<li class="clearfix" data-index="'+i+'">'
 		                              +'<div class="agenLeft">'
 		                                  +'<span><img src="'+imgUrl+'"/></span>'
 		                              +'</div>'
@@ -180,7 +179,6 @@ showIcon(window.location.search.substring(10));
 		             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 		                                +'</div>'
 		                              +'</div>'
-		                           +'</a>'
 		                           +'<p class="space"></p>'
 		                           +'</li>'
     			}
@@ -199,3 +197,19 @@ showIcon(window.location.search.substring(10));
 	    	console.log(err)
 	    }
 	});
+
+
+	function getIndex(){
+        $('.js-list').on('click','li',function(){
+        	var indLi = $(this).data('index');
+            var starterLi = dataLi[indLi].starter;
+            var nodenameLi = dataLi[indLi].nodename;
+            sessionStorage.setItem('starterLi',starterLi);
+            sessionStorage.setItem('nodenameLi',nodenameLi);
+            window.location.href="/examine.html?taskid="+dataLi[indLi].taskid;
+		})
+	}
+	// 获取数据
+	getIndex();
+
+// +'<a href="/examine.html?taskid='+data[i].taskid+'">'
