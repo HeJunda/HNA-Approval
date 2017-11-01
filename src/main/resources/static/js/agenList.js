@@ -1,6 +1,5 @@
 var imgUrl;
 function showIcon(type){
-	console.log(type)
 	if(type=="10000"){
 		imgUrl = 'images/two.png';
 	}else if(type=="10003"){
@@ -20,7 +19,7 @@ function showIcon(type){
 
 
 var user=getCookie('userid')
-$("body").dropload({
+$(".js-body").dropload({
 	scrollArea : window,
 	domUp : {
         domClass   : 'dropload-up',
@@ -34,17 +33,17 @@ $("body").dropload({
 		domLoad : '<div class="dropload-load">加载中...</div>',
 		domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 	},
-	
+
 	loadUpFn : function(me){
 		$.ajax({
             type: 'GET',
-            async: false,
+            async: true,
             url: '/workflow/getAwaitSortList',
             data:{
             	userid:user
             },
             dataType: 'json',
-            
+
             success: function(data){
             		var ahtml = "";
         	    	for(var i=0;i<data.length;i++){
@@ -68,7 +67,7 @@ $("body").dropload({
         	    	me.resetload();
         	    	 me.unlock();
                      me.noData(false);
-                   	 
+
             },
             error: function(err){
                 me.resetload();
@@ -78,15 +77,14 @@ $("body").dropload({
 	loadDownFn : function(me){
 		$.ajax({
             type: 'GET',
-            async: false,
+            async: true,
             url: '/workflow/getAwaitSortList',
             data:{
             	userid:user
             },
             dataType: 'json',
-            
+
             success: function(data){
-            	console.log(data)
         		var ahtml = "";
     	    	for(var i=0;i<data.length;i++){
     	    		showIcon(data[i].flowtype);
@@ -106,7 +104,7 @@ $("body").dropload({
 		             	        +'</li>'
     	    	}
     	    	$('.agenLists').find('ul').html(ahtml);
-    	    	
+
     	    	 me.lock();
            	     me.noData();
            	     me.resetload();

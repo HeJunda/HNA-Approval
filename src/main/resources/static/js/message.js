@@ -22,7 +22,7 @@
             // 加载菜单一的数据
 			$.ajax({
                 type: 'GET',
-                async: false,
+                async: true,
                 url: '/message/getMessageList',
                 data:{
                 	start:0,
@@ -68,7 +68,7 @@
         	if(isEnd){
                 $.ajax({
                     type: 'GET',
-                    async: false,
+                    async: true,
                     url: '/message/getMessageList',
                     data:{
                     	start:start,
