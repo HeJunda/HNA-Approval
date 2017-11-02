@@ -1,22 +1,9 @@
-//就是这个页面
-
-$(function(){
 	var userid = getCookie("userid");
 	var follows = false;
-	var follLoad = true;
- 	var itemIndex = sessionStorage.getItem('flag')
- 	
-    //$this.addClass('cur').siblings('.item').removeClass('cur');
-   $('.searNav').eq(itemIndex).addClass('cur')
-	function getList(item){
-		itemIndex = item;
-		// 解锁
-        dropload.unlock();
-        dropload.noData(false);
-     	// 重置
-        dropload.resetload();
-	}
-	 var dropload = $('.agency-list').dropload({
+ 	var itemIndex = sessionStorage.getItem('flag');
+ 	var startLi = 0;
+    $('.searNav').eq(itemIndex).addClass('cur')
+	var dropload = $('.agency-list').dropload({
         scrollArea:window,
 	        distance:50,
 	        domUp : {
@@ -31,27 +18,75 @@ $(function(){
 	            domLoad : '<div class="dropload-load">加载中...</div>',
 	            domNoData : '<div class="dropload-noData">暂无更多数据</div>'
 	        },
+         	loadUpFn : function(me){
+             follows=false;
+             $.ajax({
+                 type: 'GET',
+                 url: '/workflow/getSplitRead',
+                 data:{
+                     userid:userid,
+                     start:0,
+                     limit:10,
+                     hasread:itemIndex
+                 },
+                 dataType: 'json',
+                 success: function(data){
+                     if(data!=""){
+                         var result=''
+                         for(var i = 0; i < data.length; i++){
+                             result +=   '<li class="clearfix">'
+                                 +'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
+                                 +'<div class="agency-right">'
+                                 +'<div class="right-box">'
+                                 +'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
+                                 +'<p class="follow-person">流程编号：<span class="fr follr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
+                                 +'<p class="follow-person">发送人：<span class="fr follr">'+(data[i].sendername==undefined?"":data[i].sendername)+'</span></p>'
+                                 +'<p class="follow-person">创建时间：<span class="fr follr">'+(data[i].createtime==undefined?"":data[i].createtime)+'</span></p>'
+                                 +'<p class="follow-person">流程发起部门：<span class="fr follr">'+(data[i].startorg==undefined?"":data[i].startorg)+'</span></p>'
+                                 +'<p class="follow-person">流程发起人：<span class="fr follr">'+(data[i].startname==undefined?"":data[i].startname)+'</span></p>'
+                                 +'</div>'
+                                 +'</div>'
+                                 +'</a>'
+                                 +'</li>'
+                                 +'<p class="space"></p>'
+                         }
+                         $('.agency-list ul').html(result);
+                     }
+                     follows=true;
+                     if(data.length<10){
+                         me.noData(true);
+                     }else{
+                         me.resetload();// 每次数据加载完，必须重置
+                         me.unlock(); // 解锁位置
+                         me.noData(false);
+                     }
+                     me.resetload(); // 每次数据加载完，必须重置
+                 },
+                 error: function(err){
+                     me.resetload(); // 每次数据加载完，必须重置
+                 }
+             });
+             startLi = 10;
+         },
 	        loadDownFn : function(me){
 	        	follows=false;
-	        	$('.agency-list ul').html('')
 	            $.ajax({
 			        type: 'GET',
 			        url: '/workflow/getSplitRead',
 			        data:{
 			        	userid:userid,
-			        	start:0,//这里为什么为0？这个start不起zuo'y
-			        	limit:10000,
+			        	start:startLi,
+			        	limit:10,
 			        	hasread:itemIndex
 			        },
 			        dataType: 'json',
 			        success: function(data){
-			        	if(data!=""){
+			        	if(data.length>0){
 			        		var result='' ;
 			                for(var i = 0; i < data.length; i++){
 			                	var one= '/followAwait.html?taskid='+data[i].taskid+''
 			                	var two= '/followAlready.html?instanceid='+data[i].instanceid+''
 			                		var hrefs = itemIndex == 0 ? one: two;
-			                	//console.log(data)
 			                    result += '<li class="clearfix">'
 								      		+'<a href="'+hrefs+'">'
 								      			+'<div class="agency-right">'
@@ -68,89 +103,35 @@ $(function(){
 								           +'</li>'
 								      	+'<p class="space"></p>'
 					                }
-				            	//console.log(data);
-				            	 $('.agency-list ul').append($(result)||'');
-				        	}else{
-				        		$('.conSearch').text()
-				        		
+				            	 $('.agency-list ul').append(result);
 				        	}
 			        		follows=true
-			        	
-			        		// 锁定
-		                    me.lock();//
-		                    // 无数据
-		                    me.noData();
-							// 每次数据加载完，必须重置
-			                me.resetload();            
+							if(data.length<10){
+								me.lock(); // 锁定 位置
+								me.noData(true);// 显示无数据
+							}
+							me.resetload(); // 每次数据加载完，必须重置
 		        		},
 		        		error: function(err){
-		        		    console.log(err);
+                            me.resetload(); // 每次数据加载完，必须重置
 		        		}
 					});
+	        	startLi +=10;
 	             
-	        },
-	        loadUpFn : function(me){
-	        	follows=false;
-	            $.ajax({
-			        type: 'GET',
-			        url: '/workflow/getSplitRead',
-			        data:{
-			        	userid:userid,
-			        	start:0,
-			        	limit:10000,
-			        	hasread:itemIndex
-			        },
-			        dataType: 'json',
-			        success: function(data){
-			        	
-			        	if(data!=""){
-			        		var result=''
-				                for(var i = 0; i < data.length; i++){
-				                    result +=   '<li class="clearfix">'
-									      		+'<a href="/followAwait.html?taskid='+(data[i].taskid==undefined?"":data[i].taskid)+'">'
-									      			+'<div class="agency-right">'
-									            		+'<div class="right-box">'
-									            			+'<p class="follow-person">流程名称：<span class="fr follr" style="width: 65%;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;text-align:right">'+data[i].taskname+'</span></p>'
-									            			+'<p class="follow-person">流程编号：<span class="fr follr">'+(data[i].instanceid==undefined?"":data[i].instanceid)+'</span></p>'
-									           				+'<p class="follow-person">发送人：<span class="fr follr">'+(data[i].sendername==undefined?"":data[i].sendername)+'</span></p>'
-									           				+'<p class="follow-person">创建时间：<span class="fr follr">'+(data[i].createtime==undefined?"":data[i].createtime)+'</span></p>'
-									           				+'<p class="follow-person">流程发起部门：<span class="fr follr">'+(data[i].startorg==undefined?"":data[i].startorg)+'</span></p>'
-									           				+'<p class="follow-person">流程发起人：<span class="fr follr">'+(data[i].startname==undefined?"":data[i].startname)+'</span></p>'
-									           			+'</div>'
-									           		+'</div>'
-									           	+'</a>'	
-									      	+'</li>'
-									    	+'<p class="space"></p>'
-			                }
-			                $('.agency-list ul').html(result);
-			                
-			        	}else{
-			        		$('.conSearch').text()
-			        	}
-			        	follows=true;
-			        	// 每次数据加载完，必须重置
-                        me.resetload();		            
-		        		},
-		        		error: function(err){
-		        		    console.log(err);
-		        		}
-					});
 	        }
 	    });
-	
-	$('.tab .item').on('click',function(){
-		if(follows){
-			sessionStorage.setItem('flag',$(this).index())
-			$('.followInfo').css('display','block')
-			var $this = $(this);
-			$('.agency-list ul').html('')
-		    getList($this.index())
-		    $this.addClass('cur').siblings('.item').removeClass('cur');
-		    $('.agency-list').eq(itemIndex).show().siblings('.agency-list').hide();
-		}
-		
-	})
-})
+    $('.tab .item').on('click',function(){
+        if(follows){
+            sessionStorage.setItem('flag',$(this).index());
+            itemIndex = sessionStorage.getItem('flag');
+            $('.agency-list').find('ul').html('');
+            $(this).addClass('cur').siblings().removeClass('cur');
+            startLi = 0;
+            dropload.unlock(); // 解锁位置
+            dropload.noData(false);
+            dropload.resetload();
+        }
+    });
 
 
 
