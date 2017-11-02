@@ -87,6 +87,10 @@
                     projects=true; // 可以点击列表
                     if(data.length<10){
                         me.noData(true);
+                    }else{
+                        me.resetload();// 每次数据加载完，必须重置
+                        me.unlock(); // 解锁位置
+                        me.noData(false);
                     }
                     me.resetload(); // 每次数据加载完，必须重置
                 }
