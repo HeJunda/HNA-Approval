@@ -25,6 +25,7 @@ public class AwaitDetail implements Serializable {
      * 流程类型
      */
     private String flowtype;
+    
 	public String getUserid() {
 		return userid;
 	}

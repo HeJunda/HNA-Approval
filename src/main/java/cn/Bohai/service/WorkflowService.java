@@ -827,6 +827,8 @@ public class WorkflowService {
 		//请求体
 		mw.put("hasread",splitRead.getHasread());
 		mw.put("flowname",splitRead.getFlowname());
+		mw.put("start",splitRead.getStart());
+		mw.put("limit",splitRead.getLimit());
 		mw.put("interfaceid","R8125");//待阅/已阅数据接口(R8125)
 	    
 		IDatasets result = null;

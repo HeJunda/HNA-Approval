@@ -6,12 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
-import ch.qos.logback.classic.Logger;
-import cn.Bohai.model.Attach;
 import cn.Bohai.model.AwaitDetail;
 import cn.Bohai.model.AwaitMessage;
 import cn.Bohai.model.DoneMessage;
@@ -25,18 +21,22 @@ import cn.Bohai.model.SplitRead;
 import cn.Bohai.model.User;
 import cn.Bohai.service.WorkflowService;
 
+import org.slf4j.Logger;  
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by Junda on 2017/6/6.
  */
 @RestController
 @RequestMapping("/workflow")
 public class WorkflowController {
+	
+	private static Logger logger=LoggerFactory.getLogger(WorkflowController.class);  
     
 	@Autowired
 	private WorkflowService workflowService;
 	
 	
-//	private final Logger log = Logger.getLogger(this.getClass());
 	
 	/**
      * 获取待办消息总条数
@@ -49,6 +49,7 @@ public class WorkflowController {
 			TotalNum = workflowService.getAwaitTotalNum(user);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return TotalNum;
 	} 
@@ -65,6 +66,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getAwaitSortList(user);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -81,6 +83,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getAwaitMessage(awaitMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -97,6 +100,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getDoneMessage(doneMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -112,6 +116,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getAwaitDetail(awaitDetail);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -128,6 +133,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getProcessInformation(processInformation);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -143,6 +149,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.selectPerson(selectPerson);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	}
@@ -158,6 +165,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getNextNode(nextNode);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	}
@@ -173,6 +181,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getHistoricalApproval(historicalApproval);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	}
@@ -190,6 +199,7 @@ public class WorkflowController {
 			jsonArray = workflowService.processProcessing(processing);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	}
@@ -205,6 +215,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getMyInitiatedProcess(myInitiatedProcessing);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	}
@@ -220,6 +231,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getCommonlanguage(user);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -235,6 +247,7 @@ public class WorkflowController {
 			 jsonArray = workflowService.getSplitRead(splitRead);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 

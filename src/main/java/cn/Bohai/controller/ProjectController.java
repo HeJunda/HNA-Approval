@@ -1,5 +1,7 @@
 package cn.Bohai.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,8 @@ import com.alibaba.fastjson.JSONObject;
 @RequestMapping("/project")
 public class ProjectController {
 	
+	private static Logger logger=LoggerFactory.getLogger(WorkflowController.class); 
+	
 	@Autowired
 	private ProjectService projectService;
 	@Autowired
@@ -39,6 +43,7 @@ public class ProjectController {
 			 jsonArray = projectService.getProjectList(projectList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -60,6 +65,7 @@ public class ProjectController {
 		    jsonArray = projectService.getProjectList(projectList);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
@@ -75,6 +81,7 @@ public class ProjectController {
 			 jsonArray = projectService.getProjectDetail(projectDetail);
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error(e.toString());
 		}
 		return jsonArray;
 	} 
