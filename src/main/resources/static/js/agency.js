@@ -1,5 +1,4 @@
 var imgUrl;
-var dataLi;
 function showIcon(type){
 	if(type=="10000"){
 		imgUrl = 'images/two.png';
@@ -54,9 +53,9 @@ showIcon(window.location.search.substring(10));
 	                dataType: 'json',
 	                success: function(data){
                 		var ahtml = "";
-                        dataLi = data;
                 	    for(var i=0;i<data.length;i++){
-                		   ahtml += '<li class="clearfix" data-index="'+i+'">'
+                		   ahtml += '<li class="clearfix">'
+				                           +'<a href="/examine.html?taskid='+data[i].taskid+'">'
 					                              +'<div class="agenLeft">'
 					                                  +'<span><img src="'+imgUrl+'"/></span>'
 					                              +'</div>'
@@ -67,6 +66,7 @@ showIcon(window.location.search.substring(10));
 					             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 					                                +'</div>'
 					                              +'</div>'
+					                           +'</a>'
 					                           +'<p class="space"></p>'
 					                           +'</li>'
                 	    }
@@ -105,11 +105,11 @@ showIcon(window.location.search.substring(10));
                     dataType: 'json',
                     
                     success: function(data){
-                        	dataLi = data;
                     		var ahtml = "";
                     	    if(data.length>0){
                     	    	for(var i=0;i<data.length;i++){
-	                    		    ahtml= ahtml+ '<li class="clearfix"  data-index="'+i+'">'
+	                    		    ahtml= ahtml+ '<li class="clearfix">'
+						                           +'<a href="/examine.html?taskid='+data[i].taskid+'">'
 							                              +'<div class="agenLeft">'
 							                                  +'<span><img src="'+imgUrl+'"/></span>'
 							                              +'</div>'
@@ -120,6 +120,7 @@ showIcon(window.location.search.substring(10));
 							             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 							                                +'</div>'
 							                              +'</div>'
+							                           +'</a>'
 							                           +'<p class="space"></p>'
 							                           +'</li>'
                     	    	}
@@ -166,9 +167,9 @@ showIcon(window.location.search.substring(10));
         success: function(data){
     		var ahtml = "";
     		if(data.length>0){
-    			dataLi = data;
     			for(var i=0;i<data.length;i++){
-    				ahtml += '<li class="clearfix" data-index="'+i+'">'
+    				ahtml += '<li class="clearfix">'
+	                           +'<a href="/examine.html?taskid='+data[i].taskid+'">'
 		                              +'<div class="agenLeft">'
 		                                  +'<span><img src="'+imgUrl+'"/></span>'
 		                              +'</div>'
@@ -179,6 +180,7 @@ showIcon(window.location.search.substring(10));
 		             	                 +'<p class="agenptxt"><span>发起时间</span><span class="answer">'+data[i].starttime+'</span></p>'
 		                                +'</div>'
 		                              +'</div>'
+		                           +'</a>'
 		                           +'<p class="space"></p>'
 		                           +'</li>'
     			}
@@ -197,19 +199,3 @@ showIcon(window.location.search.substring(10));
 	    	console.log(err)
 	    }
 	});
-
-
-	function getIndex(){
-        $('.js-list').on('click','li',function(){
-        	var indLi = $(this).data('index');
-            var starterLi = dataLi[indLi].starter;
-            var nodenameLi = dataLi[indLi].nodename;
-            sessionStorage.setItem('starterLi',starterLi);
-            sessionStorage.setItem('nodenameLi',nodenameLi);
-            window.location.href="/examine.html?taskid="+dataLi[indLi].taskid;
-		})
-	}
-	// 获取数据
-	getIndex();
-
-// +'<a href="/examine.html?taskid='+data[i].taskid+'">'

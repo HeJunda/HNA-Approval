@@ -459,5 +459,3 @@ var vm=new Vue({
 		}
 	}
 })
-$('.Linodename').html(sessionStorage.getItem('nodenameLi'));
-$('.Listarter').html(sessionStorage.getItem('starterLi'));
