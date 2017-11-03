@@ -116,7 +116,7 @@ table{border-collapse:collapse;border-spacing:0;}
 .agency-right p.follow-present span{display: inline-block;width:7em}
 .agency-right span.arrow{position:absolute;display: inline-block;color:#8C8C8C;top:28px;right: 8px;text-align:center;vertical-align:middle;background:url(/images/tcmp-icon.png)no-repeat 0 -370px;height:20px;width:10px}
 .agency-right p.follow-person{display: inline-block;position: relative}
-.agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;width: 40%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;text-align: right;}
+.agency-right p.follow-person span{color:#7F7F7F;padding-right: 8px;width: 55%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;text-align: right;}
 .agency-right span.prompt{position:absolute;display: inline-block;right:8px;top:10px;font-size:0.75em;color:#E75732;padding:2px 8px;border:1px solid #E75732;border-radius:5px}
 /*项目查询*/
 .project-tab ul li{float:left;display: inline-block;width:50%;text-align:center;line-height:3em;}
