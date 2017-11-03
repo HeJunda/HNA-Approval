@@ -62,8 +62,12 @@
                     var ahtml = "";
                     if(data.length>0){
                         for(var i=0;i<data.length;i++){
+                            var isShowLi = '';
                             var startname = itemIndex == 0 ? data[i].startername : data[i].starter;
                             var startorg = itemIndex == 0 ? data[i].starterorgname : data[i].startorg;
+                            if(startorg != undefined){
+                                isShowLi = '<p class="follow-person">发起人部门：<span class="fr">'+startorg+'</span></p>';
+                            }
                             ahtml+= '<li class="clearfix">'
                                 +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
                                 +'<div class="agency-right">'
@@ -73,7 +77,7 @@
                                 +'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
                                 +'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
                                 +'<p class="follow-person">当前审批人：<span class="fr" style="width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right">'+data[i].assigneename+'</span></p>'
-                                +'<p class="follow-person">发起人部门：<span class="fr">'+startorg+'</span></p>'
+                                + isShowLi
                                 +'<span class="prompt fr">'+data[i].flowstatus+'</span>'
                                 +'</div>'
                                 +'</div>'
@@ -114,8 +118,12 @@
                     var ahtml = "";
                     if(data.length>0){
                         for(var i=0;i<data.length;i++){
+                            var isShowLi = '';
                             var startname = itemIndex == 0 ? data[i].startername : data[i].starter;
                             var startorg = itemIndex == 0 ? data[i].starterorgname : data[i].startorg;
+                            if(startorg != undefined){
+                                isShowLi = '<p class="follow-person">发起人部门：<span class="fr">'+startorg+'</span></p>';
+                            }
                             ahtml+= '<li class="clearfix">'
                                 +'<a href="/searchDetail.html?instance='+data[i].instanceid+'">'
                                 +'<div class="agency-right">'
@@ -125,7 +133,7 @@
                                 +'<p class="follow-person">发起人：<span class="fr">'+startname+'</span></p>'
                                 +'<p class="follow-person">发起时间：<span class="fr">'+data[i].starttime+'</span></p>'
                                 +'<p class="follow-person">当前审批人：<span class="fr" style="width:65%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right">'+data[i].assigneename+'</span></p>'
-                                +'<p class="follow-person">发起人部门：<span class="fr">'+startorg+'</span></p>'
+                                + isShowLi
                                 +'<span class="prompt fr">'+data[i].flowstatus+'</span>'
                                 +'</div>'
                                 +'</div>'
