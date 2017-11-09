@@ -408,7 +408,14 @@ var vm=new Vue({
 		},
 		/*点击提交*/
 		submit:function(){
-			if(this.status==""){
+            if($("#sele").val() == ''){
+                layer.open({
+                    content: '处理意见不能为空',
+                    skin: 'msg',
+                    style: 'background-color:#ccc; color:#fff; border:none;',
+                    time: 2
+                });
+            }else if(this.status==""){
 				layer.open({
 				    content: '处理方式不能为空',
 				    skin: 'msg',
