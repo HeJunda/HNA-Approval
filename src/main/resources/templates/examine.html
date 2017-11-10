@@ -41,7 +41,7 @@
                     <li v-show="exaMore"  v-for="val in ObjInfo">
 	                    <p v-for="(ie2,val2) in val">
 	                    	<span>{{val2}}</span>
-		                    <span class="fr">{{ie2}}</span>
+		                    <span class="fr">{{ie2.substring(1)}}</span>
 		                   
 	                    </p>
                     </li>
@@ -53,7 +53,7 @@
                  <div id="history" v-show="showHis">
 	                 <ul class="examine-history">
 	                     <li class="history" v-for="(msg,ind) in histry">
-	                    	<h3 class="history-title" v-html="msg.nodename"><i class="principal" v-html="msg.approveuser"></i><span class="fr" v-for="msg.approvetime"></span></h3>
+	                    	<h3 class="history-title" >{{msg.nodename}}<i class="principal" v-html="msg.approveuser"></i><span class="fr" v-html="msg.approvetime"></span></h3>
 	                    	<div class="history-describe" v-html="msg.remark"></div>
 	                    	<div class="history-enclosure">
 	                         	<ul>
