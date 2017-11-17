@@ -63,6 +63,13 @@
                 success: function(data){
                     var ahtml = "";
                     if(data.length>0){
+                        if(!data[0].projects){
+                            me.resetload();// 每次数据加载完，必须重置
+                            me.unlock(); // 解锁位置
+                            me.noData(false);
+                            projects=true; // 可以点击导航
+                            return false;
+                        }
                         for(var i=0;i<data.length;i++){
                             ahtml += '<li class="clearfix">'
                                 +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
@@ -115,6 +122,13 @@
                 success: function(data){
                     var ahtml = "";
                     if(data.length>0){
+                        if(!data[0].projectname){
+                            me.resetload();// 每次数据加载完，必须重置
+                            me.unlock(); // 解锁位置
+                            me.noData(false);
+                            projects=true; // 可以点击导航
+                            return false;
+                        }
                         for(var i=0;i<data.length;i++){
                             ahtml += '<li class="clearfix">'
                                 +'<a class="proList" href="/project-detail.html?projectcode='+data[i].projectcode+'&maxyield='+data[i].predictmaxyield+'">'
