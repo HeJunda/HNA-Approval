@@ -1,4 +1,7 @@
-	var userid = getCookie("userid");
+
+
+
+var userid = getCookie("userid");
 	var follows = false;
  	var itemIndex = sessionStorage.getItem('flag');
  	var startLi = 0;
@@ -32,6 +35,13 @@
                  dataType: 'json',
                  success: function(data){
                      if(data!=""){
+                         if(!data[0].instanceid){
+                             me.resetload();// 每次数据加载完，必须重置
+                             me.unlock(); // 解锁位置
+                             me.noData(false);
+                             follows=true; // 可以点击导航
+                             return false;
+                         }
                          var result=''
                          for(var i = 0; i < data.length; i++){
                              result +=   '<li class="clearfix">'
@@ -82,6 +92,13 @@
 			        dataType: 'json',
 			        success: function(data){
 			        	if(data.length>0){
+                            if(!data[0].instanceid){
+                                me.resetload();// 每次数据加载完，必须重置
+                                me.unlock(); // 解锁位置
+                                me.noData(true);
+                                follows=true; // 可以点击导航
+                                return false;
+                            }
 			        		var result='' ;
 			                for(var i = 0; i < data.length; i++){
 			                	var one= '/followAwait.html?taskid='+data[i].taskid+''
